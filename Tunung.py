@@ -68,3 +68,9 @@ trainer = Trainer(
 )
 
 trainer.train()
+
+
+model.eval()
+inputs = tokenizer("Explain the subset sum problem.", return_tensors="pt").to("cuda")
+outputs = model.generate(**inputs, max_new_tokens=100)
+print(tokenizer.decode(outputs[0], skip_special_tokens=True))
