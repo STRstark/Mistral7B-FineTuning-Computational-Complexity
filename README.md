@@ -167,4 +167,5 @@ print(tokenizer.decode(outputs[0], skip_special_tokens=True))
 
 
 ## **Made with ❤️ and a single RTX 3060 :)**
+### **To be honest it never ran because of the lack of prossesing power :(**
 
