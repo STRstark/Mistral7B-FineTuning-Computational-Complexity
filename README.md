@@ -1,20 +1,19 @@
 
-# 📘 Fine-Tuning a Small LLM on Scientific Text Chunks (Computational Complexity)
+# **Fine-Tuning a Small LLM on Scientific Text Chunks (Computational complexity)**
 
 This guide documents the full pipeline for preparing and fine-tuning a small language model like **Mistral 7B** on custom scientific texts (e.g., research papers from arXiv in the field of computation complexity), using a consumer GPU like RTX 3060.
 
 
-## 🧾 Overview of the Pipeline
+## Overview of the Pipeline
 
 1. **Extract text from scientific PDFs**
 2. **Chunk and preprocess text**
 3. **Generate structured JSON with metadata and keywords**
-4. **Embed text chunks into a vector database (ChromaDB)**
-5. **Convert data to a format suitable for fine-tuning**
-6. **Fine-tune a causal LLM using LoRA on a local GPU**
+4. **Convert data to a format suitable for fine-tuning**
+5. **Fine-tune a causal LLM using LoRA on a local GPU**
 
 
-## 1.  Extract and Chunk Text from PDF
+## **1.  Extract and Chunk Text from PDF**
 
 Python script used to:
 - Read scientific PDFs
@@ -22,7 +21,7 @@ Python script used to:
 - Extract keywords using YAKE
 - Store structured JSON for each chunk
 
-**Key script:** `pdf_to_json.py`
+**Key script:** `PdfToJSON.py`
 
 ```python
 # chunking and keyword extraction logic
@@ -65,7 +64,7 @@ SPECIALIZED_PROMPTS = [
 - `Explain a concept involving {keywords} in computational complexity.`
 - `Scientific context on {keywords} and their role in graph theory.`
 
-**Output format:**
+**Output format example**
 
 ```json
 {
@@ -74,58 +73,34 @@ SPECIALIZED_PROMPTS = [
 }
 ```
 
-**Script used:** `convert_json_for_finetune.py`
+**Script used:** `FineTuningData.py`
+
+**Output File :** `fine_tune_data.json`
 
 ---
 
-## 4. 🏗️ Fine-Tuning the Model (with LoRA)
-
-### Requirements
-
-```bash
-pip install transformers datasets peft accelerate bitsandbytes
-```
-
-(Optional: `xformers` for better performance)
-
----
-
-### Authenticate with Hugging Face
-
-1. Create a token: https://huggingface.co/settings/tokens
-2. Log in:
-
-```bash
-huggingface-cli login
-```
-
----
-
-### Fine-Tuning Script (`train_lora.py`)
+## 3. Fine-Tuning the Model (with LoRA)
 
 Using `mistralai/Mistral-7B-v0.1` (or any LoRA-compatible causal model):
 
-```python
-from transformers import AutoTokenizer, AutoModelForCausalLM, Trainer, TrainingArguments
-from peft import get_peft_model, LoraConfig, TaskType
-from datasets import Dataset
-import torch
-import json
+- ### Load dataset
 
-# Load dataset
+```python
 with open("fine_tune_data.json", "r") as f:
     data = json.load(f)
 
 dataset = Dataset.from_list(data)
-
-# Load model and tokenizer
+```
+- ### Load model and tokenizer
+```python
 model_id = "mistralai/Mistral-7B-v0.1"
 tokenizer = AutoTokenizer.from_pretrained(model_id, use_auth_token=True)
 tokenizer.pad_token = tokenizer.eos_token
 
 model = AutoModelForCausalLM.from_pretrained(model_id, torch_dtype=torch.float16, device_map="auto")
-
-# Apply LoRA
+```
+- ### Apply LoRA
+```python
 lora_config = LoraConfig(
     r=8,
     lora_alpha=16,
@@ -134,8 +109,9 @@ lora_config = LoraConfig(
     task_type=TaskType.CAUSAL_LM
 )
 model = get_peft_model(model, lora_config)
-
-# Tokenize
+```
+- ### Tokenize it!
+```python
 def tokenize(example):
     return tokenizer(
         f"### Prompt:\n{example['prompt']}\n\n### Response:\n{example['response']}",
@@ -145,7 +121,9 @@ def tokenize(example):
     )
 
 tokenized_dataset = dataset.map(tokenize)
-
+```
+- ### Traine the Model
+```python
 # Training setup
 training_args = TrainingArguments(
     output_dir="./checkpoints",
@@ -168,10 +146,9 @@ trainer = Trainer(
 
 trainer.train()
 ```
+### Fine-Tuning Script (`Tunung.py`)
 
----
-
-## 5. ✅ Inference (After Fine-Tuning)
+## 4. Inference (After Fine-Tuning)
 
 ```python
 model.eval()
@@ -180,7 +157,6 @@ outputs = model.generate(**inputs, max_new_tokens=100)
 print(tokenizer.decode(outputs[0], skip_special_tokens=True))
 ```
 
----
 
 ## 💡 Tips for Low-GPU (RTX 3060)
 
@@ -189,7 +165,6 @@ print(tokenizer.decode(outputs[0], skip_special_tokens=True))
 - Use `fp16=True` and `max_length=512` or less
 - Monitor GPU memory with `nvidia-smi`
 
----
 
 ## ✅ Future Extensions
 
@@ -197,51 +172,7 @@ print(tokenizer.decode(outputs[0], skip_special_tokens=True))
 - Add evaluation script for generated outputs
 - Experiment with QLoRA + `trl` for chat-style tuning
 
----
 
-**Made with ❤️ and a single RTX 3060 :)**
 
----
+## **Made with ❤️ and a single RTX 3060 :)**
 
-## 📄 PDF to Structured JSON Conversion
-
-This script processes raw scientific PDFs and converts them into structured JSON format, ready for both embedding and fine-tuning.
-
-**Key script:** `PdfToJSON.py`
-
-### 🔧 Responsibilities of this script:
-
-- Open and read PDF pages using PyMuPDF (`fitz`)
-- Clean and normalize raw text (`clean_text`)
-- Split long text into chunks (~500 characters) by sentence (`chunk_text`)
-- Extract top keywords from each chunk using YAKE (`extract_keywords`)
-- Wrap each chunk with metadata into a consistent structured JSON format
-
-### 🔍 Code Highlights:
-
-```python
-chunk_text(text, chunk_size=500)
-# Splits text into manageable chunks based on sentence boundaries.
-
-extract_keywords(text, max_keywords=10)
-# Uses YAKE to extract top keywords from each chunk.
-
-structure_data(chunks, metadata)
-# Combines chunked text with metadata and extracted keywords.
-```
-
-Each final JSON chunk looks like this:
-
-```json
-{
-  "id": "uuid",
-  "title": "",
-  "chunk_text": "Cleaned and segmented text here...",
-  "metadata": {
-    "author": "Extracted author or empty string",
-    "keywords": ["keyword1", "keyword2", ...]
-  }
-}
-```
-
-The output is saved in `JSONFiles/` with a unique file name per input PDF.
