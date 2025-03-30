@@ -1,0 +1,3775 @@
+[
+    {
+        "id": "4468d853-a21b-49e7-8949-a0dfb1e32a1d",
+        "title": "",
+        "chunk_text": "arXiv:2503.17114v1 [cs.CC] 21 Mar 2025 Range Avoidance in Boolean Circuits via Turan-type Bounds Neha Kuntewar* Jayalal Sarma∗ Abstract Given a circuit C : {0, 1}n →{0, 1}m from a circuit class C, with m > n, ﬁnding a y ∈{0, 1}m such that ∀x ∈{0, 1}n, C(x) ̸= y, is the range avoidance problem (denoted by C-AVOID).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Mar",
+                "Range",
+                "Avoidance",
+                "Kuntewar",
+                "Jayalal",
+                "Sarma",
+                "Abstract",
+                "circuit",
+                "arXiv",
+                "cs.CC"
+            ]
+        }
+    },
+    {
+        "id": "0a5c5115-1a32-432e-a6c3-3ebde16b3874",
+        "title": "",
+        "chunk_text": "Deter- ministic polynomial time algorithms (even with access to NP oracles) solving this problem is known to imply explicit constructions of various pseudorandom objects like hard Boolean functions, linear codes, PRGs etc. Deterministic polynomial time algorithms are known for NC0 2-AVOID when m > n, and for NC0 3-AVOID when m ≥ n2 log n, where NC0 k is the class of circuits with bounded fan-in which have constant depth and the output depends on at most k of the input bits.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Deter",
+                "Boolean",
+                "time",
+                "ministic",
+                "oracles",
+                "solving",
+                "functions",
+                "linear",
+                "codes",
+                "PRGs"
+            ]
+        }
+    },
+    {
+        "id": "cc691719-ec76-49a2-865d-b54f2dc13dd5",
+        "title": "",
+        "chunk_text": "On the other hand, it is also known that NC0 3-AVOID when m = n + O \u0000n2/3\u0001 is at least as hard as explicit construction of rigid matrices. In fact, algorithms for solving range avoidance for even NC0 4 circuits implies new circuit lower bounds. In this paper, we propose a new approach to solving range avoidance problem via hyper- graphs.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "hand",
+                "matrices",
+                "range",
+                "hard",
+                "explicit",
+                "construction",
+                "rigid",
+                "solving",
+                "avoidance",
+                "graphs"
+            ]
+        }
+    },
+    {
+        "id": "0c362dbe-bd43-4fa9-907d-e8b5a7c84edf",
+        "title": "",
+        "chunk_text": "We formulate the problem in terms of Turan-type problems in hypergraphs of the following kind - for a ﬁxed k-uniform hypergraph H′, what is the maximum number of edges that can exist in a k-uniform hypergraph H which does not have a sub-hypergraph isomorphic to H′? We ﬁrst demonstrate the applicability of this approach by showing alternate proofs of some of the known results for range avoidance problem using this framework.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "k-uniform",
+                "hypergraph",
+                "Turan-type",
+                "kind",
+                "problem",
+                "formulate",
+                "terms",
+                "ﬁxed",
+                "maximum",
+                "number"
+            ]
+        }
+    },
+    {
+        "id": "08e3ab7c-98e4-4922-9ab6-f18d26e2a4cd",
+        "title": "",
+        "chunk_text": "We then use our approach to show (using several different hypergraph structures for which Turan-type bounds are known in the literature) that there is a constant c such that MONOTONE- NC0 3-AVOID can be solved in deterministic polynomial time when m > cn2. To improve the stretch constraint to linear, we show a new Turan-type theorem for a hypergraph structure (which we call the the loose X 2ℓ-cycles).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "MONOTONE",
+                "Turan-type",
+                "literature",
+                "hypergraph",
+                "show",
+                "approach",
+                "bounds",
+                "constant",
+                "solved",
+                "deterministic"
+            ]
+        }
+    },
+    {
+        "id": "221a2c22-9786-4da1-a9c4-9f8f8e55744c",
+        "title": "",
+        "chunk_text": "More speciﬁcally, we prove that Any connected 3- uniform linear hypergraph with m > n edges must contain a loose X 2ℓcycle. Using this, we show that MONOTONE-NC0 3-AVOID can be solved in deterministic polynomial time when m > n, thus improving the known bounds of NC0 3-AVOID for the case of monotone circuits. In contrast, we note that efﬁcient algorithms for solving MONOTONE-NC0 6-AVOID, already implies explicit constructions for rigid matrices.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "speciﬁcally",
+                "connected",
+                "uniform",
+                "prove",
+                "linear",
+                "hypergraph",
+                "edges",
+                "loose",
+                "circuits",
+                "contrast"
+            ]
+        }
+    },
+    {
+        "id": "2fbfebc3-02d5-4888-b1a4-396903e83443",
+        "title": "",
+        "chunk_text": "Building on this further, we show that there is a polynomial time algorithm for SYMMETRIC- NC0 3-AVOID when m > 8n. We also generalize our argument to solve the special case of range avoidance for NC0 k where each output function computed by the circuit, is the majority function on its inputs where m > n2. *Indian Institute of Technology Madras, Chennai, India.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "SYMMETRIC",
+                "Building",
+                "Chennai",
+                "India",
+                "show",
+                "polynomial",
+                "time",
+                "algorithm",
+                "function",
+                "Indian"
+            ]
+        }
+    },
+    {
+        "id": "502e1623-a522-49b7-8b41-cda1d8c709e7",
+        "title": "",
+        "chunk_text": "Email: neha.kuntewar@gmail.com, jayalal@cse.iitm.ac.in 1 Contents 1 Introduction 2 2 Preliminaries 7 3 Range Avoidance for NC0 k via Fixed Hypergraphs 9 3.1 Polynomial time algorithm for ONE-INTERSECT-MAJ3-AVOID . . . . . . . . . . . . . 13 3.2 Polynomial time Algorithm for ONE-INTERSECT-MAJk-AVOID . . . . . . . . . . . . . 14 4 Polynomial time Algorithm for MONOTONE-NC0 3-AVOID 15 4.1 Reduction from MONOTONE-NC0 3-AVOID to MAJ3-AVOID: . . . . . . . . . . . . . . .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Contents",
+                "Introduction",
+                "Preliminaries",
+                "Range",
+                "Hypergraphs",
+                "Avoidance",
+                "Fixed",
+                "Polynomial",
+                "algorithm",
+                "Email"
+            ]
+        }
+    },
+    {
+        "id": "5d185363-c3d6-4fea-8210-ca023b76f41b",
+        "title": "",
+        "chunk_text": "15 4.2 Polynomial time Algorithm for MAJ3-AVOID . . . . . . . . . . . . . . . . . . . . . . . 16 5 Polynomial time Algorithm for SYMMETRIC-NC0 3-AVOID 21 6 Conclusion 24 A Appendix 27 A.1 Special cases of MONOTONE-AVOID . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27 A.2 Alternative Hypergraphs for Solving ONE-INTERSECT-MAJ3-AVOID . . . . . . . . . 28 A.3 Counter Example graphs among the (9, 5)-hypergraphs . . . . . . . . . . . . . . . . .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Polynomial",
+                "Algorithm",
+                "time",
+                "Hypergraphs",
+                "Conclusion",
+                "Appendix",
+                "Special",
+                "Alternative",
+                "Solving",
+                "Counter"
+            ]
+        }
+    },
+    {
+        "id": "8e5471a6-0aba-414d-841e-5b9c751686a7",
+        "title": "",
+        "chunk_text": "31 1 Introduction Let C : {0, 1}n →{0, 1}m be a Boolean circuit with {∧, ∨, ¬} gates, with m > n. The range of the function represented by the circuit : Range(C) = {C(x) | x ∈{0, 1}n}. Clearly, ∃y ∈{0, 1}m such that y /∈Range(C). The range avoidance problem (denoted by AVOID) asks, given a circuit C, with m > n, ﬁnd a y /∈Range(C). The AVOID problem (introduced by [KKMP21]) has been shown to have connections to some of the central research questions in circuit lower bounds and pseudorandomness.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "range",
+                "Introduction",
+                "Boolean",
+                "circuit",
+                "gates",
+                "AVOID",
+                "problem",
+                "function",
+                "represented",
+                "denoted"
+            ]
+        }
+    },
+    {
+        "id": "522085e3-92c8-46f7-9a2a-380c3f05c57d",
+        "title": "",
+        "chunk_text": "In particular, even FPNP algorithm for AVOID is known to imply new circuit lower bounds [Kor22] and new constructions of many other pseudorandom objects [Kor22]. On the algorithms side, AVOID has a trivial ZPPNP algorithm. Indeed, given a circuit C : {0, 1}n →{0, 1}m with m > n, choose y ∈{0, 1}m and use the NP oracle to check if ∃x ∈{0, 1}n such that C(x) = y.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "FPNP",
+                "AVOID",
+                "bounds",
+                "objects",
+                "algorithm",
+                "imply",
+                "lower",
+                "constructions",
+                "pseudorandom",
+                "circuit"
+            ]
+        }
+    },
+    {
+        "id": "6f5d651b-6656-43cf-9093-6634ffa47d72",
+        "title": "",
+        "chunk_text": "Since m > n, there are at least 1 2 fraction of ys which are outside Range(C), and hence the algorithm succeeds with at least 1 2 probability. Designing a deterministic polynomial time algorithm, with access to an NP oracle (FPNP algorithm) to solve AVOID is a central open problem. Recently, [CHR] obtained the ﬁrst single-valued FS2P algorithm for AVOID which works inﬁnitely often.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Range",
+                "probability",
+                "algorithm",
+                "fraction",
+                "AVOID",
+                "succeeds",
+                "FPNP",
+                "CHR",
+                "Recently",
+                "Designing"
+            ]
+        }
+    },
+    {
+        "id": "4337bf73-1adf-40c9-9240-61dc42f6ef7a",
+        "title": "",
+        "chunk_text": "Subsequently, [Li24] gave an improved FS2P algorithm that works for all n, thus establishing explicit functions in S2E requiring maximum circuit complexity. [CHR] showed an unconditional zero-error pseudodeterministic algorithm with an NP or- acle and one bit of advice that solves AVOID for inﬁnitely many inputs. These results imply 2 pseudo-determinsitic constructions for Ramsey graphs, rigid matrices, pseudo-random genera- tors etc.(See [CHR]).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "CHR",
+                "Subsequently",
+                "gave",
+                "improved",
+                "requiring",
+                "complexity",
+                "algorithm",
+                "works",
+                "establishing",
+                "explicit"
+            ]
+        }
+    },
+    {
+        "id": "1553712a-2775-4f83-bab5-2052f857b794",
+        "title": "",
+        "chunk_text": "[ILW23] shows that if there is a deterministic polynomial time algorithm for AVOID then either NP = coNP or there does not exist JLS secure iO. Given the central nature of the problem, it is also meaningful to consider simpler versions ﬁrst : consider C-AVOID to be the restricted version of AVOID where the circuit is guaranteed to be from the class C. For which classes of circuits C do we have an efﬁcient (or FPNP) algorithm for C-AVOID?",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "JLS",
+                "AVOID",
+                "shows",
+                "coNP",
+                "algorithm",
+                "deterministic",
+                "polynomial",
+                "time",
+                "exist",
+                "secure"
+            ]
+        }
+    },
+    {
+        "id": "6e184f46-f509-44e7-a96f-98cf19a9505a",
+        "title": "",
+        "chunk_text": "On this frontier, Ren, Santhanam and Wang [RSW22] showed that an FPNP algorithm for C-AVOID implies breakthrough lower bounds even when C restricted to weaker circuit models such as AC0 and NC1 circuits. To go down even further, for every constant k, consider the restricted class of circuits NC0 k where the depth of the circuit is constant and each output bit depends on at most k of the input bits.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Ren",
+                "Santhanam",
+                "Wang",
+                "FPNP",
+                "frontier",
+                "showed",
+                "restricted",
+                "algorithm",
+                "C-AVOID",
+                "implies"
+            ]
+        }
+    },
+    {
+        "id": "874895ca-2ef6-4d50-828b-d967997515c0",
+        "title": "",
+        "chunk_text": "In a surprising result, Ren, Santhanam and Wang [RSW22] showed that an FPNP algorithm for NC0 4-AVOID implies FPNP algorithms for NC1-AVOID. Additionally, this will also imply new circuit lower bounds - that there is a family of functions in ENP that requires circuits of depth at least Ω(n1−ǫ). Complementing the above, [RSW22] also exhibited FPNP algorithm for AVOID, when C is re- stricted to De Morgan formulas of size s with m > nω(√s log s).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Ren",
+                "Santhanam",
+                "Wang",
+                "FPNP",
+                "algorithm",
+                "result",
+                "showed",
+                "implies",
+                "surprising",
+                "ENP"
+            ]
+        }
+    },
+    {
+        "id": "cfaf739f-03b5-4d5b-b164-130e45bc2fe0",
+        "title": "",
+        "chunk_text": "At the low-end regime, [GLW22] showed a polynomial time algorithm for NC0 2 class, where each output bit depends on at most 2 input bits. They show a general template for obtaining FPNP algorithms for restricted classes via hitting set constructions. In particular, they give FPNP algorithms for NC0 k circuits, de Morgan formulas, CNF or DNF, provided the stretch is large enough.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "class",
+                "FPNP",
+                "algorithms",
+                "regime",
+                "showed",
+                "input",
+                "low-end",
+                "polynomial",
+                "time",
+                "output"
+            ]
+        }
+    },
+    {
+        "id": "cefc14db-9538-420f-b1c0-805ee5c7c687",
+        "title": "",
+        "chunk_text": "En route they also give a general method for obtaining the hitting set in polynomial time using approximation degree of polynomi- als. Complementing this further, [GGNS23] designed deterministic polynomial time algorithms for all NC0 k-AVOID for m ≥nk−1 log n . For k = 3, which was the frontier beyond [GLW22], this requires m ≥ n2 log n.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "als",
+                "log",
+                "polynomi",
+                "polynomial",
+                "time",
+                "route",
+                "give",
+                "general",
+                "method",
+                "obtaining"
+            ]
+        }
+    },
+    {
+        "id": "c38477ed-52be-4b78-bc07-701580d72561",
+        "title": "",
+        "chunk_text": "They also showed the reason for lack of progress for NC0 3-AVOID by proving that a deterministic polynomial time algorithm for NC0 3-AVOID , where m = n + O(n2/3) would imply explicit construction of rigid matrices in deterministic polynomial time. This demonstrates the importance of the stretch function in the context of AVOID problem. Our Results: In this paper, we propose a new approach to range avoidance problem for NC0 k circuits via Turan-type extremal problems in hypergraphs.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "polynomial",
+                "deterministic",
+                "time",
+                "showed",
+                "reason",
+                "lack",
+                "progress",
+                "proving",
+                "algorithm",
+                "imply"
+            ]
+        }
+    },
+    {
+        "id": "fac19b4a-8569-4663-8c85-d2c0dbce0f89",
+        "title": "",
+        "chunk_text": "For an NC0 k circuit C, for each function fi ∈C where i ∈[m], let I(fi) denote the set of input variables that fi depends on. Let HC denote the hypergraph deﬁned as follows: Let V be the set of inputs in C. For 1 ≤i ≤m, deﬁne a hyperedge ei as {xj | j ∈[n], xj ∈I(fi)}. Thus E = {{ei | i ∈[m]}} has exactly m edges, each of size at most k. Let F be the family of functions that appear in the circuit C, and let φ : E →F be a labelling of the edges of the hypergraph H with the corresponding function.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "set",
+                "denote",
+                "variables",
+                "depends",
+                "circuit",
+                "hypergraph",
+                "function",
+                "input",
+                "inputs",
+                "edges"
+            ]
+        }
+    },
+    {
+        "id": "f3fbe9d4-9277-430a-96b6-25a8f6b9764f",
+        "title": "",
+        "chunk_text": "Without loss of generality, by assigning colors to Boolean bits, say red R for 0, and blue B for 1, we can interpret these functions as functions from {R, B}k →{R, B}, which induces a color to the hyperedge given any 2-coloring of the vertices of the hypergraph. A 2-coloring of the hyperedges of H, is said to be a φ-coloring if there is a vertex coloring which induces this edge coloring via φ.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Boolean",
+                "functions",
+                "induces",
+                "generality",
+                "bits",
+                "hypergraph",
+                "colors",
+                "color",
+                "loss",
+                "assigning"
+            ]
+        }
+    },
+    {
+        "id": "7827dbff-1246-4298-b445-bc7fdf71c33a",
+        "title": "",
+        "chunk_text": "With this notation, we state the following theorem, which essentially follows from the above deﬁnition (see section 3). 3 Theorem 1.1. Let C : {0, 1}n →{0, 1}m be a circuit and HC be the corresponding hypergraph and let φ be the labelling function. Suppose HC contains a sub-hypergraph H′ (of ﬁxed size) such that there is an edge-coloring of H′ which is not φ-coloring. Then there is a polynomial time algorithm to ﬁnd a string outside the range of C.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "theorem",
+                "notation",
+                "deﬁnition",
+                "section",
+                "state",
+                "essentially",
+                "function",
+                "Suppose",
+                "size",
+                "φ-coloring"
+            ]
+        }
+    },
+    {
+        "id": "25f6127f-0ded-4c50-9ab2-ac20dfced3d3",
+        "title": "",
+        "chunk_text": "The main idea of the above proof is that it sufﬁces to identify an sub-hypergraph H′ in H such that there is an edge-coloring of H′ which is not φ-coloring on H′. If we can ascertain the existence of a copy of H’ by extremal hypergraph theory, then it can be used to solve the AVOID problem.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "main",
+                "idea",
+                "proof",
+                "sufﬁces",
+                "identify",
+                "sub-hypergraph",
+                "edge-coloring",
+                "φ-coloring",
+                "AVOID",
+                "theory"
+            ]
+        }
+    },
+    {
+        "id": "908a1bc0-150b-4b05-b76a-e5181fd4779e",
+        "title": "",
+        "chunk_text": "In particular, this formulates range avoidance problem in terms of Turan-type extremal problems in hypergraphs of the following kind - for a ﬁxed family of hypergraphs H′, what is the maximum number of edges that can exist in any hypergraph that avoids any member of the family H′ as an (induced) subgraph? This is particularly well-studied for k-uniform hypergraph and is denoted by exk(n, H′).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Turan-type",
+                "family",
+                "induced",
+                "subgraph",
+                "kind",
+                "problem",
+                "problems",
+                "formulates",
+                "range",
+                "avoidance"
+            ]
+        }
+    },
+    {
+        "id": "00e8dc7e-9768-4928-9fa6-140bf1193b67",
+        "title": "",
+        "chunk_text": "Notice that the family H′ may critically depend on the set of functions F, and the mapping φ, and hence on the circuit C. A natural question is, are there ﬁxed H′ that works for all circuits in the circuit class1 for which we are interested to solve AVOID problem. We ﬁrst demonstrate immediate simple applications of this framework for designing algo- rithms for AVOID in restricted settings.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Notice",
+                "AVOID",
+                "circuit",
+                "family",
+                "critically",
+                "depend",
+                "set",
+                "functions",
+                "mapping",
+                "circuits"
+            ]
+        }
+    },
+    {
+        "id": "7f892a97-3858-4e2d-b108-8342cb770bac",
+        "title": "",
+        "chunk_text": "As mentioned above, [GLW22] designed a simple iterative algorithm for solving AVOID when the input is restricted to circuits where each output function depends on at most 2 input bits. We show that the same special case can also be solved using our approach. Thus, as a warm up, we derive an alternative proof of the following theorem (originally due to [GLW22]) using our framework.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "AVOID",
+                "input",
+                "designed",
+                "bits",
+                "mentioned",
+                "simple",
+                "iterative",
+                "algorithm",
+                "solving",
+                "restricted"
+            ]
+        }
+    },
+    {
+        "id": "0ae4a6ad-ea87-4918-b77d-f66b1b002c16",
+        "title": "",
+        "chunk_text": "As second demonstration of our framework, we use tools from extremal graph theory to pro- vide deterministic polynomial time algorithms for AVOID when F contains only ∧and ∨functions that depend on exactly k input bits. We remark that such powerful tools are not needed to solve this special case as the iterative algorithmic idea due to [GLW22] can be extended to this case as well. Nevertheless, we argue that it serves as a demonstration of our technique itself.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "AVOID",
+                "framework",
+                "pro",
+                "vide",
+                "functions",
+                "bits",
+                "tools",
+                "demonstration",
+                "extremal",
+                "graph"
+            ]
+        }
+    },
+    {
+        "id": "5464adb8-2e7e-400a-8f17-58ecebc3b19f",
+        "title": "",
+        "chunk_text": "We state both of these applications as the following proposition. Proposition 1.2. There is a deterministic polynomial time algorithm for NC0 2-AVOID when m > n. Using the same framework, there is a polynomial time algorithm for solving {ANDk, OR k}-AVOID, for a ﬁxed k. We now demonstrate the main application of this framework. Towards describing the setting of our application, we study the complexity of AVOID in the restricted case of when the circuit is monotone.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "proposition",
+                "AVOID",
+                "state",
+                "time",
+                "algorithm",
+                "framework",
+                "polynomial",
+                "application",
+                "ANDk",
+                "solving"
+            ]
+        }
+    },
+    {
+        "id": "6514893b-ccbb-45aa-93e9-6735a7d45210",
+        "title": "",
+        "chunk_text": "A ﬁrst observation is that by applying DeMorgan’s law we can reduce the AVOID (when m > 2n) in polynomial time to C-AVOID where C is restricted to monotone circuits, where reduction preserves the depth of the circuit and at most doubles the size of the circuit. Hence solving AVOID even for monotone circuits. Proposition 1.3. If m > 2n, AVOID reduces to MONOTONE-AVOID in polynomial time. Proof. Let C : {0, 1}n →{0, 1}m a multi-output circuit with m > 2n which is an instance of AVOID.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "AVOID",
+                "circuit",
+                "monotone",
+                "polynomial",
+                "circuits",
+                "time",
+                "ﬁrst",
+                "observation",
+                "applying",
+                "DeMorgan"
+            ]
+        }
+    },
+    {
+        "id": "6f720ac1-e1a8-4c75-abdd-810e5697e0c2",
+        "title": "",
+        "chunk_text": "1We remark that while it may not be easy to ﬁnd the hypergraph structure from the given circuit in general, for the important special cases of the problem mentioned in the previous discussion, just the exhaustive search based on the circuit structure will yield efﬁcient algorithms to ﬁnd the hypergraph structure. 4 We describe how to obtain the circuit C′ : {0, 1}2n →{0, 1}m from C.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "structure",
+                "ﬁnd",
+                "hypergraph",
+                "circuit",
+                "remark",
+                "general",
+                "discussion",
+                "easy",
+                "important",
+                "special"
+            ]
+        }
+    },
+    {
+        "id": "efbb19c3-0a90-4668-9319-abe2ff5a540d",
+        "title": "",
+        "chunk_text": "By applying De Morgan’s law to push down the negation gates (with appropriate duplication of each gate), we can construct a circuit D equivalent to circuit C, with all the negations at the leaves. The circuit D has input literals {x1, . . . xn, ¬x1, . . . ¬xn}. Now obtain the circuit C′ by replacing each input variable ¬xi by a new variable x′ i. Observe that Range(C) ⊆Range(C′). Indeed, consider an arbitrary y ∈ Range(C) with a = (a1, . . . an) ∈{0, 1}n such that C(a) = y. Let a′ = (a1, . . .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Morgan",
+                "circuit",
+                "Range",
+                "gates",
+                "gate",
+                "negation",
+                "negations",
+                "leaves",
+                "applying",
+                "law"
+            ]
+        }
+    },
+    {
+        "id": "c3892205-bfd7-4cc1-90c1-ff4ef5643a7d",
+        "title": "",
+        "chunk_text": "an, a1, . . . an) ∈ {0, 1}2n. Observe that C′(a′) = y. Since m > 2n, C′ is a valid input instance for MONOTONE- AVOID. Hence, it sufﬁces to solve the range avoidance problem for monotone circuits with m > 2n. Therefore, we can restrict our attention to solving the range avoidance problem for the mono- tone circuits. We also observe the following corollary for the case of NC0 k circuits which are the current boundary for polynomial time algorithms solving AVOID.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "AVOID",
+                "circuits",
+                "MONOTONE",
+                "range",
+                "avoidance",
+                "problem",
+                "Observe",
+                "solving",
+                "mono",
+                "tone"
+            ]
+        }
+    },
+    {
+        "id": "d927c83e-10c9-45b6-b33f-afeacfbe406b",
+        "title": "",
+        "chunk_text": "For any k > 0, if m > 2n, NC0 k-AVOID reduces to MONOTONE-NC0 2k-AVOID in deterministic polynomial time. In particular, when m > 2n, NC0 3-AVOID reduces to MONOTONE-NC0 6-AVOID in deterministic polynomial time. In the remaining part of the paper, we use the framework in theorem 1.1 to show polynomial time algorithms for MONOTONE-NC0 3-AVOID and related problems.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "polynomial",
+                "time",
+                "deterministic",
+                "reduces",
+                "k-AVOID",
+                "paper",
+                "theorem",
+                "problems",
+                "remaining",
+                "part"
+            ]
+        }
+    },
+    {
+        "id": "7060f7ef-f341-474c-9f72-17f3fa3b575a",
+        "title": "",
+        "chunk_text": "Deterministic Polynomial Time Algorithm for MONOTONE-NC0 3-AVOID with Quadratic stretch: We now show the main technical application of the framework in the case when F contains only MAJ function on k inputs, with the additional constraint that two functions should depend on at most one common input variable. As per the above formulation, this makes the hypergraph to be linear and k-uniform.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Polynomial",
+                "Time",
+                "Algorithm",
+                "Quadratic",
+                "MAJ",
+                "Deterministic",
+                "stretch",
+                "variable",
+                "function",
+                "inputs"
+            ]
+        }
+    },
+    {
+        "id": "06f1b7b5-f166-4d55-aeda-d4c35702bdd3",
+        "title": "",
+        "chunk_text": "In the setting of k-uniform linear hypergraphs, using Turan-type results for speciﬁcally designed graphs in F, we can use theorem 1.1 for deriving polynomial time algorithms for solving AVOID for speciﬁc class of circuits. Turan-type extremal problems for hypergraphs were introduced by [BES73] and bounds are known (see [Kee11] for a survey) for exk(n, H′) for a few hypergraphs H′.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "AVOID",
+                "hypergraphs",
+                "Turan-type",
+                "theorem",
+                "circuits",
+                "setting",
+                "k-uniform",
+                "linear",
+                "results",
+                "speciﬁcally"
+            ]
+        }
+    },
+    {
+        "id": "e6a64060-918a-49a1-ab08-32f92bb40efd",
+        "title": "",
+        "chunk_text": "Bounds are known for when H′ is k × k grid [FR13], wickets [Sol24], fano plane [KS04] (see section 2 for a brief overview of Turan-type extremal problems, and exact deﬁnition of these hypergraphs). We exhibit several different ﬁxed hypergraphs H′ and use them to provide different proofs of the following algorithmic upper bound Theorem 1.4. MONOTONE-NC0 3-AVOID when m > cn2 for any constant c can be solved in deterministic polynomial time.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "wickets",
+                "Turan-type",
+                "grid",
+                "fano",
+                "plane",
+                "section",
+                "problems",
+                "hypergraphs",
+                "overview",
+                "extremal"
+            ]
+        }
+    },
+    {
+        "id": "55ddcd06-4299-44b8-a58b-275ef00acae4",
+        "title": "",
+        "chunk_text": "Our proof relies on a reduction of the problem to a more restricted case of MONOTONE-NC0 3-AVOID where each individual output function is the majority of three input bits. We call this version as MAJ3-AVOID. Notice that for any two functions, there can be at most two input bits that both of them can depend on. By using a combinatorial argument on the circuit, we show how to re- duce MAJ3-AVOID to the case where two functions can depend on at most one common input.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "input",
+                "bits",
+                "proof",
+                "relies",
+                "reduction",
+                "problem",
+                "restricted",
+                "individual",
+                "output",
+                "majority"
+            ]
+        }
+    },
+    {
+        "id": "128f07b7-af78-4148-b936-2a6d76e4943e",
+        "title": "",
+        "chunk_text": "We denote this version as ONE-INTERSECT-MAJ3-AVOID. As mentioned above, we use theo- rem 1.1 and H being k-uniform, and F = {MAJ3} use it to design polynomial time algorithms 5 for ONE-INTERSECT-MAJ3-AVOID where each function is majority on three inputs and two dif- ferent functions depend on at most one common input bit.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "denote",
+                "version",
+                "rem",
+                "theo",
+                "k-uniform",
+                "algorithms",
+                "dif",
+                "ferent",
+                "bit",
+                "mentioned"
+            ]
+        }
+    },
+    {
+        "id": "d6553b38-2769-440e-8422-9c4dc69eac37",
+        "title": "",
+        "chunk_text": "We exhibit several different ﬁxed hypergraphs H′ - wickets (lemma 3.7), k-cage (lemma A.4), weak Fano plane (lemma A.6), 3 × 3 grid (lemma 3.9), (k, ℓ)-butterﬂy (lemma A.8), (k, ℓ)-odd kite (lemma A.11) which can be also used to derive polynomial time algorithms for ONE-INTERSECT-MAJ3-AVOID. Extremal bounds are known for exk(n, F) only when F is weak Fano plane, 3 × 3 grid and the wicket.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "lemma",
+                "Fano",
+                "plane",
+                "grid",
+                "k-cage",
+                "butterﬂy",
+                "weak",
+                "odd",
+                "kite",
+                "exhibit"
+            ]
+        }
+    },
+    {
+        "id": "4600da15-12fc-4931-b49a-b128b2e46038",
+        "title": "",
+        "chunk_text": "The best known bounds for exk(n, F) among these is when F is the hypergraph called a wicket (see section 2 for a deﬁnition), and hence we use it in the proof of theorem 1.4. Observing that the above reduction to monotone case also doubles the number of input bits on which each function depends, for NC0 k-AVOID with m > 2n, this implies a reduction to MONOTONE- NC0 2k-AVOID. We use theorem 1.1, with H as the k × k grid (see (lemma 3.9)), we show that: Theorem 1.5.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "theorem",
+                "monotone",
+                "exk",
+                "wicket",
+                "section",
+                "deﬁnition",
+                "bounds",
+                "hypergraph",
+                "called",
+                "proof"
+            ]
+        }
+    },
+    {
+        "id": "2d6cd553-b14a-4376-8b39-aa7362480140",
+        "title": "",
+        "chunk_text": "There is a deterministic polynomial time algorithm for ONE-INTERSECT-MAJk-AVOID when m > n2. However, unlike the case when k = 3, it is unclear how to reduce MONOTONE-NC0 k-AVOID to MAJk-AVOID, and then further to ONE-INTERSECT-MAJk-AVOID. Indeed, designing polynomial time algorithms for MONOTONE-NC0 6-AVOID itself with m = n + O(n2/3) already leads to explicit construction of rigid matrices [GGNS23], which is an important problem in the area.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "time",
+                "polynomial",
+                "deterministic",
+                "algorithm",
+                "algorithms",
+                "unlike",
+                "reduce",
+                "k-AVOID",
+                "MAJk-AVOID",
+                "case"
+            ]
+        }
+    },
+    {
+        "id": "9442b22b-b31f-4da2-84e7-e647544e1477",
+        "title": "",
+        "chunk_text": "Deterministic Polynomial Time Algorithm for MONOTONE-NC0 3-AVOID with Linear Stretch: Deterministic polynomial time algorithms are known [GGNS23] for NC0 3-AVOID when m ≥ n2 log n and as mentioned above, improving the stretch constraint to m = n + O(n2/3) would imply explicit construction of rigid matrices. We next aim to improve the stretch requirement in the above theorem to linear (in fact, to just n), thus improving the known bounds for the case of MONOTONE-NC0 3-AVOID.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Deterministic",
+                "Polynomial",
+                "Time",
+                "Stretch",
+                "Algorithm",
+                "algorithms",
+                "Linear",
+                "improving",
+                "log",
+                "matrices"
+            ]
+        }
+    },
+    {
+        "id": "e31416c6-871b-4be8-a17b-00fc5eb90301",
+        "title": "",
+        "chunk_text": "Towards this, notice that the above argument for theorem 1.4 uses the bounds for Turan num- ber from the literature in a blackbox manner. In fact, the quadratic constraints on the stretch function m that we have imposed in theorem 1.4 can be relaxed by using stricter variants of the power-bound conjecture in the context of Turan numbers of linear hypergraphs.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Turan",
+                "theorem",
+                "notice",
+                "num",
+                "ber",
+                "manner",
+                "argument",
+                "bounds",
+                "literature",
+                "blackbox"
+            ]
+        }
+    },
+    {
+        "id": "dd1d6af6-d4a2-4df6-8ab0-544ab91fbcc9",
+        "title": "",
+        "chunk_text": "In particular, [GL21] conjectures that there exists an ǫ such that any linear hypergraph on n vertices having more than ω(n2−ǫ) edges must contain a (u, u −4)-hypergraph2 as a subgraph. The speciﬁc hypergraph of wicket is an example of a (9, 5)-hypergraph. However, there are (9, 5)-hypergraphs which are not suitable for our purpose (See appendix A.3). Hence, we need a stronger variant of this conjecture which insists on having wicket as a subgraph instead of just (9, 5)-subgraphs.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "hypergraph",
+                "edges",
+                "exists",
+                "linear",
+                "vertices",
+                "subgraph",
+                "wicket",
+                "subgraphs",
+                "speciﬁc",
+                "conjectures"
+            ]
+        }
+    },
+    {
+        "id": "8e24e16a-0ca2-412f-98db-c42b40123de8",
+        "title": "",
+        "chunk_text": "Speciﬁcally, in the case of wickets, which we critically use in our argument for theorem 1.4, [FS24, Sol24] conjectured that the Turan number for 3-uniform hypergraphs avoiding wickets is n2−o(1), and this will directly improve the constraint on m as m = n2−o(1) for theorem 1.4 as well.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "theorem",
+                "Speciﬁcally",
+                "Turan",
+                "wickets",
+                "conjectured",
+                "hypergraphs",
+                "case",
+                "critically",
+                "argument",
+                "number"
+            ]
+        }
+    },
+    {
+        "id": "2cfed90e-fbfb-48b9-8e6c-dfdcb8193e55",
+        "title": "",
+        "chunk_text": "To go beyond the limitations posed by the above structures for which Turan number bounds are classically studied, we deﬁne a new notion of cycles called X 2ℓ-cycles in 3-uniform linear 2A (u, u−4)-hypergraph in this context is a 3-uniform linear hypergraph which has u−4 edges spanning u vertices. 6 hypergraphs. We ﬁrst show a new Turan-type theorem for such cycles for connected hypergraphs, which might be of independent interest. Theorem 1.6.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "linear",
+                "Turan",
+                "studied",
+                "edges",
+                "vertices",
+                "limitations",
+                "posed",
+                "structures",
+                "number",
+                "bounds"
+            ]
+        }
+    },
+    {
+        "id": "61b5d44f-82d1-412c-a5ca-af50f2083a74",
+        "title": "",
+        "chunk_text": "Any connected 3-uniform linear hypergraph with m > n edges must contain a loose X 2ℓ cycle. In the context of ONE-INTERSECT-MAJ3-AVOID where m > n, using the above theorem, we show that the corresponding hypergraph HC contains a loose X 2ℓcycle. Using the framework of theorem 1.1, where we show (lemma 4.5) there exists an edge-coloring of X 2ℓwhich is not MAJ- coloring. Inaddition, we note that although the cycle is not of ﬁxed size, we can ﬁnd it in HC in polynomial time.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "loose",
+                "connected",
+                "linear",
+                "hypergraph",
+                "theorem",
+                "edges",
+                "show",
+                "cycle",
+                "MAJ",
+                "lemma"
+            ]
+        }
+    },
+    {
+        "id": "b6566072-1dab-40b6-a8e2-2e7ff8431b80",
+        "title": "",
+        "chunk_text": "This gives us the following theorem. Theorem 1.7. (Main Theorem) For m > n, MONOTONE-NC0 3-AVOID can be solved in deterministic polynomial time. Thus, while the applicability of theorem 1.1 seems to impose constraints such as k-uniformity and one-intersection to the cases of AVOID that they can be used to solve, the above theorem indicates that along with other combinatorial reductions to such special cases, it can be still lead to useful bounds for the more general problem.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "theorem",
+                "Main",
+                "cases",
+                "AVOID",
+                "time",
+                "solve",
+                "problem",
+                "solved",
+                "deterministic",
+                "polynomial"
+            ]
+        }
+    },
+    {
+        "id": "9df80804-a1b2-4688-a0bd-21590c8d637f",
+        "title": "",
+        "chunk_text": "Building on the above, we can also prove the following theorem for the case of circuits where each output function is restricted to be symmetric. Theorem 1.8. For m > 8n, SYMMETRIC-NC0 3-AVOID can be solved in deterministic polynomial time. We prove this by showing a polynomial time reduction from SYMMETRIC-NC0 3-AVOID to the MONOTONE-NC0 3-AVOID when m > 8n, which is based on a careful combinatorial analysis of the functions involved.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Building",
+                "symmetric",
+                "theorem",
+                "case",
+                "circuits",
+                "output",
+                "restricted",
+                "prove",
+                "polynomial",
+                "time"
+            ]
+        }
+    },
+    {
+        "id": "930dbb7b-3266-4eaa-ba51-1ab8b5d606d3",
+        "title": "",
+        "chunk_text": "Related Work: More recently, [KPI25] described polynomial time algorithms for solving NC0 k- AVOID when the stretch function is m > ˜Ω(n k 2 − k−2 2(k+2) ) when k is an odd constant, and m > Ω(n k 2 log n) when k is an even constant. This improves the algorithms in [GGNS23] for NC0 k. We note that our algorithm (theorem 1.7) is for k = 3 and works for linear stretch, but in the case of monotone NC0 3-AVOID. Thus, our results are incomparable with [KPI25].",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "constant",
+                "AVOID",
+                "Related",
+                "recently",
+                "solving",
+                "log",
+                "algorithms",
+                "stretch",
+                "polynomial",
+                "time"
+            ]
+        }
+    },
+    {
+        "id": "4b4ffcb2-4fca-4b83-ae29-1527d50e6931",
+        "title": "",
+        "chunk_text": "2 Preliminaries We study the range avoidance problem for restricted circuit classes. C-AVOID is the following problem: Given a multi-output circuit C : {0, 1}n →{0, 1}m such that m > n where each output function can be computed by a circuit in class C, ﬁnd a y ∈{0, 1}m which is outside the range of C. In particular, we study the following two problems: MONOTONE-AVOID and SYMMETRIC-AVOID where the circuit class C is restricted to monotone and symmetric functions respectively.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Preliminaries",
+                "circuit",
+                "range",
+                "study",
+                "classes",
+                "avoidance",
+                "class",
+                "problem",
+                "restricted",
+                "C-AVOID"
+            ]
+        }
+    },
+    {
+        "id": "da7df61f-af80-493e-a4fd-a074088d0d8d",
+        "title": "",
+        "chunk_text": "7 Hypergraphs: We collect the preliminaries from theory of hypergraphs that we use in the paper. We will work with hypergraphs G(V, E) where E ⊆2V . A hypergraph is linear if two edges intersect at most one vertex - ∀e1, e2 ∈E, |e1 ∩e2| ≤1. A hypergraph is said to be k-uniform if every edge has exactly k elements from V - ∀e ∈E, |e| = k. We will be working with k-uniform linear hypergraphs, and in particular with k = 3. We will deﬁne some of the hypergraphs that are used in the paper.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Hypergraphs",
+                "paper",
+                "collect",
+                "preliminaries",
+                "theory",
+                "linear",
+                "k-uniform",
+                "vertex",
+                "edges",
+                "edge"
+            ]
+        }
+    },
+    {
+        "id": "81bc3b62-ebb0-4ac8-90b2-918ba4b10b28",
+        "title": "",
+        "chunk_text": "A k × k grid in a hypergraph is a set of k2 vertices {v11, v12, . . . vkk} such that there are edges r1, r2, . . . rk, c1, c2, . . . ck ∈E, corresponding to the vertices in the rows and columns respectively, when the vertices are arranged in the row major order (See ﬁg. 1(a)). A particular special hyper- graph (for k = 3) is called a wicket is the 3 × 3 grid with one edge removed (See ﬁg. 1(b)). A Berge path is deﬁned as v1e1v2 . . . vkekvk+1 where each edge ei contains vertices vi, vi+1.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "vertices",
+                "hypergraph",
+                "set",
+                "grid",
+                "edge",
+                "Berge",
+                "vkk",
+                "graph",
+                "rows",
+                "row"
+            ]
+        }
+    },
+    {
+        "id": "933ef851-c6b8-4803-8245-09eb88bdb20e",
+        "title": "",
+        "chunk_text": "A Berge path is said to be even if k is even and odd otherwise. We say a hypergraph is connected if there exists a Berge path between any two pair of vertices.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Berge",
+                "path",
+                "odd",
+                "vertices",
+                "hypergraph",
+                "connected",
+                "exists",
+                "pair"
+            ]
+        }
+    },
+    {
+        "id": "9410121b-78c1-45e4-9a72-86700afb049f",
+        "title": "",
+        "chunk_text": "Turan-type Problems in Hypergraphs: One of the classical extremal Turan-type problems intro- duced in the context of hypergraphs by [BES73] is the following : for a ﬁxed set of k-uniform hyper- graphs F, what is the maximum number of edges that a k-uniform linear hypergraph can have, if it does not contain a subgraph isomorphic to any of the hypergraphs in the collection F of hypergraphs. This number is denoted by exk(n, F).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Hypergraphs",
+                "Turan-type",
+                "Problems",
+                "k-uniform",
+                "intro",
+                "duced",
+                "hyper",
+                "graphs",
+                "number",
+                "classical"
+            ]
+        }
+    },
+    {
+        "id": "22920a32-a77f-465d-8c49-eb8b2c5fec47",
+        "title": "",
+        "chunk_text": "The Turan density of F is denoted by π(F) = limn→∞ \u0010\u0000n k \u0001−1exk(n, F) \u0011 . It is known that a k-uniform hypergraph F has π(F) = 0 (also called degenerate) if and only if it is k-partite. The special 3-uniform hypergraph called wicket, denoted by W (see ﬁgure 1(b)) forms an im- portant step in our argument. We will need the following result about 3-uniform linear hyper- graphs due to Solymosi [Sol24]. Proposition 2.1 ( [Sol24]).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Turan",
+                "limn",
+                "denoted",
+                "degenerate",
+                "k-partite",
+                "hypergraph",
+                "called",
+                "density",
+                "k-uniform",
+                "Solymosi"
+            ]
+        }
+    },
+    {
+        "id": "ca9d7181-06b3-492b-b544-7f2cabe8d034",
+        "title": "",
+        "chunk_text": "If a 3-uniform linear hypergraph does not contain a wicket then the number of hyperedges is bounded by o(n2). A slightly weaker result was proven by [GS22] where they showed that ex3(n, W) ≤(1−c)n2 6 . Another standard hypergraph that we will be using is the Fano plane. A Fano plane F is a 3- uniform linear hypergarph which is isomorphic to the hypergraph H(V, E) with vertex set V = [7] and edge set E = {{1, 2, 3}, {3, 4, 5}, {1, 5, 6}, {3, 6, 7}, {2, 5, 7}, {1, 4, 7}, {2, 4, 6}}.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Fano",
+                "hypergraph",
+                "wicket",
+                "number",
+                "hyperedges",
+                "bounded",
+                "plane",
+                "linear",
+                "set",
+                "slightly"
+            ]
+        }
+    },
+    {
+        "id": "c6c9c880-d3cc-4397-b77c-5f9d17fc2ebb",
+        "title": "",
+        "chunk_text": "The following result shows a bound on ex3(n, F). Proposition 2.2 ( [KS04]). If a 3-uniform linear hypergraph contains more than \u0000n 3 \u0001 − \u0000⌊n/2⌋ 3 \u0001 − \u0000⌈n/2⌉ 3 \u0001 then it must contain a Fano plane F as a sub-hypergraph. Coming to k-uniform hypergraphs, we use the following result about k × k grid Gk, which exhibits a bound for exk(n, {Gk}). Proposition 2.3 ( [FR13]). Let H be a k-uniform linear hypergraph with m > n(n−1) k(k−1) edges. Then H contains a k × k grid Gk as a sub-hypergraph.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Proposition",
+                "shows",
+                "result",
+                "bound",
+                "sub-hypergraph",
+                "hypergraph",
+                "grid",
+                "linear",
+                "k-uniform",
+                "Fano"
+            ]
+        }
+    },
+    {
+        "id": "94527a3f-56e0-4e3b-8b1e-ff11db0a3dd6",
+        "title": "",
+        "chunk_text": "8 (a) (b) (c) Figure 1: (a) 4 × 4 grid (b) A wicket (c) Fano plane Cycles in Hypergraphs: Various notions of cycles have been explored in the hypergraph setting. [CCGJ18] consider the notion of linear cycles of length ℓ(denoted by Cℓ) which is deﬁned as set of ℓedges such that each pair of adjacent edges ei, ei+1 (modulo ℓ) intersect in exactly one vertex and each pair of non-adjacent edges are disjoint. [CCGJ18] show that for exk(n, C2ℓ) ≤ck,ℓn1+ 1 ℓ and exk(n, C2ℓ+1) ≤c′ k,ℓn1+ 1 ℓ.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Figure",
+                "Fano",
+                "Cycles",
+                "grid",
+                "Hypergraphs",
+                "wicket",
+                "setting",
+                "pair",
+                "plane",
+                "explored"
+            ]
+        }
+    },
+    {
+        "id": "bbf1a165-dfee-4c3f-ae8d-66f0ca631c3a",
+        "title": "",
+        "chunk_text": "Another notion of cycles which is well-studied is that of Berge cycle of length ℓ, denoted by Bℓwhich consists of ℓdistinct edges such that each hyperedge ei contains vertices vi, vi+1 where 1 ≤i < ℓand the edge eℓcontains vertices v1, vℓwhere v1, . . . vℓare distinct vertices. [GL12] show that exk(n, B2ℓ) = dk,ℓn1+ 1 ℓand exk(n, B2ℓ+1) = d′ k,ℓn1+ 1 ℓ. X 2ℓ-cycles and Loose X 2ℓ-cycles: We deﬁne a new notion of cycles called X 2ℓ-cycles in 3-uniform linear hypergraphs.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Berge",
+                "Bℓwhich",
+                "vℓwhere",
+                "vertices",
+                "denoted",
+                "ℓand",
+                "edges",
+                "edge",
+                "well-studied",
+                "length"
+            ]
+        }
+    },
+    {
+        "id": "d715a847-0c96-48f6-a763-55ebc7d40d9c",
+        "title": "",
+        "chunk_text": "We deﬁne X 2ℓto be a relaxation of B2ℓwhere ∃ei, ej such that |ei ∩ej| = 1, i + 1 ≡j mod 2 and |i −j| > 2. We call the (ei, ej)-pair a χ-structure in the cycle. Alterna- tively, we can view X 2ℓusing the lens of Berge path. X 2ℓcan be thought as B2ℓ1 ∪B2ℓ2 ∪χ where B2ℓ1 = u1e1u2 . . . u2ℓ1e2ℓ1u2ℓ1+1, B2ℓ2 = v1e′ 1v2 . . . v2ℓ2e′ 2ℓ2v2ℓ2+1, χ = (e, e′) where e, e′ ̸∈ {e1, . . . e2ℓ1, e′ 1, . . . e′ 2ℓ2} and e = {u1, uℓ1, w}, e′ = {v1, vℓ2, w}.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "mod",
+                "deﬁne",
+                "relaxation",
+                "Berge",
+                "pair",
+                "cycle",
+                "Alterna",
+                "tively",
+                "call",
+                "χ-structure"
+            ]
+        }
+    },
+    {
+        "id": "de58e613-ecb0-439b-8e6f-f3444d8f8fef",
+        "title": "",
+        "chunk_text": "If we relax the Berge paths to Berge walks (denoted by Pℓ) by allowing repetition of edges and vertices, we get loose X 2ℓcycle. In section 4, we shall prove extremal bounds on this structure and use it to solve range avoidance for restricted circuit classes.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Berge",
+                "walks",
+                "denoted",
+                "vertices",
+                "relax",
+                "paths",
+                "allowing",
+                "repetition",
+                "edges",
+                "loose"
+            ]
+        }
+    },
+    {
+        "id": "3be3f067-1626-4550-8563-455a447ae474",
+        "title": "",
+        "chunk_text": "3 Range Avoidance for NC0 k via Fixed Hypergraphs In this section, we describe the main technical tool of the paper by formulating the range avoidance problem as a way of avoiding certain hypergraph - leading to a Turan-type formulation of the problem. We recall the notation from the introduction: for an NC0 k circuit C = (fi)i∈[m] : {0, 1}n → {0, 1}m. Let HC denote the hypergraph deﬁned as follows: The set of vertices are [n]. For 1 ≤i ≤ m, deﬁne a hyperedge ei as {xj | j ∈[n], xj ∈I(fi)}.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Range",
+                "Avoidance",
+                "problem",
+                "Fixed",
+                "Turan-type",
+                "hypergraph",
+                "section",
+                "leading",
+                "describe",
+                "main"
+            ]
+        }
+    },
+    {
+        "id": "34246720-93b4-4501-84d6-c2f6f8feef13",
+        "title": "",
+        "chunk_text": "Thus E = {{ei | i ∈[m]}} has exactly m edges, each of size at most k. Let F be the family of functions that appear in the circuit C, and let φ : E →F be a labelling of the edges of the hypergraph H with the corresponding function. A 2-coloring of the hyperedges of H, is said to be a φ-coloring if there is a vertex coloring which induces this edge coloring via φ. We argue the following: 9 Theorem 1.1.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "edges",
+                "size",
+                "coloring",
+                "Theorem",
+                "edge",
+                "functions",
+                "function",
+                "family",
+                "circuit",
+                "labelling"
+            ]
+        }
+    },
+    {
+        "id": "9c142c20-912a-446f-a57d-6c747a75a734",
+        "title": "",
+        "chunk_text": "Let C : {0, 1}n →{0, 1}m be a circuit and HC be the corresponding hypergraph and let φ be the labelling function. Suppose HC contains a sub-hypergraph H′ (of ﬁxed size) such that there is an edge-coloring of H′ which is not φ-coloring. Then there is a polynomial time algorithm to ﬁnd a string outside the range of C. Proof. Let HC be the hypergraph corresponding to the circuit C. Let H′ be a sub-hypergraph of ﬁxed size ℓin HC.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "function",
+                "labelling",
+                "ﬁxed",
+                "sub-hypergraph",
+                "size",
+                "circuit",
+                "hypergraph",
+                "Suppose",
+                "φ-coloring",
+                "Proof"
+            ]
+        }
+    },
+    {
+        "id": "21271b73-983e-4dab-add2-00376f8a0557",
+        "title": "",
+        "chunk_text": "We note that since H′ is of ﬁxed size, we can exhaustively search for a copy of H′ in HC in polynomial time. Let Γ : E(H′) →{R, B} be an edge-coloring of H′ which in not a φ-coloring. Let C′ be the circuit corresponding to the hypergraph H′. Let y = y1y2 . . . ym be deﬁned as follows: yi =        ∗, if ei ̸∈E(H′) 0, if ei ∈E(H′) and Γ(ei) = R 1, otherwise where ∗denotes that yi can take any value in {0, 1}. We will show that y ̸∈Range(C).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "size",
+                "time",
+                "note",
+                "ﬁxed",
+                "exhaustively",
+                "search",
+                "copy",
+                "polynomial",
+                "Range",
+                "φ-coloring"
+            ]
+        }
+    },
+    {
+        "id": "cd3ebb33-aa20-4800-8c1e-6edeecf9356b",
+        "title": "",
+        "chunk_text": "Let ∆: {R, B} →{0, 1} be a function such that ∆(R) = 0, ∆(B) = 1. For the sake of brevity, let ∆(x) = ∆(x1, . . . xn) = ∆(x1)∆(x2) . . . ∆(xn). It sufﬁces to show the following claim. Claim 3.1. y ∈Range(C) if and only if ∆(y) is a valid φ-coloring. Proof. Notice that y ∈Range(C) if and only if ∃x ∈{0, 1}n such that C(x) = y. This is equivalent to ∃Π : V →{R, B} such that the corresponding Γ : E →{R, B} is a φ −coloring.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Range",
+                "function",
+                "claim",
+                "brevity",
+                "sake",
+                "Proof",
+                "coloring",
+                "φ-coloring",
+                "Notice",
+                "sufﬁces"
+            ]
+        }
+    },
+    {
+        "id": "6402eb0f-1579-4113-9d88-0d55c63c04a5",
+        "title": "",
+        "chunk_text": "Indeed, the latter equivalence can be obtained by setting Π, Γ such that Π(vi) = ∆(xi) and Γ(ej) = ∆(yj) for all i ∈[n], j ∈[m]. Since, HC has an edge coloring Γ which is not a φ-coloring, by claim 3.1 we obtain a y ∈{0, 1}m which is outside Range(C). Warm-up 1: Algorithm for NC0 2-AVOID: As mentioned in the introduction, [GLW22] described a polynomial time algorithm for solving the range avoidance problem for NC0 2 circuit.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Range",
+                "equivalence",
+                "obtained",
+                "setting",
+                "Algorithm",
+                "Warm-up",
+                "circuit",
+                "φ-coloring",
+                "claim",
+                "edge"
+            ]
+        }
+    },
+    {
+        "id": "caba21fa-a698-4dbc-ab63-1312251c9699",
+        "title": "",
+        "chunk_text": "In the following, we show an alternate proof of the same as an application of the framework described above. Proposition 3.2. There is a polynomial time algorithm for NC0 2-AVOID when m > n. Proof. Let C : {0, 1}n →{0, 1}m be the given NC0 2 circuit. [GLW22] observed that there are only four types of NC0 2 functions possible: AND, OR, PARITY and constant functions. We can check the type of function in polynomial time. Suppose there is a constant function f in the circuit.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "show",
+                "alternate",
+                "application",
+                "framework",
+                "proof",
+                "circuit",
+                "polynomial",
+                "time",
+                "constant",
+                "functions"
+            ]
+        }
+    },
+    {
+        "id": "29ff12a4-2766-4b37-8e05-982be7d78e90",
+        "title": "",
+        "chunk_text": "Wlog let this function be a constant zero function. Then by setting the output of f to 1 and the other output bits arbitrarily we get a string which is outside the range of the circuit. Now we consider the other case when the circuit contains only {∧, ∨, ⊕} gates where inputs may be negated. We consider the graph HC corresponding to the circuit C. Since m > n, the graph HC corresponding to the circuit C indeed contains a cycle Q. Furthermore, we can ﬁnd this cycle in polynomial time.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "circuit",
+                "function",
+                "Wlog",
+                "constant",
+                "output",
+                "graph",
+                "cycle",
+                "setting",
+                "bits",
+                "arbitrarily"
+            ]
+        }
+    },
+    {
+        "id": "7376e743-ad78-41a2-b1fc-f930052aef8a",
+        "title": "",
+        "chunk_text": "Thus, it sufﬁces to obtain an edge-coloring of Q which is not a φ-coloring. 10 We consider the following cases based on the function types of the edges participating in the cycle Q: Case 1: Suppose each edge in Q computes a PARITY of two inputs which may be negated. Con- sider an edge f with endpoints xi, xj. Consider the path P starting at xi and ending at xj obtained by deleting f from Q. Let Γ color all the edges in Q −f to R. Let xi = b ∈{R, B}.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "φ-coloring",
+                "sufﬁces",
+                "obtain",
+                "edge-coloring",
+                "Suppose",
+                "edges",
+                "edge",
+                "PARITY",
+                "cases",
+                "Case"
+            ]
+        }
+    },
+    {
+        "id": "7ea56bf5-42e6-4d76-87d8-1cd67f7d6aea",
+        "title": "",
+        "chunk_text": "Notice that setting the function to R ﬁxes the color of every other vertex to either b or b depending on the function. In particular, it ﬁxes xj = b′ ∈{b, b}. This ﬁxes the value of the function computed at f, and hence the color of f. Thus, ﬂipping the color of f would produce an edge-coloring which is not achievable. Therefore, the following coloring Γ is a not a φ-coloring.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "color",
+                "function",
+                "ﬁxes",
+                "Notice",
+                "setting",
+                "vertex",
+                "depending",
+                "ﬂipping",
+                "achievable",
+                "computed"
+            ]
+        }
+    },
+    {
+        "id": "92278739-d43e-4e5a-81bd-abb2f499a07d",
+        "title": "",
+        "chunk_text": "Γ(e) =        R if e ∈Q −f B if e = f and b′ = b R if e = f and b′ = b Case 2: Suppose there exists an edge e1 in Q which computes AND or OR of two inputs which may be negated. Let the cycle Q be e1e2 . . . eℓe1. Consider the path e1e2 . . . eℓ−1 obtained by deleting the edge eℓfrom Q. Consider the following edge-coloring Γ : Q −eℓ→{R, B} Γ(e) = ( B if e ∈Q −eℓ, φ(e) = ∧ R if e ∈Q −eℓand φ(e) ∈{∨, ⊕} Let e1 ∩eℓ= {xi} and eℓ∩eℓ−1 = {xj}.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Case",
+                "Suppose",
+                "negated",
+                "exists",
+                "computes",
+                "inputs",
+                "edge",
+                "cycle",
+                "path",
+                "obtained"
+            ]
+        }
+    },
+    {
+        "id": "dfdcace1-0b8e-433a-a3d8-18e7fee8ff75",
+        "title": "",
+        "chunk_text": "We would like to show that by coloring the edges of Q −eℓaccording to Γ, we end up ﬁxing the colors of xi, xj thus ﬁxing the color of eℓor we obtain an inconsistency. In the former case, ﬂipping the color of eℓwe obtain an edge- coloring which is not a φ-coloring. It sufﬁces to show that Γ ﬁxes the color of eℓor we obtain an inconsistent coloring for Q −eℓ. We prove this by induction on length of the path. For the base case, wlog let φ(e1) =AND.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "color",
+                "ﬁxing",
+                "obtain",
+                "coloring",
+                "show",
+                "eℓor",
+                "eℓaccording",
+                "inconsistency",
+                "colors",
+                "end"
+            ]
+        }
+    },
+    {
+        "id": "34731333-e5a8-4ed3-8296-ac2b5cd55573",
+        "title": "",
+        "chunk_text": "According to our Γ, we color e1 to B, which ﬁxes the color of both vertices incident on e1. By induction hypothesis, let Γ ﬁx the colors of all vertices participating in the path e1e2 . . . ek−1 for k ∈[ℓ]. In the other case when the coloring is inconsistent we are already done. Thus, we would like to argue that Γ ﬁxes the other endpoint y of ek where y ̸∈ek−1.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "color",
+                "vertices",
+                "incident",
+                "colors",
+                "ﬁxes",
+                "hypothesis",
+                "path",
+                "induction",
+                "participating",
+                "case"
+            ]
+        }
+    },
+    {
+        "id": "46830fff-04bf-4e50-b76b-477ba6c09e87",
+        "title": "",
+        "chunk_text": "Notice that, since one input feeding into ek is already ﬁxed Γ gives a way to ﬁx the other input y to b ∈{R, B} by setting the color of ek appropriately or we get an inconsistency at this stage. Thus, inductively either we get an inconsistent coloring (in this case color eℓarbitrarily) or we end up ﬁxing the colors of xi, xj which in turn ﬁxes the color of the edge eℓ. Hence, ﬂipping the color of ℓﬁxed by the above assignment produces an edge-coloring which is not a φ-coloring.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "color",
+                "input",
+                "Notice",
+                "stage",
+                "feeding",
+                "ﬁxed",
+                "setting",
+                "appropriately",
+                "inconsistency",
+                "colors"
+            ]
+        }
+    },
+    {
+        "id": "c74b8e4a-605f-4b38-903d-db1010c0296f",
+        "title": "",
+        "chunk_text": "By the above case analysis we have an edge-coloring of H′ which is not φ-coloring. By theorem 1.1 we obtain a string outside the range of the circuit in polynomial time. 11 To demonstrate the method further, as another simple application, we show a polynomial time algorithm for solving the range avoidance problem when each output function computes an AND or OR function of k input bits for a ﬁxed k > 0 and satisﬁes the property that any two output functions share at most one input.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "φ-coloring",
+                "case",
+                "analysis",
+                "edge-coloring",
+                "range",
+                "polynomial",
+                "time",
+                "output",
+                "function",
+                "input"
+            ]
+        }
+    },
+    {
+        "id": "9c86e9fa-28ba-4aea-a85a-1d69d35d6809",
+        "title": "",
+        "chunk_text": "Warm-up 2: Polynomial time algorithm for {AND, OR}-AVOID: As our next application, we show a polynomial time algorithm for solving the range avoidance problem when each output function computes an AND or OR function of k input bits for a ﬁxed k > 0. Additionally, it satisﬁes the constraint that any two output functions share at most one input. Thus, the hypergraph HC corresponding to C is a k-uniform linear hypergraph. The sub-hypergraphs we will use in this case are k-crown and C∗.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "AVOID",
+                "Polynomial",
+                "time",
+                "algorithm",
+                "Warm-up",
+                "output",
+                "application",
+                "function",
+                "input",
+                "show"
+            ]
+        }
+    },
+    {
+        "id": "7e3638f8-4449-4e3b-b977-6401b0980403",
+        "title": "",
+        "chunk_text": "As our next application, we show a polynomial time algorithm for solving the range avoidance problem when each output function computes an AND or OR function of k input bits for a ﬁxed k. The sub-hypergraphs we will use in this case are k-crown and C∗. A k-crown is a k-uniform linear hypergraph consisting of k disjoint hyperedges {e1, . . . ek} and an additional hyperedge e0 intersecting each hyperedge e1, . . . ek exactly once. C∗is a variant of the k-crown where the edges e1, . . .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "function",
+                "application",
+                "k-crown",
+                "show",
+                "polynomial",
+                "time",
+                "algorithm",
+                "solving",
+                "range",
+                "avoidance"
+            ]
+        }
+    },
+    {
+        "id": "dde8f730-f14d-40a5-bb60-002d550abe71",
+        "title": "",
+        "chunk_text": "ek−2 intersect in a common vertex v ̸∈e0. We will use the following extremal bound on these subhypergraphs Proposition 3.3 ( [ZBW24]). Let H be a k-uniform linear hypergraph with m > k(k−2)(n−s) k−1 where s is the number of vertices with degree at least (k −1)2 + 2. Then H contains a k-crown or C∗. Proposition 3.4. Let C : {0, 1}n →{0, 1}m be a multi-output circuit where m > k(k−2)(n−s) k−1 and each output function computes ANDk or ORk for ﬁxed k.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "intersect",
+                "Proposition",
+                "common",
+                "vertex",
+                "extremal",
+                "bound",
+                "subhypergraphs",
+                "k-uniform",
+                "linear",
+                "hypergraph"
+            ]
+        }
+    },
+    {
+        "id": "5fbeaa06-4cae-4dad-8479-11c8c3978458",
+        "title": "",
+        "chunk_text": "Additionally, any two output functions share at most one input. Then, there is a polynomial time algorithm for solving AVOID on C. Proof. We will show an edge coloring of the hypergraphs k-crown or C∗which is not a φ-coloring. Γ(e) =              B if e ∈{e1, . . . ek}, φ(e) =AND R if e ∈{e1, . . . ek}, φ(e) =OR B if e = e0, ∃i ∈[k] such that φ(ei) =OR R otherwise By Proposition 3.3 we have that if m > k(k−1)(n−s) k−1 then H contains a C∗or k-crown.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Additionally",
+                "input",
+                "output",
+                "functions",
+                "share",
+                "AVOID",
+                "k-crown",
+                "polynomial",
+                "time",
+                "algorithm"
+            ]
+        }
+    },
+    {
+        "id": "49d0fd01-fb53-40b7-bc5b-b91c083ef87a",
+        "title": "",
+        "chunk_text": "Furthermore, we can ﬁnd these subhypergraphs in polynomial time. By the above argument, we can ﬁnd an edge coloring of C∗and k-crown which is not a φ-coloring. By theorem 1.1 we can ﬁnd a string outside the range of C in polynomial time. We remark that the above special case of AVOID ({AND, OR}-AVOID) can be solved by a di- rect algorithm similar to the algorithm for NC2 0-AVOID due to [GLW22]. Nevertheless the above method is yet another demonstration of our framework for solving AVOID problem.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "ﬁnd",
+                "time",
+                "AVOID",
+                "polynomial",
+                "subhypergraphs",
+                "algorithm",
+                "argument",
+                "φ-coloring",
+                "edge",
+                "coloring"
+            ]
+        }
+    },
+    {
+        "id": "861fab94-5b09-4bf0-811e-8661227786d4",
+        "title": "",
+        "chunk_text": "12 3.1 Polynomial time algorithm for ONE-INTERSECT-MAJ3-AVOID In this subsection, we show the ﬁrst application of our formulation of the problem in terms of hy- pergraphs. We apply it to describe a deterministic polynomial time algorithm for ONE-INTERSECT-MAJ3- AVOID. For our purpose, we are interested in a special case of φ-coloring when F = {MAJ}. We deﬁne this formally below: Deﬁnition 3.5 (MAJ-coloring). Let H(V, E) be a k-uniform hypergraph.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "pergraphs",
+                "Polynomial",
+                "time",
+                "algorithm",
+                "subsection",
+                "AVOID",
+                "show",
+                "ﬁrst",
+                "application",
+                "formulation"
+            ]
+        }
+    },
+    {
+        "id": "239d6bab-4f91-4e9d-9ec8-9756d716d103",
+        "title": "",
+        "chunk_text": "We say Γ : E →{R, B} is a MAJ-coloring if there exists a vertex coloring Π : V →{R, B} such that ∀e ∈E(H) we have Γ(e) = B ⇐⇒∃S ⊆e, |S| ≥ j |V | 2 k + 1 such that ∀v ∈S, Π(v) = B. We have the following corollary from theorem 1.1. Corollary 3.6. Let C : {0, 1}n →{0, 1}m be a circuit where each output function computes a MAJ function. Let HC be the corresponding hypergraph. Suppose HC contains a subhypergraph H′ such that there is an edge-coloring of H′ which is not MAJ-coloring.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "exists",
+                "vertex",
+                "coloring",
+                "corollary",
+                "MAJ-coloring",
+                "function",
+                "MAJ",
+                "theorem",
+                "hypergraph",
+                "Suppose"
+            ]
+        }
+    },
+    {
+        "id": "ca23a713-12b6-4c50-baa0-46644adc7f34",
+        "title": "",
+        "chunk_text": "Then there is a polynomial time algorithm to ﬁnd a string outside the range of C. Thus it is sufﬁcient to exhibit an explicit ﬁxed size linear 3-uniform hypergraph H′ which satisﬁes the conditions of Corollary 3.6. Hypergraph Structure : Wickets - A wicket is deﬁned as a 3 × 3 grid with one edge removed. By proposition 2.1, if H contains more that o(n2) edges, then it contains a wicket. We will show that there is an edge coloring of a wicket which is not a MAJ-coloring. Lemma 3.7.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "wicket",
+                "hypergraph",
+                "polynomial",
+                "time",
+                "algorithm",
+                "ﬁnd",
+                "string",
+                "range",
+                "Corollary",
+                "edge"
+            ]
+        }
+    },
+    {
+        "id": "166abfc9-65fd-4f7d-ade4-6206e07e4f0a",
+        "title": "",
+        "chunk_text": "Let H be a wicket. There exists an edge-coloring Γ : E →{R, B} such that it not a MAJ- coloring. Furthermore, we can ﬁnd this in polynomial time. Proof. Wlog let the edge e removed from the wicket be a column edge. Let E = E1 ∪E2 where E1 be the set of three row edges and E2 denote the set of column edges. We will show that the following Γ : E →{R, B} is not a MAJ-coloring: Γ(e) = ( R if e ∈E1 B if e ∈E2 . Let U be the set of vertices upon which the edges of E2 are incident.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "set",
+                "edges",
+                "MAJ",
+                "wicket",
+                "column",
+                "edge",
+                "coloring",
+                "exists",
+                "edge-coloring",
+                "Proof"
+            ]
+        }
+    },
+    {
+        "id": "feb28637-fcf5-4f17-adea-23fa6cc30263",
+        "title": "",
+        "chunk_text": "For the edges in E1 to be colored R, there must be at least three vertices in U that should be colored R. Similarly, for the edges in E2 to be B, there must be at least 4 vertices in U that should be colored B. Thus, totally there should be at least 7 distinct vertices in U. But |U| = 6, which is a contradiction. Hence, Γ is not a MAJ-coloring. The following is an easy corollary of corollary 3.6 and lemma 3.7. Corollary 3.8.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "colored",
+                "vertices",
+                "edges",
+                "corollary",
+                "Similarly",
+                "totally",
+                "distinct",
+                "contradiction",
+                "MAJ-coloring",
+                "lemma"
+            ]
+        }
+    },
+    {
+        "id": "4a445c74-1f94-44c1-b528-5d25c26cf21d",
+        "title": "",
+        "chunk_text": "Let C : {0, 1}n →{0, 1}m be an instance of ONE-INTERSECT-MAJ3-AVOID with m = Ω(n2). Then we can ﬁnd a y ∈{0, 1}m outside the range of C in polynomial time. 13 Proof. Let HC be the 3-uniform linear hypergraph corresponding to the the circuit C. Since m > o(n2), proposition 2.1 guarantees existence of a wicket in H. Furthermore, we can ﬁnd such wicket in polynomial time by simply checking across all subsets of m which are of size 5. The number of subsets is bounded by \u0000m 5 \u0001 .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "instance",
+                "polynomial",
+                "Proof",
+                "ﬁnd",
+                "time",
+                "wicket",
+                "subsets",
+                "range",
+                "proposition",
+                "linear"
+            ]
+        }
+    },
+    {
+        "id": "79ca49d4-c57f-4f02-a440-f827bccb1f4a",
+        "title": "",
+        "chunk_text": "By corollary 3.6 and lemma 3.7 it follows that we can ﬁnd a y outside the range of C in polynomial time. 3.2 Polynomial time Algorithm for ONE-INTERSECT-MAJk-AVOID In this subsection, we show a second application of the framework proposed in theorem 1.1. Let C : {0, 1}n →{0, 1}m be a multi-output circuit such that each output function computes MAJ of k input bits. Let H be a k-uniform hypergraph obtained from C as in the case of theorem 1.1.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "polynomial",
+                "time",
+                "corollary",
+                "lemma",
+                "theorem",
+                "ﬁnd",
+                "range",
+                "Algorithm",
+                "MAJ",
+                "subsection"
+            ]
+        }
+    },
+    {
+        "id": "174450c6-6506-4180-ae66-59a2eff28677",
+        "title": "",
+        "chunk_text": "Since every pair of output functions intersect in at most one input variable, we have that H is a linear k-uniform hypergraph. Recall proposition 2.3 which argued that a k-uniform hypergraph that has more than n(n−1) k(k−1) must have a k × k grid contained in it.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "variable",
+                "k-uniform",
+                "hypergraph",
+                "pair",
+                "output",
+                "functions",
+                "intersect",
+                "input",
+                "linear",
+                "Recall"
+            ]
+        }
+    },
+    {
+        "id": "5792b259-aa72-49fa-a3e5-e7cac19bc49f",
+        "title": "",
+        "chunk_text": "We will show that if H contains a k × k- grid then we can solve range avoidance for the corresponding circuit in polynomial time and hence this will imply an algorithm for ONE-INTERSECT-MAJk-AVOID by using the same framework as theorem 1.1. Lemma 3.9. There exists an edge-coloring Γ : E →{R, B} of k × k-grid which is not a MAJ-coloring. Furthermore, we can ﬁnd Γ in polynomial time. Proof. Let H(V, E) be a k×k grid.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "theorem",
+                "polynomial",
+                "show",
+                "solve",
+                "range",
+                "avoidance",
+                "circuit",
+                "imply",
+                "algorithm",
+                "framework"
+            ]
+        }
+    },
+    {
+        "id": "e701814b-edf2-4eeb-97bb-45e348f98dcb",
+        "title": "",
+        "chunk_text": "Let E = E1∪E2 where E1, E2 are the set of edges corresponding to the rows and columns of the grid respectively. We deﬁne an edge-coloring Γ(e) = ( R if e ∈E1 B otherwise We will show that Γ is not a valid MAJ-coloring. We consider the following cases based on the parity of k: Case 1 Suppose k is odd. For each e ∈E1 to be colored R, at least \u0004 k 2 \u0005 + 1 of its vertices should be colored R.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "set",
+                "edges",
+                "rows",
+                "columns",
+                "grid",
+                "colored",
+                "Suppose",
+                "MAJ-coloring",
+                "cases",
+                "Case"
+            ]
+        }
+    },
+    {
+        "id": "ce928d01-91ab-4f79-b601-0cefc42d67bb",
+        "title": "",
+        "chunk_text": "Since the edges in E1n are pairwise disjoint, at least k \u0000\u0004 k 2 \u0005 + 1 \u0001 distinct vertices should be colored R. Similarly for edges in E2, we have that at least k \u0000\u0004 k 2 \u0005 + 1 \u0001 vertices in V should be colored B. Hence, there should be at least 2k \u0000\u0004 k 2 \u0005 + 1 \u0001 > k2 vertices in V , which is a contradiction. Case 2 Suppose k is even. By previous argument, for edges in E2 to get color B at least k \u0000k 2 + 1 \u0001 vertices should be colored B.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "edges",
+                "colored",
+                "vertices",
+                "disjoint",
+                "distinct",
+                "pairwise",
+                "Suppose",
+                "Similarly",
+                "Case",
+                "contradiction"
+            ]
+        }
+    },
+    {
+        "id": "30f838a1-285a-439c-b9c7-f93cea3e166a",
+        "title": "",
+        "chunk_text": "For edges in E1 at least k \u0000k 2 \u0001 vertices should be colored R. So totally, there are at least k (k + 1) > k2 vertices in V , which is again a contradiction. In either case, we obtain a contradiction. Hence, Γ is not a MAJ-coloring. By proposition 2.3 and lemma 3.2, we have the following result: Theorem 3.10. Let C : {0, 1}n →{0, 1}m be an instance of ONE-INTERSECT-MAJk-AVOID and m > n(n−1) k(k−1) . There is a polynomial time algorithm to ﬁnd a string outside the range of C.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "vertices",
+                "contradiction",
+                "edges",
+                "colored",
+                "Theorem",
+                "totally",
+                "case",
+                "MAJ-coloring",
+                "obtain",
+                "proposition"
+            ]
+        }
+    },
+    {
+        "id": "11cbbd63-bc04-4153-92b6-cd832b20a15a",
+        "title": "",
+        "chunk_text": "14 4 Polynomial time Algorithm for MONOTONE-NC0 3-AVOID In this section, we describe a deterministic polynomial time algorithm for MONOTONE-NC0 3-AVOID for m = Ω(n2). The algorithm proceeds in three steps. In the ﬁrst step, we give a polynomial time reduction from MONOTONE-NC0 3-AVOID to MAJ3-AVOID. Next, we show a reduction from MAJ3-AVOID to ONE-INTERSECT-MAJ3-AVOID. Finally, we describe a polynomial time algorithm for solving MAJ3-AVOID when m = Ω(n2).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Algorithm",
+                "Polynomial",
+                "time",
+                "section",
+                "describe",
+                "deterministic",
+                "reduction",
+                "steps",
+                "step",
+                "Finally"
+            ]
+        }
+    },
+    {
+        "id": "f6e884c0-5479-4539-b5a7-86f546f9523a",
+        "title": "",
+        "chunk_text": "4.1 Reduction from MONOTONE-NC0 3-AVOID to MAJ3-AVOID: We show the following reduction: Theorem 4.1. There is a polynomial time reduction from MONOTONE-NC0 3-AVOID to MAJ3-AVOID. Proof. Let C : {0, 1}n →{0, 1}m be a monotone circuit with m > n. We will obtain a circuit C′ : {0, 1}n′ →{0, 1}m′ such that n′ ≤n < m′ ≤m and each output function computes majority of three input bits.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Theorem",
+                "Reduction",
+                "show",
+                "circuit",
+                "Proof",
+                "polynomial",
+                "time",
+                "bits",
+                "monotone",
+                "obtain"
+            ]
+        }
+    },
+    {
+        "id": "c24cbd77-e0bc-41b4-b76f-83b32be11fc8",
+        "title": "",
+        "chunk_text": "Furthermore, we can ﬁnd a y ̸∈Range(C) from y′ ̸∈Range(C′) in polynomial time by setting the remaining m −m′ many bits of y to arbitrary values. We remark that this proof technique is inspired by [GLW22]. To begin with, note that there are only a few types of monotone functions that depend on 3 bits.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Range",
+                "ﬁnd",
+                "polynomial",
+                "time",
+                "setting",
+                "remaining",
+                "arbitrary",
+                "bits",
+                "note",
+                "remark"
+            ]
+        }
+    },
+    {
+        "id": "a79b6f2b-4745-4f03-b8a8-26c60ec22859",
+        "title": "",
+        "chunk_text": "For each of these cases we will show a reduction from C : {0, 1}n →{0, 1}m to a smaller circuit C′ : {0, 1}n−1 →{0, 1}m−1 such that a string outside the range of C′ gives a string which is outside the range of C. Let Cj denote the sub-circuit of C that computes the j-th bit of the output. Let Wi := {x ∈{0, 1}3 | |x|1 = i} be the set of inputs with weight i, for i ∈{0, 1, 2, 3}. We describe the reduction for each type of function except when the function is the MAJ3 function.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "range",
+                "string",
+                "cases",
+                "show",
+                "smaller",
+                "circuit",
+                "function",
+                "reduction",
+                "output",
+                "denote"
+            ]
+        }
+    },
+    {
+        "id": "71df1753-3bf3-4af4-a105-a45e4845ba59",
+        "title": "",
+        "chunk_text": "We iteratively apply this sequence of reduction rules for each j ∈{1, 2 . . . m}, we will end up a circuit where each output bit is the MAJ3 function in terms of input variables. Case 1: C−1 j (0) = ∅: That is Cj computes a constant 1 function. Then setting y1 = 0 and the remaining output bits arbitrarily gives a string outside the range of C. Case 2: C−1 j (0) = W0: Suppose Cj computes OR of three input variables x1, x2, x3.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Case",
+                "variables",
+                "iteratively",
+                "apply",
+                "sequence",
+                "reduction",
+                "rules",
+                "function",
+                "output",
+                "input"
+            ]
+        }
+    },
+    {
+        "id": "d77968dd-b03e-4a91-be98-d810285e4274",
+        "title": "",
+        "chunk_text": "Then setting y1 = 0 and all the input variables x1, x2, x3 to 0 we obtain a smaller circuit C′ : {0, 1}n−3 → {0, 1}m−1 such that y′ ̸∈Range(C′) then y = 0y′ is outside the range of C. Case 3: C−1 j (0) = W0 ∪{α} where α ∈W1: Without loss of generality, we assume α = 001. In this case, setting y1 = 0 and the input variables x1, x2 to 0 we obtain a smaller circuit C′ : {0, 1}n−2 →{0, 1}m−1. Same argument applies when α = 100, and α = 010.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Range",
+                "variables",
+                "setting",
+                "input",
+                "obtain",
+                "smaller",
+                "circuit",
+                "Case",
+                "generality",
+                "loss"
+            ]
+        }
+    },
+    {
+        "id": "91fcbbd3-de2e-417e-b634-5f1bb756b273",
+        "title": "",
+        "chunk_text": "Case 4: C−1 j (0) = W0 ∪{α1, α2} where α1, α2 ∈W1: Without loss of generality, let α1 = 001, and α2 = 010. By property of monotone functions, we have that Cj evaluates to 1 on inputs {101, 110, 111}. Then setting y1 = 0 and x1 = 0, yields a circuit C′ : {0, 1}n−1 →{0, 1}m−1. Same argument applies in the case when α1 = 010, α2 = 100 and also in the case when α1 = 001, α2 = 100. 15 Case 5: C−1 j (0) = W0 ∪W1 ∪{α} where α ∈W2: Without loss of generality, assume α = 011.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Case",
+                "generality",
+                "loss",
+                "functions",
+                "inputs",
+                "property",
+                "monotone",
+                "evaluates",
+                "setting",
+                "yields"
+            ]
+        }
+    },
+    {
+        "id": "5c82747e-d512-4137-ba9b-2ca7883de417",
+        "title": "",
+        "chunk_text": "Setting y1 = 1 and x1 = 1 we get a smaller circuit C′ : {0, 1}n−1 →{0, 1}m−1. The other cases when α = 101 and α = 110 can be handled similarly. Case 6: C−1 j (0) = W0 ∪W1 ∪{α1, α2} where α1, α2 ∈W2: Without loss of generality, assume α1 = 011, α2 = 110. Setting y1 = 1 and x1 = 1 we get a smaller circuit C′ : {0, 1}n−1 →{0, 1}m−1. The same argument applies when W2 \\ {α1, α2} = 110 or 011. Case 7: C−1 j (0) = W0 ∪W1 ∪W2: In this case, Cj computes AND of three input variables x1, x2, x3.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Case",
+                "Setting",
+                "smaller",
+                "circuit",
+                "cases",
+                "similarly",
+                "handled",
+                "assume",
+                "generality",
+                "loss"
+            ]
+        }
+    },
+    {
+        "id": "16206915-f17d-4aa9-b0bb-e0bc6d0ba84c",
+        "title": "",
+        "chunk_text": "Then setting y1 = 1 and all the input variables x1, x2, x3 to 1 we obtain a smaller circuit C′ : {0, 1}n−3 →{0, 1}m−1 such that y′ ̸∈Range(C′) then y = 1y′ is outside the range of C. Case 8: C−1 j (0) = W0 ∪W1 ∪W2 ∪W3: That is, Cj computes a constant zero function. Then setting y1 = 1 and the remaining output bits arbitrarily gives a string outside the range of C. It can be veriﬁed that the only function that is not covered in the above cases is when Cj computes MAJ on 3 bits.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Range",
+                "setting",
+                "variables",
+                "input",
+                "obtain",
+                "smaller",
+                "circuit",
+                "computes",
+                "function",
+                "bits"
+            ]
+        }
+    },
+    {
+        "id": "9ff3370f-4e63-4566-9909-78533faef7af",
+        "title": "",
+        "chunk_text": "Note that in each case we eliminate one output bit and at least one input bit. Thus, ﬁnally we are left with a circuit C′ : {0, 1}n′ →{0, 1}m′ where m′ > n′ and each output bit is computed by MAJ3 function. We note that we can check the type of function computed by a circuit by simply evaluating the function on all possible input values. Since the function depends on only three variables there are only 8 input possibilities to check. Hence, overall the reduction can be done in polynomial time.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "bit",
+                "function",
+                "output",
+                "input",
+                "Note",
+                "circuit",
+                "computed",
+                "case",
+                "eliminate",
+                "check"
+            ]
+        }
+    },
+    {
+        "id": "faab2e3f-0ab7-4144-b692-f3758034a730",
+        "title": "",
+        "chunk_text": "4.2 Polynomial time Algorithm for MAJ3-AVOID We show that there is a deterministic polynomial time algorithm for MAJ3-AVOID. Recall that MAJ3 avoid instance is a circuit C : {0, 1}n →{0, 1}m with constant depth, bounded fan-in and polynomial size, where each output function of the circuit is a majority of exactly three input variables. For each i ∈[m], let fi denote the function corresponding to the i-th output bit, and let I(fi) denote the set of three variables that fi depends on.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Algorithm",
+                "time",
+                "Polynomial",
+                "show",
+                "deterministic",
+                "circuit",
+                "output",
+                "function",
+                "variables",
+                "denote"
+            ]
+        }
+    },
+    {
+        "id": "3c6eefe3-7cd4-4f22-ab9c-e076daf82b08",
+        "title": "",
+        "chunk_text": "We shall demonstrate working of the algorithm in three steps. For our purpose, we shall deﬁne sub-circuits of C called clusters (denoted by K) as follows: Let O = {f1, . . . fm} be the set of output functions of C. We deﬁne the relation R : O × O as follows: We say (fi, fj) ∈R if ∃some input x that feeds into both fi, fj for i, j ∈[m]. Let R′ be transitive closure of R. Observe that R′ is an equivalence relation. We deﬁne a cluster to be an equivalence class of R′.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "steps",
+                "deﬁne",
+                "demonstrate",
+                "working",
+                "algorithm",
+                "equivalence",
+                "relation",
+                "purpose",
+                "denoted",
+                "sub-circuits"
+            ]
+        }
+    },
+    {
+        "id": "593456b8-0217-43c1-aa61-e852f20c3b82",
+        "title": "",
+        "chunk_text": "Step 1 : Reduction to a single cluster: The following lemma shows that C must contain a cluster with more outputs than inputs and hence we can concentrate on such a cluster. Lemma 4.2. Let C : {0, 1}n →{0, 1}m be a multi-output circuit with m > n, then there exists a cluster K such that |K| > |I(K)| where I(K) = ∪f∈KI(f). 16 Proof. Let K1, . . . Kt be the clusters such that ∪i∈[t]Ki covers the set of output functions of C. Observe that ∪i∈[t]I(Ki) covers the input set of C.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Reduction",
+                "cluster",
+                "Step",
+                "lemma",
+                "single",
+                "shows",
+                "concentrate",
+                "Proof",
+                "covers",
+                "set"
+            ]
+        }
+    },
+    {
+        "id": "2b0c8751-bcd1-402b-9fba-2a56c6e9bb0e",
+        "title": "",
+        "chunk_text": "By deﬁnition, ∀i, j ∈[t] such that i ̸= j we have that Ki ∩Kj = ∅and I(Ki) ∩I(Kj) = ∅. Assume for the sake of contradiction that for each cluster Ki, we have |Ki| ≤|I(Ki)|. Then by the above observation, we have that ∪i∈[t]Ki ≤ ∪i∈[t]I(Ki) implying that m < n, which is a contradiction. Let K be a cluster guaranteed by proposition 4.2. Let CK be the sub-circuit of C corresponding to the cluster K. Since, |K| > |I(K)|, there must be a string outside the range of CK.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "deﬁnition",
+                "cluster",
+                "contradiction",
+                "Assume",
+                "sake",
+                "observation",
+                "implying",
+                "proposition",
+                "guaranteed",
+                "sub-circuit"
+            ]
+        }
+    },
+    {
+        "id": "f40260c5-42c3-4d63-8f29-fb2d40cf30b8",
+        "title": "",
+        "chunk_text": "Observe that if y′ ∈{0, 1}|K| ̸∈Range(CK) then any y ∈{0, 1}m which agrees with y′ is outside Range(C). Hence, it sufﬁces to solve the problem on CK. It is easy to see that if there exist two output functions that intersect in three inputs then we already have a string outside the range. Hence, we consider the cases when they intersect in fewer than three inputs.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Range",
+                "Observe",
+                "agrees",
+                "intersect",
+                "inputs",
+                "sufﬁces",
+                "solve",
+                "problem",
+                "easy",
+                "exist"
+            ]
+        }
+    },
+    {
+        "id": "7441d28e-3f50-45e6-b489-6dfe7721b548",
+        "title": "",
+        "chunk_text": "Motivated by this, we deﬁne the following problems: TWO-INTERSECT-MAJ3- AVOID (ONE-INTERSECT-MAJ3-AVOID) is the following problem: Given C : {0, 1}n →{0, 1}m such that output function is MAJ3 function and any two functions share at most two (resp. one) inputs, the goal is to ﬁnd y ̸∈Range(C). Step 2 : A reduction to ONE-INTERSECT-MAJ3-AVOID For the rest of the proof CK = C, m′ = m and n′ = n.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "AVOID",
+                "Range",
+                "problems",
+                "problem",
+                "inputs",
+                "function",
+                "Motivated",
+                "resp.",
+                "deﬁne",
+                "output"
+            ]
+        }
+    },
+    {
+        "id": "3baf1ca9-aa84-4359-86cd-74e32d1a486a",
+        "title": "",
+        "chunk_text": "We show that the there is polynomial time reduction from TWO-INTERSECT-MAJ3- AVOID problem to ONE-INTERSECT-MAJ3-AVOID problem. Finally, in step 3 we will show that that there is a deterministic polynomial time algorithm for ONE-INTERSECT-MAJ3-AVOID prob- lem. Lemma 4.3. There is a polynomial time reduction from TWO-INTERSECT-MAJ3-AVOID to ONE-INTERSECT-MAJ3-AVOID. Proof. Let C : {0, 1}n →{0, 1}m be a circuit such that each output bit is computed by a MAJ3 function where m > n.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "AVOID",
+                "time",
+                "problem",
+                "polynomial",
+                "show",
+                "reduction",
+                "Finally",
+                "prob",
+                "lem",
+                "Lemma"
+            ]
+        }
+    },
+    {
+        "id": "c69ac291-4f1e-48bf-afb5-033f8cf6edf5",
+        "title": "",
+        "chunk_text": "By step 1, we know that the set of functions corresponding to C form some cluster K. Hence, we obtain C starting with an arbitrary function in K and iteratively adding a new function f to O, such that I(f) ∩I(O) ̸= ∅. Our algorithm will follow this construction procedure, and eliminate functions that appear in that order by setting input variables. We start with the following claim that helps us to eliminate functions from the circuit by setting input variables.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "step",
+                "functions",
+                "variables",
+                "set",
+                "form",
+                "cluster",
+                "setting",
+                "input",
+                "eliminate",
+                "function"
+            ]
+        }
+    },
+    {
+        "id": "307c0a7d-4cb2-4546-bb75-68a6d83b2bdf",
+        "title": "",
+        "chunk_text": "Let f1, f2 be two output functions of C such that |I(f1) ∩I(f2)| = 2. Initially O = {f1, f2}, and we iteratively apply the following claim for each function g ∈K \\O that is used to build the cluster by the above process. A variable in I(K) is said to be alive if it is not set to a value in {0, 1} in the below process. Claim 4.4.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "process",
+                "output",
+                "claim",
+                "functions",
+                "function",
+                "Initially",
+                "iteratively",
+                "apply",
+                "build",
+                "cluster"
+            ]
+        }
+    },
+    {
+        "id": "85e7e6fc-a99a-48b3-9c67-5476f9489c1f",
+        "title": "",
+        "chunk_text": "∀g ∈K \\ O such that |I(g) ∩I(O)| = 2, there is an setting of g ∈{0, 1} and a consistent assignment to some of the input variables, such that the number of variables in I(O) which is alive is at most 1. Proof. We shall prove this by induction on the construction of the cluster. Initially, let O = {f1, f2}, I(O) = {x1, x2, x3, x4}. Without loss of generality, let I(f1) = {x1, x2, x3} and I(f2) = {x2, x3, x4}.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "variables",
+                "setting",
+                "consistent",
+                "assignment",
+                "input",
+                "number",
+                "alive",
+                "Proof",
+                "Initially",
+                "cluster"
+            ]
+        }
+    },
+    {
+        "id": "730a13d4-4d95-41fe-9b8a-cf1f36f0ae60",
+        "title": "",
+        "chunk_text": "17 We observe that if f1 = 1 and f2 = 0, then x1 = 1, x4 = 0, x3 = ¬x2 and the number of variables in I(O) is exactly 1. By hypothesis, let the number of variables in I(K) which are alive after i steps is at most 1. Now consider a g such that |I(g) ∩I(K)| = 2, we would like to show that there is an assignment of values to g (which also forces setting of input variables) such that in the new cluster, K ∪{g}, the number of variables that are alive is still at most 1.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "number",
+                "variables",
+                "observe",
+                "alive",
+                "hypothesis",
+                "steps",
+                "cluster",
+                "show",
+                "assignment",
+                "forces"
+            ]
+        }
+    },
+    {
+        "id": "f10a9dba-98ad-42ec-8f2d-59fb21e1b7e5",
+        "title": "",
+        "chunk_text": "The following cases arise depending on the two inputs g shares with the cluster. Let z1, z2 ∈I(g) ∩I(K) and let y = I(g) \\ I(K), b ∈{0, 1}. Case 1: Both z1, z2 are not alive: There are two cases to consider. Suppose z1 = z2 = b. By setting g = b, we can obtain a string which is outside the range of C. The other case is when z1 = b, z2 = b. In this case, we set g = b and y = b. Therefore, the number of variables in the new cluster is still at most 1.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Case",
+                "arise",
+                "depending",
+                "inputs",
+                "shares",
+                "cluster",
+                "cases",
+                "Suppose",
+                "alive",
+                "setting"
+            ]
+        }
+    },
+    {
+        "id": "9998f637-3a55-4313-bd04-ef2bd504694c",
+        "title": "",
+        "chunk_text": "Case 2: Exactly one of z1, z2 is alive: Again two cases arise. Consider the ﬁrst case when z1 = b, z2 = x. Now, we set g = x = y = b eliminating all the variables. The other case is: z1 = b, z2 = ¬x. Similarly, we set g = b, x = b, y = b which eliminates all the variables. Case 3: Both z1, z2 are alive: If z1, z2 that are both alive, then it must be that z1 = x, z2 = ¬x. In this case, we set g = y = 0 so that the number of variables in the cluster is at most 1.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Case",
+                "set",
+                "alive",
+                "variables",
+                "arise",
+                "ﬁrst",
+                "Similarly",
+                "eliminating",
+                "cases",
+                "eliminates"
+            ]
+        }
+    },
+    {
+        "id": "5b212b3a-1674-4d50-a068-022e2993c61e",
+        "title": "",
+        "chunk_text": "Hence, in all the cases there is an assignment value to g and consistent assignment for variables in I(g) such that there is at most one variable which is alive in I(O). Now, we consider the functions h such that |I(h) ∩I(O)| = 1. Let w := I(h) ∩I(O). If w is assigned to b ∈{0, 1}, then we set h to b and the input variables in I(h) \\ {w} to b. Consider the other case when w is alive. Wlog let w = x. We set the output of h and its other two inputs to x.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "assignment",
+                "consistent",
+                "variables",
+                "alive",
+                "set",
+                "variable",
+                "functions",
+                "cases",
+                "case",
+                "input"
+            ]
+        }
+    },
+    {
+        "id": "0696be83-50e0-45ec-aa7e-c5beebaee44c",
+        "title": "",
+        "chunk_text": "In this case we have not yet assigned a ﬁxed 0/1 value to h, which we shall ﬁx in the next step. However, note that in either case the number of alive variables in O is at most 1. After at most n −2 iterations, we would have ﬁxed each of the inputs to one of 0, 1, x or ¬x. This is because in the iterative process, each function that we add to the set O covers at least one new variable. Now consider an f ∈K \\ O, which is guaranteed since m > n. Observe that I(f) ⊆I(O). Let I(f) = {x1, x2, x3}.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "step",
+                "case",
+                "assigned",
+                "ﬁxed",
+                "note",
+                "iterations",
+                "number",
+                "alive",
+                "variables",
+                "variable"
+            ]
+        }
+    },
+    {
+        "id": "786ce81a-3a10-4093-b2d2-23097499b3e8",
+        "title": "",
+        "chunk_text": "The following two cases arise based on the number of alive variables. Case 1: Suppose there is no variable in O which is alive. Then the value of f is already ﬁxed by the inputs I(O). Wlog let this be b ∈{0, 1}. Setting the output of f to b gives a string outside Range(C). Case 2: Suppose there exactly on variable that is alive. Wlog let x1 = x. Case 2(a): Consider the case when x2 = x3 = b for b ∈{0, 1}. Notice that this already forces f to take value b.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Suppose",
+                "alive",
+                "Case",
+                "variable",
+                "Wlog",
+                "arise",
+                "based",
+                "number",
+                "Range",
+                "variables"
+            ]
+        }
+    },
+    {
+        "id": "c786ba08-325d-4372-bc2c-a643642cde59",
+        "title": "",
+        "chunk_text": "Thus, by setting f to b and the functions outputs of functions that were set to x to b we obtain a y ∈{0, 1}m which is outside Range(C). 18 Case 2(b): Suppose x2 = b, x3 = b. Then setting the output of f to b, we ﬁx the value of x to b. Thus, at this stage there are no variables that are alive in O. Since, |O| ≤n −1 and m > n there exists a g ∈K \\ O such that I(g) ⊆I(O). Since, all inputs are ﬁxed, we can now handle this using case 1. Case 3: Suppose f has two variables that are alive.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Range",
+                "functions",
+                "Case",
+                "Suppose",
+                "setting",
+                "set",
+                "obtain",
+                "variables",
+                "alive",
+                "outputs"
+            ]
+        }
+    },
+    {
+        "id": "1512a126-cca3-4f51-b41a-ba4af9161d93",
+        "title": "",
+        "chunk_text": "Let x1 = b where b ∈{0, 1}. Case 3(a): Suppose x2 = x3 = x. By setting the output of f to b we ﬁx the value of x2, x3 to b. This eliminates all the variables from O. Again, this reduces to case 1. Case 3(b): Suppose x2 = x, x3 = x. This ﬁxes the value of f to b. Hence, setting the output of f to b gives a string outside the range. Case 4: Suppose all the three variables of f are alive. Note that since |O | ≤n −1 and m > n there must be at least two more functions outside O.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Suppose",
+                "Case",
+                "output",
+                "setting",
+                "variables",
+                "eliminates",
+                "range",
+                "reduces",
+                "alive",
+                "Note"
+            ]
+        }
+    },
+    {
+        "id": "35e8ced6-7552-4236-b66c-d530ab1311e4",
+        "title": "",
+        "chunk_text": "If any of these functions satisfy the above cases then we have already found a solution to the problem. Therefore, we consider the case when all three functions have all the three variables that are alive. By PHP, there exist two functions at least two of whose inputs are set to x(x). This ﬁxes the output of these functions to x(x). By setting one of outputs to 1 and the other to 0 yields a string outside the range.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "functions",
+                "problem",
+                "satisfy",
+                "found",
+                "solution",
+                "PHP",
+                "cases",
+                "case",
+                "alive",
+                "variables"
+            ]
+        }
+    },
+    {
+        "id": "140763bf-defb-4ea3-a40b-c25cda23adf2",
+        "title": "",
+        "chunk_text": "Thus, if there exist two function in C which have at least two common inputs then as de- scribed above, we already have a solution to the range avoidance problem. Otherwise, we have an instance of ONE-INTERSECT-MAJ3-AVOID. Note that the above steps can be done in polyno- mial time. Hence, it sufﬁces to show a polynomial time algorithm for this case.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "scribed",
+                "problem",
+                "exist",
+                "function",
+                "common",
+                "inputs",
+                "solution",
+                "range",
+                "avoidance",
+                "time"
+            ]
+        }
+    },
+    {
+        "id": "f43f76fb-992d-47dd-ac52-458fdad4c61b",
+        "title": "",
+        "chunk_text": "Having described all the ingredients of the proof, we are now ready to prove our ﬁrst algorithm for MAJ3-AVOID (which works only for quadratic stretch m > cn2). We apply step 1 to obtain a sub-circuit CK whose outputs form a cluster K. Next we ob- serve that any two functions in CK share at most two input variables since otherwise we can trivially obtain a string outside the range by assigning opposite values to the corresponding out- put bits.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "proof",
+                "ingredients",
+                "ready",
+                "prove",
+                "ﬁrst",
+                "algorithm",
+                "works",
+                "quadratic",
+                "stretch",
+                "obtain"
+            ]
+        }
+    },
+    {
+        "id": "15f52557-c71a-44b6-8aa5-53b7e6707e0c",
+        "title": "",
+        "chunk_text": "By step 2, we reduce our problem to an instance of ONE-INTERSECT-MAJ3-AVOID in polynomial time. Since m > cn2, theorem 3.10 gives a polynomial time algorithm for solving ONE-INTERSECT-MAJ3-AVOID. This gives a polynomial time algorithm for solving MONOTONE-NC0 3-AVOID with quadratic stretch, thus completing the proof of the following theorem from the introduction. Theorem 1.4. MONOTONE-NC0 3-AVOID when m > cn2 for any constant c can be solved in deterministic polynomial time.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "time",
+                "polynomial",
+                "solving",
+                "step",
+                "theorem",
+                "algorithm",
+                "reduce",
+                "problem",
+                "instance",
+                "stretch"
+            ]
+        }
+    },
+    {
+        "id": "3dfc46eb-c871-4f7c-b56b-90b5bdb43113",
+        "title": "",
+        "chunk_text": "Improved Polynomial Time Algorithms for MONOTONE-NC0 3-AVOID with Linear Stretch: In the previous section, we saw that using wicket as our candidate for forbidden sub-hypergraph, works for quadratic stretch. In order improve this bound on the stretch requirement, we shall use loose a different forbidden sub-hypergraphs which are X 2ℓ-cycles. It sufﬁces to show that the structure has an edge-coloring which is not MAJ-coloring and that the extremal number for the structure is not too large.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Polynomial",
+                "Time",
+                "Algorithms",
+                "Linear",
+                "Stretch",
+                "forbidden",
+                "Improved",
+                "section",
+                "works",
+                "previous"
+            ]
+        }
+    },
+    {
+        "id": "acd2347e-8a93-4d29-b067-aaea10c42be8",
+        "title": "",
+        "chunk_text": "19 First, we show that there exists an edge-coloring of X 2ℓwhich is not MAJ-coloring. Lemma 4.5. Let H be X 2ℓ-cycle. Then there exists an edge-coloring of H which is not MAJ-coloring. Proof. Let v1e1v2 . . . v2ℓe2ℓv1 be the X 2ℓcycle with (ei, ej) as χ-structure where i ≡0 mod 2, j ≡1 mod 2. Consider the following edge-coloring- Γ(ei) = ( R, if i ≡0 mod 2 B, if i ≡1 mod 2 Let ei ∩ej = {x}. First consider the case when Π(x) = R. This forces the color of the other two endpoints of ej to B.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "mod",
+                "edge-coloring",
+                "MAJ-coloring",
+                "exists",
+                "show",
+                "Lemma",
+                "Proof",
+                "χ-structure",
+                "case",
+                "forces"
+            ]
+        }
+    },
+    {
+        "id": "55e80513-aadf-4cc0-b51f-a3b2196aa9a7",
+        "title": "",
+        "chunk_text": "Iteratively, we get Π(vj) = B iff j ≡1 mod 2. This implies Γ(ei) = B which is a contradiction. The other case when Π(x) = B is similar. The following is an easy corollary of lemma 4.5. Corollary 4.6. Let H be a loose X 2ℓ-cycle. Then there exists an edge-coloring of H which is not a MAJ- coloring. In the following theorem, we show an extremal bound for the loose C2ℓin a connected 3- uniform linear hypergraph. Theorem 1.6.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Iteratively",
+                "mod",
+                "iff",
+                "theorem",
+                "corollary",
+                "loose",
+                "MAJ",
+                "contradiction",
+                "implies",
+                "similar"
+            ]
+        }
+    },
+    {
+        "id": "496755e4-84dd-40c8-af2e-4f2dc3f3e3a2",
+        "title": "",
+        "chunk_text": "Any connected 3-uniform linear hypergraph with m > n edges must contain a loose X 2ℓ cycle. Proof. Let H a connected 3-uniform linear hypergraph. It sufﬁces to show that there is a loose X 2ℓ cycle in H. Towards this, we construct block graph G corresponding to H as follows: let the set of m hyperedges in H be the vertices of G and add an edge (f, g) if the hyperedges f, g intersect at a vertex. Observe that G is connected.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "connected",
+                "linear",
+                "loose",
+                "cycle",
+                "hypergraph",
+                "hyperedges",
+                "Proof",
+                "edges",
+                "edge",
+                "vertex"
+            ]
+        }
+    },
+    {
+        "id": "4ca5ed9b-9c66-4d2c-8748-535cb2cebd0f",
+        "title": "",
+        "chunk_text": "Now we shall argue that ﬁnding a copy of loose X 2ℓcycle in H is equivalent to ﬁnding a subgraph G′ in G where G′ consists of an edge (f, f ′) and distinct odd walks from g to g′ and h to h′ without using edge (f, f ′), where g, h and g′, h′ are neighbors of f, f ′ respectively in G. The equivalence follows from the observation that a walk of length ℓ corresponds to a walk of length ℓ−1 in G. Thus, our task is to show that there must be a G′ in G. Observe that G has m vertices and 3m edges.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "ﬁnding",
+                "walk",
+                "edge",
+                "length",
+                "argue",
+                "copy",
+                "loose",
+                "equivalent",
+                "subgraph",
+                "consists"
+            ]
+        }
+    },
+    {
+        "id": "19696d71-1235-433a-8df6-487adc8c8811",
+        "title": "",
+        "chunk_text": "Hence, G must contain a cycle Q. Let e = (f, f ′) be an edge in Q. Now we would like to show that G \\ e contains G′. We will show the argument for the g to h walk, the other argument is symmetric. Note that G \\ e is still connected. Hence, there must be a path P from g, h. Now P ′ = (f, g)∪P ∪(h, f ′) is a path from f to f ′. If P ′ is an odd length path then we have our desired path from f to f ′ otherwise we shall modify P ′ to obtain a walk of odd length from f to f ′.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "path",
+                "cycle",
+                "show",
+                "argument",
+                "walk",
+                "odd",
+                "length",
+                "edge",
+                "symmetric",
+                "Note"
+            ]
+        }
+    },
+    {
+        "id": "d4e0679c-2d67-4d94-99aa-c3169f2a525f",
+        "title": "",
+        "chunk_text": "We observe that the average degree of a vertex in G is 3m n . Hence, there a vertex with minimum degree 3m n . Observe that these vertices form a clique in G. Let f ′′ be one of these functions. Note that f ′′ has degree at least 3m/n > 3 in G. Hence, there must be an odd cycle C′ containing f ′′. Now, there must be a path Q′ from g to f ′′ owing to connectivity of GC. Thus, qQ′f ′′C′f ′′Q′gPg′ is an odd walk from g to g′. Adding edges (f, g), (f ′, g′) to Q′ gives an odd walk from f to f ′.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "observe",
+                "vertex",
+                "degree",
+                "odd",
+                "average",
+                "minimum",
+                "vertices",
+                "form",
+                "clique",
+                "walk"
+            ]
+        }
+    },
+    {
+        "id": "16d6fa4c-ff5f-4ae1-b065-222099c44f84",
+        "title": "",
+        "chunk_text": "The other walk containing h, h′ can be obtained similarly. Hence there is a copy of G′(loose X 2ℓcycle) in G(H). This completes the proof. 20 Finally, combining all the results above, we shall now prove our ﬁrst algorithm for MONOTONE-NC0 3-AVOID with linear stretch. Theorem 1.7. (Main Theorem) For m > n, MONOTONE-NC0 3-AVOID can be solved in deterministic polynomial time. Proof.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "similarly",
+                "Theorem",
+                "Finally",
+                "walk",
+                "obtained",
+                "proof",
+                "Main",
+                "loose",
+                "copy",
+                "combining"
+            ]
+        }
+    },
+    {
+        "id": "7fc58680-c0fa-48fe-88cf-eae20fe0172a",
+        "title": "",
+        "chunk_text": "By lemma 4.2 and lemma 4.3, we ﬁrst reduce the circuit to a sub-circuit corresponding to cluster, and then further to the case of ONE-INTERSECT-MAJ3-AVOID. Hence, it sufﬁces to solve ONE-INTERSECT-MAJ3-AVOID. By theorem 1.6 we know that there exists a loose X 2ℓin the hypergraph corresponding to the given circuit. It sufﬁces to show that we can ﬁnd loose X 2ℓin H in polynomial time. By corollary 4.6 and theorem 3.6 we get a polynomial time algorithm to solve MAJ3-AVOID.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "lemma",
+                "cluster",
+                "solve",
+                "sufﬁces",
+                "ﬁrst",
+                "reduce",
+                "sub-circuit",
+                "case",
+                "circuit",
+                "theorem"
+            ]
+        }
+    },
+    {
+        "id": "7b59a505-afda-444c-8d19-fbe8ef0a5a19",
+        "title": "",
+        "chunk_text": "Indeed to ﬁnd G′ in the proof of theorem 1.6, we need to ﬁnd the paths P, Q′, and a high degree vertex f ′′, which can be done in polynomial time. Hence, we can ﬁnd the G′ in polynomial time. 5 Polynomial time Algorithm for SYMMETRIC-NC0 3-AVOID A natural restriction of the range avoidance problem would be when all the functions are sym- metric. We call this the SYMMETRIC-AVOID problem. In this section, we use our results for MONOTONE-NC0 3-AVOID to solve SYMMETRIC-NC0 3-AVOID.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "polynomial",
+                "ﬁnd",
+                "time",
+                "theorem",
+                "proof",
+                "paths",
+                "high",
+                "degree",
+                "vertex",
+                "problem"
+            ]
+        }
+    },
+    {
+        "id": "14e6af52-0816-4a80-8915-55e2728ee3fa",
+        "title": "",
+        "chunk_text": "We look at all possible symmetric functions over three bits and handle each case. We will need the following lemma, which shows that range avoidance problem is easy when all the functions compute parity. Lemma 5.1. Let C : {0, 1}n →{0, 1}m be a circuit such that each output function is a parity function and m > n. Then there is a deterministic polynomial time algorithm to ﬁnd a string outside the range of C. Proof. We note that since each output function computes parity of input bits.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "function",
+                "parity",
+                "case",
+                "lemma",
+                "symmetric",
+                "handle",
+                "functions",
+                "output",
+                "range",
+                "bits"
+            ]
+        }
+    },
+    {
+        "id": "34c8ce89-67b1-4dad-9565-6d84f618c32d",
+        "title": "",
+        "chunk_text": "These are linear functions. We can express this in the form of matrix M of dimensions m × n as follows: Mij = ( 1 if fi depends on variable xj 0 otherwise Let x = (x1, . . . xn). Observe that the Mx is the range of circuit C. Let C1, . . . Cn be the column vectors of M. We have that the column space of Ci is the range of C. Let e1, . . . em be the standard basis vectors. We claim that there exists an ei which is outside the range of C.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "range",
+                "functions",
+                "Mij",
+                "linear",
+                "column",
+                "vectors",
+                "express",
+                "form",
+                "matrix",
+                "dimensions"
+            ]
+        }
+    },
+    {
+        "id": "c57c5f39-7fad-43fd-9d21-62621cc5b049",
+        "title": "",
+        "chunk_text": "Otherwise the column-space covers each m-bit string which is a contradiction since a string outside the range is guaranteed by m > n. We observe that ei ∈Range(C) ⇐⇒ {C1, . . . Cn, ei} is a linearly dependent. Since, we can check whether a set of vectors is linearly independent in polynomial time, we can ﬁnd an ej which is outside the range of C. We can extend the above idea to work with MOD3 functions with different residues.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "range",
+                "string",
+                "column-space",
+                "covers",
+                "m-bit",
+                "contradiction",
+                "guaranteed",
+                "linearly",
+                "observe",
+                "dependent"
+            ]
+        }
+    },
+    {
+        "id": "9dc248bc-af79-4801-a041-ac68b58420a1",
+        "title": "",
+        "chunk_text": "We deﬁne 21 Algorithm 1 Algorithm for solving MAJ3-AVOID on input C : {0, 1}n →{0, 1}m 1: Step 1: Obtain a cluster K such that |I(K)| < |K| ⊲by observation 4.2 2: Step 2: Reduction from TWO-INTERSECT-MAJ3-AVOID to ONE-INTERSECT-MAJ3-AVOID 3: if f1, f2 ∈K such that I(f1) = {x1, x2, x3} and I(f2) = {x2, x3, x4} then 4: Set f1 = 1, f2 = 0 and x1 = 1, x2 = 0, x4 = ¬x3, O = {f1, f2} 5: repeat 6: Consider g ∈K \\ O such that I(g) ̸= ∅ 7: if |I(g) ∩I(O)| = 2 then 8: Let I(g) = {z1, z2, z3} and z3 = I(g) \\ I(O).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Step",
+                "Algorithm",
+                "Set",
+                "Obtain",
+                "Reduction",
+                "repeat",
+                "deﬁne",
+                "solving",
+                "observation",
+                "input"
+            ]
+        }
+    },
+    {
+        "id": "2e09cbc3-68b8-4fa2-ae14-e3432d90cc13",
+        "title": "",
+        "chunk_text": "Let b ∈{0, 1} 9: if Both z1, z2 are not alive: then 10: If z1 = z2 = b By setting g = b, we obtain y ̸∈Range(C) 11: If z1 = b, z2 = b then set g = b and y = b 12: else if Exactly one of z1, z2 is alive: say z1 = b, z2 = x then 13: Setting g = z3 = b eliminates all the variables 14: else if Both z1, z2 are alive: that is z1 = x, z2 = ¬x then 15: We set g = z3 = 0 so that the number of variables in the cluster is at most 1.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "alive",
+                "setting",
+                "Range",
+                "set",
+                "variables",
+                "obtain",
+                "eliminates",
+                "number",
+                "cluster"
+            ]
+        }
+    },
+    {
+        "id": "58ce4076-1e38-44d3-b626-bc8d58c448ce",
+        "title": "",
+        "chunk_text": "16: end if 17: else if I(g) ∩I(O) = {z1} then 18: If z1 = b ∈{0, 1}, then Set g to b and z2 = z3 = b 19: If z1 = x(alive) then set g to x and z2 = z3 = x 20: Update the cluster O = O ∪{g} and I(O) = I(O) ∪I(g) 21: end if 22: until ∃g ̸∈O such that I(g) ∩I(O) ̸= ∅ 23: end if 24: ∃h1, h2, h3 ̸∈O such that I(f) = {w1, w2, w3} ⊆I(O) since |O| ≤n −2 and |I(O)| = n. 25: if ̸ ∃a variable which is alive then 26: Setting the output of h1 to b gives a string outside the range.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "end",
+                "Set",
+                "Update",
+                "alive",
+                "cluster",
+                "Setting",
+                "range",
+                "variable",
+                "output",
+                "string"
+            ]
+        }
+    },
+    {
+        "id": "374759b9-73e7-4be6-8d38-52f4007cdac0",
+        "title": "",
+        "chunk_text": "27: else if ∃exactly one variable w1 which is alive then 28: if w2 = w3 = b then 29: Setting the output of h1 to b gives a string outside the range. 30: else if w2 = b, w3 = b then 31: Set the output of h1 to b, which ﬁxes w1 to b. 32: We have h2 ̸∈O and I(h2) ⊆I(O). Same as previous case. 33: end if 34: else if h1 has two variables that are alive and w3 = b then 35: if w1 = w2 = x then 36: We set the output of h1 to b. This ﬁxes all input variable(case 1).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Setting",
+                "output",
+                "Set",
+                "range",
+                "string",
+                "case",
+                "alive",
+                "ﬁxes",
+                "variable",
+                "variables"
+            ]
+        }
+    },
+    {
+        "id": "a6dac6a4-22dd-4103-8908-fb0a5f3cb77f",
+        "title": "",
+        "chunk_text": "37: else if w1 = x, w2 = x then 38: Setting the output of h1 to b gives a string outside the range. 39: end if 40: else if All three variables are alive then 41: ∃hi, hj whose inputs are set the same. Setting hi to 1 and hj to 0 gives y ̸∈Range(C).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Setting",
+                "range",
+                "output",
+                "string",
+                "end",
+                "variables",
+                "alive",
+                "inputs",
+                "set"
+            ]
+        }
+    },
+    {
+        "id": "4d80b11f-207f-47b6-b78b-80608965f654",
+        "title": "",
+        "chunk_text": "42: end if 43: Step 3: Polynomial time algorithm for ONE-INTERSECT-MAJ3-AVOID 44: Find a loose X 2ℓin HC ⊲by theorem 1.6 45: Output y ̸∈Range(C) ⊲by corollary 3.6 22 the MODi 3 function for i ∈{0, 1, 2} as follows: MODi 3(x) = ( 1 if x1 + x2 + x3 ≡i mod 3 0 otherwise Lemma 5.2. Let C : {0, 1}n →{0, 1}m be a circuit such that each output function is a MODi 3 function for i ∈{0, 1, 2} and m > n. Then there is a deterministic polynomial time algorithm to ﬁnd a string outside the range of C. Proof.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Step",
+                "Find",
+                "Lemma",
+                "MODi",
+                "function",
+                "Output",
+                "Polynomial",
+                "Range",
+                "time",
+                "end"
+            ]
+        }
+    },
+    {
+        "id": "5acfe4d9-d61c-4844-a38f-4febf6ebe7b0",
+        "title": "",
+        "chunk_text": "We express these linear functions in terms of matrix M with dimensions m × (n + 1) as follows: Mjk =        1 if fj depends on variable xk and k ∈[n] i if fj is an MODi 3 function and k = n + 1 0 otherwise Let C1, . . . Cn+1 be the column vectors of M. Then the column span of {C1, . . . Cn} ⊕3 Cn+1 is the range of C where ⊕3 denotes bitwise MOD3. As earlier let e1, . . . em denote the stan- dard basis vectors.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Mjk",
+                "MODi",
+                "functions",
+                "function",
+                "express",
+                "linear",
+                "terms",
+                "matrix",
+                "dimensions",
+                "depends"
+            ]
+        }
+    },
+    {
+        "id": "a72c5b88-aa03-47fe-86ce-7049ed16fb42",
+        "title": "",
+        "chunk_text": "One of the ei must be outside the range of C since otherwise every m-bit string is in the range of C, which is a contradiction. We observe that ei ∈Range(C) ⇐⇒ {C1, C2 . . . Cn, ei ⊕3 Cn+1 ⊕3 Cn+1} is linearly dependent. For each of the vectors e1, e2, . . . em we can check the linear dependence in polynomial time. Hence, we can obtain a string outside the range of C in polynomial time.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "range",
+                "contradiction",
+                "m-bit",
+                "time",
+                "polynomial",
+                "string",
+                "observe",
+                "dependent",
+                "vectors",
+                "linearly"
+            ]
+        }
+    },
+    {
+        "id": "3b0187b8-12ed-46f3-b918-b9cc60f29e36",
+        "title": "",
+        "chunk_text": "Equipped with lemma 5.1 and lemma 5.2, we show a polynomial time algorithm for SYMMETRIC-NC0 3-AVOID using a reduction to the MAJ3-AVOID problem. Theorem 5.3. There is a polynomial time algorithm to solve SYMMETRIC-NC0 3-AVOID when m > 8n. Proof. It sufﬁces to show that SYMMETRIC-NC0 3-AVOID reduces to MAJ3-AVOID when m > 8n since we have a polynomial time algorithm to solve MAJ3-AVOID when m > n.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "lemma",
+                "polynomial",
+                "time",
+                "algorithm",
+                "problem",
+                "Equipped",
+                "solve",
+                "reduction",
+                "show",
+                "Theorem"
+            ]
+        }
+    },
+    {
+        "id": "569956df-4d4e-4096-b6bc-cbe95f374442",
+        "title": "",
+        "chunk_text": "We observe that there are only six types of symmetric functions possible on three bits: the MAJ3 functions, the parity functions(MOD2), the modulo 3 functions with different residues MODi 3 and their respective negations We assume that there are at least 4n functions of the form MAJ3, MOD2, MODi 3. The other case when there are more than 4n negations of these functions can be handled by ﬂipping the output bit values.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "MODi",
+                "functions",
+                "modulo",
+                "form",
+                "negations",
+                "observe",
+                "types",
+                "symmetric",
+                "parity",
+                "residues"
+            ]
+        }
+    },
+    {
+        "id": "39ea799c-786d-4080-bb30-409e4201e8fd",
+        "title": "",
+        "chunk_text": "Again, by PHP the following cases arise: Case 1: Suppose there are more than 2n functions of the form MOD2 or MODi 3. By repeated application of PHP we get the further cases: Case 1(a): There are more than n parity functions in the circuit. By lemma 5.1, we can ﬁnd a string outside the range in polynomial time. Case 1(b): Consider the other case when the number of MODi 3 functions is more than n.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Suppose",
+                "PHP",
+                "Case",
+                "functions",
+                "cases",
+                "arise",
+                "form",
+                "MODi",
+                "circuit",
+                "repeated"
+            ]
+        }
+    },
+    {
+        "id": "c39478b4-2936-4316-9364-1e97885a241d",
+        "title": "",
+        "chunk_text": "In this case we can obtain a string which is outside the range of the circuit in polynomial time using lemma 5.2. 23 Case 2: There are more than 2n MAJ3 functions. It sufﬁces to solve the range avoidance problem for the MAJ3-AVOID problem. Thus, we have a polynomial time algorithm to solve SYMMETRIC-NC0 3-AVOID in polynomial time when m > 8n.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "case",
+                "functions",
+                "polynomial",
+                "time",
+                "range",
+                "lemma",
+                "obtain",
+                "string",
+                "circuit",
+                "solve"
+            ]
+        }
+    },
+    {
+        "id": "efc49137-a4ff-4117-b5a4-9e01a58bfe92",
+        "title": "",
+        "chunk_text": "6 Conclusion We described the formulation of special cases AVOID in terms of Turan-type problems in k-uniform hypergraphs, and demonstrated some applications to solve monotone versions of AVOID under depth restrictions for the circuit.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "AVOID",
+                "Conclusion",
+                "Turan-type",
+                "hypergraphs",
+                "circuit",
+                "formulation",
+                "special",
+                "cases",
+                "terms",
+                "problems"
+            ]
+        }
+    },
+    {
+        "id": "420e2ce3-0c3f-4af2-8fc7-ce401c40eab0",
+        "title": "",
+        "chunk_text": "We exhibited several different ﬁxed hypergraphs H′ - k-cage, weak Fano plane, 3 × 3 grid, (3, 3)-butterﬂy, (3, 3)-odd kite which can be also used to derive polynomial time algorithms for ONE-INTERSECT-MAJ3-AVOID which in turn is used to solve MONOTONE-NC0 3-AVOID when the strech is quadratic. Finally, the improvement to linear stretch (theorem 1.7) comes from using loose X 2ℓcycles as our hypergraph. We note that, this is not a ﬁxed sized hypergraph, however, we can ﬁnd it in polynomial time.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Fano",
+                "k-cage",
+                "grid",
+                "butterﬂy",
+                "weak",
+                "plane",
+                "odd",
+                "solve",
+                "quadratic",
+                "polynomial"
+            ]
+        }
+    },
+    {
+        "id": "dbc8808c-ca1c-45df-b0b0-e4603304b612",
+        "title": "",
+        "chunk_text": "We also obtain a polyno- mial time algorithm for SYMMETRIC-NC0 3-AVOID with linear stretch. Prior to this work, the best known polynomial time algorithm MONOTONE-NC0 3-AVOID and SYMMETRIC-NC0 3-AVOID was via the algorithm for NC0 3-AVOID which requires m > n2 log n [GGNS23]. We extend our framework to solve ONE-INTERSECT-MAJk-AVOID for linear and quadratic stretch respectively. [GGNS23] give a polynomial time algorithm for solving NC0 k-AVOID when m > nk−1 log n .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "algorithm",
+                "time",
+                "log",
+                "polyno",
+                "mial",
+                "obtain",
+                "linear",
+                "stretch",
+                "polynomial",
+                "Prior"
+            ]
+        }
+    },
+    {
+        "id": "64fc65bf-77c4-4ad0-8bab-73cadf6203df",
+        "title": "",
+        "chunk_text": "it would be interesting to improve the stretch using the hypergraph framework even for monotone NC0 6 circuits, which would in turn give an improvement for the case of NC0 3-AVOID. References [BES73] WG Brown, P´al Erd¨os, and Vera S´os. Some Extremal Problems on Gamma-graphs. Academic Press, Inc, 1973. [CCGJ18] Claton Collier-Cartaino, Nathan Graber, and Tao Jiang. Linear Tur´an Numbers of Linear Cycles and Cycle-Complete Ramsey Numbers.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "circuits",
+                "monotone",
+                "Brown",
+                "P´al",
+                "Erd",
+                "S´os",
+                "interesting",
+                "improve",
+                "stretch",
+                "hypergraph"
+            ]
+        }
+    },
+    {
+        "id": "c06b1fc5-765e-4a36-b520-a6966f67ca3a",
+        "title": "",
+        "chunk_text": "Combinatorics, Probability and Computing, 27(3):358–386, 2018. [CHR] Lijie Chen, Shuichi Hirahara, and Hanlin Ren. Symmetric Exponential Time Requires Near-Maximum Circuit Size, year = 2024. In Proceedings of the 56th Annual ACM Sym- posium on Theory of Computing (STOC 2024), page 1990–1999. [FR13] Zolt´an F¨uredi and Mikl´os Ruszink´o. Uniform hypergraphs containing no grids. Ad- vances in Mathematics, 240:302–324, 2013. [FS24] Jakob F¨uhrer and Jozsef Solymosi. Caps and Wickets.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Probability",
+                "Combinatorics",
+                "Computing",
+                "CHR",
+                "Lijie",
+                "Chen",
+                "Shuichi",
+                "Hirahara",
+                "Ren",
+                "Hanlin"
+            ]
+        }
+    },
+    {
+        "id": "e3a66bc7-0255-46b6-b78f-7444e8e08af6",
+        "title": "",
+        "chunk_text": "Technical report, 2024. 24 [GGNS23] Karthik Gajulapalli, Alexander Golovnev, Satyajeet Nagargoje, and Sidhant Saraogi. Range Avoidance for Constant Depth Circuits: Hardness and Algorithms. In Nicole Megow and Adam D. Smith, editors, Approximation, Randomization, and Combinato- rial Optimization. Algorithms and Techniques, APPROX/RANDOM 2023, September 11-13, 2023, Atlanta, Georgia, USA, volume 275 of LIPIcs, pages 65:1–65:18. Schloss Dagstuhl - Leibniz-Zentrum f¨ur Informatik, 2023.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Technical",
+                "report",
+                "Karthik",
+                "Gajulapalli",
+                "Alexander",
+                "Golovnev",
+                "Satyajeet",
+                "Nagargoje",
+                "Saraogi",
+                "Algorithms"
+            ]
+        }
+    },
+    {
+        "id": "4cf669b6-dd39-443b-9a25-17dc8bc5333e",
+        "title": "",
+        "chunk_text": "[GL12] Ervin Gyori and Nathan Lemons. Hypergraphs with no cycle of a given length. Com- binatorics, Probability and Computing, 21(1–2):193–201, 2012. [GL21] W. T. Gowers and J. Long. The length of an s-increasing sequence of r-tuples. Combi- natorics, Probability and Computing, 30(5):686–721, 2021. [GLW22] Venkatesan Guruswami, Xin Lyu, and Xiuhan Wang. Range Avoidance for Low-Depth Circuits and Connections to Pseudorandomness. In Approximation, Randomization, and Combinatorial Optimization.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Ervin",
+                "Lemons",
+                "Gyori",
+                "Nathan",
+                "Probability",
+                "Computing",
+                "length",
+                "Long",
+                "Randomization",
+                "Hypergraphs"
+            ]
+        }
+    },
+    {
+        "id": "dd083107-8585-4b41-a443-cc4b02dbaa96",
+        "title": "",
+        "chunk_text": "Algorithms and Techniques (APPROX/RANDOM 2022), vol- ume 245 of Leibniz International Proceedings in Informatics (LIPIcs), pages 20:1–20:21, Dagstuhl, Germany, 2022. Schloss Dagstuhl – Leibniz-Zentrum f¨ur Informatik. [GS22] Andr´as Gy´arf´as and G´abor N. S´ark¨ozy. The linear Tur´an number of small triple sys- tems or why is the wicket interesting? Discrete Mathematics, 345(11):113025, 2022. [ILW23] Rahul Ilango, Jiatu Li, and R. Ryan Williams.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "APPROX",
+                "RANDOM",
+                "Germany",
+                "Techniques",
+                "Informatics",
+                "Dagstuhl",
+                "Leibniz",
+                "International",
+                "Proceedings",
+                "vol"
+            ]
+        }
+    },
+    {
+        "id": "aaa458c6-c073-47a7-b55d-b69b1a70b913",
+        "title": "",
+        "chunk_text": "Indistinguishability Obfuscation, Range Avoidance, and Bounded Arithmetic. In Proceedings of the 55th Annual ACM Symposium on Theory of Computing (STOC 2023), page 1076–1089, 2023. [Kee11] Peter Keevash. Hypergraph Tur´an Problems. Surveys in Combinatorics, 06 2011. [KKMP21] Robert Kleinberg, Oliver Korten, Daniel Mitropolsky, and Christos Papadimitriou. To- tal Functions in the Polynomial Hierarchy. In James R.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Obfuscation",
+                "Range",
+                "Avoidance",
+                "Arithmetic",
+                "Bounded",
+                "Indistinguishability",
+                "STOC",
+                "Annual",
+                "Computing",
+                "Proceedings"
+            ]
+        }
+    },
+    {
+        "id": "1fe4b1d7-c250-4816-9456-87e0ac4c834d",
+        "title": "",
+        "chunk_text": "Lee, editor, 12th Innovations in Theoretical Computer Science Conference (ITCS 2021), volume 185 of Leibniz International Proceedings in Informatics (LIPIcs), pages 44:1–44:18, Dagstuhl, Germany, 2021. Schloss Dagstuhl–Leibniz-Zentrum f¨ur Informatik. [Kor22] Oliver Korten. The Hardest Explicit Construction. In 2021 IEEE 62nd Annual Sympo- sium on Foundations of Computer Science (FOCS), pages 433–444, 2022. [KPI25] Oliver Korten, Toniann Pitassi, and Russell Impagliazzo.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "ITCS",
+                "Germany",
+                "Innovations",
+                "Conference",
+                "Informatics",
+                "Dagstuhl",
+                "Theoretical",
+                "Leibniz",
+                "International",
+                "Proceedings"
+            ]
+        }
+    },
+    {
+        "id": "d51d83df-e273-450e-8e64-14f918aee0f2",
+        "title": "",
+        "chunk_text": "Stronger Cell Probe Lower Bounds via Local PRGs. Technical Report 30, Electronic Colloquium on Computational Complexity (ECCC), March 2025. [KS04] Peter Keevash and Benny Sudakov. The Tur´an Number Of The Fano Plane. Combina- torica, 25, 03 2004. [Li24] Zeyong Li. Symmetric Exponential Time Requires Near-Maximum Circuit Size: Sim- pliﬁed, Truly Uniform. In Proceedings of the 56th Annual ACM Symposium on Theory of Computing (STOC 2024), 2024.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Cell",
+                "Probe",
+                "Lower",
+                "Bounds",
+                "Local",
+                "ECCC",
+                "March",
+                "Stronger",
+                "PRGs",
+                "Report"
+            ]
+        }
+    },
+    {
+        "id": "c5fc7484-3969-452f-8ac3-d2501ff877a5",
+        "title": "",
+        "chunk_text": "25 [RSW22] Hanlin Ren, Rahul Santhanam, and Zhikun Wang. On the Range Avoidance Problem for Circuits. In 63rd IEEE Annual Symposium on Foundations of Computer Science, FOCS 2022, Denver, CO, USA, October 31 - November 3, 2022, pages 640–650. IEEE, 2022. [Sol24] Jozsef Solymosi. Wickets in 3-uniform hypergraphs. Discrete Mathematics, 347(6):114029, 2024. [ZBW24] Lin-Peng Zhang, Hajo Broersma, and Ligong Wang. A Note on Generalized Crowns in Linear r-graphs. Technical report, 2024.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Hanlin",
+                "Ren",
+                "Rahul",
+                "Santhanam",
+                "Zhikun",
+                "IEEE",
+                "Wang",
+                "FOCS",
+                "Denver",
+                "USA"
+            ]
+        }
+    },
+    {
+        "id": "5153a540-0aca-45fd-94dd-2df49c5cb8f0",
+        "title": "",
+        "chunk_text": "arxiv : 2401.12339. 26 A Appendix A.1 Special cases of MONOTONE-AVOID We now describe some special cases of the monotone range avoidance problem that are simpler than the general case of AVOID. We consider the depth 1 sub-circuit obtained by viewing circuits as a composition of two circuits. To denote this, for the rest of this discussion, we assume D is a monotone circuit of depth d.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "arxiv",
+                "Special",
+                "cases",
+                "Appendix",
+                "AVOID",
+                "monotone",
+                "depth",
+                "circuits",
+                "case",
+                "MONOTONE-AVOID"
+            ]
+        }
+    },
+    {
+        "id": "d9f745a5-362f-40ee-9648-466ad83ef490",
+        "title": "",
+        "chunk_text": "For j ≤d, deﬁne Dj to be the sub-circuit of C obtained by removing all the gates and variables below depth j and c Dj be the sub-circuit of C obtained by deleting all the gates above depth j. Let mj denote the number of gates at depth j for circuit C. Hence Dj : {0, 1}mj →{0, 1}m and c Dj : {0, 1}n →{0, 1}mj. By deﬁnition, D = Dj ◦c Dj. We show below that when j ≤2, the problem is easier under some constraints for m1 and m2 respectively. Proposition A.1.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "sub-circuit",
+                "obtained",
+                "depth",
+                "gates",
+                "deﬁne",
+                "removing",
+                "variables",
+                "deleting",
+                "denote",
+                "number"
+            ]
+        }
+    },
+    {
+        "id": "ec2f2133-15ba-4d98-8ccd-6635fd55637c",
+        "title": "",
+        "chunk_text": "If m > m1 then there is a deterministic polynomial time algorithm that ﬁnds a string outside the range of the circuit. Proof. Since m > m1, we have that D1 is a valid instance of the AVOID problem. Observe that, D1 is a depth 1 monotone circuit. We claim that y ̸∈Range(D1) =⇒y ̸∈Range(D). This follows from the fact that if no input setting x ∈{0, 1}m1 in circuit D1 can produce a y ∈{0, 1}m, then no input assignment of n variables in circuit D can ever produce y.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "range",
+                "circuit",
+                "deterministic",
+                "polynomial",
+                "time",
+                "algorithm",
+                "ﬁnds",
+                "string",
+                "input",
+                "AVOID"
+            ]
+        }
+    },
+    {
+        "id": "f4004ac2-85a9-495f-9ac4-5e1602468ff5",
+        "title": "",
+        "chunk_text": "We now show how to ﬁnd a y outside the range of D1 in deterministic polynomial time. Hence, when m > m1 there is a polynomial time algorithm for AVOID. Similar to the approach in [GLW22], the idea is that we inductively solve the range avoidance problem for smaller cir- cuits. Consider the ﬁrst output bit y1 (which is a function f1 of the input variables). We consider the following cases based on the type of functions: Case 1: Suppose f is a constant function.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "polynomial",
+                "time",
+                "range",
+                "show",
+                "ﬁnd",
+                "deterministic",
+                "function",
+                "AVOID",
+                "Suppose",
+                "functions"
+            ]
+        }
+    },
+    {
+        "id": "d8686a1f-f167-417c-a0fe-ffe65f9a258a",
+        "title": "",
+        "chunk_text": "Without loss of generality assume f is the constant zero function. Setting y1 = 1 and the remaining output bits to arbitrary Boolean values, we obtain a string y which is outside the range of D1. Case 2: Suppose f is the ∧of some variables. In this case, we set output bit y1 = 1 and variables feeding into this gate to be 1. Thus, we obtain a smaller circuit D′ 1 : {0, 1}mj−1 →{0, 1}m−1. Case 3: Suppose f is the ∨of some variables. This case can be handled similar to case 2.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Case",
+                "Suppose",
+                "variables",
+                "function",
+                "loss",
+                "generality",
+                "assume",
+                "constant",
+                "obtain",
+                "Boolean"
+            ]
+        }
+    },
+    {
+        "id": "af17b18c-ac70-4af1-a00b-5f3a93ddb4a0",
+        "title": "",
+        "chunk_text": "Setting output bit y1 = 0 and variables feeding into this gate to be 0, we obtain a smaller circuit D′ 1 : {0, 1}mj−1 →{0, 1}m−1. After n steps, we obtain a circuit D′′ 1 : {0, 1}0 →{0, 1}m−mj . The value of function fmj+1 is ﬁxed by the input assignments. Flipping this value, we obtain a string outside the range of D1. We note that this can be done in O(m) time. Even if m < m1, m is much larger compared to m2, there is FPNP algorithm for MONOTONE- AVOID where s is the size of the circuit.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "obtain",
+                "circuit",
+                "Setting",
+                "bit",
+                "output",
+                "variables",
+                "feeding",
+                "gate",
+                "smaller",
+                "MONOTONE"
+            ]
+        }
+    },
+    {
+        "id": "009e046f-9f39-4747-8f39-f323c53abb51",
+        "title": "",
+        "chunk_text": "Proposition A.2. If m > mω(√m2 log s) 2 there is an FPNP algorithm for MONOTONE-AVOID where s is the size of the circuit. 27 Proof. We show that if m2 < m 2 , then the problem can be reduced in polynomial time to CNF- AVOID. If in addition, m > mω(√m2 log s) 2 , we can use FPNP algorithm due to [GLW22] to solve the CNF-AVOID instance and this implies the above proposition. The reduction is as follows. Let F1, F2 be the set of all ∧gates and all ∨gates respectively in the output layer.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "FPNP",
+                "log",
+                "Proposition",
+                "algorithm",
+                "Proof",
+                "gates",
+                "AVOID",
+                "CNF",
+                "circuit",
+                "MONOTONE-AVOID"
+            ]
+        }
+    },
+    {
+        "id": "b57e4e2d-ff29-41ff-9599-ebe2b8b4a093",
+        "title": "",
+        "chunk_text": "By pigeon hole principle, we have that either |F1| ≥m 2 or |F2| ≥m 2 . Without loss of generality assume |F1| ≥m/2. Since m2 < m 2 , it sufﬁces to solve the problem for D′ obtained from D2 by eliminating the top ∨gates. Since top layer of D′ contains only ∧gates, we can assume that there are only ∨gates in the second layer of this circuit. Otherwise, we can feed the inputs of this ∧gate directly to the ∧gate above it. Now D2 is a CNF formula.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "gates",
+                "principle",
+                "gate",
+                "pigeon",
+                "hole",
+                "loss",
+                "generality",
+                "assume",
+                "top",
+                "layer"
+            ]
+        }
+    },
+    {
+        "id": "61ba632d-b8f1-42d2-8472-a367c4deb958",
+        "title": "",
+        "chunk_text": "A.2 Alternative Hypergraphs for Solving ONE-INTERSECT-MAJ3-AVOID app:subsec:structures In this subsection, we show other choices of hypergraphs that can be used in place of wickets in the algorithm above for solving ONE-INTERSECT-MAJ3-AVOID. Alternative 1 : k-cage: We deﬁne the graph class as below: Deﬁnition A.3.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Solving",
+                "Hypergraphs",
+                "app",
+                "subsec",
+                "Alternative",
+                "structures",
+                "subsection",
+                "Deﬁnition",
+                "show",
+                "choices"
+            ]
+        }
+    },
+    {
+        "id": "2a87d77e-d1b3-4a1b-8fe8-96d4747ca049",
+        "title": "",
+        "chunk_text": "A k-cage is a k-uniform linear hypergraph H(V, E) with edge set E = E1 ∪E2 such that E1 consists of pairwsise disjoint edges which intersect exactly at w ∈V and E2 consists of k −1 edges that are pairwise disjoint over V \\ {w}. The picture shown is the 5-cage. We will show that there exists an edge-coloring Γ that is not a MAJ-coloring. Lemma A.4. Let H be a k-cage. There exists an edge coloring Γ : E →{R, B} which is not a MAJ- coloring.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "consists",
+                "disjoint",
+                "k-uniform",
+                "linear",
+                "hypergraph",
+                "set",
+                "pairwsise",
+                "intersect",
+                "pairwise",
+                "k-cage"
+            ]
+        }
+    },
+    {
+        "id": "b379d2df-bb1c-4b5b-b10e-2685b75c88b0",
+        "title": "",
+        "chunk_text": "Furthermore, we can ﬁnd such a coloring in polynomial time. Proof. Let H be a k-cage with k edge-set E = E1 ∪E2, where E1 is the set of k-edges intersecting in vertex w and E2 is the set of k −1 pairwise disjoint edges over V \\ {w}. We will show t the following Γ is not a MAJ-coloring: Γ(e) = ( B if e ∈E1 R otherwise We consider the following cases based on the parity of k: Case 1: Suppose k is odd.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "time",
+                "ﬁnd",
+                "coloring",
+                "polynomial",
+                "set",
+                "Proof",
+                "Suppose",
+                "cases",
+                "Case",
+                "pairwise"
+            ]
+        }
+    },
+    {
+        "id": "3b73dc88-9262-4bb9-96ff-d8c338ac81e9",
+        "title": "",
+        "chunk_text": "Observe that for an edge in E2 to be colored R at least \u0004 k 2 \u0005 + 1 of its vertices should be colored R. Since the edges in E2 are pairwise disjoint, we have that there should be at least k \u0000\u0004 k 2 \u0005 + 1 \u0001 vertices in V \\ {w} that are colored R. Similarly, for any edge in e ∈E1 to be colored B, we have that at least \u0004 k 2 \u0005 vertices in e \\ {w} should be colored B.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "colored",
+                "vertices",
+                "Observe",
+                "edge",
+                "edges",
+                "disjoint",
+                "Similarly",
+                "pairwise"
+            ]
+        }
+    },
+    {
+        "id": "6e5bebdd-6187-4aac-9981-c0a4073b18a8",
+        "title": "",
+        "chunk_text": "Since, any two edges in E1 intersect exactly at vertex w, we have that at least \u0000\u0004 k 2 \u0005\u0001 (k −1) vertices in V \\ {w} that should be colored R. Thus, totally there must be at 28 least \u0000\u0004 k 2 \u0005\u0001 (k −1) + \u0000\u0004 k 2 \u0005 + 1 \u0001 (k) = k2 + k −⌊k/2⌋> k(k −1) vertices in V \\ {w}. Since, |V \\ {w}| = k(k −1) we get a contradiction. Case 2: Suppose k is even. As earlier for the edges in E2 to be colored R there must be at least k \u0000k 2 + 1 \u0001 vertices in V \\ {w} that are colored R.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "vertices",
+                "colored",
+                "intersect",
+                "vertex",
+                "edges",
+                "Suppose",
+                "totally",
+                "contradiction",
+                "Case",
+                "earlier"
+            ]
+        }
+    },
+    {
+        "id": "dcf39af2-5861-4988-a380-9c84a9ac5d01",
+        "title": "",
+        "chunk_text": "Since k is odd, for any edge in e ∈E1 to be colored B, we have that at least k 2 −1 vertices in e \\ {w} should be colored B. Hence, at least \u0000k 2 −1 \u0001 (k −1) vertices in V \\ {w} should be colored R. Thus, totally there must be at least \u0000k 2 + 1 \u0001 (k) + \u0000 k 2 −1 \u0001 (k −1) = k2 −k/2 −1 vertices in V \\ {w} > k(k −1). Since, |V \\ {w}| = k(k −1) we get a contradiction. In either case, we show that Γ is not a MAJ-coloring of H.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "vertices",
+                "colored",
+                "odd",
+                "edge",
+                "totally",
+                "contradiction",
+                "case",
+                "show",
+                "MAJ-coloring"
+            ]
+        }
+    },
+    {
+        "id": "6fb42e81-5a3c-4604-a7b6-b16238a8d17e",
+        "title": "",
+        "chunk_text": "Alternative 2 : Weak Fano plane: This structure is similar to the fano plane that was deﬁned in section 2 with one hyperedge removed. Deﬁnition A.5. A weak Fano plane is a 3-uniform linear hypergraph which is isomorphic to the hypergraph H(V, E) with vertex set V = [7] and edge set E = {{1, 2, 3}, {3, 4, 5}, {1, 5, 6}, {3, 6, 7}, {2, 5, 7}, {2, 4, 6}} We will show that there Γ : E →{R, B} which is not a MAJ-coloring. Lemma A.6. Let H be a weak Fano plane hypergraph.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Fano",
+                "Weak",
+                "plane",
+                "Alternative",
+                "section",
+                "removed",
+                "hypergraph",
+                "structure",
+                "similar",
+                "deﬁned"
+            ]
+        }
+    },
+    {
+        "id": "7b271e2d-e966-4a0e-b4ba-c91a7dbd03c4",
+        "title": "",
+        "chunk_text": "Then there is an edge-coloring Γ : E →{R, B} which is not a MAJ-coloring. Furthermore, we can ﬁnd this coloring in polynomial time. Proof. Let E1 = {e|1 ∈e}. We will show that the following Γ is not a MAJ-coloring. Γ(e) = ( R if e ∈E1 B otherwise We consider the following cases: Case 1: Suppose Π(1) = B. Then for any edge e ∈E1 to be colored R, it must be that the other two vertices in e should be R. In particular, we have Π(3) = Π(5) = R. This implies Γ({3, 4, 5}) = R which is a contradiction.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "MAJ-coloring",
+                "edge-coloring",
+                "Suppose",
+                "time",
+                "cases",
+                "Case",
+                "Proof",
+                "ﬁnd",
+                "coloring",
+                "polynomial"
+            ]
+        }
+    },
+    {
+        "id": "f71390da-3b24-447a-8565-d588dba37ae4",
+        "title": "",
+        "chunk_text": "Case 2: Suppose Π(1) = R. Then for an edge e ∈E1 to be colored R there must be a vertex pair {i, j} ∈{{2, 5}, {2, 6)}, {3, 5}, {3, 6}} such that Π(i) = Π(j) = R. We will obtain a contradic- tion in each case: Suppose {i, j} = {2, 5} then Γ({2, 5, 7}) = R which is a contradiction. For {i, j} being one of {2, 6}, {3, 5}, {3, 6} we similarly obtain contradictions for the coloring of the edges {2, 4, 6}, {3, 4, 6}, {3, 7, 6} respectively. Hence, Γ is not a MAJ-coloring of H.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Suppose",
+                "Case",
+                "obtain",
+                "pair",
+                "colored",
+                "vertex",
+                "edge",
+                "edges",
+                "contradic",
+                "tion"
+            ]
+        }
+    },
+    {
+        "id": "c0c6c568-50ba-4b55-aede-12ffffbddc17",
+        "title": "",
+        "chunk_text": "29 Alternative 3 : (k, ℓ)-odd butterﬂy: A 3-uniform loose cycle of length k, C := u1e1u2 . . . ukeku1 is a hypergraph over the vertex set {u1, . . . , uk} ∪{v1, . . . vk} such that ui, ui+1 ∈ei and ei = (ui, vi, ui+1) where uk+1 = u1. Deﬁnition A.7. A (k, ℓ)-odd butterﬂy is a 3-uniform hypergraph over E = {e1 . . . ek} ∪{f1, . . . fℓ} consisting of two loose cycles C1 := u1e1u2e2 . . . ukeku1 and C2 := u1f1v2f2 . . . vℓfℓu1 where k, ℓ are odd. The ﬁgure demonstrates a (3, 3)-butterﬂy.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Alternative",
+                "odd",
+                "butterﬂy",
+                "length",
+                "hypergraph",
+                "loose",
+                "set",
+                "Deﬁnition",
+                "vertex",
+                "cycle"
+            ]
+        }
+    },
+    {
+        "id": "ef48b1cf-c5c5-4595-b375-3ea3fcd29ee7",
+        "title": "",
+        "chunk_text": "In the following lemma we show an edge coloring function Γ which is not a MAJ-coloring. Lemma A.8. Let H be a (k, ℓ)-odd butterﬂy. Then there is an edge coloring Γ : E(H) →{R, B} which is not MAJ-coloring. Furthermore, we can ﬁnd this coloring in polynomial time. Proof. Let C1, C2 be the two loose cycles of order k in H. Let C1 := u1e1u2e2 . . . ukeku1 and C2 := u1f1v2f2 . . . vℓfℓu1. We will show that the following edge-coloring Γ : E →{R, B} is not a MAJ- coloring.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "coloring",
+                "lemma",
+                "edge",
+                "MAJ-coloring",
+                "function",
+                "show",
+                "MAJ",
+                "Proof",
+                "odd",
+                "butterﬂy"
+            ]
+        }
+    },
+    {
+        "id": "ea06e554-9838-4e2d-a8ab-4ce0bec4c49b",
+        "title": "",
+        "chunk_text": "Γ(ei) = ( R, if i is even B, otherwise Γ(fi) = ( R, if i is odd B, otherwise where i ∈[k]. First, we will show the following claim: Claim A.9. Let Γ : E →{R, B} be a MAJ-coloring under vertex coloring Π : V →{R, B} such that Π(ui) = c and Γ(ei) = c where c ∈{R, B} and c = {R, B} \\ {c}. Then Π(ui+1) = c. Proof. Wlog let Π(ui) = R. Since Γ is a MAJ-coloring satisfying Γ(ei) = B, the other two vertices in ei must be B. In particular we have that Π(ui+1) = B. Suppose Π(u1) = R.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "claim",
+                "odd",
+                "MAJ-coloring",
+                "show",
+                "Proof",
+                "vertex",
+                "coloring",
+                "Wlog",
+                "Suppose",
+                "satisfying"
+            ]
+        }
+    },
+    {
+        "id": "7f59b549-440e-4f71-8def-41d3620b9cf8",
+        "title": "",
+        "chunk_text": "Then by claim A.9 we have that uk = R. We have Γ(ek) = B. This implies Π(u1) = B which a contradiction. Similarly, if Π(u1) = B then we can repeatedly apply the claim A.9 for C2 to obtain a contradiction. Alternative 4 : (k, ℓ)-odd kite: We deﬁne the hypergraph as follows: Deﬁnition A.10. A (k, ℓ)-odd kite is a 3-uniform linear hypergraph with edge set E = {e1, . . . ek} ∪{f1, . . . fk} ∪{e′} consisting of two loose odd cycles C1 = u1e1u2 . . . ukeku1, C2 = u1f1v2f2 . . .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "contradiction",
+                "claim",
+                "odd",
+                "Deﬁnition",
+                "kite",
+                "hypergraph",
+                "Similarly",
+                "Alternative",
+                "implies",
+                "linear"
+            ]
+        }
+    },
+    {
+        "id": "468eb234-727c-4732-bb80-bc1dac41d727",
+        "title": "",
+        "chunk_text": "fℓ−1ukfℓu1 where ek = fℓ= {u0, u1, uk}, e′ = {u0, ui, vj} such that i ∈{2, . . . k−1}, j ∈{2, 3 . . . ℓ− 1} and i ≡j mod 2. The ﬁgure shows a (3, 3)-odd kite. We will show an edge coloring of (k, ℓ) which is not a valid MAJ-coloring. 30 Lemma A.11. Let H be a (k, ℓ)-odd kite. Then there exists an edge-coloring Γ : E →{R, B} which is not a valid MAJ-coloring. Furthermore, we can ﬁnd such a coloring in polynomial time. Proof.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "odd",
+                "kite",
+                "MAJ-coloring",
+                "valid",
+                "Lemma",
+                "coloring",
+                "mod",
+                "Proof",
+                "shows",
+                "show"
+            ]
+        }
+    },
+    {
+        "id": "60bbcd5a-6ec6-45d4-83c2-20ad037908df",
+        "title": "",
+        "chunk_text": "We will show that the following edge-coloring Γ is not a valid edge-coloring: Γ(e) =                        B, if e = ei ∈{e1, . . . ek} and i is odd R, if e = ei ∈{e1, . . . ek} and i is even R, if e = fj ∈{f1, . . . fℓ−1} and j is odd B, if e = fj ∈{f1, . . . fℓ−1} and j is even R, if e = e′ = {u0, ui, vj} and i is even B, if e = e′ = {u0, ui, vj} and i is odd We consider the following cases based on the colors of vertices u1, uk: Case 1: Suppose Π(u1) = Π(uk) = R.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "edge-coloring",
+                "odd",
+                "show",
+                "valid",
+                "Suppose",
+                "cases",
+                "Case",
+                "vertices",
+                "based",
+                "colors"
+            ]
+        }
+    },
+    {
+        "id": "f27551ae-a815-4d96-ace2-b234b8370353",
+        "title": "",
+        "chunk_text": "Since two of its vertices are colored R, this implies that color of edge ek is R, which is a contradiction. Case 2: Wlog let Π(u1) = R, Π(uk) = B. By repeated application of claim A.9 in cycle C1 we get that Π(uk) = R, which is again a contradiction. The other can be handles similarly by applying claim A.9 on cycle C2. Case 3: Suppose Π(u1) = Π(uk) = B. By repeatedly applying claim A.9 in cycles C1, C2 we get that Π(ui) = B ⇐⇒i ≡0 mod 2 and Π(vj) = B ⇐⇒j ≡0 mod 2.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "claim",
+                "contradiction",
+                "Case",
+                "cycle",
+                "Wlog",
+                "vertices",
+                "colored",
+                "implies",
+                "color",
+                "edge"
+            ]
+        }
+    },
+    {
+        "id": "10f6ee1a-f079-4610-8e90-a2856f622f81",
+        "title": "",
+        "chunk_text": "This implies that Γ(e′) = B ⇐⇒i ≡0 mod 2, which is a contradiction. Since, in either case we obtain a contradiction, Γ is not a valid MAJ-coloring. A.3 Counter Example graphs among the (9, 5)-hypergraphs In continuation with the discussion towards the introduction, we write down the explicit example of a (9, 5)-graph which does not lead to a contradiction as used in our arguments. It is easy to verify that every edge coloring is a MAJ-coloring for this hypergraph.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "contradiction",
+                "mod",
+                "implies",
+                "MAJ-coloring",
+                "Counter",
+                "case",
+                "obtain",
+                "valid",
+                "introduction",
+                "arguments"
+            ]
+        }
+    },
+    {
+        "id": "d6dc1583-f9f2-4f4f-bcc8-f0fb6f492389",
+        "title": "",
+        "chunk_text": "This example explains why the power-bound conjecture in [GL21] is not sufﬁcient to provide us the required improvements for the relation between m and n in our proposed algorithm for solving MAJ3-AVOID and hence MONOTONE- NC0 3-AVOID. 31",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "MONOTONE",
+                "solving",
+                "explains",
+                "power-bound",
+                "conjecture",
+                "sufﬁcient",
+                "provide",
+                "required",
+                "improvements",
+                "relation"
+            ]
+        }
+    }
+]

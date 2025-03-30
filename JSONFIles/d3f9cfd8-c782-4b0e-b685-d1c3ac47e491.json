@@ -1,0 +1,4073 @@
+[
+    {
+        "id": "faf51b05-8a88-4e3c-898e-b72d1b1de2ef",
+        "title": "",
+        "chunk_text": "Query-Efficient Fixpoints of ℓp-Contractions Sebastian Haslebacher1, Jonas Lill1, Patrick Schnider1,2, and Simon Weber1 1Department of Computer Science, ETH Z¨urich, Switzerland 2Department of Mathematics and Computer Science, University of Basel, Switzerland Abstract We prove that an ε-approximate fixpoint of a map f : [0, 1]d →[0, 1]d can be found with O(d2(log 1 ε + log 1 1−λ)) queries to f if f is λ-contracting with respect to an ℓp-metric for some p ∈[1, ∞) ∪{∞}.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Science",
+                "log",
+                "Switzerland",
+                "Computer",
+                "Jonas",
+                "Patrick",
+                "Sebastian",
+                "Simon",
+                "ETH",
+                "University"
+            ]
+        }
+    },
+    {
+        "id": "d2912197-f219-4681-b0c6-de364e900685",
+        "title": "",
+        "chunk_text": "This generalizes a recent result of Chen, Li, and Yannakakis [STOC’24] from the ℓ∞-case to all ℓp-metrics. Previously, all query upper bounds for p ∈[1, ∞) \\ {2} were either exponential in d, log 1 ε , or log 1 1−λ. Chen, Li, and Yannakakis also show how to ensure that all queries to f lie on a discrete grid of limited granularity in the ℓ∞-case. We provide such a rounding for the ℓ1-case, placing an appropriately defined version of the ℓ1-case in FPdt.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Yannakakis",
+                "Chen",
+                "ℓp-metrics",
+                "case",
+                "log",
+                "generalizes",
+                "recent",
+                "result",
+                "Previously",
+                "query"
+            ]
+        }
+    },
+    {
+        "id": "dcde99b3-0802-44b2-9de1-dd89976a1c52",
+        "title": "",
+        "chunk_text": "To prove our results, we introduce the notion of ℓp-halfspaces and generalize the classical centerpoint theorem from discrete geometry: for any p ∈[1, ∞) ∪{∞} and any mass distri- bution (or point set), we prove that there exists a centerpoint c such that every ℓp-halfspace defined by c and a normal vector contains at least a 1 d+1-fraction of the mass (or points).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "bution",
+                "prove",
+                "centerpoint",
+                "mass",
+                "results",
+                "geometry",
+                "distri",
+                "set",
+                "introduce",
+                "notion"
+            ]
+        }
+    },
+    {
+        "id": "332b32ac-78c2-480e-b1de-e4eccb862ca5",
+        "title": "",
+        "chunk_text": "1 arXiv:2503.16089v1 [cs.CC] 20 Mar 2025 1 Introduction A contraction map is a function that maps any two points in such a way that their two images lie closer to each other than the original points. Formally, a function f : X →X on a metric space (X, dX) is a contraction map if there exists some λ < 1, such that any two points x, y ∈ X satisfy dX( f (x), f (y)) ≤λ · dX(x, y).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Mar",
+                "Introduction",
+                "points",
+                "contraction",
+                "arXiv",
+                "cs.CC",
+                "function",
+                "map",
+                "images",
+                "lie"
+            ]
+        }
+    },
+    {
+        "id": "7248723c-5329-43d6-aac5-41ab15bff09e",
+        "title": "",
+        "chunk_text": "Banach’s fixpoint theorem [1] famously states that a contraction map must have a unique fixpoint, i.e., a point x ∈X with f (x) = x. In this paper, we consider the problem of finding approximate fixpoints based on the residual error criterion: we wish to find any point with dX( f (x), x) ≤ε, called an ε-approximate fixpoint. Banach’s proof actually provides a simple algorithm to find such an ε-approximate fixpoint: start at any point x ∈X and iteratively apply f until dX( f k+1(x), f k(x)) ≤ε.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "fixpoint",
+                "point",
+                "Banach",
+                "theorem",
+                "famously",
+                "ε-approximate",
+                "states",
+                "contraction",
+                "map",
+                "unique"
+            ]
+        }
+    },
+    {
+        "id": "0999aea7-1895-4641-b366-475480ab97e6",
+        "title": "",
+        "chunk_text": "This algorithm requires at most O \u0010 log( 1 ε ) log( 1 λ ) \u0011 queries to f on metric spaces of constant diameter. Unfortunately, Banach’s iterative algorithm is quite slow when λ is close to 1, which is often the regime that is useful in practice [36]. For example, Simple Stochastic Games (SSG) reduce to approximating the fixpoint of a contraction map on the metric space induced on the unit cube [0, 1]d by the ℓ∞-norm, with 1 −λ and ε exponentially small [7].",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "log",
+                "queries",
+                "diameter",
+                "algorithm",
+                "metric",
+                "requires",
+                "constant",
+                "Banach",
+                "SSG",
+                "Simple"
+            ]
+        }
+    },
+    {
+        "id": "2439dfc6-0be7-4246-9430-4ab75f61a30c",
+        "title": "",
+        "chunk_text": "Similarly, the ARRIVAL problem reduces to approximating the fixpoint of a contraction map on the unit cube [0, 1]d, again with 1 −λ and ε exponentially small, but here the metric is induced by the ℓ1-norm instead [17]. Note that no polynomial-time algorithms are known for SSG and ARRIVAL, despite both of them being contained in NP ∩CoNP [7, 10].",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "ARRIVAL",
+                "Similarly",
+                "cube",
+                "small",
+                "problem",
+                "reduces",
+                "approximating",
+                "fixpoint",
+                "contraction",
+                "map"
+            ]
+        }
+    },
+    {
+        "id": "5da23a5a-7760-4c7d-955f-bc1542de66d9",
+        "title": "",
+        "chunk_text": "If we could approximate the fixpoint of a λ-contraction map on [0, 1]d with respect to an ℓp-norm in time polynomial in d, log( 1 ε ), and log( 1 1−λ), then this would put both ARRIVAL and SSG in P. In the Euclidean case (p = 2), such efficient algorithms have been known for quite some time [19, 35, 36]. Concretely, the Inscribed Ellipsoid algorithm [19] requires O(d log( 1 ε )) queries (indepen- dent of λ) to find an ε-approximate fixpoint.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "ARRIVAL",
+                "SSG",
+                "log",
+                "time",
+                "approximate",
+                "λ-contraction",
+                "map",
+                "respect",
+                "ℓp-norm",
+                "polynomial"
+            ]
+        }
+    },
+    {
+        "id": "8662191a-3e17-47b5-9112-b5070f2c3a81",
+        "title": "",
+        "chunk_text": "Moreover, each query point can be found efficiently, implying an overall time-efficient (and not just query-efficient) algorithm. In contrast, only little is known for p ̸= 2. The problem is known to be contained in CLS [8] and was explicitely mentioned as an open problem by Fearnley, Goldberg, Hollender, and Sa- vani [12] when they proved CLS = PPAD ∩EOPL.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "algorithm",
+                "CLS",
+                "efficiently",
+                "implying",
+                "time-efficient",
+                "query-efficient",
+                "Goldberg",
+                "Hollender",
+                "PPAD",
+                "EOPL"
+            ]
+        }
+    },
+    {
+        "id": "d36d5722-c6d1-4cbd-a07d-f6727c8c9b51",
+        "title": "",
+        "chunk_text": "For p ∈N ∪{∞}, Fearnley, Gordon, Mehta, and Savani proved containment in UEOPL by reduction to One-Permutation Discrete Contrac- tion (OPDC) [13]. Moreover, their algorithm for OPDC implies an algorithm for finding an ε-approximate fixpoint in O(logd( 1 ε )) queries. Unfortunately, this is still exponential in d. Chen, Li, and Yannakakis [5] recently (STOC’24) gave the first query-efficient algorithm in the special case of the ℓ∞-norm.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Fearnley",
+                "Gordon",
+                "Mehta",
+                "Contrac",
+                "Savani",
+                "UEOPL",
+                "Discrete",
+                "OPDC",
+                "tion",
+                "algorithm"
+            ]
+        }
+    },
+    {
+        "id": "9f1024cb-0545-4f5f-8626-6a9026b679c0",
+        "title": "",
+        "chunk_text": "Concretely, their algorithm can find an ε-approximate fixed point with O(d2 log 1 ε ) (independent of λ) queries to f. One of the main questions that they ask is whether similar query upper bounds can be shown for p ̸= {2, ∞} as well. We answer this question affirmatively by achieving a query upper bound of O(d2(log 1 ε + log 1 1−λ)) for all p ∈ [1, ∞) ∪{∞}.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "log",
+                "Concretely",
+                "independent",
+                "queries",
+                "upper",
+                "algorithm",
+                "find",
+                "ε-approximate",
+                "fixed",
+                "point"
+            ]
+        }
+    },
+    {
+        "id": "28c7a496-05e2-4eab-8f9a-a4a47310ac04",
+        "title": "",
+        "chunk_text": "Note that using an observation of Chen, Li, and Yannakakis [5], we can also get rid of the factor log 1 1−λ for p = ∞, hence matching their bound. Neither our algorithm nor the algorithm of Chen, Li, and Yannakakis [5] is time-efficient, i.e., in both cases it is unclear how to algorithmically find the query points efficiently.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Chen",
+                "Yannakakis",
+                "Note",
+                "log",
+                "bound",
+                "observation",
+                "rid",
+                "factor",
+                "matching",
+                "algorithm"
+            ]
+        }
+    },
+    {
+        "id": "cc94b29a-c4a7-4e8f-9fc3-16c10b7860cd",
+        "title": "",
+        "chunk_text": "However, Chen, Li, and Yannakakis [5] ensure that all queries made by their algorithm lie on a discrete grid of limited granularity, which is certainly a prerequisite for any time-efficient algorithms. We provide a similar rounding of queries to a grid in the ℓ1-case. 2 Note that since our algorithm is only query-efficient, it does not imply polynomial-time algo- rithms for SSG, ARRIVAL, or other applications.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Chen",
+                "Yannakakis",
+                "ensure",
+                "granularity",
+                "queries",
+                "grid",
+                "made",
+                "lie",
+                "discrete",
+                "limited"
+            ]
+        }
+    },
+    {
+        "id": "b90b3dcd-0afa-4ad2-aa8b-2ff202ac5e6e",
+        "title": "",
+        "chunk_text": "However, as pointed out by Chen, Li, and Yannakakis [5], the existence of query-efficient algorithms could be viewed as evidence for the existence of time-efficient algorithms for ℓp-contraction (at least for p ∈{1, ∞}). 1.1 Results For any ℓp-norm with p ∈[1, ∞) ∪{∞}, we present an algorithm that can find an ε-approximate fixpoint of a λ-contracting function f : [0, 1]d →[0, 1]d by making at most O(d2(log 1 ε + log 1 1−λ)) queries to f.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "existence",
+                "Chen",
+                "Yannakakis",
+                "log",
+                "ℓp-contraction",
+                "algorithms",
+                "pointed",
+                "query-efficient",
+                "viewed",
+                "evidence"
+            ]
+        }
+    },
+    {
+        "id": "161f15e2-e310-40c6-930d-7b0d66aaad56",
+        "title": "",
+        "chunk_text": "In the ℓ1-case, we show how to ensure that all queries are made on points of a given discrete grid, as long as the distance between two neighboring grid points is at most 2d ε 1+λ 1−λ. A similar rounding was provided by Chen, Li, and Yannakakis [5] in the ℓ∞-case, and their rounding can also be used in combination with our algorithm.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "points",
+                "grid",
+                "show",
+                "ensure",
+                "queries",
+                "made",
+                "discrete",
+                "long",
+                "distance",
+                "neighboring"
+            ]
+        }
+    },
+    {
+        "id": "9bbc61b7-56f8-4992-8b6e-a9518e3cf61a",
+        "title": "",
+        "chunk_text": "If the function f produces only poly(k) bits of output when given k bits of input (as it is the case with many applications of the ℓ1-case and the ℓ∞-case), our algorithm only needs to input and output polynomially many bits of information into the function f. As a main technical tool, we consider a generalization of the notion of halfspaces from Euclidean geometry into ℓp-geometry.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "bits",
+                "function",
+                "output",
+                "input",
+                "case",
+                "poly",
+                "produces",
+                "applications",
+                "algorithm",
+                "polynomially"
+            ]
+        }
+    },
+    {
+        "id": "18f05ed3-949b-4050-b539-c3c5d46fbb99",
+        "title": "",
+        "chunk_text": "In particular, we prove a generalization of the classical centerpoint theorem from discrete and computational geometry that works for any p ∈[1, ∞) ∪{∞}. We think that this might be of independent interest. Our generalized centerpoint theorem works for both mass distributions and point sets and is tight in both cases.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "centerpoint",
+                "theorem",
+                "works",
+                "prove",
+                "generalization",
+                "classical",
+                "discrete",
+                "computational",
+                "geometry",
+                "interest"
+            ]
+        }
+    },
+    {
+        "id": "371a2973-cdc3-4e1e-8f37-e0113c5d7067",
+        "title": "",
+        "chunk_text": "Our results also imply that a properly defined total search problem version of the ℓ1-case lies in FPdt, the class of black-box total search problems that can be solved efficiently by decision trees [15]. Again, the analogous observation for the ℓ∞-case was made by Chen, Li, and Yan- nakakis [5] already.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "search",
+                "total",
+                "lies",
+                "FPdt",
+                "trees",
+                "problem",
+                "problems",
+                "results",
+                "imply",
+                "properly"
+            ]
+        }
+    },
+    {
+        "id": "69e036d4-7378-4950-8cf5-cb3c6e0e3c30",
+        "title": "",
+        "chunk_text": "In a total search problem, the algorithm has to either return a solution (an ε-approximate fixpoint) or a proof that the given instance does not fulfill the promise (i.e., that the given function on the grid does not extend to a contraction map on all of [0, 1]d). In the ℓ∞-case, it suffices to consider pairs of grid points violating the contraction property as proof for the violation of the promise [5].",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "promise",
+                "proof",
+                "grid",
+                "contraction",
+                "problem",
+                "solution",
+                "fixpoint",
+                "total",
+                "search",
+                "algorithm"
+            ]
+        }
+    },
+    {
+        "id": "63d1ac05-e9f7-402f-aab3-95a4a55edeb5",
+        "title": "",
+        "chunk_text": "For the ℓ1-case, this does not seem to suffice, which means that we need to consider a slightly more complicated proof of violation to properly define a total search version of the problem. 1.2 Proof Techniques Our algorithm is based on a simple observation that has also been used in previous work [5, 35]: due to the contraction property, given any query point x, the fixpoint x⋆must be closer to the query’s response f (x) than to the query x itself.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "proof",
+                "suffice",
+                "problem",
+                "query",
+                "slightly",
+                "complicated",
+                "violation",
+                "properly",
+                "define",
+                "total"
+            ]
+        }
+    },
+    {
+        "id": "1129bd59-89a1-462f-b9fc-00719a73ad04",
+        "title": "",
+        "chunk_text": "To quickly hone in on the fixpoint, we therefore wish to query a point x such that for every possible response f (x) of f, a significantly large part of the remaining search space lies at least as close to x as to f (x). Querying x then allows us to considerably shrink the remaining search space no matter the response f (x).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "remaining",
+                "search",
+                "response",
+                "space",
+                "fixpoint",
+                "quickly",
+                "hone",
+                "query",
+                "point",
+                "significantly"
+            ]
+        }
+    },
+    {
+        "id": "5e682cb2-d542-42d3-8a73-316d40a28b6b",
+        "title": "",
+        "chunk_text": "In the Euclidean case (ℓ2-metric), a centerpoint of the remaining search space makes for a good query: a point c is a ρ-centerpoint of a mass distribution µ if any halfspace that contains c also contains at least a ρ-fraction of the mass of µ. The celebrated centerpoint theorem originally due to Rado [31] guarantees that a 1 d+1-centerpoint (commonly just called a centerpoint) always exists.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "mass",
+                "centerpoint",
+                "Euclidean",
+                "case",
+                "query",
+                "remaining",
+                "search",
+                "space",
+                "makes",
+                "good"
+            ]
+        }
+    },
+    {
+        "id": "331be825-4e7d-4f8f-8e1a-94621ab5542c",
+        "title": "",
+        "chunk_text": "Since the set of points that are at least as close to c as to f (c) is a halfspace containing c, querying a centerpoint c of the remaining search space allows us to discard at least a 1 d+1-fraction 3 of the search space. We generalize these concepts from Euclidean geometry to arbitrary ℓp-metrics. We first define ℓp- halfspaces as a generalization of halfspaces.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "search",
+                "space",
+                "querying",
+                "set",
+                "points",
+                "close",
+                "centerpoint",
+                "remaining",
+                "discard",
+                "halfspaces"
+            ]
+        }
+    },
+    {
+        "id": "e850507f-f5e9-4c88-b02f-6c77405b8c66",
+        "title": "",
+        "chunk_text": "Informally speaking, an ℓp-halfspace Hp x,v is defined by a point x ∈Rd and a direction v ∈Sd−1 and contains all points that are at least as close (with respect to the ℓp-metric) to x as to x −εv for all ε > 0 (see Figure 1). We then prove a generalized centerpoint theorem for ℓp-metrics, which says that for every mass distribution µ on Rd, there exists a point c satisfying µ(Hp c,v) ≥ 1 d+1µ(Rd) for all v ∈Sd−1.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Figure",
+                "Informally",
+                "speaking",
+                "close",
+                "point",
+                "ℓp-halfspace",
+                "defined",
+                "direction",
+                "respect",
+                "ℓp-metric"
+            ]
+        }
+    },
+    {
+        "id": "d5c14fde-9474-4c87-8131-c26cc840e3fa",
+        "title": "",
+        "chunk_text": "This theorem implies existence of good query points for our algorithm, allowing us to discard a 1 d+1-fraction of the remaining search space with each query. Figure 1: The ℓ5-halfspace H5 0,v for v = (−2, −0.5, −0.6) is drawn in red. The vector shown in the image is −v. Image created with the Desmos 3D calculator. To prove our generalized centerpoint theorem, we use Brouwer’s fixpoint theorem [3].",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "query",
+                "algorithm",
+                "allowing",
+                "theorem",
+                "implies",
+                "existence",
+                "good",
+                "points",
+                "discard",
+                "remaining"
+            ]
+        }
+    },
+    {
+        "id": "dfe42777-caae-4407-914b-9b225c56e6df",
+        "title": "",
+        "chunk_text": "Con- cretely, given a mass distribution µ on Rd, we consider a function F : Rd →Rd which intuitively maps any point x by pushing it in all directions v ∈Sd−1 for which µ(Hp x,−v) is not yet large enough. Formally, we define it using the following integral Fi(x) := xi + Z Sd−1 vi max \u0012 1 d + 1 −µ(Hp x,−v), 0 \u0013 dv for all i ∈[d]. We show that F is continuous, which means that if we restrict it to a compact domain, Brouwer’s fixpoint theorem implies existence of a fixpoint.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Con",
+                "cretely",
+                "mass",
+                "distribution",
+                "function",
+                "intuitively",
+                "maps",
+                "point",
+                "pushing",
+                "directions"
+            ]
+        }
+    },
+    {
+        "id": "a2fdcde7-d4c8-448a-8446-bae1db92c94d",
+        "title": "",
+        "chunk_text": "We then prove that this fixpoint must be a centerpoint. After proving that we can reduce our remaining search space by a 1 d+1-fraction with every query, we still need a termination condition for our algorithm. To this end, we show that as long as 4 a queried point x is not an ε-approximate fixpoint, any point sufficiently close to the fixpoint x⋆cannot lie closer to x than to f (x).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "centerpoint",
+                "fixpoint",
+                "prove",
+                "point",
+                "query",
+                "algorithm",
+                "proving",
+                "reduce",
+                "remaining",
+                "search"
+            ]
+        }
+    },
+    {
+        "id": "d4875a26-5aef-4c3e-ba29-d54d543eb6e6",
+        "title": "",
+        "chunk_text": "Thus, there exists a small ball around x⋆that cannot be discarded as long as we have not queried an ε-approximate fixpoint yet. This in turn implies a lower bound Vε,λ for the volume of the remaining search space that holds as long as the algorithm does not terminate. From this, we can then conclude the upper bound log d d+1 \u0012 1 Vε,λ \u0013 = O \u0012 d2 \u0012 log 1 ε + log 1 1 −λ + log d \u0013\u0013 on the number of queries needed to find an ε-approximate fixpoint.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "long",
+                "log",
+                "Vε,λ",
+                "ε-approximate",
+                "fixpoint",
+                "exists",
+                "small",
+                "ball",
+                "discarded",
+                "queried"
+            ]
+        }
+    },
+    {
+        "id": "4e2e48aa-d7b9-49f3-9860-a7f2c62355ab",
+        "title": "",
+        "chunk_text": "To get rid of the log d term, we additionally observe that a simple iterative algorithm is faster if d dominates 1 ε and 1 1−λ. As mentioned before, Chen, Li, and Yannakakis [5] provide a rounding scheme in the ℓ∞-case that allows them to ensure that all queries lie on a discrete grid of limited granularity. Their rounding scheme can also be used in combination with our algorithm, but is specific to the ℓ∞- case.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Chen",
+                "term",
+                "dominates",
+                "case",
+                "Yannakakis",
+                "rid",
+                "log",
+                "additionally",
+                "observe",
+                "simple"
+            ]
+        }
+    },
+    {
+        "id": "ec7f9f7f-156a-4adf-a35c-f69c267a1003",
+        "title": "",
+        "chunk_text": "For the ℓ1-case, which is also motivated by applications, we therefore provide our own rounding scheme. Concretely, we show that for p = 1, each centerpoint query c of the original algorithm can be replaced with a query to the closest grid point c′ to c. To make this work, we need to use a discrete variant of our centerpoint theorem to measure the size of the remaining search space in terms of remaining grid points. 1.3 Discussion Comparison to Results for p = 2.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "applications",
+                "scheme",
+                "motivated",
+                "provide",
+                "rounding",
+                "grid",
+                "query",
+                "centerpoint",
+                "remaining",
+                "Concretely"
+            ]
+        }
+    },
+    {
+        "id": "9abec59f-96ae-47e4-ac80-7497f9693922",
+        "title": "",
+        "chunk_text": "The intersection of Euclidean halfspaces is a polyhedron, and Gr¨unbaum’s theorem says that the centroid of a polyhedron is a 1 e -centerpoint of the poly- hedron [16]. Thus, there always exists a 1 e -centerpoint of the remaining search space in the ℓ2-case, rather than just a 1 d+1-centerpoint.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "polyhedron",
+                "centerpoint",
+                "Euclidean",
+                "hedron",
+                "unbaum",
+                "poly",
+                "intersection",
+                "halfspaces",
+                "theorem",
+                "centroid"
+            ]
+        }
+    },
+    {
+        "id": "7a9c7ab1-0627-40da-a434-ff4d9b7bdf2d",
+        "title": "",
+        "chunk_text": "Thanks to this, specialized algorithms such as the In- scribed Ellipsoid and the Centroid algorithm [35, 36] achieve a query upper bound that depends only linearly on d (compared to our quadratic dependency). An interesting question would be whether something analogous to Gr¨unbaum’s theorem exists for the intersection of ℓp-halfspaces in general. Such a bound could then be plugged into our analysis to improve our upper bounds from O(d2) to O(d log d) in terms of the dimension.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Ellipsoid",
+                "Centroid",
+                "specialized",
+                "scribed",
+                "achieve",
+                "compared",
+                "dependency",
+                "upper",
+                "algorithms",
+                "algorithm"
+            ]
+        }
+    },
+    {
+        "id": "53c4f48e-fac6-410c-921e-c93bac522e88",
+        "title": "",
+        "chunk_text": "Note that the log d overhead (compared to aforementioned results with O(d) dependency for the ℓ2-case) would come from using a lower bound of vol(Bp(0, b)) ≥2d d! bd for the volume of a general ℓp-ball in our analysis (see proof of Theorem 4.2 for more details). As we have discussed earlier, the Inscribed Ellipsoid algorithm is not just query-efficient, but can actually be implemented in polynomial time. However, this is not straightforward.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Note",
+                "overhead",
+                "compared",
+                "dependency",
+                "vol",
+                "log",
+                "aforementioned",
+                "results",
+                "lower",
+                "bound"
+            ]
+        }
+    },
+    {
+        "id": "c4c87baf-e5c3-44ac-9746-9312b58430d1",
+        "title": "",
+        "chunk_text": "Even in the Euclidean case, computing the centroid of a polyhedron (given by its bounding hyperplanes) is #P-hard [30]. One thus has to rely on approximate centerpoints that can be computed effi- ciently by taking the centroid of an ellipsoid that approximates the polyhedron (hence the name Inscribed Ellipsoid algorithm).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "P-hard",
+                "Euclidean",
+                "centroid",
+                "polyhedron",
+                "case",
+                "computing",
+                "hyperplanes",
+                "ellipsoid",
+                "bounding",
+                "Inscribed"
+            ]
+        }
+    },
+    {
+        "id": "1696adf7-d1be-40b3-b22e-d64c340a14eb",
+        "title": "",
+        "chunk_text": "In other words, using ellipsoids to approximate the remaining search space is the main tool to get from query-efficient algorithms to actual polynomial-time algorithms in the Euclidean case. For more information regarding the ℓ2-case, we refer to the survey by Sikorksi [36]. Comparison to Chen, Li, and Yannakakis [5] on p = ∞. Our approach is similar (but much more general) to the one of Chen, Li, and Yannakakis [5] for the ℓ∞-case.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "algorithms",
+                "Euclidean",
+                "Yannakakis",
+                "Chen",
+                "words",
+                "case",
+                "ellipsoids",
+                "approximate",
+                "remaining",
+                "search"
+            ]
+        }
+    },
+    {
+        "id": "ba7df005-0037-443c-a376-19b63674fd0f",
+        "title": "",
+        "chunk_text": "They prove that there always exists a query point x, such that any response f (x) will allow them to discard at least 5 a 1 2d-fraction of the remaining search space. Concretely, the area that is discarded is one out of 2d pyramids (d pairs of antipodal pyramids) that touch at x. To prove existence of a good query x, they use Brouwer’s fixpoint theorem on a function that balances the mass among the two pyramids in each of the d pairs of antipodal pyramids simultaneously.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "pyramids",
+                "space",
+                "pairs",
+                "antipodal",
+                "exists",
+                "point",
+                "response",
+                "discard",
+                "remaining",
+                "search"
+            ]
+        }
+    },
+    {
+        "id": "9c2ef2f3-1469-440d-8e4f-e1b6542ec884",
+        "title": "",
+        "chunk_text": "In other words, their good query point x is essentially a 1 2d-centerpoint, although they do not use this terminology. Their decomposition into pyramids is tailored to the ℓ∞-case and does not generalize. Our algorithm for arbitrary p ∈[1, ∞) ∪{∞} uses O(d2(log 1 ε + log 1 1−λ)) queries, essentially matching the bound in [5].",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "log",
+                "words",
+                "terminology",
+                "good",
+                "query",
+                "point",
+                "essentially",
+                "case",
+                "generalize",
+                "queries"
+            ]
+        }
+    },
+    {
+        "id": "aebddcb2-f0a3-482c-a13b-5a1b1592ca5a",
+        "title": "",
+        "chunk_text": "Note that their upper bound does not include λ because they show how to get rid of the dependency on λ by applying a reduction that turns an instance with parameters ε and λ into an instance with ε′ = ε/2 and λ′ = 1 −ε′. This is again specific to the case p = ∞and unlikely to work in general. In order to prove the result for all p ∈[1, ∞) ∪{∞} simultaneously, we avoid a specific decom- position such as the pyramid decomposition in the ℓ∞-case.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "instance",
+                "Note",
+                "upper",
+                "bound",
+                "include",
+                "show",
+                "rid",
+                "dependency",
+                "applying",
+                "reduction"
+            ]
+        }
+    },
+    {
+        "id": "4ef87d0c-ff97-4bf5-87bb-d21eca43de5e",
+        "title": "",
+        "chunk_text": "We think that the generality of our approach also makes our arguments less technical than the ones used in [5]. Chen, Li, and Yannakakis [5] show that their algorithm also places the following total version of the problem in FPdt: given query access to the function f on a grid, either find an ε-approximate fixpoint, or two grid points violating the contraction property.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "generality",
+                "approach",
+                "makes",
+                "arguments",
+                "technical",
+                "grid",
+                "Yannakakis",
+                "Chen",
+                "show",
+                "FPdt"
+            ]
+        }
+    },
+    {
+        "id": "293e0eff-748f-450a-90b6-780da92c3015",
+        "title": "",
+        "chunk_text": "Totality of this problem crucially relies on the fact that any ℓ∞-contracting function defined only on the grid can be extended to an ℓ∞-contracting map on the whole cube. Unfortunately, their extension construction, which is an implicit application of the extension theorem of McShane [25], does not generalize to other values of p. In fact, we do not expect a similar extension theorem to hold for general p.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "contracting",
+                "Totality",
+                "cube",
+                "extension",
+                "problem",
+                "crucially",
+                "relies",
+                "function",
+                "defined",
+                "grid"
+            ]
+        }
+    },
+    {
+        "id": "d660dda8-4af9-45a2-87e1-7688bc63ff76",
+        "title": "",
+        "chunk_text": "In order to define a total version of the problem in the ℓ1-case, we therefore need to include a different certificate for violation of the contraction property. This certificate uses not just two, but polynomially many grid points, and exists whenever our algorithm would fail to find an ε-approximate fixpoint (on a non-contracting map). CLS-Completeness of General Banach.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "property",
+                "certificate",
+                "order",
+                "define",
+                "total",
+                "version",
+                "problem",
+                "include",
+                "violation",
+                "contraction"
+            ]
+        }
+    },
+    {
+        "id": "a090dc2e-3a17-4189-a869-71d8719d6fe7",
+        "title": "",
+        "chunk_text": "Daskalakis, Tzamos, and Zampetakis [9] showed that the problem of computing the fixpoint of a contraction map on the metric space ([0, 1]3, d[0,1]3) is CLS-complete if the metric d[0,1]3 is an arbitrary metric given as an algebraic circuit. This stands in stark contrast to our polynomial-query result for all ℓp-metrics, and highlights that the ℓp- metrics are quite special metrics. For example, as metrics induced by a norm, the ℓp-metrics are translation-invariant.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Tzamos",
+                "Zampetakis",
+                "Daskalakis",
+                "metric",
+                "metrics",
+                "showed",
+                "space",
+                "circuit",
+                "problem",
+                "computing"
+            ]
+        }
+    },
+    {
+        "id": "f626be03-edca-418c-aff9-86e7b2446300",
+        "title": "",
+        "chunk_text": "In future work, it would be interesting to investigate whether super- polynomial query lower bounds can be proven for some fixed metric, or whether our results can be generalized to more general classes of metrics, for example all metrics induced by some norm. Finding Centerpoints. An important question left unanswered by our work is whether our algorithms can be implemented not only using polynomially many queries, but also in overall polynomial time.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "metrics",
+                "super",
+                "norm",
+                "future",
+                "interesting",
+                "investigate",
+                "query",
+                "lower",
+                "bounds",
+                "proven"
+            ]
+        }
+    },
+    {
+        "id": "6a569f74-f545-4898-85ca-4817f417e963",
+        "title": "",
+        "chunk_text": "Such a result would have important implications. For example, it would imply the existence of a polynomial-time algorithm for SSGs [7] in the ℓ∞-case and a polynomial-time algorithm for ARRIVAL [17] in the ℓ1-case. To be able to implement our algorithm in polynomial time, we would have to be able to find a centerpoint of an intersection of ℓp-halfspaces (the remaining search space) efficiently.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "algorithm",
+                "implications",
+                "polynomial-time",
+                "result",
+                "important",
+                "ARRIVAL",
+                "efficiently",
+                "SSGs",
+                "case",
+                "imply"
+            ]
+        }
+    },
+    {
+        "id": "1c6101b3-9351-4590-afd0-fe60099ad4ed",
+        "title": "",
+        "chunk_text": "However, note that we would not necessarily need a 1 d+1- centerpoint; a 1 poly(d)-centerpoint would suffice. In Euclidean geometry, such approximate centerpoints can be computed efficiently with a variety 6 of approaches [6, 26].",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "poly",
+                "note",
+                "suffice",
+                "necessarily",
+                "centerpoint",
+                "Euclidean",
+                "geometry",
+                "variety",
+                "approaches",
+                "approximate"
+            ]
+        }
+    },
+    {
+        "id": "fff4abe9-370e-4daf-9ea4-971328ecd035",
+        "title": "",
+        "chunk_text": "One approach for a randomized algorithm that might potentially generalize to our setting is the one based on computing the centerpoint of a representative subset of a point set: given a point set X ⊆[0, 1]d, the set of all halfspaces induces a set system (or range space) on X. This range space has a Vapnik–Chervonenkis dimension [37] of at most d + 1, as implied by Radon’s lemma [32].",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "set",
+                "point",
+                "range",
+                "space",
+                "system",
+                "approach",
+                "randomized",
+                "algorithm",
+                "potentially",
+                "generalize"
+            ]
+        }
+    },
+    {
+        "id": "6ff9de55-f9b1-4599-965f-b9facab2fc1b",
+        "title": "",
+        "chunk_text": "For range spaces with bounded VC-dimension, a random sample of a constant number of points is a so-called ε-approximation [27] with high probability [22, 27]. Furthermore, the centerpoint of such an ε-approximation of the range space of halfspaces is an approximate centerpoint of X itself [24]. More details about this series of results can be found in Chapter 47 of the Handbook of Discrete and Computational Geometry [27].",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "range",
+                "ε-approximation",
+                "VC-dimension",
+                "probability",
+                "bounded",
+                "random",
+                "sample",
+                "constant",
+                "number",
+                "points"
+            ]
+        }
+    },
+    {
+        "id": "bd390365-837c-46ca-81bc-2813b5861e9d",
+        "title": "",
+        "chunk_text": "To generalize this approach to our setting, one would need to bound the VC-dimension of the range space induced by ℓp-halfspaces, and to find an efficient way of sampling a random point from the intersection of ℓp-halfspaces. The first step towards such a sampling procedure may be to study the analogue of Linear Programming feasibility for ℓp-halfspaces: how quickly can we decide whether an intersection of ℓp-halfspaces is empty or not? Proof of Centerpoint Theorem.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "ℓp-halfspaces",
+                "intersection",
+                "setting",
+                "sampling",
+                "generalize",
+                "approach",
+                "bound",
+                "VC-dimension",
+                "range",
+                "space"
+            ]
+        }
+    },
+    {
+        "id": "d096cf4e-6068-43b5-ae3c-e5c73f635f50",
+        "title": "",
+        "chunk_text": "Our proof of the generalized centerpoint theorem makes use of Brouwer’s fixpoint theorem. The classical centerpoint theorem is usually proven using Helly’s theorem, which can in turn be proven using Brouwer’s fixpoint theorem [23].",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Brouwer",
+                "theorem",
+                "fixpoint",
+                "centerpoint",
+                "proof",
+                "generalized",
+                "makes",
+                "proven",
+                "Helly",
+                "classical"
+            ]
+        }
+    },
+    {
+        "id": "b6503dfd-40ba-4147-adf7-00fa8f86ff11",
+        "title": "",
+        "chunk_text": "A proof of the classical centerpoint theorem using Brouwer’s fixpoint theorem directly in the style of our proof seems to be somewhat folklore, as this strategy is mentioned in Chapter 27 of the Handbook of Discrete and Computational Geometry [38], but we were unable to find any reference containing the full proof. 1.4 Further Related Work Generalized Centerpoint Theorems. The classical centerpoint theorem has been generalized in many different directions.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Chapter",
+                "Geometry",
+                "proof",
+                "centerpoint",
+                "Brouwer",
+                "Handbook",
+                "Discrete",
+                "Computational",
+                "theorem",
+                "classical"
+            ]
+        }
+    },
+    {
+        "id": "4e085069-1c0c-4fa4-a8c6-e12639405ef6",
+        "title": "",
+        "chunk_text": "For example, it has been generalized from single centerpoints (gen- eralizing the concept of a median) to multiple centerpoints (generalizing the concept of quan- tiles) [29, 33]. It has also been generalized from centerpoints to centerdisks [2]. The centerpoint theorem has further been generalized to projective spaces [21], which is the only generalization to non-Euclidean geometries that we are aware of. Fixpoint Theorems.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "concept",
+                "generalized",
+                "gen",
+                "tiles",
+                "eralizing",
+                "median",
+                "generalizing",
+                "quan",
+                "centerpoints",
+                "single"
+            ]
+        }
+    },
+    {
+        "id": "ea75e0de-b1cc-47d9-aeb3-6f784082622c",
+        "title": "",
+        "chunk_text": "Many other fixpoint theorems have been studied from the lens of compu- tational complexity. Finding a fixpoint of a continuous function from a hypercube to itself, as guaranteed by Brouwer’s fixpoint theorem, is famously PPAD-complete [28]. Finding a fixpoint of a monotone function from a lattice to itself, as guaranteed by Tarski’s fixpoint theorem, is known to lie in EOPL [11, 14], but no hardness result is known.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "fixpoint",
+                "Finding",
+                "theorem",
+                "compu",
+                "tational",
+                "complexity",
+                "guaranteed",
+                "studied",
+                "lens",
+                "function"
+            ]
+        }
+    },
+    {
+        "id": "a670c6d6-8671-42cf-b3c3-6f95aa76b7fb",
+        "title": "",
+        "chunk_text": "Chang and Lyuu [4] gave lower bounds on the query complexity of finding fixpoints on finite metric spaces, as guaranteed by Banach’s and Caristi’s fixpoint theorems. The computational problem associated with Caristi’s fixpoint theorem on the metric space ([0, 1]3, ℓ∞) has been proven PLS-complete [20]. The com- putational version of Brøndsted’s fixpoint theorem on the same metric space is known to lie in PPAD and to be CLS-hard [20], with the exact complexity still open.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Lyuu",
+                "Caristi",
+                "Banach",
+                "fixpoint",
+                "metric",
+                "theorem",
+                "space",
+                "Chang",
+                "gave",
+                "lower"
+            ]
+        }
+    },
+    {
+        "id": "53fef36c-9fb2-4d5f-86ab-676bf0267fa4",
+        "title": "",
+        "chunk_text": "1.5 Overview and Organization We start our exposition in Section 2 by formally defining the problem ℓp-ContractionFixpoint that we are interested in. We also recall important notions and results from the literature that are needed to understand the rest of the paper. 7 We introduce the notion of ℓp-halfspaces in Section 3.1 and discuss some of their properties in Section 3.2. Proofs of those properties are deferred to Appendix A.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Section",
+                "Overview",
+                "Organization",
+                "start",
+                "exposition",
+                "formally",
+                "defining",
+                "problem",
+                "ℓp-ContractionFixpoint",
+                "interested"
+            ]
+        }
+    },
+    {
+        "id": "1aebd95a-d82b-4803-8781-1d64759c192f",
+        "title": "",
+        "chunk_text": "Section 3.3 contains the proof of our generalized centerpoint theorem for mass distributions. We also provide a discrete variant for point sets instead of mass distributions, the proof of which can be found in Appendix B. Finally, we use Section 3.4 to briefly argue that both versions of our generalized centerpoint theorem are tight. We use Section 4 to describe our algorithms. In Section 4.1, we prove our query upper bound for ℓp-ContractionFixpoint for all p ∈[1, ∞) ∪{∞}.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Section",
+                "distributions",
+                "proof",
+                "generalized",
+                "centerpoint",
+                "theorem",
+                "mass",
+                "Finally",
+                "Appendix",
+                "tight"
+            ]
+        }
+    },
+    {
+        "id": "990cb40e-b91b-40d5-9de0-fac6b71f4c1b",
+        "title": "",
+        "chunk_text": "In Section 4.2, we then show how we can ensure that all queries lie on a discrete grid in the ℓ1-case, solving what we call the problem ℓ1-GridContractionFixpoint. Finally, we discuss membership in FPdt of a total search version ℓ1-GridContractionFixpoint in Section 4.3. 2 Preliminaries Definition 2.1 (Contraction Map).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Section",
+                "solving",
+                "problem",
+                "show",
+                "ensure",
+                "queries",
+                "lie",
+                "discrete",
+                "grid",
+                "call"
+            ]
+        }
+    },
+    {
+        "id": "d54a0553-578c-4a52-ab40-52dbb58ea5b2",
+        "title": "",
+        "chunk_text": "Given a metric space (X, dX) and a contraction factor 0 ≤λ < 1, a function f : X →X is called a λ-contraction map (or λ-contracting) if dX( f (x), f (y)) ≤λ · dX(x, y) holds for all x, y ∈X. A function is called a contraction map if it is λ-contracting for some 0 ≤λ < 1. Theorem 2.2 (Banach Fixpoint Theorem [1]). Every contraction map f : X →X on a non-empty complete metric space (X, dX) admits a unique fixpoint x⋆∈X, i.e., a unique point satisfying f (x⋆) = x⋆.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "contraction",
+                "map",
+                "called",
+                "function",
+                "λ-contracting",
+                "space",
+                "Theorem",
+                "factor",
+                "holds",
+                "Fixpoint"
+            ]
+        }
+    },
+    {
+        "id": "f32c3041-b03a-46ac-92dc-3d9ceaae1d6b",
+        "title": "",
+        "chunk_text": "In this paper, we will consider metric spaces of the form ([0, 1]d, ℓp) for some p ∈[1, ∞) ∪{∞}, where ℓp denotes the metric induced by the ℓp-norm. Definition 2.3 (ℓp-Norm). The ℓp-norm of x ∈Rd is defined as ||x||p := \u0010 ∑d i=1 |xi|p\u00111/p for p ∈[1, ∞) and ||x||p := maxi |xi| for p = ∞. Concretely, the distance between two points x, y ∈([0, 1]d, ℓp) is given by ||y −x||p. We also use Bp(x, r) := {y ∈Rd | ||y −x||p ≤r} to denote the ℓp-ball of radius r around x.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "metric",
+                "ℓp-norm",
+                "paper",
+                "form",
+                "spaces",
+                "induced",
+                "Definition",
+                "denotes",
+                "denote",
+                "maxi"
+            ]
+        }
+    },
+    {
+        "id": "d545b4e4-3b62-4f45-a5f1-fa07e5d5ac85",
+        "title": "",
+        "chunk_text": "Finding the exact fixpoint of a contraction map is often infeasible, which is why one usually considers the problem of finding ε-approximate fixpoints instead. Definition 2.4 (ε-Approximate Fixpoint). Given a contraction map f : X →X and an ε > 0, a point x ∈X is called an ε-approximate fixpoint if dX(x, f (x)) ≤ε. In the literature, this condition is often called the residual error criterion.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "fixpoint",
+                "Finding",
+                "ε-approximate",
+                "contraction",
+                "infeasible",
+                "map",
+                "exact",
+                "problem",
+                "called",
+                "fixpoints"
+            ]
+        }
+    },
+    {
+        "id": "83d8a19d-a202-41ba-b211-f559c05b0f45",
+        "title": "",
+        "chunk_text": "Note that the contraction property ensures that any ε-approximate fixpoint has a distance of at most ε 1−λ to the unique fixpoint x⋆, thus also bounding the so-called absolute error dX(x, x⋆). Definition 2.5. The ℓp-ContractionFixpoint problem is to find an ε-approximate fixpoint of a λ- contraction map f on ([0, 1]d, ℓp), given parameters d ∈N, ε > 0, λ ∈[0, 1) and p ∈[1, ∞) ∪{∞} as well as black-box query access to f. The goal is to minimize the number of queries made to f.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "fixpoint",
+                "Note",
+                "ε-approximate",
+                "property",
+                "ensures",
+                "distance",
+                "unique",
+                "bounding",
+                "so-called",
+                "absolute"
+            ]
+        }
+    },
+    {
+        "id": "78b34bc6-ad2e-45c7-bdbb-28e7154d7929",
+        "title": "",
+        "chunk_text": "We consider an algorithm for ℓp-ContractionFixpoint to be query-efficient if the number of queries made to f is polynomial in d, log( 1 ε ), and log( 1 1−λ), and independent of p. In ℓp-ContractionFixpoint, we are allowed to query f at any point x ∈[0, 1]d, even at points with irrational coordinates.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "log",
+                "ℓp-ContractionFixpoint",
+                "algorithm",
+                "query-efficient",
+                "number",
+                "queries",
+                "made",
+                "polynomial",
+                "independent",
+                "coordinates"
+            ]
+        }
+    },
+    {
+        "id": "86e9e3f6-38eb-4709-9880-57c348851e2a",
+        "title": "",
+        "chunk_text": "This might be unsuitable in some applications, and it seems rea- sonable to also consider a discretized version of this problem, where we are only allowed to 8 make queries to points on a discrete grid. Although we define this discretized version for all p ∈[1, ∞) ∪{∞}, we will only really study it for the cases p ∈{1, ∞} (motivated by applica- tions). Definition 2.6. Given an integer b ≥1, the grid Gd b ⊆[0, 1]d is the set of points x ∈[0, 1]d with rational coordinates x1, . . .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "discretized",
+                "version",
+                "applications",
+                "rea",
+                "sonable",
+                "problem",
+                "make",
+                "unsuitable",
+                "allowed",
+                "queries"
+            ]
+        }
+    },
+    {
+        "id": "14a1a485-133c-47e1-8b30-83599ac85af6",
+        "title": "",
+        "chunk_text": ", xd of the form xi = ki 2b for integers k1, . . . , kd ∈{0, 1, . . . , 2b}. Definition 2.7. A function f : Gd b →[0, 1]d is called a λ-contraction grid-map if there exists a λ- contraction map f ′ : [0, 1]d →[0, 1]d such that f (x) = f ′(x) for all x ∈Gd b (both f ′ and f are contracting with respect to the same fixed ℓp-metric). Definition 2.8. The ℓp-GridContractionFixpoint problem is to find an ε-approximate fixpoint x ∈ Gd b of a λ-contraction grid-map f : Gd b →[0, 1]d.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "integers",
+                "form",
+                "Definition",
+                "λ-contraction",
+                "grid-map",
+                "contraction",
+                "ℓp-metric",
+                "function",
+                "called",
+                "exists"
+            ]
+        }
+    },
+    {
+        "id": "6a6f68b3-5eb0-4f82-aa7a-85930a603eb0",
+        "title": "",
+        "chunk_text": "A priori, ℓp-GridContractionFixpoint is not guaranteed to have a solution and might therefore not be well-defined. However, it is not hard to see that an ε-approximate fixpoint on the grid must exist if the input grid is fine enough. Lemma 2.9. For b ≥log2( d+dλ 2ε ), any λ-contraction grid-map f : Gd b →[0, 1]d admits an ε-approximate fixpoint. Proof. Let x⋆be the unique fixpoint of some λ-contraction map f ′ : [0, 1]d →[0, 1]d extending f.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "priori",
+                "ℓp-GridContractionFixpoint",
+                "well-defined",
+                "fixpoint",
+                "ε-approximate",
+                "guaranteed",
+                "solution",
+                "grid",
+                "λ-contraction",
+                "Lemma"
+            ]
+        }
+    },
+    {
+        "id": "8cda7059-5caa-4076-883d-794f2b410500",
+        "title": "",
+        "chunk_text": "The following calculation shows that any point x ∈[0, 1]d with ||x −x⋆||p ≤ ε 1+λ must be an ε-approximate fixpoint: || f (x) −x||p ≤|| f (x) −f (x⋆)||p + || f (x⋆) −x||p ≤λ||x −x⋆||p + ||x −x⋆||p = (1 + λ)||x −x⋆||p ≤ε. We now determine a lower bound on b needed to ensure the existence of such a point x ∈Gd b. Observe that since B∞(x⋆, r d) ⊆Bp(x⋆, r) (follows from ||x||p ≤d||x||∞) for all r > 0 and all p, it suffices to prove existence of a grid point in B∞(x⋆, ε d+dλ).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "point",
+                "fixpoint",
+                "calculation",
+                "shows",
+                "ε-approximate",
+                "existence",
+                "determine",
+                "lower",
+                "bound",
+                "needed"
+            ]
+        }
+    },
+    {
+        "id": "b8c3b185-0589-4534-af86-23ce5d2438ad",
+        "title": "",
+        "chunk_text": "Observe that this is the axis-aligned cube x⋆+ [− ε d+dλ, ε d+dλ]d. If 2−b ≤ 2ε d+dλ, this cube must always contain at least one point of Gd b. Thus, we get the lower bound b ≥log2( d+dλ 2ε ). 3 ℓp-Halfspaces and ℓp-Centerpoints In this section, we generalize halfspaces and centerpoints from Euclidean geometry to ℓp-norms for any p ∈[1, ∞) ∪{∞}. Note that we sometimes use ∡(v, w) to denote the angle between two vectors v, w ∈Rd. We also sometimes use −→ xy for the vector y −x.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Observe",
+                "cube",
+                "axis-aligned",
+                "Euclidean",
+                "point",
+                "ℓp-Halfspaces",
+                "section",
+                "lower",
+                "bound",
+                "Note"
+            ]
+        }
+    },
+    {
+        "id": "d5e988e1-eb6c-4c5e-8bb4-ff4986aa0933",
+        "title": "",
+        "chunk_text": "For example, ∡(−→ xy, v) denotes the angle between the vectors y −x and v. 3.1 ℓp-Halfspaces There are many different ways of defining a halfspace in Euclidean geometry (p = 2). One natural way that will appear in our algorithms for finding the fixpoints of contraction maps (see Section 4) is to define a halfspace using two distinct points x, y ∈Rd: a point z ∈Rd is considered to be in the halfspace if and only if ∥x −z∥2 ≤∥y −z∥2.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "denotes",
+                "halfspace",
+                "angle",
+                "vectors",
+                "Euclidean",
+                "Section",
+                "ℓp-Halfspaces",
+                "geometry",
+                "defining",
+                "maps"
+            ]
+        }
+    },
+    {
+        "id": "c42d902c-5b54-4456-8b2e-056e48e1d06c",
+        "title": "",
+        "chunk_text": "This directly generalizes to arbitrary p ∈[1, ∞) ∪{∞} as follows. 9 Definition 3.1 (Bisector ℓp-Halfspace). For fixed p ∈[1, ∞) ∪{∞} and distinct points x, y ∈Rd, the bisector ℓp-halfspace Hp x,y ⊆Rd is defined as Hp x,y := {z ∈Rd | ||x −z||p ≤||y −z||p}.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Definition",
+                "Bisector",
+                "directly",
+                "generalizes",
+                "arbitrary",
+                "ℓp-Halfspace",
+                "fixed",
+                "distinct",
+                "points",
+                "defined"
+            ]
+        }
+    },
+    {
+        "id": "053a7df0-841a-4a2a-91b9-6c81384bfdc3",
+        "title": "",
+        "chunk_text": "In Euclidean geometry, rather than defining a halfspace using the principle of bisection, we can alternatively define it by a point x on the boundary and a normal vector v ∈Sd−1, making use of the Euclidean inner product: a point z ∈Rd belongs to the halfspace if and only if ⟨v, z −x⟩≥0. In fact, the ℓ2-norm is special because it is induced by an inner product. In general, ℓp-norms are not induced by an inner product, and therefore this definition does not directly generalize.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Euclidean",
+                "product",
+                "point",
+                "halfspace",
+                "geometry",
+                "bisection",
+                "making",
+                "defining",
+                "principle",
+                "alternatively"
+            ]
+        }
+    },
+    {
+        "id": "6ad523c2-a20a-4189-9557-18b987b76889",
+        "title": "",
+        "chunk_text": "However, we can avoid the inner product with the following observation: a point z satisfies ⟨v, z −x⟩≥0 if and only if ∥x −z∥2 ≤∥x −εv −z∥2 holds for all ε > 0. In a way, this definition can be seen as the limit of the bisector definition with y = x −εv and ε →0. Stated like this, we can generalize the definition to arbitrary p ∈[1, ∞) ∪{∞}. Definition 3.2 (Limit ℓp-Halfspace).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "definition",
+                "observation",
+                "satisfies",
+                "holds",
+                "limit",
+                "avoid",
+                "product",
+                "point",
+                "bisector",
+                "Stated"
+            ]
+        }
+    },
+    {
+        "id": "a2daf270-7556-4944-9a36-b00462fa275a",
+        "title": "",
+        "chunk_text": "For fixed p ∈[1, ∞) ∪{∞}, point x ∈Rd, and direction v ∈Rd with v ̸= 0, the ℓp-halfspace Hp x,v ⊆Rd through x in the direction of v is defined as Hp x,v := {z ∈Rd | ∀ε > 0 : ||x −z||p ≤||x −εv −z||p}. Observe that scaling the direction v with a positive scalar does not change the halfspace Hp x,v. Hence, we usually assume v ∈Sd−1 ⊆Rd. In fact, we will frequently use the following charac- terization for containment in a limit ℓp-halfspace. Observation 3.3.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "direction",
+                "point",
+                "fixed",
+                "defined",
+                "ℓp-halfspace",
+                "Observe",
+                "scaling",
+                "positive",
+                "scalar",
+                "change"
+            ]
+        }
+    },
+    {
+        "id": "473883af-6c25-485a-89b8-96fee45d6e5d",
+        "title": "",
+        "chunk_text": "For a given limit ℓp-halfspace Hp x,v and point z ∈Rd, let R−be the open ray from x in direction −v, and let Bz be the smallest closed ℓp-ball with center z that contains x. Then we have z ∈Hp x,v ⇐⇒R−∩B◦ z = ∅, where B◦ z denotes the interior of Bz. For our centerpoint theorem, we will exclusively work with limit halfspaces. However, as men- tioned before, bisector halfspaces naturally appear in the analysis of our algorithms in Section 4.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "direction",
+                "ℓp-halfspace",
+                "point",
+                "open",
+                "ray",
+                "smallest",
+                "closed",
+                "ℓp-ball",
+                "center",
+                "limit"
+            ]
+        }
+    },
+    {
+        "id": "980fcea0-ce03-4753-9736-c6675717dd8b",
+        "title": "",
+        "chunk_text": "Thus, we will need the following observation that allows us to translate between the two. Observation 3.4. Let p ∈[1, ∞) ∪{∞}, x ∈Rn, and v ∈Sd−1. The limit ℓp-halfspace Hp x,v is the intersection of all bisector ℓp-halfspaces Hp x,x−εv for ε > 0. Thus, we have Hp x,v ⊆Hp x,x−εv for all ε > 0. For the rest of this section, we will exclusively work with limit ℓp-halfspaces and refer to them simply as ℓp-halfspaces.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "observation",
+                "ℓp-halfspaces",
+                "translate",
+                "limit",
+                "section",
+                "intersection",
+                "bisector",
+                "rest",
+                "exclusively",
+                "work"
+            ]
+        }
+    },
+    {
+        "id": "882be6dd-211d-4b3c-874a-863d2d6a4aa4",
+        "title": "",
+        "chunk_text": "In particular, we will first establish some properties of ℓp-halfspaces that we will then use to prove our centerpoint theorem. 3.2 Properties of ℓp-Halfspaces We now collect some useful properties of ℓp-halfspaces. The proofs of all the following properties and additional insights into ℓp-halfspaces can be found in Appendix A. We start with a simple observation for the case when the direction v is a standard unit vector (i.e., v is parallel to one of the coordinate axes).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "properties",
+                "ℓp-halfspaces",
+                "theorem",
+                "establish",
+                "prove",
+                "centerpoint",
+                "Appendix",
+                "collect",
+                "vector",
+                "axes"
+            ]
+        }
+    },
+    {
+        "id": "afa00393-02b7-41f3-b457-8439b7102b58",
+        "title": "",
+        "chunk_text": "It turns out that for those directions, ℓp-halfspaces are no different from the classical ℓ2-halfspaces. 10 Lemma 3.5. For any p ∈[1, ∞) ∪{∞}, any x ∈Rd, and any direction v ∈Sd−1 parallel to one of the coordinate axes, we have Hp x,v = H2 x,v. Lemma 3.5 really only describes a handful of special cases. For most directions v, ℓp-halfspaces are very different to classical ℓ2-halfspaces. In particular, they are in general not convex.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Lemma",
+                "ℓp-halfspaces",
+                "classical",
+                "turns",
+                "directions",
+                "parallel",
+                "axes",
+                "direction",
+                "cases",
+                "convex"
+            ]
+        }
+    },
+    {
+        "id": "e9073091-eefc-41ab-b897-aff8522291df",
+        "title": "",
+        "chunk_text": "Still, we can give a somewhat nice qualitative description of their shape. Lemma 3.6. For any p ∈[1, ∞) ∪{∞}, any limit halfspace Hp x,v is a union of rays originating in x. For p ∈(1, ∞), the boundary of any limit halfspace Hp x,v is a union of lines through x. Note that we will not really use the observation about the boundary of ℓp-halfspaces for p ∈ (1, ∞), but find it an interesting addition to the lemma.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "shape",
+                "give",
+                "nice",
+                "qualitative",
+                "description",
+                "Lemma",
+                "limit",
+                "halfspace",
+                "union",
+                "boundary"
+            ]
+        }
+    },
+    {
+        "id": "fce9cba9-a8a5-489c-81ce-23fd2c4e7c1a",
+        "title": "",
+        "chunk_text": "Unfortunately, it breaks down in some degenerate cases if p ∈{1, ∞} (see, e.g., Figure 2). x x v v Figure 2: Examples of Lemma 3.6. Two ℓ1-halfspaces, both are unions of rays starting at x, but only the left one (with non-degenerate v) has a boundary consisting of a union of lines through x. Lemma 3.6 provides a qualitative description of ℓp-halfspaces, but does not really give us any concrete points that must be contained in or outside of a given ℓp-halfspace.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Figure",
+                "Lemma",
+                "breaks",
+                "degenerate",
+                "cases",
+                "ℓp-halfspaces",
+                "unions",
+                "union",
+                "rays",
+                "starting"
+            ]
+        }
+    },
+    {
+        "id": "7338e68e-63ac-4a76-90cb-487ff38a079d",
+        "title": "",
+        "chunk_text": "For example, it seems intuitive that points lying roughly in the direction of v from x should be contained in Hp x,v, while points lying roughly in the direction of −v from x should never be contained. The following lemma formalizes this (see also Figure 3). Lemma 3.7. Let p ∈[1, ∞) ∪{∞} and Hp x,v be arbitrary. All z ∈Hp x,v satisfy ∡(−→ xz, v) ≤π −√ 1/d. Similarly, all z ∈Rd with ∡(−→ xz, v) ≤√ 1/d must be contained in Hp x,v.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "lying",
+                "roughly",
+                "direction",
+                "points",
+                "contained",
+                "Figure",
+                "intuitive",
+                "lemma",
+                "Similarly",
+                "formalizes"
+            ]
+        }
+    },
+    {
+        "id": "5c0ae354-68b5-42a2-a3df-3b5c07fe5095",
+        "title": "",
+        "chunk_text": "With Lemma 3.7, it now also seems clear that any ℓp-halfspace Hp x,−x with x far away from the origin should contain every small compact set C around the origin. Corollary 3.8 makes this precise for C = [0, 1]d. Corollary 3.8. For arbitrary p ∈[1, ∞) ∪{∞} and x ∈Rd with ∥x∥2 > 2d, we have [0, 1]d ⊆Hp x,−x. Finally, we will need some results on the interaction of ℓp-halfspaces with mass distributions, defined as follows. Definition 3.9 (Mass Distribution).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Lemma",
+                "origin",
+                "Corollary",
+                "clear",
+                "small",
+                "compact",
+                "set",
+                "mass",
+                "distributions",
+                "makes"
+            ]
+        }
+    },
+    {
+        "id": "9fade0f2-9617-4d8b-a087-92911c95a3c9",
+        "title": "",
+        "chunk_text": "We call a measure µ on Rd a mass distribution if it is absolutely continuous with respect to the Lebesgue measure on Rd and satisfies µ(Rd) < ∞. Note that absolute continuity of µ says that all measurable sets A with Lebesgue measure 0 must also satisfy µ(A) = 0. By the Radon–Nikodym theorem, any such mass distribution must have 11 x v Hp x,v Figure 3: Sketch of Lemma 3.7. No point in the red cone is contained in the ℓp-halfspace Hp x,v, but all points in the green cone are.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Lebesgue",
+                "measure",
+                "mass",
+                "distribution",
+                "call",
+                "absolutely",
+                "continuous",
+                "respect",
+                "satisfies",
+                "Radon"
+            ]
+        }
+    },
+    {
+        "id": "e0ff9747-edfa-425d-ac21-1b81854d013e",
+        "title": "",
+        "chunk_text": "x Hp x,−x 0 v Figure 4: Sketch of Corollary 3.8. The cube [0, 1]d is contained in all Hp x,−x for ||x||2 large enough. a density, and so one can think of mass distributions as probability distributions with a density (by assuming µ(Rd) = 1, without loss of generality). Concretely, we will adopt this point of view in the proofs of Lemma 3.10 and Lemma 3.11 (see Appendix A.2). We can now study how µ(Hp x,v) behaves with respect to its arguments x and v.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Figure",
+                "Sketch",
+                "Corollary",
+                "Lemma",
+                "density",
+                "distributions",
+                "Appendix",
+                "cube",
+                "large",
+                "contained"
+            ]
+        }
+    },
+    {
+        "id": "ef00f6fe-e3c9-4c4d-a25a-66a60dbe322f",
+        "title": "",
+        "chunk_text": "For example, the next lemma says that the mass µ(Hp x,v) of an ℓp-halfspace is continuous under translation of the defining point x. Lemma 3.10. The function f (x) := µ(Hp x,v) is continuous in x ∈Rd for all mass distributions µ, all v ∈Sd−1, and all p ∈[1, ∞) ∪{∞}. For p ∈(1, ∞), one could also show continuity with respect to v ∈Sd−1 rather than x. Unfor- tunately, this breaks down for p ∈{1, ∞} again in some degenerate cases.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "lemma",
+                "continuous",
+                "ℓp-halfspace",
+                "translation",
+                "defining",
+                "point",
+                "mass",
+                "Unfor",
+                "tunately",
+                "function"
+            ]
+        }
+    },
+    {
+        "id": "abfe7f94-2978-4802-babf-7358db37a397",
+        "title": "",
+        "chunk_text": "However, it turns out that a weaker property will suffice for our needs. Concretely, for fixed x ∈Rd and some threshold t > 0, consider the set of directions Vx := {v ∈Sd−1 | µ(Hp x,v) < t} corresponding to halfspaces Hp x,v with strictly less than t mass. The following lemma says that Vx is an open subset of Sd−1. Lemma 3.11. The set Vx = {v ∈Sd−1 | µ(Hp x,v) < t} is an open subset of Sd−1 for all mass distributions µ, all t > 0, all p ∈[1, ∞) ∪{∞}, and all x ∈Rd.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "turns",
+                "weaker",
+                "property",
+                "suffice",
+                "open",
+                "subset",
+                "set",
+                "mass",
+                "lemma",
+                "Concretely"
+            ]
+        }
+    },
+    {
+        "id": "7c050c9b-f206-469d-a8f8-a73b6cdd81db",
+        "title": "",
+        "chunk_text": "12 3.3 ℓp-Centerpoints of Mass Distributions Using our notion of limit halfspaces, we can state the classical (Euclidean) centerpoint theorem for mass distributions as follows. Theorem 3.12 (Euclidean Centerpoint Theorem for Mass Distributions [31]). Let µ be a mass dis- tribution on Rd with bounded support. There exists c ∈Rd such that µ(H2 c,v) ≥ 1 d+1µ(Rd) for all v ∈Sd−1. We call such a point c an ℓ2-centerpoint of µ.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Distributions",
+                "Mass",
+                "theorem",
+                "Euclidean",
+                "centerpoint",
+                "ℓp-Centerpoints",
+                "halfspaces",
+                "classical",
+                "notion",
+                "limit"
+            ]
+        }
+    },
+    {
+        "id": "0dde7eda-0af7-4afc-869d-14143275029a",
+        "title": "",
+        "chunk_text": "In this section, we will prove existence of an ℓp- centerpoint of µ for all p ∈[1, ∞) ∪{∞}, as stated in the following theorem. Theorem 3.13 (ℓp-Centerpoint Theorem for Mass Distributions). Let µ be a mass distribution on Rd with bounded support, and let p ∈[1, ∞) ∪{∞} be arbitrary. There exists c ∈Rd such that µ(Hp c,v) ≥ 1 d+1µ(Rd) for all v ∈Sd−1.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "theorem",
+                "section",
+                "centerpoint",
+                "Mass",
+                "prove",
+                "existence",
+                "stated",
+                "Distributions",
+                "ℓp-Centerpoint",
+                "support"
+            ]
+        }
+    },
+    {
+        "id": "cea078e2-2687-404f-bd80-bee51b8c5f9b",
+        "title": "",
+        "chunk_text": "A classical and simple proof of Theorem 3.12 uses Helly’s theorem [18] to show that all ℓ2- halfspaces containing strictly more than a d d+1-fraction of µ(Rd) must have a non-empty intersec- tion. Choosing c in this intersection guarantees the required property. However, this proof breaks down if we consider ℓp-halfspaces: they are in general non-convex and thus Helly’s theorem is no longer applicable. Instead, we prove Theorem 3.13 with Brouwer’s fixpoint theorem.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Theorem",
+                "Helly",
+                "tion",
+                "halfspaces",
+                "intersec",
+                "classical",
+                "simple",
+                "show",
+                "strictly",
+                "non-empty"
+            ]
+        }
+    },
+    {
+        "id": "d33ce17f-f7b5-4070-ae92-ec8e6db7683a",
+        "title": "",
+        "chunk_text": "The existence of a proof of Theorem 3.12 via Brouwer’s fixpoint theorem seems to be folklore1, but we were unable to find a reference containing the full proof. We briefly recall Brouwer’s fixpoint theorem. Theorem 3.14 (Brouwer’s fixpoint theorem [3]). Let C ⊆Rd be a non-empty compact convex set, and let f : C →C be a continuous function. Then f has a fixpoint. We will now use Brouwer’s fixpoint theorem to prove Theorem 3.13.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Brouwer",
+                "Theorem",
+                "fixpoint",
+                "proof",
+                "existence",
+                "unable",
+                "find",
+                "reference",
+                "full",
+                "briefly"
+            ]
+        }
+    },
+    {
+        "id": "4ee6c8e7-eef8-429e-b521-4474765ac02a",
+        "title": "",
+        "chunk_text": "For this, we first define a function F : Rd →Rd such that any fixpoint of F must be an ℓp-centerpoint of µ. Concretely, the intuition behind this function is that any point x is “pushed” in all directions v for which Hp x,−v does not contain a sufficient fraction of mass simultaneously. We achieve this by defining Fi(x) for all i ∈[d] using an integral over all directions, i.e., Fi(x) := xi + Z Sd−1 vi max \u0012 1 d + 1µ(Rd) −µ(Hp x,−v), 0 \u0013 dv.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "function",
+                "define",
+                "fixpoint",
+                "ℓp-centerpoint",
+                "directions",
+                "Concretely",
+                "pushed",
+                "simultaneously",
+                "intuition",
+                "point"
+            ]
+        }
+    },
+    {
+        "id": "34c99a9f-1ae2-4f95-bcbc-0a473d2e542d",
+        "title": "",
+        "chunk_text": "Since we eventually want to apply Brouwer’s fixpoint theorem to F, let us check that F is contin- uous. Lemma 3.15. Let p ∈[1, ∞) ∪{∞} be arbitrary. Let µ be a mass distribution on Rd with bounded support. Then the function F : Rd →Rd defined above is continuous. Proof. Fix x ∈Rd and let (xn)n∈N be an arbitrary sequence converging to x. By Lemma 3.10, the functions gn(v) := vi max \u0012 1 d + 1µ(Rd) −µ(Hp xn,−v), 0 \u0013 converge pointwise to g(v) = vi max \u00001 d+1µ(Rd) −µ(Hp x,−v), 0 \u0001 for all i ∈[d].",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Brouwer",
+                "uous",
+                "contin",
+                "Lemma",
+                "eventually",
+                "apply",
+                "fixpoint",
+                "theorem",
+                "check",
+                "max"
+            ]
+        }
+    },
+    {
+        "id": "991122fa-ce97-4a62-94dc-cef4efc34ee9",
+        "title": "",
+        "chunk_text": "Since they are also globally bounded, we can apply the dominated convergence theorem to exchange limit and integral, yielding continuity of F. 1Such a proof is vaguely outlined in [38]. 13 We next turn our attention to the fixpoints of F. Concretely, we wish to show that any fixpoint x of F must be an ℓp-centerpoint of µ. To argue this, we analyze the set Vx := {v ∈Sd−1 | max \u0012 1 d + 1µ(Rd) −µ(Hp x,−v), 0 \u0013 > 0} of directions which contribute towards the integral.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "bounded",
+                "yielding",
+                "globally",
+                "apply",
+                "dominated",
+                "convergence",
+                "theorem",
+                "exchange",
+                "limit",
+                "continuity"
+            ]
+        }
+    },
+    {
+        "id": "4429041d-07ca-4b73-be6f-b2d91d963bff",
+        "title": "",
+        "chunk_text": "We will show that it is impossible for conv(Vx) to contain 0 (for any x ∈Rd). Later, we will then use this to argue that the inte- gral in the definition of F cannot be 0 without Vx being empty. This in turn allows us to conclude that fixpoints of F are ℓp-centerpoints of µ. To prove that 0 ̸∈conv(Vx), we need the following lemma. Lemma 3.16. Assume that 0 ∈Rd is contained in the convex hull of k ≤d + 1 points v1, . . . , vk ∈Sd−1. Let z ∈Rd and p ∈[1, ∞) ∪{∞} be arbitrary.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "conv",
+                "show",
+                "impossible",
+                "lemma",
+                "inte",
+                "gral",
+                "empty",
+                "argue",
+                "definition",
+                "points"
+            ]
+        }
+    },
+    {
+        "id": "b15e42f7-45ac-416a-aabd-198a2ad1f334",
+        "title": "",
+        "chunk_text": "Then there exists j ∈[k] such that z ∈Hp 0,−vj. Proof. Let R1, . . . , Rk be the open rays from 0 in the directions v1, . . . , vk, respectively. Let us now grow an ℓp-ball Bz centered at z, exactly until the ball contains 0. Recall that by Observation 3.3, we have z ∈Hp 0,−vj if and only if B◦ z does not intersect Rj. Now observe that if we had B◦ z ∩Rj ̸= ∅ for all j ∈[k], then this would imply 0 ∈B◦ z by convexity of B◦ z.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "exists",
+                "Proof",
+                "Observation",
+                "directions",
+                "open",
+                "rays",
+                "Recall",
+                "imply",
+                "grow",
+                "ℓp-ball"
+            ]
+        }
+    },
+    {
+        "id": "cce286dd-9d1b-46fb-b273-eb98cff8535f",
+        "title": "",
+        "chunk_text": "But then, Bz cannot have been the minimum-radius ball centered at z containing 0, a contradiction. Let us now see how this lemma implies 0 ̸∈conv(Vx) for all x ∈Rd. Corollary 3.17. Let p ∈[1, ∞) ∪{∞} be arbitrary and let µ be a mass distribution on Rd. For any point x ∈Rd, the set Vx = {v ∈Sd−1 | max \u00001 d+1µ(Rd) −µ(Hp x,−v), 0 \u0001 > 0} does not contain 0 in its convex hull. Proof. If 0 would lie in conv(Vx), this would mean that Vx is non-empty.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "contradiction",
+                "minimum-radius",
+                "ball",
+                "centered",
+                "conv",
+                "implies",
+                "Corollary",
+                "lemma",
+                "max",
+                "Proof"
+            ]
+        }
+    },
+    {
+        "id": "9903335a-d696-4e70-bea4-5c9c21e5f375",
+        "title": "",
+        "chunk_text": "In particular, using Carath´eodory’s theorem, we would get a set of k ≤d + 1 vectors v1, . . . , vk ∈Vx with 0 ∈ conv(v1, . . . , vk). Since these vectors are in Vx, we get on the one hand that k ∑ i=1 µ(Hp x,−vi) < k d + 1µ(Rd) ≤µ(Rd). On the other hand, Lemma 3.16 guarantees that every z ∈Rd is contained in at least one of the halfspaces Hp x,−v1, . . . , Hp x,−vk. Thus, we can derive k ∑ i=1 µ(Hp x,−vi) ≥µ k[ i=1 Hp x,−vi ! = µ(Rd), a contradiction.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Carath´eodory’s",
+                "theorem",
+                "set",
+                "vectors",
+                "Lemma",
+                "hand",
+                "conv",
+                "guarantees",
+                "contradiction",
+                "contained"
+            ]
+        }
+    },
+    {
+        "id": "b1f1f95f-2712-4c5c-bb2b-0b932976b616",
+        "title": "",
+        "chunk_text": "We are now ready to put all of this together to get a proof of Theorem 3.13. The main technical thing that we still have to do, is to restrict F to a compact convex set (so that we can apply Brouwer’s fixpoint theorem). Proof of Theorem 3.13. Without loss of generality, assume that the bounded support of µ is con- tained in the box [0, 1]d. To apply Brouwer’s fixpoint theorem, we need a function going from a compact convex set C to itself, rather than from Rd to Rd like our function F.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Theorem",
+                "Brouwer",
+                "proof",
+                "ready",
+                "put",
+                "compact",
+                "convex",
+                "fixpoint",
+                "set",
+                "apply"
+            ]
+        }
+    },
+    {
+        "id": "24a58bd3-ca3c-4d12-be4e-bbd9d9bd8f58",
+        "title": "",
+        "chunk_text": "We create such a 14 function FC by defining a large compact convex set C ⊇[0, 1]d, and then restricting the function F to C using projection. More formally, we use the restricted function FC : C →C with FC(x) defined as the projection of F(x) onto C in the direction of the origin (for any x ∈C). As our set C, we choose the Euclidean ball of radius 1 + 2d around the origin, since this allows us to apply Corollary 3.8 for all x on the boundary of C.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "function",
+                "projection",
+                "origin",
+                "set",
+                "create",
+                "defining",
+                "large",
+                "compact",
+                "convex",
+                "restricting"
+            ]
+        }
+    },
+    {
+        "id": "5eb062c9-69ef-40aa-ac3b-806d0e075773",
+        "title": "",
+        "chunk_text": "By continuity of F, it follows that FC is also continuous. Thus, we can use Brouwer’s fixpoint theorem, which tells us that there exists c ∈C with FC(c) = c. We now prove that c is a centerpoint by distinguishing the two cases F(c) = FC(c) and F(c) ̸= FC(c). In the first case, we must have that Z Sd−1 vi max \u0012 1 d + 1µ(Rd) −µ(Hp c,−v), 0 \u0013 dv = 0 for all i ∈[d]. Now consider the set of directions Vc = {v ∈Sd−1 | max \u00001 d+1µ(Rd) −µ(Hp c,−v), 0 \u0001 > 0}.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "continuous",
+                "continuity",
+                "max",
+                "Brouwer",
+                "theorem",
+                "fixpoint",
+                "exists",
+                "cases",
+                "case",
+                "prove"
+            ]
+        }
+    },
+    {
+        "id": "941fcd0b-eda3-4bb2-838d-89fc8ff4f217",
+        "title": "",
+        "chunk_text": "By Lemma 3.11, this is an open subset of Sd−1. Moreover, 0 is not contained in conv(Vc) by Corollary 3.17. However, this implies that Vc must be empty: if Vc were non-empty, we could find a separating hyperplane between the two convex sets {0} and conv(Vc). But then, the definition of Vc and its openness contradicts that the above integral is zero (there would be a non-zero net push in the direction of the normal vector defining the separating hyperplane).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Lemma",
+                "conv",
+                "open",
+                "subset",
+                "Corollary",
+                "separating",
+                "hyperplane",
+                "contained",
+                "empty",
+                "non-empty"
+            ]
+        }
+    },
+    {
+        "id": "e61532b8-2a20-44e0-b5d4-34debbe91358",
+        "title": "",
+        "chunk_text": "Therefore, since Vc must be empty, the expression max( 1 d+1µ(Rd) −µ(Hp c,−v), 0) must be 0 for all v ∈Sd−1, and c is a centerpoint. In the second case, F(c) ̸= FC(c), we know that FC “used” the projection to map c. We thus know that c = FC(c) lies on the boundary of C. Furthermore, since the projection onto C is towards the origin, we get F(c) = (1 + ε)c for some ε > 0. Concretely, we must have Z Sd−1 vi max \u0012 1 d + 1µ(Rd) −µ(Hp c,−v), 0 \u0013 dv = εci for all i ∈[d].",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "empty",
+                "centerpoint",
+                "expression",
+                "max",
+                "projection",
+                "case",
+                "map",
+                "lies",
+                "boundary",
+                "Concretely"
+            ]
+        }
+    },
+    {
+        "id": "0584a2d0-7291-461d-b55d-c4f6743a6d57",
+        "title": "",
+        "chunk_text": "Considering the set Vc again, we can see that there hence must exist some δ > 0 with δc ∈conv(Vc): otherwise, we could find a hyperplane separating conv(Vc) from the line segment [0, c ∥c∥2 ], yielding a contradiction. But since C was chosen large enough, we also get − c ||c||2 ∈Vc by Corollary 3.8. Thus, we see that 0 ∈conv(Vc). This contradicts Corollary 3.17, and hence this case cannot occur.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "conv",
+                "Corollary",
+                "segment",
+                "yielding",
+                "contradiction",
+                "set",
+                "exist",
+                "find",
+                "hyperplane",
+                "separating"
+            ]
+        }
+    },
+    {
+        "id": "3d543ee6-bedb-4b4c-98da-0f03bb20301a",
+        "title": "",
+        "chunk_text": "We conclude that every fixpoint of FC is a fixpoint of F, and thus every fixpoint of FC must be a centerpoint. Theorem 3.12 can be adapted to point sets instead of mass distributions (see Theorem 3.18 below). The proof is not difficult but a bit technical, which is why we defer it to Appendix B. The main idea is to put a ball of small radius around each point and to apply Theorem 3.13. Letting the radius go to zero, we obtain a sequence of centerpoints.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "fixpoint",
+                "Theorem",
+                "conclude",
+                "point",
+                "radius",
+                "Appendix",
+                "centerpoint",
+                "distributions",
+                "adapted",
+                "sets"
+            ]
+        }
+    },
+    {
+        "id": "e1610c4a-8772-4775-aa6c-a42359f74f3a",
+        "title": "",
+        "chunk_text": "A subsequence of this sequence must converge to a discrete ℓp-centerpoint of the point set. Theorem 3.18 (ℓp-Centerpoint Theorem for Finite Point Sets). Let p ∈[1, ∞) ∪{∞} be arbitrary, and let P ⊆Rd be a finite set of points. There exists a point c such that |Hp c,v ∩P| ≥ |P| d+1 for all v ∈Sd−1. Finally, we observe that the centerpoint in both the discrete and continuous setting must lie inside any axis-aligned bounding box of the point set P or the support of µ, respectively. 15 Lemma 3.19.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "point",
+                "set",
+                "Theorem",
+                "Finite",
+                "ℓp-centerpoint",
+                "subsequence",
+                "sequence",
+                "converge",
+                "discrete",
+                "Lemma"
+            ]
+        }
+    },
+    {
+        "id": "933cb7c7-4922-464b-8a10-1b093cf6a319",
+        "title": "",
+        "chunk_text": "Let B be an axis-aligned bounding box that contains the support of µ (in the case of Theo- rem 3.13) or all of P (in the case of Theorem 3.18), respectively. Any ℓp-centerpoint guaranteed by either theorem must lie inside B. Proof. Towards a contradiction, let c be an ℓp-centerpoint of µ (or P, respectively) not contained in B. Assume without loss of generality that every point x in the support of µ (or in P) satisfies x1 < c1.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "case",
+                "Theo",
+                "Theorem",
+                "rem",
+                "axis-aligned",
+                "bounding",
+                "box",
+                "support",
+                "ℓp-centerpoint",
+                "Proof"
+            ]
+        }
+    },
+    {
+        "id": "95e0cdd0-a132-45dd-b3e2-896ba9c4bcfe",
+        "title": "",
+        "chunk_text": "Then, by Lemma 3.5, we have that µ(Hp c,e1) = 0 (or Hp c,e1 ∩P = 0), where e1 is the first standard unit vector. This contradicts the centerpoint property of c. 3.4 Tightness of Centerpoint Theorems We want to remark that the fraction 1 d+1 in Theorem 3.13 and Theorem 3.18 is tight for all p ∈ [1, ∞) ∪{∞}. To prove this, we use a construction that has also been used to prove tightness of the classical Euclidean centerpoint theorem.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Lemma",
+                "Theorem",
+                "centerpoint",
+                "vector",
+                "Tightness",
+                "standard",
+                "unit",
+                "prove",
+                "Euclidean",
+                "Theorems"
+            ]
+        }
+    },
+    {
+        "id": "c175f42e-c8ae-47a2-8edb-e6fd89161b59",
+        "title": "",
+        "chunk_text": "We will restrict ourselves to the discrete setting of Theorem 3.18, but tightness of Theorem 3.13 follows as well because any better bound for mass distributions could be used to get a better bound for point sets by following the proof of Theorem 3.18 (see Appendix B). Lemma 3.20. For every d ∈N, there exists a point set Pd ⊆[0, 1]d, such that for every p ∈[1, ∞) ∪{∞}, every point c ∈Rd has a direction v ∈Sd−1 with |Hp c,v ∩Pd| ≤|Pd| d+1. Proof. Let Pd = {0, e1, . . .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Theorem",
+                "bound",
+                "Appendix",
+                "point",
+                "restrict",
+                "discrete",
+                "setting",
+                "tightness",
+                "mass",
+                "distributions"
+            ]
+        }
+    },
+    {
+        "id": "e5711744-5339-4ca9-a542-7740c24fc40e",
+        "title": "",
+        "chunk_text": ", ed} ⊆[0, 1]d, where ei is the i-th standard unit vector. Let c ̸= 0 be arbitrary. Then c cannot lie on all axis-aligned facets of the convex hull of Pd simultaneously. Thus, by Lemma 3.5 there must exist a direction v ∈{−e1, . . . , −ed, e1, . . . , ed} such that Hp c,v does not contain any vertices of a facet that c does not lie on, and therefore |Hp c,v ∩Pd| ≤1 = |Pd| d+1. If we instead have c = 0, then Hp c,v ∩Pd = {0} for v = (−√ 1/d, . . . , −√ 1/d) ∈Sd−1 by direct calculation.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "vector",
+                "i-th",
+                "standard",
+                "unit",
+                "lie",
+                "Lemma",
+                "arbitrary",
+                "simultaneously",
+                "axis-aligned",
+                "convex"
+            ]
+        }
+    },
+    {
+        "id": "a0ce4cd3-22ea-4857-823a-47a2c0bd0174",
+        "title": "",
+        "chunk_text": "4 Finding Fixpoints of ℓp-Contraction Maps In this section, we describe our algorithms for the continuous problem ℓp-ContractionFixpoint and explain how, in the ℓ1-case, the algorithm can be adapted to the discretized setting ℓ1- GridContractionFixpoint. Note that in the ℓ∞-case, a suitable rounding strategy has already been provided by Chen, Li, and Yannakakis [5].",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Finding",
+                "Fixpoints",
+                "Maps",
+                "GridContractionFixpoint",
+                "section",
+                "setting",
+                "ℓp-Contraction",
+                "describe",
+                "continuous",
+                "problem"
+            ]
+        }
+    },
+    {
+        "id": "804d3756-203d-4422-a3dc-9fe6694ade93",
+        "title": "",
+        "chunk_text": "We will not repeat that, but note that their round- ing can also be used in combination with our methods (solving ℓ∞-GridContractionFixpoint). 4.1 Solving ℓp-ContractionFixpoint Our algorithm works as follows: we maintain a search space M that is guaranteed to always contain the fixpoint x⋆. At the beginning of the algorithm, we simply set M = [0, 1]d. We then iteratively query the centerpoint c of our remaining search space M.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "solving",
+                "GridContractionFixpoint",
+                "round",
+                "ing",
+                "methods",
+                "space",
+                "repeat",
+                "note",
+                "combination",
+                "search"
+            ]
+        }
+    },
+    {
+        "id": "9e6d1a6b-fa52-4348-9686-f01f5f43c7fa",
+        "title": "",
+        "chunk_text": "Concretely, we use the measure vol (which we simply call volume) defined by the Lebesgue measure (such that vol([0, 1]d) = 1), with its support restricted to M. Whenever we query the centerpoint c of M, we get to discard at least a 1 d+1-fraction of the search space, because x⋆must lie closer to f (c) than to c itself. With each query, the volume of M is thus multiplied with a factor of at most d d+1. We terminate once we happen to query an ε-approximate fixpoint.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "vol",
+                "Lebesgue",
+                "measure",
+                "Concretely",
+                "defined",
+                "query",
+                "simply",
+                "call",
+                "support",
+                "restricted"
+            ]
+        }
+    },
+    {
+        "id": "759b845a-c3ee-4deb-8a42-2dab4e878fa1",
+        "title": "",
+        "chunk_text": "It remains to prove that this must happen before the search space M gets too small. To that end, we show in the next lemma 16 that, whenever we query a point that is not an ε-approximate fixpoint, a ball of some radius rε,λ around x⋆cannot be discarded, and thus has to remain in the search space M. Note that while the centerpoint theorems use limit ℓp-halfspaces, we will now use bisector half- spaces in the analysis of our algorithm. Observation 3.4 allows us to translate between the two.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "search",
+                "space",
+                "small",
+                "prove",
+                "happen",
+                "spaces",
+                "remains",
+                "remain",
+                "end",
+                "lemma"
+            ]
+        }
+    },
+    {
+        "id": "c9dfdfa9-35d3-4a52-ad49-3bdd015de925",
+        "title": "",
+        "chunk_text": "Lemma 4.1. Let p ∈[1, ∞) ∪{∞} be arbitrary. Let x⋆be the unique fixpoint of the λ-contracting map f : [0, 1]d →[0, 1]d. Let x ∈[0, 1]d be arbitrary. If x is not an ε-approximate fixpoint of f, then Bp(x⋆, rε,λ) ∩Hp x,f (x) = ∅ for rε,λ = ε−ελ 2+2λ. Proof. Let z ∈Bp(x⋆, rε,λ) be arbitrary. We need to show ||z −x||p > ||z −f (x)||p. Let us first collect some facts. Concretely, we know that x is not an ε-approximate fixpoint, z ∈Bp(x⋆, rε,λ), and that f is λ-contracting.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "arbitrary",
+                "rε,λ",
+                "fixpoint",
+                "Lemma",
+                "ε-approximate",
+                "λ-contracting",
+                "unique",
+                "map",
+                "Proof",
+                "Concretely"
+            ]
+        }
+    },
+    {
+        "id": "d3ef284c-e605-4a60-b35c-0be7b858f93d",
+        "title": "",
+        "chunk_text": "This gives us the following inequalities: || f (x) −x||p > ε (4.1) ||z −x⋆||p ≤rε,λ (4.2) ||x⋆−f (x)||p ≤λ||x⋆−x||p. (4.3) Combining these using the triangle inequality, we also get ||z −x||p ≥||x⋆−x||p −rε,λ (4.4) ||z −f (x)||p ≤||x⋆−f (x)||p + rε,λ. (4.5) Before putting everything together, we also want to lower bound ||z −x||p. We first lower bound ||x⋆−x||p using the calculation ε (4.1) < ||x −f (x)||p ≤||x⋆−x||p + ||x⋆−f (x)||p (4.3) ≤(1 + λ)||x⋆−x||p.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "rε,λ",
+                "inequalities",
+                "bound",
+                "lower",
+                "Combining",
+                "inequality",
+                "triangle",
+                "putting",
+                "calculation"
+            ]
+        }
+    },
+    {
+        "id": "a4f06fb9-81d6-4a0b-bb66-f08015c9a602",
+        "title": "",
+        "chunk_text": "(4.6) Combining Equations (4.4) and (4.6), we get ||z −x||p > ε 1 + λ −rε,λ. (4.7) We can now put everything together to obtain ||z −f (x)||p (4.5) ≤||x⋆−f (x)||p + rε,λ (4.3) ≤λ||x⋆−x||p + rε,λ (4.4) ≤λ||z −x||p + (1 + λ)rε,λ = ||z −x||p −(1 −λ)||z −x||p + (1 + λ)rε,λ (4.7) < ||z −x||p −(1 −λ) \u0012 ε 1 + λ −rε,λ \u0013 + (1 + λ)rε,λ = ||z −x||p + 2rε,λ −ε −ελ 1 + λ = ||z −x||p, and we conclude ||z −x||p > ||z −f (x)||p and thus z /∈Hp x,f (x). 17 We now have all the ingredients to prove Theorem 4.2.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "rε,λ",
+                "Combining",
+                "Equations",
+                "Theorem",
+                "obtain",
+                "conclude",
+                "put",
+                "ingredients",
+                "prove"
+            ]
+        }
+    },
+    {
+        "id": "c16d9651-cb51-49f5-bd3c-65e233b9ea93",
+        "title": "",
+        "chunk_text": "Theorem 4.2. For every p ∈[1, ∞) ∪{∞}, an ε-approximate fixpoint of a λ-contracting (in ℓp-norm) function f : [0, 1]d →[0, 1]d can be found using O(d2(log 1 ε + log 1 1−λ)) queries. Proof. We begin with the search space M = [0, 1]d with vol(M) = 1. We then repeatedly query the centerpoint c of M (or rather the measure induced by M), guaranteed to exist by Theorem 3.13. We terminate if c is an ε-approximate fixpoint. Otherwise, we remove the bisector halfspace Hc,f (c) from M.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "log",
+                "Theorem",
+                "ε-approximate",
+                "fixpoint",
+                "queries",
+                "λ-contracting",
+                "ℓp-norm",
+                "function",
+                "Hc,f",
+                "Proof"
+            ]
+        }
+    },
+    {
+        "id": "cddc9965-bb9a-409d-a3e0-98a350fcdaaa",
+        "title": "",
+        "chunk_text": "For each non-terminating query, we get the guarantee that the volume of M decreases to at most a d d+1-fraction of its previous volume, where we use Observation 3.4 to translate the centerpoint guarantee of Theorem 3.13 from limit halfspaces to bisector halfspaces. Now recall that Lemma 4.1 guarantees that Bp(x∗, rε,λ) stays in M as long as we do not query an ε-approximate fixpoint. Thus, we know that we must terminate before having reached vol(M) < vol(Bp(0, rε,λ)).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Observation",
+                "Theorem",
+                "volume",
+                "halfspaces",
+                "rε,λ",
+                "guarantee",
+                "query",
+                "non-terminating",
+                "decreases",
+                "previous"
+            ]
+        }
+    },
+    {
+        "id": "f8062da8-3a59-4029-9e52-3887c53b1c43",
+        "title": "",
+        "chunk_text": "Therefore, to compute our final query bound, we first note that it is well-known that the volume of the ℓp-norm ball Bp(0, rε,λ) can be bounded from below by vol(Bp 0,rε,λ) ≥2d d! rd ε,λ = 2d d! ( ε −ελ 2 + 2λ)d. Finally, we can upper bound the number k of queries by k ≤log d d+1 2d d! \u0012 ε −ελ 2 + 2λ \u0013d! = log \u0010 2d d! ( ε−ελ 2+2λ)d\u0011 log \u0010 d d+1 \u0011 = log \u0010 d! 2d ( 2 ε 1+λ 1−λ)d\u0011 log \u0010 d+1 d \u0011 ≤log d!",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "log",
+                "rε,λ",
+                "vol",
+                "compute",
+                "final",
+                "query",
+                "note",
+                "well-known",
+                "volume",
+                "ℓp-norm"
+            ]
+        }
+    },
+    {
+        "id": "83a585ce-070b-4ae6-890b-a58d5c20cf6c",
+        "title": "",
+        "chunk_text": "−d + d \u0000log 4 + log( 1 ε ) + log( 1 1−λ) \u0001 log( d+1 d ) ≤O \u0000d \u0000log d + log( 1 ε ) + log( 1 1−λ) \u0001\u0001 log(1 + 1 d) . For small δ > 0, we have log(1 + δ) ≈δ, and thus we get k ≤O(d2(log d + log( 1 ε ) + log( 1 1−λ)). To get rid of the log d term, observe that if max( 1 ε , 1 1−λ) < d (i.e., whenever this term matters), a simple iteration algorithm can find an ε-approximate fixpoint after at most O(d log d) queries.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "log",
+                "small",
+                "term",
+                "queries",
+                "observe",
+                "max",
+                "matters",
+                "rid",
+                "simple",
+                "iteration"
+            ]
+        }
+    },
+    {
+        "id": "3cbcfaa3-1d93-408c-a408-297e29e96236",
+        "title": "",
+        "chunk_text": "In particular, let x(0) ∈[0, 1]d be arbitrary and consider the recursively defined iterates x(i) := f (x(i−1)) for i ≥1. Since f is contracting, we have ∥x(i) −f (x(i))∥p ≤λ∥x(i−1) −f (x(i−1))∥p for all i ≥1. Together with the observation ∥x(0) −f (x(0))∥p ≤d, we get ∥x(i) −f (x(i))∥p ≤λid for all i. If i is large enough such that λid < ε, we must have found an ε-approximate fixpoint. This is equivalent to i > log d/ε log 1 λ .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "arbitrary",
+                "recursively",
+                "defined",
+                "iterates",
+                "λid",
+                "log",
+                "contracting",
+                "observation",
+                "fixpoint",
+                "large"
+            ]
+        }
+    },
+    {
+        "id": "9d7cc1b7-8518-4a59-89c9-f10c487ef83a",
+        "title": "",
+        "chunk_text": "By using max( 1 ε , 1 1−λ) < d, we get log( 1 λ) = log(1 + 1 −λ λ ) ≥log(1 + 1 dλ) ≥log(1 + 1 d) and hence we obtain that O(d log d) iterations suffice. 4.2 Rounding to the Grid in the ℓ1-Case In this section, we adapt the algorithm from the previous section to also work in the discretized setting ℓ1-GridContractionFixpoint, proving the following theorem. 18 Theorem 4.3.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "log",
+                "theorem",
+                "max",
+                "iterations",
+                "suffice",
+                "obtain",
+                "section",
+                "Rounding",
+                "Grid",
+                "setting"
+            ]
+        }
+    },
+    {
+        "id": "55331ef0-94ff-40d1-bb05-c842911146a8",
+        "title": "",
+        "chunk_text": "For every b ≥log2 \u0010 2d ε 1+λ 1−λ \u0011 , an ε-approximate fixpoint of a λ-contracting (in ℓ1-norm) grid map f : Gd b →[0, 1]d can be found using O(d2(log 1 ε + log 1 1−λ)) queries. The main issue that we have to address is that we cannot always query the centerpoint c of the remaining search space, since c is not guaranteed to lie on the grid Gd b. In the ℓ∞-case, Chen, Li, and Yannakakis [5] solved this problem by choosing the measure for the remaining search space appropriately.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "log",
+                "queries",
+                "grid",
+                "λ-contracting",
+                "remaining",
+                "search",
+                "ε-approximate",
+                "fixpoint",
+                "map",
+                "found"
+            ]
+        }
+    },
+    {
+        "id": "19064a7a-0537-4d67-8b7d-94ae15126d48",
+        "title": "",
+        "chunk_text": "Concretely, they design a special measure to determine the size of the remaining search space, and then show that rounding the centerpoint to the grid works for this measure. We do not repeat their argument here, but note that their technique also works if applied together with our (discrete) centerpoint theorem. Instead, we focus on the ℓ1-case. Fortunately, rounding in the ℓ1-case turns out to be simpler than in the ℓ∞-case.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "measure",
+                "Concretely",
+                "centerpoint",
+                "works",
+                "space",
+                "design",
+                "special",
+                "determine",
+                "size",
+                "remaining"
+            ]
+        }
+    },
+    {
+        "id": "4f7aee7b-1e75-4ae9-9f9b-3de69c0d9243",
+        "title": "",
+        "chunk_text": "Indeed, we simply measure the size of the remaining search space as the number of grid points that still remain inside. It turns out that appropriately rounding the centerpoint to the grid does not change its centerpoint properties with respect to this measure of size. More formally, we get the following lemma. Lemma 4.4. Consider an arbitrary subset of points P ⊆Gd b on the grid. There exists a point c ∈Gd b such that |H1 c,v ∩P| ≥ |P| d+1 for all v ∈Sd−1.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "grid",
+                "measure",
+                "size",
+                "inside",
+                "simply",
+                "remaining",
+                "search",
+                "space",
+                "number",
+                "remain"
+            ]
+        }
+    },
+    {
+        "id": "fecd99dd-96e8-497e-8208-b8b2c361f603",
+        "title": "",
+        "chunk_text": "We postpone the proof of Lemma 4.4 and instead first use it to derive Theorem 4.3. Proof of Theorem 4.3. Overall, we use a similar strategy as in the proof of Theorem 4.2, but we use Lemma 4.4 that is derived from our discrete centerpoint theorem. Concretely, let M ⊆Gd b be the subset of grid points that could still be ε-approximate fixpoints (they have not been ruled out yet). Applying Lemma 4.4 to M yields a centerpoint c on the grid Gd b.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Theorem",
+                "Lemma",
+                "proof",
+                "postpone",
+                "derive",
+                "centerpoint",
+                "grid",
+                "Concretely",
+                "fixpoints",
+                "Applying"
+            ]
+        }
+    },
+    {
+        "id": "d70c1ade-d38a-476c-9223-90b3d513b158",
+        "title": "",
+        "chunk_text": "Querying c guarantees that we can exclude at least |M| d+1 points from our current search space in each non-terminating iteration. Now Lemma 4.1 guarantees that as long as we have not queried an ε-approximate fixpoint, no point in B1(x⋆, rε,λ) ∩Gd b has been excluded from the search space yet (where rε,λ = ε−ελ 2+2λ). To guarantee that this intersection is non-empty, it suffices to have 2−b ≤rε,λ d , which translates to our assumption b ≥log2 \u0010 2d ε 1+λ 1−λ \u0011 .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Querying",
+                "iteration",
+                "search",
+                "space",
+                "guarantees",
+                "rε,λ",
+                "Lemma",
+                "exclude",
+                "current",
+                "non-terminating"
+            ]
+        }
+    },
+    {
+        "id": "d0968861-1615-4ca3-93db-f36627a8f610",
+        "title": "",
+        "chunk_text": "In fact, we can assume b = \u0018 log2 \u00122d ε 1 + λ 1 −λ \u0013\u0019 without loss of generality (as we can use a subgrid of this size, if the given grid is finer). For this choice of b, we have |Gd b| = (2b + 1)d ≤4db. With the calculation log d d+1 4−db = log 4−db log d d+1 = db log(1 + 1 d) ≤O(d2b) ≤O \u0012 d2 \u0012 log d + log ε + log 1 1 −λ \u0013\u0013 we therefore conclude that the algorithm must find an ε-approximate fixpoint after at most O(d2(log 1 ε + log 1 1−λ + log d)) queries to grid points.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "log",
+                "fact",
+                "generality",
+                "size",
+                "finer",
+                "grid",
+                "assume",
+                "loss",
+                "subgrid",
+                "choice"
+            ]
+        }
+    },
+    {
+        "id": "7d84c14c-f48c-4d2a-83d5-3016f9099eed",
+        "title": "",
+        "chunk_text": "As in the proof of Theorem 4.2, we can get rid of the log d term in our query bound by observing that if max( 1 ε , 1 1−λ) < d, a simple iteration algorithm (this time with rounding) can find an ε- approximate fixpoint after at most O(d log d) queries. 19 It remains to prove Lemma 4.4. For this, we need some additional theory. In particular, we will proceed to give a characterization of containment in an ℓ1-halfspace based on tools from convex analysis.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Theorem",
+                "log",
+                "queries",
+                "max",
+                "algorithm",
+                "rounding",
+                "approximate",
+                "proof",
+                "rid",
+                "term"
+            ]
+        }
+    },
+    {
+        "id": "80c01cce-6600-46c5-86a3-ed150ae3dcfb",
+        "title": "",
+        "chunk_text": "Once this characterization is established, it will be quite easy to derive Lemma 4.4. Note that more details on this characterization can be found in Appendix A.1. The main tool that we need is the notion of subgradients of a convex function f : Rd →R: a vector u ∈Rd is a subgradient of f at x ∈Rd if and only if f (x′) −f (x) ≥⟨u, (x′ −x)⟩ for all x′ ∈Rd. The set ∂f (x) ⊆Rd of all subgradients of f at x is also called the subdifferential. If f is differentiable at x, then ∂f (x) = {∇f (x)}.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Lemma",
+                "characterization",
+                "established",
+                "easy",
+                "derive",
+                "subgradients",
+                "Appendix",
+                "Note",
+                "details",
+                "found"
+            ]
+        }
+    },
+    {
+        "id": "e8c24e0b-806e-4ecf-ae9e-c27f9c107eb1",
+        "title": "",
+        "chunk_text": "For more details on these concepts and convex analysis in general, we refer to the standard textbook by Rockafellar [34]. Subgradients are useful for us due to the following characterization of containment for ℓp- halfspaces. The proof can be found in Appendix A.1. Lemma 4.5. For any p ∈[1, ∞) ∪{∞}, a point z ∈Rd is contained in an ℓp-halfspace Hp x,v if and only if there exists a subgradient u ∈∂||z −x||p with ⟨u, v⟩≥0. In this section, we are interested in applying Lemma 4.5 in the ℓ1-case.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Rockafellar",
+                "general",
+                "details",
+                "concepts",
+                "convex",
+                "analysis",
+                "refer",
+                "standard",
+                "textbook",
+                "Lemma"
+            ]
+        }
+    },
+    {
+        "id": "83417c69-308a-4a9b-91f8-541452b3e7a4",
+        "title": "",
+        "chunk_text": "Therefore, let us next describe the subgradients of || · ||1. Due to Lemma 3.6 (ℓp-halfspaces are unions of rays), it will suffice to characterize the subgradients at points z with ||z||1 = 1. Observation 4.6. Consider arbitrary z ∈Rd with ||z||1 = 1. A vector u ∈Rd is a subgradient of || · ||1 at z if and only if ui ∈      {1} if zi > 0 {−1} if zi < 0 [−1, 1] if zi = 0 for all i ∈[d]. In particular, we have ⟨u, z⟩= ||u||∞= ||z||1 = 1 for all u ∈∂||z||1.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "subgradients",
+                "describe",
+                "Lemma",
+                "Due",
+                "ℓp-halfspaces",
+                "rays",
+                "unions",
+                "suffice",
+                "characterize",
+                "points"
+            ]
+        }
+    },
+    {
+        "id": "5faed9cc-4022-492c-aeea-e4edd5216f91",
+        "title": "",
+        "chunk_text": "Equipped with Lemma 4.5 and Observation 4.6, we are now ready to prove Lemma 4.4. Proof of Lemma 4.4. Let P ⊆Gd b be an arbitrary subset of the grid points, as given in the lemma. By Theorem 3.18, there exists a discrete ℓ1-centerpoint c of P. Moreover, by Lemma 3.19, c is contained in the convex hull conv(Gd b) = [0, 1]d of the grid. Let c′ ∈Gd b be the grid point closest to c (in ℓ1-distance). In other words, c′ is obtained from c by rounding each coordinate individually as little as possible.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Lemma",
+                "Observation",
+                "grid",
+                "Equipped",
+                "ready",
+                "prove",
+                "Theorem",
+                "Proof",
+                "points",
+                "point"
+            ]
+        }
+    },
+    {
+        "id": "2f4b316b-efde-42ce-8d37-e3954876d2ba",
+        "title": "",
+        "chunk_text": "We claim that c′ is also a discrete ℓ1-centerpoint of P. To prove this, consider the ℓ1-halfspaces H1 c′,v and H1 c,v for an arbitrary direction v ∈Sd−1. We prove that every point z ∈P ∩H1 c,v must also be contained in H1 c′,v. Indeed, by Lemma 4.5, there exists a subgradient u ∈∂||z −c||1 such that ⟨u, v⟩≥0. We want to prove u ∈∂||z −c′||1. Observe that our choice of c′ guarantees zi −c′ i > 0 =⇒zi −ci > 0 and zi −c′ i < 0 =⇒zi −ci < 0 for all i ∈[d].",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "prove",
+                "discrete",
+                "claim",
+                "Lemma",
+                "arbitrary",
+                "direction",
+                "point",
+                "contained",
+                "Observe",
+                "exists"
+            ]
+        }
+    },
+    {
+        "id": "d0928fb5-40c0-488d-947a-7918d0709f1b",
+        "title": "",
+        "chunk_text": "With Observation 4.6, we therefore have u ∈∂||z −c′||1 and conclude by Lemma 4.5 that z is contained in H1 c′,v. 20 4.3 Total Search Version The class TFNPdt (standing for Total Function NP Search Problems, decision-tree view), as defined by G¨o¨os et al. [15], captures total search problems (i.e., problems where every possible instance has a solution) that are specified by a long hidden bitstring accessible only through a bit querying oracle.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Observation",
+                "Lemma",
+                "Search",
+                "Total",
+                "Problems",
+                "conclude",
+                "contained",
+                "Version",
+                "Function",
+                "TFNPdt"
+            ]
+        }
+    },
+    {
+        "id": "899ad4e7-e3e0-4e38-9ed1-b33baa560178",
+        "title": "",
+        "chunk_text": "To lie in TFNPdt, solutions must be efficiently verifiable (i.e., by decision trees of depth poly-logarithmic in the length of the bitstring). To lie in FPdt, the subclass of efficiently solvable problems in TFNPdt, one must be able to efficiently find a solution as well, i.e., there has to be a decision tree of poly-logarithmic depth that always outputs a correct solution.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "TFNPdt",
+                "lie",
+                "efficiently",
+                "decision",
+                "verifiable",
+                "bitstring",
+                "depth",
+                "poly-logarithmic",
+                "length",
+                "solution"
+            ]
+        }
+    },
+    {
+        "id": "9e8977d3-bf7d-4ad5-9a84-b52218e203a5",
+        "title": "",
+        "chunk_text": "To fit a promise search problem into TFNPdt, we must introduce solution types, usually called violations, that are guaranteed to exist when the promise is violated. Chen, Li, and Yannakakis [5] showed how the ℓ∞-GridContractionFixpoint problem can be made total: under the ℓ∞-norm, a grid-map f : Gd b →[0, 1]d extends to a λ-contraction f ′ on [0, 1]d if and only if f is λ-contracting for all pairs of points in Gd b.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "promise",
+                "TFNPdt",
+                "types",
+                "violations",
+                "violated",
+                "problem",
+                "fit",
+                "search",
+                "introduce",
+                "solution"
+            ]
+        }
+    },
+    {
+        "id": "cde68df4-03ec-452d-99f3-73b96419aea5",
+        "title": "",
+        "chunk_text": "Thus, it suffices to introduce violations consisting of two points x, y ∈Gd b for which ∥f (x) −f (y)∥∞> λ · ∥x −y∥∞. If a function f : Gd b →Gd b′ (for b′ ∈poly(b)) is now encoded as a bitstring of length 2d·b · b′ by simply concatenating the output values f (x) for all x ∈Gd b, both ε-approximate fixpoints as well as these violations can be verified by querying O(b′) ∈poly log(2d·b · b′) bits, thus placing the resulting problem in TFNPdt.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "violations",
+                "poly",
+                "suffices",
+                "introduce",
+                "consisting",
+                "points",
+                "bits",
+                "length",
+                "log",
+                "TFNPdt"
+            ]
+        }
+    },
+    {
+        "id": "8dcc3579-c1da-4b15-8089-68c6c9e52e73",
+        "title": "",
+        "chunk_text": "Furthermore, the algorithm of Chen, Li, and Yannakakis can also be used to solve this total version of the problem: if the function f is λ-contracting for all pairs of points queried by the algorithm, the algorithm must return an ε-approximate fixpoint. Otherwise, the algorithm must have encountered a violation. Thus, ℓ∞-GridContractionFixpoint is in FPdt. The same strategy does not seem to work in the ℓ1-case.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "algorithm",
+                "Chen",
+                "Yannakakis",
+                "problem",
+                "fixpoint",
+                "solve",
+                "total",
+                "version",
+                "function",
+                "λ-contracting"
+            ]
+        }
+    },
+    {
+        "id": "ed76c9d6-859b-44b2-9c5a-81f7fb67a388",
+        "title": "",
+        "chunk_text": "In fact, we suspect that the statement that a grid-map extends to a contraction map if and only if it is contracting for all grid points is not true for the ℓ1-norm and general ℓp-norms. In the case of p = ∞, Chen, Li, and Yannakakis constructed an extension explicitly: they extended the grid-function to [0, 1]d using a formula that corresponds to applying McShane’s extension lemma [25] to every partial function fi : Gd b →[0, 1] independently.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "fact",
+                "ℓp-norms",
+                "Chen",
+                "suspect",
+                "statement",
+                "grid-map",
+                "extends",
+                "contraction",
+                "map",
+                "contracting"
+            ]
+        }
+    },
+    {
+        "id": "ae8fccc4-42d1-42d8-b3db-07db74e7b4f5",
+        "title": "",
+        "chunk_text": "McShane’s extension lemma guarantees that the partial functions f ′ i : [0, 1]d → [0, 1] then fulfill the same contraction property as fi, which together with the definition of the ℓ∞-norm as a maximum over coordinates, yields the contraction property for f ′. Trying this for p = 1, the analysis only yields that f ′ is (dλ)-Lipschitz, which is not enough to be contracting if we for example have d > 1 and λ > 0.5.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "contraction",
+                "property",
+                "McShane",
+                "norm",
+                "coordinates",
+                "yields",
+                "extension",
+                "lemma",
+                "guarantees",
+                "partial"
+            ]
+        }
+    },
+    {
+        "id": "5a5e275c-8a4d-4bee-b585-1fa77d6299e6",
+        "title": "",
+        "chunk_text": "We get around this in a naive way by introducing a violation type based on the termination cri- terion of our algorithm for ℓ1-GridContractionFixpoint. Concretely, if our algorithm does not find an ε-approximate fixpoint after reaching its query bound, then the queried points x(1), . . . , x(k) must satisfy Gd b \\ S i∈[k] H1 x(i),f (x(i)) = ∅.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "cri",
+                "terion",
+                "algorithm",
+                "naive",
+                "introducing",
+                "violation",
+                "type",
+                "based",
+                "termination",
+                "Concretely"
+            ]
+        }
+    },
+    {
+        "id": "04ce8888-f4f2-4fa5-ac02-30d33d065270",
+        "title": "",
+        "chunk_text": "In other words, we certify the existence of a violation of the contraction property with a set of points on the grid whose associated bisector halfspaces contain all grid points in their union. Definition 4.7. An instance of the Total-ℓ1-ContractionFixpoint problem consists of a bitstring encoding integers d, b, b′ ∈N and integral logarithms log( 1 1−λ), log( 1 ε ) in unary, as well as a function f : Gd b →Gd b′ encoded as a concatenation of its values.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "points",
+                "grid",
+                "words",
+                "union",
+                "certify",
+                "existence",
+                "violation",
+                "contraction",
+                "property",
+                "set"
+            ]
+        }
+    },
+    {
+        "id": "929f4870-1084-46ea-8272-879607267e39",
+        "title": "",
+        "chunk_text": "The goal is to produce one of the following. (S) A point x ∈Gd b such that ∥f (x) −x∥p ≤ε. (V) A set P of poly(b, d, log \u0000 1 ε \u0001 , log \u00001 1−λ \u0001) points in Gd b with Gd b ⊆S x∈P H1 x,f (x). 21 Note that for our algorithm to work, we need to syntactically guarantee b ≥log2 \u0010 2d ε 1+λ 1−λ \u0011 . In fact, without this assumption, we would not even know if the problem is total.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "log",
+                "goal",
+                "produce",
+                "Note",
+                "point",
+                "points",
+                "poly",
+                "work",
+                "fact",
+                "assumption"
+            ]
+        }
+    },
+    {
+        "id": "d378f7e6-ceba-4727-810b-0c4df83dc109",
+        "title": "",
+        "chunk_text": "We also syntactically guarantee b′ ∈poly(b) to make sure that the number of bit queries that our algorithm makes to the encoding of f is polynomially bounded. Such syntactic guarantees can be realized by adding trivial-to-verify additional violation types for the cases where the input parameters do not fulfill these assumptions.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "poly",
+                "bounded",
+                "syntactically",
+                "number",
+                "bit",
+                "queries",
+                "algorithm",
+                "encoding",
+                "polynomially",
+                "make"
+            ]
+        }
+    },
+    {
+        "id": "c77775ec-3102-4dbf-9c27-25e885bfa364",
+        "title": "",
+        "chunk_text": "We have shown in the proof of Theorem 4.3 that after O(d2(log 1 ε + log 1 1−λ + log d)) queries to f, the queries made by our algorithm must have produced either a solution (S), or a violation (V). Thus, our algorithm solves Total-ℓ1-ContractionFixpoint as well, placing it in TFNPdt and even in FPdt. Corollary 4.8. Total-ℓ1-ContractionFixpoint ∈FPdt.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "log",
+                "Theorem",
+                "queries",
+                "solution",
+                "violation",
+                "algorithm",
+                "FPdt",
+                "shown",
+                "proof",
+                "made"
+            ]
+        }
+    },
+    {
+        "id": "52d0145a-e8a7-45d1-bab3-1fe93166af77",
+        "title": "",
+        "chunk_text": "Note that for general p /∈{1, 2, ∞}, it is unclear whether an analogue of Definition 4.7 would even yield a total problem: we do not provide any rounding strategy for those values and hence it is unclear whether any grid-map without ε-approximate fixpoints on the grid must have a certificate for this in terms of a violation (V) as described above. 22 References [1] Stefan Banach. Sur les op´erations dans les ensembles abstraits et leur application aux ´equations int´egrales.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "unclear",
+                "Definition",
+                "Note",
+                "problem",
+                "violation",
+                "References",
+                "general",
+                "analogue",
+                "yield",
+                "total"
+            ]
+        }
+    },
+    {
+        "id": "373aead8-fa91-45da-894b-70e4553975d3",
+        "title": "",
+        "chunk_text": "Fundamenta mathematicae, 3(1):133–181, 1922. doi:10.4064/ fm-3-1-133-181. [2] Abdul Basit, Nabil H. Mustafa, Saurabh Ray, and Sarfraz Raza. Centerpoints and Tverberg’s technique. Computational Geometry, 43(6):593–600, 2010. doi:10.1016/j.comgeo.2010.03. 002. [3] Luitzen E. J. Brouwer. ¨Uber Abbildung von Mannigfaltigkeiten. Math. Ann., 71(1):97–115, March 1911. doi:10.1007/BF01456931. [4] Ching-Lueh Chang and Yuh-Dauh Lyuu. Optimal bounds on finding fixed points of con- traction mappings.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "doi",
+                "Fundamenta",
+                "mathematicae",
+                "Abdul",
+                "Basit",
+                "Nabil",
+                "Mustafa",
+                "Saurabh",
+                "Ray",
+                "Raza"
+            ]
+        }
+    },
+    {
+        "id": "95c4d15e-2242-45dc-845c-b94fcc0d303c",
+        "title": "",
+        "chunk_text": "Theoretical Computer Science, 411(16):1742–1749, 2010. doi:10.1016/j. tcs.2010.01.016. [5] Xi Chen, Yuhao Li, and Mihalis Yannakakis. Computing a Fixed Point of Contraction Maps in Polynomial Queries. In Proceedings of the 56th Annual ACM Symposium on Theory of Com- puting, STOC 2024, pages 1364–1373, New York, NY, USA, June 2024. Association for Com- puting Machinery. doi:10.1145/3618260.3649623. [6] Yeshwanth Cherapanamjeri. Computing approximate centerpoints in polynomial time.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Science",
+                "Computer",
+                "doi",
+                "Theoretical",
+                "Polynomial",
+                "STOC",
+                "USA",
+                "June",
+                "puting",
+                "Computing"
+            ]
+        }
+    },
+    {
+        "id": "8be755dc-6c19-4ca9-bee7-810c9f8037e0",
+        "title": "",
+        "chunk_text": "In 2024 IEEE 65th Annual Symposium on Foundations of Computer Science (FOCS), pages 1654– 1668, Los Alamitos, CA, USA, 2024. IEEE Computer Society. doi:10.1109/FOCS61266. 2024.00104. [7] Anne Condon. The Complexity of Stochastic Games. Information and Computation, 96(2):203– 224, February 1992. doi:10.1016/0890-5401(92)90048-K. [8] Constantinos Daskalakis and Christos Papadimitriou. Continuous Local Search.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "FOCS",
+                "USA",
+                "Annual",
+                "Science",
+                "Los",
+                "Alamitos",
+                "IEEE",
+                "pages",
+                "Symposium",
+                "Foundations"
+            ]
+        }
+    },
+    {
+        "id": "4a4a5ebf-72bd-49b9-b8f9-a4d2a6c619c8",
+        "title": "",
+        "chunk_text": "In Pro- ceedings of the 2011 Annual ACM-SIAM Symposium on Discrete Algorithms (SODA), Pro- ceedings, pages 790–804. Society for Industrial and Applied Mathematics, January 2011. doi:10.1137/1.9781611973082.62. [9] Constantinos Daskalakis, Christos Tzamos, and Manolis Zampetakis. A converse to Ba- nach’s fixed point theorem and its CLS-completeness. In Proceedings of the 50th Annual ACM SIGACT Symposium on Theory of Computing, STOC 2018, pages 44–50, New York, NY, USA, June 2018.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Pro",
+                "SODA",
+                "Algorithms",
+                "ceedings",
+                "Discrete",
+                "pages",
+                "Annual",
+                "January",
+                "Symposium",
+                "Mathematics"
+            ]
+        }
+    },
+    {
+        "id": "0459f47d-33f6-461d-9dea-63acf89c018e",
+        "title": "",
+        "chunk_text": "Association for Computing Machinery. doi:10.1145/3188745.3188968. [10] J´erˆome Dohrau, Bernd G¨artner, Manuel Kohler, Jiˇr´ı Matouˇsek, and Emo Welzl. ARRIVAL: A Zero-Player Graph Game in NP ∩coNP. In A Journey Through Discrete Mathematics: A Tribute to Jiˇr´ı Matouˇsek, pages 367–374. Springer International Publishing, Cham, 2017. doi: 10.1007/978-3-319-44479-6_14. [11] Kousha Etessami, Christos Papadimitriou, Aviad Rubinstein, and Mihalis Yannakakis.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Machinery",
+                "Computing",
+                "Matouˇsek",
+                "doi",
+                "Association",
+                "Jiˇr´ı",
+                "ARRIVAL",
+                "J´erˆome",
+                "Dohrau",
+                "Bernd"
+            ]
+        }
+    },
+    {
+        "id": "614485dd-2cdf-4bc8-b104-01f9ff01d24e",
+        "title": "",
+        "chunk_text": "Tarski’s Theorem, Supermodular Games, and the Complexity of Equilibria. In 11th Inno- vations in Theoretical Computer Science Conference (ITCS 2020), volume 151 of Leibniz Interna- tional Proceedings in Informatics (LIPIcs), pages 18:1–18:19, Dagstuhl, Germany, 2020. Schloss Dagstuhl–Leibniz-Zentrum f¨ur Informatik. doi:10.4230/LIPIcs.ITCS.2020.18. 23 [12] John Fearnley, Paul Goldberg, Alexandros Hollender, and Rahul Savani. The Complexity of Gradient Descent: CLS = PPAD ∩PLS. J.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Theorem",
+                "Supermodular",
+                "Games",
+                "Equilibria",
+                "Dagstuhl",
+                "Complexity",
+                "Inno",
+                "ITCS",
+                "Germany",
+                "Tarski"
+            ]
+        }
+    },
+    {
+        "id": "5e438e9b-d628-44db-8bff-cc65ae5b6a51",
+        "title": "",
+        "chunk_text": "ACM, 70(1):7:1–7:74, December 2022. doi: 10.1145/3568163. [13] John Fearnley, Spencer Gordon, Ruta Mehta, and Rahul Savani. Unique End of Potential Line. Journal of Computer and System Sciences, 114:1–35, December 2020. doi:10.1016/j. jcss.2020.05.007. [14] M. G¨o¨os, A. Hollender, S. Jain, G. Maystre, W. Pires, R. Robere, and R. Tao. Further Collapses in TFNP. SIAM Journal on Computing, 53(3), 2024.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "ACM",
+                "December",
+                "7:74",
+                "doi",
+                "John",
+                "Fearnley",
+                "Spencer",
+                "Gordon",
+                "Ruta",
+                "Mehta"
+            ]
+        }
+    },
+    {
+        "id": "0e437a92-1098-4c17-9491-0d75d9eda8b3",
+        "title": "",
+        "chunk_text": "[15] Mika G¨o¨os, Alexandros Hollender, Siddhartha Jain, Gilbert Maystre, William Pires, Robert Robere, and Ran Tao. Separations in Proof Complexity and TFNP. J. ACM, 71(4):26:1–26:45, August 2024. doi:10.1145/3663758. [16] B. Gr¨unbaum. Partitions of mass-distributions and of convex bodies by hyperplanes. Pacific Journal of Mathematics, 10(4):1257–1261, January 1960. [17] Sebastian Haslebacher. ARRIVAL: Recursive Framework & ℓ1-Contraction, February 2025.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Mika",
+                "Alexandros",
+                "Hollender",
+                "Siddhartha",
+                "Jain",
+                "Gilbert",
+                "Maystre",
+                "William",
+                "Pires",
+                "Robert"
+            ]
+        }
+    },
+    {
+        "id": "baa22585-76cf-491c-9345-b338746b8bb9",
+        "title": "",
+        "chunk_text": "arXiv:2502.06477, doi:10.48550/arXiv.2502.06477. [18] Eduard Helly. ¨Uber Mengen konvexer K¨orper mit gemeinschaftlichen Punkten. Jahresbericht der Deutschen Mathematiker-Vereinigung, 32:175–176, 1923. [19] Z. Huang, L. Khachiyan, and K. Sikorski. Approximating Fixed Points of Weakly Contract- ing Mappings. Journal of Complexity, 15(2):200–213, June 1999. doi:10.1006/jcom.1999. 0504. [20] Takashi Ishizuka. On TFNP Classes: Approaches from Fixed Point Theory and Algorithmic Game Theory.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "arXiv",
+                "doi",
+                "Eduard",
+                "Helly",
+                "Fixed",
+                "Theory",
+                "June",
+                "Uber",
+                "Punkten",
+                "Mengen"
+            ]
+        }
+    },
+    {
+        "id": "fa6b51f5-fcc1-4783-8b80-414310f756de",
+        "title": "",
+        "chunk_text": "PhD thesis, Kyushu University, 2022. [21] Roman Karasev and Benjamin Matschke. Projective center point and Tverberg the- orems. Discrete & Computational Geometry, 52(1):88–101, July 2014. doi:10.1007/ s00454-014-9602-9. [22] Yi Li, Philip M. Long, and Aravind Srinivasan. Improved bounds on the sample complexity of learning. Journal of Computer and System Sciences, 62(3):516–527, 2001. doi:10.1006/jcss. 2000.1741. [23] Jes´us A. De Loera, Xavier Goaoc, Fr´ed´eric Meunier, and Nabil H. Mustafa.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Kyushu",
+                "University",
+                "PhD",
+                "thesis",
+                "doi",
+                "Roman",
+                "Matschke",
+                "Karasev",
+                "Benjamin",
+                "July"
+            ]
+        }
+    },
+    {
+        "id": "40eb05c2-4cd8-422d-8b44-5c72f2ca34f7",
+        "title": "",
+        "chunk_text": "The discrete yet ubiquitous theorems of Carath´eodory, Helly, Sperner, Tucker, and Tverberg. Bulletin of the American Mathematical Society, 56:415–511, 2019. doi:10.1090/bull/1653. [24] Jiˇr´ı Matouˇsek. Computing the center of planar point sets. DIMACS Series in Discrete Mathe- matics and Theoretical Computer Science, 6:221–230, 1991. doi:10.1090/dimacs/006/14. [25] Edward J. McShane. Extension of range of functions. Bulletin of the American Mathematical Society, 40(12):837–842, December 1934.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Helly",
+                "Sperner",
+                "Tucker",
+                "Carath´eodory",
+                "Tverberg",
+                "Society",
+                "American",
+                "Mathematical",
+                "doi",
+                "ubiquitous"
+            ]
+        }
+    },
+    {
+        "id": "7e5fb01f-8003-4c86-b3ac-2225958cb378",
+        "title": "",
+        "chunk_text": "[26] Gary L. Miller and Donald R. Sheehy. Approximate center points with proofs. In Pro- ceedings of the Twenty-Fifth Annual Symposium on Computational Geometry, SCG ’09, pages 153–158, New York, NY, USA, June 2009. Association for Computing Machinery. doi: 10.1145/1542362.1542395. 24 [27] Nabil H. Mustafa and Kasturi Varadarajan. Epsilon-approximations & epsilon-nets. In Handbook of Discrete and Computational Geometry, chapter 47, pages 1241–1267. CRC Press LLC, 3 edition, 2017.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Gary",
+                "Sheehy",
+                "Miller",
+                "Donald",
+                "Geometry",
+                "pages",
+                "USA",
+                "June",
+                "Computational",
+                "Pro"
+            ]
+        }
+    },
+    {
+        "id": "c05d931b-40b7-4bba-aedb-2e1447a3003e",
+        "title": "",
+        "chunk_text": "[28] Christos H. Papadimitriou. On the complexity of the parity argument and other inefficient proofs of existence. Journal of Computer and System Sciences, 48(3):498–532, June 1994. doi: 10.1016/S0022-0000(05)80063-7. [29] Alexander Pilz and Patrick Schnider. Extending the centerpoint theorem to multiple points.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Christos",
+                "Papadimitriou",
+                "June",
+                "Sciences",
+                "Computer",
+                "System",
+                "Alexander",
+                "Schnider",
+                "existence",
+                "doi"
+            ]
+        }
+    },
+    {
+        "id": "7725ec5c-8fe4-41c9-b440-f84799d88b1e",
+        "title": "",
+        "chunk_text": "In 29th International Symposium on Algorithms and Computation (ISAAC 2018), volume 123 of Leibniz International Proceedings in Informatics (LIPIcs), pages 53:1–53:13, Dagstuhl, Germany, 2018. Schloss Dagstuhl – Leibniz-Zentrum f¨ur Informatik. doi:10.4230/LIPIcs.ISAAC. 2018.53. [30] Luis A. Rademacher. Approximating the centroid is hard. In Proceedings of the Twenty-Third Annual Symposium on Computational Geometry, SCG ’07, pages 302–305, New York, NY, USA, June 2007.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "ISAAC",
+                "Germany",
+                "International",
+                "Computation",
+                "Informatics",
+                "Dagstuhl",
+                "Algorithms",
+                "Leibniz",
+                "volume",
+                "LIPIcs"
+            ]
+        }
+    },
+    {
+        "id": "acb12f03-452d-4872-97e5-4eb75937cd6c",
+        "title": "",
+        "chunk_text": "Association for Computing Machinery. doi:10.1145/1247069.1247123. [31] Richard Rado. A Theorem on General Measure. Journal of the London Mathematical Society, s1-21(4):291–300, 1946. doi:10.1112/jlms/s1-21.4.291. [32] Johann Radon. Mengen konvexer K¨orper, die einen gemeinsamen Punkt enthalten. Mathe- matische Annalen, 83(1):113–115, 1921. doi:10.1007/BF01464231. [33] Saurabh Ray and Nabil H. Mustafa. An optimal generalization of the centerpoint theorem, and its extensions.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Machinery",
+                "doi",
+                "Computing",
+                "Association",
+                "Richard",
+                "Rado",
+                "Theorem",
+                "Measure",
+                "Society",
+                "Johann"
+            ]
+        }
+    },
+    {
+        "id": "29509228-ea32-401e-b02a-65e39092eba3",
+        "title": "",
+        "chunk_text": "In Proceedings of the Twenty-Third Annual Symposium on Computational Geometry, SCG ’07, pages 138–141, New York, NY, USA, 2007. Association for Computing Machinery. doi:10.1145/1247069.1247097. [34] Ralph T. Rockafellar. Convex Analysis. Princeton University Press, Princeton, 1970. doi: 10.1515/9781400873173. [35] K. Sikorski, C.W. Tsay, and H. Wo´zniakowski. An Ellipsoid Algorithm for the Computation of Fixed Points. J. Complex., 9(1):181–200, March 1993. doi:10.1006/jcom.1993.1013.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "USA",
+                "Geometry",
+                "SCG",
+                "York",
+                "doi",
+                "Proceedings",
+                "Annual",
+                "Symposium",
+                "Computational",
+                "pages"
+            ]
+        }
+    },
+    {
+        "id": "dde018ce-fa96-4175-8e3a-c666a88117f7",
+        "title": "",
+        "chunk_text": "[36] Krzysztof Sikorski. Computational complexity of fixed points. J. Fixed Point Theory Appl., 6(2):249–283, December 2009. doi:10.1007/s11784-009-0128-3. [37] Vladimir N. Vapnik and Alexey Y. Chervonenkis. On the uniform convergence of relative frequencies of events to their probabilities. Theory of Probability & Its Applications, 16(2):264– 280, 1971. doi:10.1137/1116025. [38] Rade T. ˇZivaljevi´c. Topological methods in discrete geometry.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Krzysztof",
+                "Sikorski",
+                "doi",
+                "fixed",
+                "December",
+                "Theory",
+                "Appl.",
+                "points",
+                "Point",
+                "Vladimir"
+            ]
+        }
+    },
+    {
+        "id": "04e9ac45-bdab-4f23-b6c7-3ba9090e51d1",
+        "title": "",
+        "chunk_text": "In Handbook of Discrete and Computational Geometry, chapter 27, pages 551–580. CRC Press LLC, 3 edition, 2017. 25 A More on ℓp-Halfspaces In this section, we will study limit ℓp-halfspaces in more detail. The main goal is to provide proofs for the halfspace properties in Section 3.2 and Section 4.2, but we will also develop some additional theory on the way.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Geometry",
+                "Handbook",
+                "Discrete",
+                "Computational",
+                "chapter",
+                "pages",
+                "section",
+                "CRC",
+                "LLC",
+                "Press"
+            ]
+        }
+    },
+    {
+        "id": "79ede6dd-2cd4-40de-97a0-3118364bc019",
+        "title": "",
+        "chunk_text": "We split the exposition into two parts: fundamental properties of ℓp-halfspaces and insights about their shape are developed in Appendix A.1 while Appendix A.2 focuses on the interaction of ℓp-halfspaces with mass distributions. A.1 Fundamentals of ℓp-Halfspaces For completeness sake, we recall the definition of limit ℓp-halfspaces, which we will just refer to as ℓp-halfspaces in this appendix. Definition 3.2 (Limit ℓp-Halfspace).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Appendix",
+                "ℓp-halfspaces",
+                "limit",
+                "parts",
+                "focuses",
+                "distributions",
+                "fundamental",
+                "split",
+                "exposition",
+                "properties"
+            ]
+        }
+    },
+    {
+        "id": "06577b33-5423-4f27-998c-d6488dca6aaf",
+        "title": "",
+        "chunk_text": "For fixed p ∈[1, ∞) ∪{∞}, point x ∈Rd, and direction v ∈Rd with v ̸= 0, the ℓp-halfspace Hp x,v ⊆Rd through x in the direction of v is defined as Hp x,v := {z ∈Rd | ∀ε > 0 : ||x −z||p ≤||x −εv −z||p}. Recall that Hp x,v is invariant under scaling v with a positive scalar, and we therefore usually use v ∈Sd−1. As a warm-up, we prove Lemma 3.5, which considers ℓp-halfspaces with axis-aligned directions v. Lemma 3.5.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "point",
+                "Lemma",
+                "direction",
+                "fixed",
+                "defined",
+                "directions",
+                "Recall",
+                "scalar",
+                "ℓp-halfspace",
+                "invariant"
+            ]
+        }
+    },
+    {
+        "id": "e0f59d5a-35d1-4501-b4eb-08271ea6b6bb",
+        "title": "",
+        "chunk_text": "For any p ∈[1, ∞) ∪{∞}, any x ∈Rd, and any direction v ∈Sd−1 parallel to one of the coordinate axes, we have Hp x,v = H2 x,v. Proof. Without loss of generality, assume that v = (1, 0, . . . , 0) ∈Sd−1. By our definition of ℓp- halfspaces, z is contained in Hp x,v if and only if ∥x −z∥p p ≤∥x −εv −z∥p p for all ε > 0, which happens if and only if |x1 −z1|p ≤|x1 −ε −z1|p. This last inequality holds if and only if z1 ≥x1, independently of p. This concludes the proof.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "parallel",
+                "axes",
+                "direction",
+                "coordinate",
+                "Proof",
+                "generality",
+                "assume",
+                "halfspaces",
+                "loss",
+                "independently"
+            ]
+        }
+    },
+    {
+        "id": "31146566-c3a9-443a-bc30-8e81b079de56",
+        "title": "",
+        "chunk_text": "The proofs of the other properties require some more effort. In particular, for Lemma 3.6, we will need Observation 3.3, which we restate here for convenience. Observation 3.3. For a given limit ℓp-halfspace Hp x,v and point z ∈Rd, let R−be the open ray from x in direction −v, and let Bz be the smallest closed ℓp-ball with center z that contains x. Then we have z ∈Hp x,v ⇐⇒R−∩B◦ z = ∅, where B◦ z denotes the interior of Bz.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Observation",
+                "effort",
+                "proofs",
+                "properties",
+                "require",
+                "Lemma",
+                "convenience",
+                "restate",
+                "direction",
+                "limit"
+            ]
+        }
+    },
+    {
+        "id": "592b2b35-eef7-4664-9290-96bf9d446977",
+        "title": "",
+        "chunk_text": "With this, we are ready to prove Lemma 3.6, which states that ℓp-halfspaces are unions of rays originating at x. The proof mainly relies on convexity of ℓp-balls and Observation 3.3. Lemma 3.6. For any p ∈[1, ∞) ∪{∞}, any limit halfspace Hp x,v is a union of rays originating in x. For p ∈(1, ∞), the boundary of any limit halfspace Hp x,v is a union of lines through x. Proof. We start with the first part of the statement for arbitrary p ∈[1, ∞) ∪{∞}.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Lemma",
+                "rays",
+                "Observation",
+                "union",
+                "ready",
+                "prove",
+                "states",
+                "ℓp-halfspaces",
+                "originating",
+                "limit"
+            ]
+        }
+    },
+    {
+        "id": "fd87740b-a27d-408e-b40f-328150d3b433",
+        "title": "",
+        "chunk_text": "For this, let L be the line through x in direction v, and let R−be the open ray from x in direction −v. Let Bz be the smallest ℓp-ball around a point z ∈Rd that contains x. From Observation 3.3, we know that z ∈Hp x,v ⇐⇒R−∩B◦ z = ∅, 26 where B◦ z denotes the interior of Bz. Consider what happens when we move z along the ray through x and z. In other words, consider a point z′ = x + δ(z −x) for some δ > 0. By definition, x is on the boundary of both balls Bz′ and Bz.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "direction",
+                "line",
+                "open",
+                "ray",
+                "point",
+                "Observation",
+                "Bz′",
+                "smallest",
+                "ℓp-ball",
+                "denotes"
+            ]
+        }
+    },
+    {
+        "id": "f19c49f8-4b1c-41d6-9138-bbc135bab65f",
+        "title": "",
+        "chunk_text": "Moreover, observe that the ball Bz′ is a translated (with center z′ instead of z) and scaled (such that x stays on the boundary) version of Bz. In particular, both Bz and Bz′ have the same tangent hyperplanes at the point x. Thus, we conclude R−∩B◦ z = ∅⇐⇒R−∩B◦ z′ = ∅, which means that z′ ∈Hp x,v if and only if z ∈Hp x,v. This proves that Hp x,v is a union of rays starting at x. It remains to prove that the boundary ∂Hp x,v of Hp x,v is a union of lines through x, assuming that p ∈(1, ∞).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Bz′",
+                "observe",
+                "translated",
+                "scaled",
+                "version",
+                "boundary",
+                "ball",
+                "center",
+                "stays",
+                "union"
+            ]
+        }
+    },
+    {
+        "id": "674a9581-1241-4bf7-b363-317e68b86d0a",
+        "title": "",
+        "chunk_text": "For this, observe that the ℓp-balls for p ∈(1, ∞) are strictly convex. We claim that a point z is on the boundary of Hp x,v if and only if B◦ z ∩L = ∅. Indeed, any point z with B◦ z ∩L = ∅ is clearly contained in Hp x,v (by Observation 3.3). Moreover, moving z into the direction −v yields a point z′ with B◦ z′ ∩R−̸= ∅(by strict convexity of ℓp-balls). We conclude z ∈∂Hp x,v. Conversely, consider an arbitrary point z with B◦ z ∩L ̸= ∅.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "point",
+                "observe",
+                "convex",
+                "strictly",
+                "ℓp-balls",
+                "Observation",
+                "claim",
+                "boundary",
+                "Conversely",
+                "moving"
+            ]
+        }
+    },
+    {
+        "id": "499c2340-ca94-40c2-b0ad-029bd6516477",
+        "title": "",
+        "chunk_text": "If B◦ z intersects R−, slightly moving z does not change this. Concretely, any point z′ in a small neighborhood around z satisfies B◦ z′ ∩R−̸= ∅, and thus none of these points is contained in the halfspace. We conclude that z cannot be on the boundary. Otherwise, B◦ z intersects R+ := L \\ (R−∪{x}), but then slightly moving z does not change this.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "intersects",
+                "moving",
+                "change",
+                "slightly",
+                "Concretely",
+                "halfspace",
+                "point",
+                "points",
+                "small",
+                "neighborhood"
+            ]
+        }
+    },
+    {
+        "id": "433ef040-7116-4355-a7e8-9c787b129c9f",
+        "title": "",
+        "chunk_text": "In other words, any point z′ in a small neighborhood around z satisfies B◦ z′ ∩R+ ̸= ∅, which also implies B◦ z′ ∩R−= ∅(as otherwise, x would be contained in B◦ z′ by convexity). We conclude that z is not on the boundary. With this characterization of the boundary points, we can now finish the proof. Consider an arbitrary z ∈∂Hp x,v. We must have B◦ z ∩L = ∅. In other words, L is tangential to Bz.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "convexity",
+                "words",
+                "small",
+                "neighborhood",
+                "satisfies",
+                "implies",
+                "contained",
+                "boundary",
+                "point",
+                "points"
+            ]
+        }
+    },
+    {
+        "id": "63fd7ced-7a23-4fc4-99d4-c7ffe5104e03",
+        "title": "",
+        "chunk_text": "This remains true for any other point z′ = x + δ(z −x) for δ ∈R on the line through x and z with ball Bz′ (using point-symmetry of ℓp-balls around their center for δ < 0). This again implies z′ ∈∂Hp x,v. With Lemma 3.6 at our disposal, we now want to tackle Lemma 3.7 next. However, before getting there, we will need to recall some tools from convex analysis.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Bz′",
+                "Lemma",
+                "remains",
+                "true",
+                "point",
+                "line",
+                "ball",
+                "point-symmetry",
+                "ℓp-balls",
+                "center"
+            ]
+        }
+    },
+    {
+        "id": "25936999-e278-4315-8afd-407b29de5f8d",
+        "title": "",
+        "chunk_text": "Concretely, we will need the notion of subgradients of a convex function f : Rd →R: a vector u ∈Rd is a subgradient of f at x ∈Rd if and only if f (x′) −f (x) ≥⟨u, (x′ −x)⟩ for all x′ ∈Rd. The set ∂f (x) ⊆Rd of all subgradients of f at x is also called the subdifferential. If f is differentiable at x, then ∂f (x) = {∇f (x)}. For more details on convex analysis, we refer to the standard textbook by Rockafellar [34].",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "subgradients",
+                "Concretely",
+                "notion",
+                "function",
+                "vector",
+                "convex",
+                "Rockafellar",
+                "set",
+                "subdifferential",
+                "called"
+            ]
+        }
+    },
+    {
+        "id": "c74cd390-8266-48ec-b510-f700577bc842",
+        "title": "",
+        "chunk_text": "Subgradients are useful because they allow us to further characterize containment of a given point z in an ℓp-halfspace Hp x,v as follows. Lemma 4.5. For any p ∈[1, ∞) ∪{∞}, a point z ∈Rd is contained in an ℓp-halfspace Hp x,v if and only if there exists a subgradient u ∈∂||z −x||p with ⟨u, v⟩≥0. Proof. Assume first that there exists such a subgradient u ∈∂||z −x||p with ⟨u, v⟩≥0.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "ℓp-halfspace",
+                "point",
+                "subgradient",
+                "characterize",
+                "containment",
+                "exists",
+                "Lemma",
+                "Proof",
+                "Assume",
+                "contained"
+            ]
+        }
+    },
+    {
+        "id": "7c7a69ae-5b8c-456a-b9db-78173c0c49d8",
+        "title": "",
+        "chunk_text": "Choosing x′ = z −x + εv in the definition of subgradients, we conclude ||z −x + εv||p −||z −x||p ≥ ε⟨u, v⟩≥0 for all ε > 0. Thus, z is contained in the halfspace. Conversely, assume z ∈Hp x,v. By 27 Observation 3.3, this implies that the intersection of the open ray R−from x in direction −v with the interior B◦ z of the smallest ball Bz containing x around z is empty. Both of these objects are convex. Thus, there exists a hyperplane separating R−and B◦ z.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Choosing",
+                "subgradients",
+                "conclude",
+                "definition",
+                "Observation",
+                "halfspace",
+                "Conversely",
+                "contained",
+                "assume",
+                "direction"
+            ]
+        }
+    },
+    {
+        "id": "c523f9e5-bd74-49c3-8d8d-aa1e00428317",
+        "title": "",
+        "chunk_text": "Note that this hyperplane must go through x, and a scaling of its normal vector must be a subgradient in ∂||x −z||p. Naturally, this subgradient u at x points away from B◦ z, and we have ⟨u, −v⟩≥0. It remains to observe −u ∈∂||z −x||p (−u is the desired subgradient). In order to use Lemma 4.5, we need to determine the subgradients of the ℓp-norm for all p ∈ [1, ∞) ∪{∞}. We start with the cases p ∈(1, ∞), and focus on those points z ∈Rd with ||z||p = 1.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Note",
+                "subgradient",
+                "hyperplane",
+                "scaling",
+                "normal",
+                "vector",
+                "points",
+                "Lemma",
+                "Naturally",
+                "observe"
+            ]
+        }
+    },
+    {
+        "id": "3fe61c96-c364-4d32-86d2-f28984cbd95b",
+        "title": "",
+        "chunk_text": "Note that by Lemma 3.6, knowledge about the cases with ||z||p = 1 already suffices to make full use of Lemma 4.5. Observation A.1. For p ∈(1, ∞) and arbitrary z ∈Rd with ||z||p = 1, || · ||p is differentiable at z and the gradient ∇||z||p is given by ∇||z||p =   |z1|p−1sign(z1) ... |zd|p−1sign(zd)  . In particular, we have ⟨∇||z||p, z⟩= ∇ \u0000||z||p \u0001 p p−1 = ||z||p = 1. Next, we characterize the subgradients for || · ||∞and || · ||1 on points z ∈Rd with ||z||∞= 1 (||z||1 = 1, respectively).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Lemma",
+                "Note",
+                "knowledge",
+                "cases",
+                "suffices",
+                "make",
+                "full",
+                "Observation",
+                "gradient",
+                "arbitrary"
+            ]
+        }
+    },
+    {
+        "id": "0f9d5014-820b-41e0-8071-026da4c3cbfd",
+        "title": "",
+        "chunk_text": "Note that these subdifferentials can also be found in the literature (see, e.g., [34]). Observation A.2. Consider arbitrary z ∈Rd with ||z||∞= 1. The set of subgradients ∂||z||∞is given by ∂||z||∞= conv ({−ei | zi = −1} ∪{ei | zi = 1}) , where ei denotes the i-th standard unit vector in Rd. In particular, we have ⟨u, z⟩= ||u||1 = ||z||∞= 1 for all u ∈∂||z||∞. Observation 4.6. Consider arbitrary z ∈Rd with ||z||1 = 1.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Note",
+                "literature",
+                "Observation",
+                "subdifferentials",
+                "found",
+                "arbitrary",
+                "conv",
+                "subgradients",
+                "set",
+                "denotes"
+            ]
+        }
+    },
+    {
+        "id": "01243f36-408a-44c8-a4da-7f8a106a9643",
+        "title": "",
+        "chunk_text": "A vector u ∈Rd is a subgradient of || · ||1 at z if and only if ui ∈      {1} if zi > 0 {−1} if zi < 0 [−1, 1] if zi = 0 for all i ∈[d]. In particular, we have ⟨u, z⟩= ||u||∞= ||z||1 = 1 for all u ∈∂||z||1. Consider a subgradient u of || · ||p at point z. Given the characterization of ℓp-halfspaces in Lemma 4.5, it will be useful to prove an upper bound on the angle between u and z. Lemma A.3. Let p ∈[1, ∞) ∪{∞} and consider arbitrary z ∈Rd with ||z||p = 1.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "subgradient",
+                "Lemma",
+                "vector",
+                "point",
+                "characterization",
+                "ℓp-halfspaces",
+                "prove",
+                "upper",
+                "bound",
+                "angle"
+            ]
+        }
+    },
+    {
+        "id": "95150d64-bc80-4f99-8143-b538bf46d6d6",
+        "title": "",
+        "chunk_text": "Then we have ∡(u, z) ≤π 2 −√ 1/d for all subgradients u ∈∂||z||p. Proof. We heavily use the previous observations. In particular, recall that we have ⟨u, z⟩= ||u|| p p−1 = ||z||p = 1 for all subgradients u ∈∂||z||p (where p p−1 is interpreted as 1 for p = ∞ and as ∞for p = 1, respectively). We thus get cos(∡(u, z)) = ⟨u, z⟩ ||u||2||z||2 = 1 ||u||2||z||2 . 28 Recall the ℓp-norm inequalities ||x||2 ≤||x||p for p ≤2 and ||x||2 ≤ √ d||x||p for 2 ≤p.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "subgradients",
+                "recall",
+                "Proof",
+                "observations",
+                "heavily",
+                "previous",
+                "cos",
+                "inequalities",
+                "interpreted",
+                "ℓp-norm"
+            ]
+        }
+    },
+    {
+        "id": "b9443b0d-bf40-4a04-975c-6a32b4b016c9",
+        "title": "",
+        "chunk_text": "Further, for any p ∈[1, ∞) ∪{∞} we have p < 2 ⇐⇒ p p−1 > 2. Thus, we obtain 1 ||u||2||z||2 ≥ 1 √ d||u|| p p−1 ||z||p = 1 √ d . Thus, we conclude ∡(u, z) ≤π 2 − 1 √ d, as desired. With this theory in place, we are now ready to prove Lemma 3.7. Lemma 3.7. Let p ∈[1, ∞) ∪{∞} and Hp x,v be arbitrary. All z ∈Hp x,v satisfy ∡(−→ xz, v) ≤π −√ 1/d. Similarly, all z ∈Rd with ∡(−→ xz, v) ≤√ 1/d must be contained in Hp x,v. Proof.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Lemma",
+                "obtain",
+                "conclude",
+                "desired",
+                "place",
+                "theory",
+                "ready",
+                "prove",
+                "Similarly",
+                "arbitrary"
+            ]
+        }
+    },
+    {
+        "id": "7c93aa64-8df2-491d-99c2-938462744bf1",
+        "title": "",
+        "chunk_text": "By Lemma 3.6 (every halfspace is a union of rays), we can assume ||z −x||p = 1, without loss of generality. Now consider the first statement of the lemma. Lemma 4.5 says that z ∈Hp x,v implies ⟨u, v⟩≥0 for some subgradient u ∈∂||z −x||p. Concretely, this means that ∡(u, v) ≤π 2 . Moreover, by Lemma A.3, we have ∡(u, z −x) ≤ π 2 −√ 1/d. Combining the two bounds, we conclude ∡(−→ xz, v) = ∡(z −x, v) ≤π −√ 1/d, as desired. For the second statement, assume that z satisfies ∡(−→ xz, v) ≤√ 1/d.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Lemma",
+                "rays",
+                "generality",
+                "halfspace",
+                "union",
+                "loss",
+                "assume",
+                "statement",
+                "Concretely",
+                "implies"
+            ]
+        }
+    },
+    {
+        "id": "3d40645a-1972-4b3a-8285-c78334ce0f90",
+        "title": "",
+        "chunk_text": "By Lemma A.3, there exists a subgradient u ∈∂||z −x||p with ∡(u, z −x) ≤π 2 −√ 1/d. We conclude ∡(u, v) ≤π, which implies z ∈Hp x,v by Lemma 4.5. Finally, we can prove Corollary 3.8 using Lemma 3.7. Corollary 3.8. For arbitrary p ∈[1, ∞) ∪{∞} and x ∈Rd with ∥x∥2 > 2d, we have [0, 1]d ⊆Hp x,−x. Proof. By Lemma 3.7, it suffices to prove that all points z ∈[0, 1]d satisfy ∡(−→ xz, −x) ≤√ 1/d. To see this, consider the triangle spanned by the origin 0 ∈Rd and the two points z and x.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Lemma",
+                "Corollary",
+                "exists",
+                "subgradient",
+                "prove",
+                "points",
+                "conclude",
+                "Finally",
+                "implies",
+                "Proof"
+            ]
+        }
+    },
+    {
+        "id": "db9a5500-18da-45c5-890c-2e2de37b5b90",
+        "title": "",
+        "chunk_text": "We know that ||z −0||2 = ||z||2 ≤ √ d, and ||x −0||2 = ||x||2 > 2d. By the law of sines, we get sin(∡(−→ xz, −→ x0)) = ||z −0||2 sin(∡(−→ zx, −→ z0)) ||x −0||2 ≤ √ dsin(∡(−→ zx, −→ z0)) ||x −0||2 < √ d 1 2d = 1 2 √ d which implies ∡(−→ xz, −→ x0) < √ 1/d. A.2 ℓp-Halfspaces and Mass Distributions We now move on to the interaction of ℓp-halfspaces with mass distributions. We briefly recall that mass distributions are finite absolutely continuous (w.r.t. the Lebesgue measure) measures on Rd.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Mass",
+                "Distributions",
+                "sin",
+                "ℓp-Halfspaces",
+                "dsin",
+                "Lebesgue",
+                "sines",
+                "implies",
+                "law",
+                "continuous"
+            ]
+        }
+    },
+    {
+        "id": "c54f5b6b-ac77-4eb0-974a-42de903c31b6",
+        "title": "",
+        "chunk_text": "As mentioned in Section 3.2, by the Radon-Nikodym theorem, we can therefore think of mass distributions as probability distributions with a density (by assuming µ(Rd) = 1, without 29 loss of generality). We will use this point of view repeatedly in this section: it allows us to use the language of probability theory (instead of the language of measure theory).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Section",
+                "distributions",
+                "theorem",
+                "density",
+                "loss",
+                "generality",
+                "probability",
+                "language",
+                "theory",
+                "mentioned"
+            ]
+        }
+    },
+    {
+        "id": "925460a5-2dd0-439d-b26c-af4d9a0cf6a0",
+        "title": "",
+        "chunk_text": "Before we prove Lemma 3.10, i.e., that µ(Hp x,v) is continuous in x, we first want to prove that the boundary of an ℓp-halfspace has measure 0. The following lemma will help with this. Lemma A.4 (Inside and Outside Orthant). Let Hp x,v be an arbitrary ℓp-halfspace for some p ∈[1, ∞) ∪ {∞}. Consider arbitrary z, z′ ∈Rd satisfying both • vi > 0 =⇒z′ i −zi ≥0 • and vi < 0 =⇒z′ i −zi ≤0 for all i ∈[d]. Then z ∈Hp x,v implies z′ ∈Hp x,v.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "prove",
+                "Lemma",
+                "measure",
+                "continuous",
+                "boundary",
+                "ℓp-halfspace",
+                "Inside",
+                "Orthant",
+                "arbitrary",
+                "satisfying"
+            ]
+        }
+    },
+    {
+        "id": "dfebf434-bb76-479c-8b0b-907ffccc0e3b",
+        "title": "",
+        "chunk_text": "Similarly, for any z /∈Hp x,v, all z′ ∈Rd satisfying vi > 0 =⇒z′ i −zi ≤0 and vi < 0 =⇒z′ i −zi ≥0 for all i ∈[d] are not contained in Hp x,v. Proof. Let z ∈Hp x,v be arbitrary and consider first the case p ̸= ∞. Without loss of generality, we can consider the case where z′ and z only differ in one coordinate, i.e., z′ i = zi + αvi for some i ∈[d] and α > 0, and z′ j = zj for all j ∈[d] \\ {i}. By definition, we must have ∥x −z∥p p ≤∥x −εv −z∥p p for all ε > 0.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Similarly",
+                "satisfying",
+                "contained",
+                "case",
+                "Proof",
+                "generality",
+                "coordinate",
+                "αvi",
+                "arbitrary",
+                "definition"
+            ]
+        }
+    },
+    {
+        "id": "7b517164-4809-40fd-89db-a1a6896e51fb",
+        "title": "",
+        "chunk_text": "If we can prove that |xi −εvi −zi|p −|xi −zi|p ≤|xi −εvi −z′ i|p −|xi −z′ i|p (A.1) for all ε > 0, we are done, because then 0 ≤∥x −εv −z∥p p −∥x −z∥p p ≤∥x −εv −z′∥p p −∥x −z′∥p p holds for all ε > 0 and thus z′ ∈Hp x,v. Equation (A.1) follows from the observation that |xi −εvi −z′ i|p −|xi −z′ i|p = |xi −(α + ε)vi −zi|p −|xi −αvi −zi|p and that the function f (β) := |β + γ|p −|β|p is for all p ∈[1, ∞) monotonically non-increasing for γ ≤0 and monotonically non-decreasing for γ ≥0.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "εvi",
+                "prove",
+                "holds",
+                "monotonically",
+                "Equation",
+                "αvi",
+                "observation",
+                "function",
+                "non-increasing",
+                "non-decreasing"
+            ]
+        }
+    },
+    {
+        "id": "b34b9050-022b-40f0-bf4b-94b43bc288ab",
+        "title": "",
+        "chunk_text": "The proof for p = ∞follows from p = 1, since the ℓ∞-norm is just taking the maximum over the constituents of the ℓ1-norm. Consider now z /∈Hp x,v and consider again first the case p ̸= ∞. As before, we can assume without loss of generality that z′ i = zi −αvi for some i ∈[d] and α > 0, and z′ j = zj for all j ∈[d] \\ {i}. We want to prove z′ /∈Hp x,v. By z /∈Hp x,v, there must exist ε > 0 such that ∥x −z∥p p > ∥x −εv −z∥p p.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "norm",
+                "proof",
+                "taking",
+                "maximum",
+                "constituents",
+                "case",
+                "αvi",
+                "assume",
+                "loss",
+                "generality"
+            ]
+        }
+    },
+    {
+        "id": "c9b3bd13-3cdb-467e-bd2f-4111bc278c46",
+        "title": "",
+        "chunk_text": "If we can prove |xi −zi|p −|xi −εvi −zi|p ≤|xi −z′ i|p −|xi −εvi −z′ i|p, (A.2) we get 0 < ∥x −z∥p p −∥x −εv −z∥p p ≤∥x −z′∥p p −∥x −εv −z′∥p p and thus z′ /∈Hp x,v. The inequality Equation (A.2) follows from the observation that |xi −z′ i|p −|xi −εvi −z′ i|p = |xi + αvi −zi|p −|xi + (α −ε)vi −zi|p and that the function f (β) := |β|p −|β −γ|p is for all p ∈[1, ∞) monotonically non-increasing for γ ≤0 and monotonically non-decreasing for γ ≥0. The proof for p = ∞again follows from p = 1.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "εvi",
+                "prove",
+                "monotonically",
+                "Equation",
+                "αvi",
+                "inequality",
+                "observation",
+                "function",
+                "non-increasing",
+                "non-decreasing"
+            ]
+        }
+    },
+    {
+        "id": "f8c0535a-8f1d-4846-b3cf-dacfc2fabe33",
+        "title": "",
+        "chunk_text": "30 This now lets us conclude that the boundary of the halfspace has measure 0. Corollary A.5 (Boundary has Measure 0). Let p ∈[1, ∞) ∪{∞}. The boundary ∂Hp x,v of the ℓp- halfspace Hp x,v has Lebesgue measure 0 for all x ∈Rd and v ∈Sd−1. Proof. We prove that ∂Hp x,v is porous, i.e., we prove that there exists 0 < α < 1 such that for every sufficiently small r > 0 and for every z ∈Rd, there is y ∈Rd such that Bp(y, αr) ⊆ Bp(z, r) \\ ∂Hp x,v.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "measure",
+                "boundary",
+                "conclude",
+                "halfspace",
+                "prove",
+                "Corollary",
+                "Lebesgue",
+                "Proof",
+                "porous",
+                "exists"
+            ]
+        }
+    },
+    {
+        "id": "0fde7c6d-814b-40c6-b6f4-98ca752da968",
+        "title": "",
+        "chunk_text": "This is a sufficient condition for a subset of Rd to have measure 0. Porosity follows from Lemma A.4 by distinguishing between the cases z ∈Hp x,v and z /∈Hp x,v. We are now ready to prove Lemma 3.10. While this could be proven purely in terms of measure theory, we opted for the language of probability theory instead. Lemma 3.10. The function f (x) := µ(Hp x,v) is continuous in x ∈Rd for all mass distributions µ, all v ∈Sd−1, and all p ∈[1, ∞) ∪{∞}. Proof.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Lemma",
+                "sufficient",
+                "condition",
+                "subset",
+                "measure",
+                "theory",
+                "Porosity",
+                "Proof",
+                "distinguishing",
+                "cases"
+            ]
+        }
+    },
+    {
+        "id": "61ab6619-13b7-4120-a0fd-472bb04e3f4e",
+        "title": "",
+        "chunk_text": "Fix a mass distribution µ, and fix v ∈Sd−1 and p ∈[1, ∞) ∪{∞}. Without loss of gener- ality, assume µ(Rd) = 1. Let x ∈Rd be arbitrary, and consider an arbitrary sequence (xn)n∈N converging to x. For n ∈N, let Xn denote the indicator random variable for a point drawn at random (w.r.t. µ) to lie in the set Hp xn,v. Similarly, let X denote the indicator random variable for containment in Hp x,v. We claim that Xn converges almost surely to X as n goes to infinity.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Fix",
+                "random",
+                "mass",
+                "distribution",
+                "indicator",
+                "variable",
+                "denote",
+                "arbitrary",
+                "ality",
+                "gener"
+            ]
+        }
+    },
+    {
+        "id": "9278058f-496b-41cc-b8d1-194e72641510",
+        "title": "",
+        "chunk_text": "To see this, observe first that we naturally have lim n→∞∥z −xn∥p = ∥z −x∥p for all z ∈Rd. Now let z /∈Hp x,v be arbitrary (i.e., X(z) = 0). Then there exist ε, δ > 0 such that ∥x −εv −z∥p < ∥x −z∥p −δ. Thus, for n ∈N large enough we also have Xn(z) = 0. Consider now an arbitrary z in the interior of Hp x,v. By definition, there exists δ > 0 such that a δ-ball around z is contained in Hp x,v. In other words, we have ∥x −εv −z′∥p ≥∥x −z′∥p for all ε > 0 and z′ with ∥z′ −z∥p ≤δ.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "observe",
+                "naturally",
+                "lim",
+                "arbitrary",
+                "exist",
+                "exists",
+                "large",
+                "definition",
+                "interior",
+                "words"
+            ]
+        }
+    },
+    {
+        "id": "4727ce0e-8703-47af-8941-6b2c7bc90610",
+        "title": "",
+        "chunk_text": "For large enough n ∈N, we can therefore choose z′ such that x −z′ = xn −z, which yields ∥xn −εv −z∥p ≥∥xn −z∥p and thus limn→∞Xn(z) = 1. We conclude that the set {z ∈Rd | limn→∞Xn(z) = X(z)} includes all of Rd except for the boundary of Hp x,v. By Corollary A.5, this boundary has measure zero and we get almost sure convergence. Using the dominated convergence theorem, this implies convergence in mean and thus lim n→∞µ(Hp xn,v) = lim n→∞E(Xn) = E(X) = µ(Hp x,v), as desired.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "limn",
+                "yields",
+                "convergence",
+                "large",
+                "choose",
+                "boundary",
+                "lim",
+                "Corollary",
+                "set",
+                "includes"
+            ]
+        }
+    },
+    {
+        "id": "8d0ee40d-2afa-46f7-8ba9-aae03961244c",
+        "title": "",
+        "chunk_text": "While we cannot prove for all p that µ(Hp x,v) is continuous in v, we at least prove Lemma 3.11, which states that the set V of directions v for which µ(Hp x,−v) is strictly smaller than some threshold t, is open. 31 Lemma 3.11. The set Vx = {v ∈Sd−1 | µ(Hp x,v) < t} is an open subset of Sd−1 for all mass distributions µ, all t > 0, all p ∈[1, ∞) ∪{∞}, and all x ∈Rd. Proof. Fix µ and p ∈[1, ∞) ∪{∞} and let x ∈Rd be arbitrary. Assume without loss of generality that µ(Rd).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Lemma",
+                "prove",
+                "set",
+                "continuous",
+                "states",
+                "directions",
+                "strictly",
+                "smaller",
+                "threshold",
+                "open"
+            ]
+        }
+    },
+    {
+        "id": "4460034f-8065-400b-998c-5c5be0b9f04a",
+        "title": "",
+        "chunk_text": "Instead of directly proving that V is open, we will prove that its complement Sd−1 \\ V = {v ∈Sd−1 | µ(Hp x,v) ≥t} is closed. To this end, consider an arbitrary sequence (vn)n∈N converging to v ∈Sd−1 satisfying vn ∈Sd−1 \\ V for all n ∈N. We will prove that then v ∈Sd−1 \\ V. Let Xn be the indicator random variable for containment of a point drawn according to µ in Hp x,vn.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "prove",
+                "open",
+                "closed",
+                "directly",
+                "proving",
+                "complement",
+                "end",
+                "sequence",
+                "satisfying",
+                "arbitrary"
+            ]
+        }
+    },
+    {
+        "id": "8105c1ab-db43-490a-98a3-eb0ea618465a",
+        "title": "",
+        "chunk_text": "Observe that by limn→∞∥x −εvn −z∥p = ∥x −εv −z∥p for all z ∈Rd, the sequence of random variables (Xn)n∈N converges point-wise to a random variable X. In other words, (Xn)n∈N converges almost surely to X, and by the dominated convergence theorem we get convergence in mean. Concretely, this means that we have lim n→∞µ(Hp x,vn) = EX ≥t. Let now z /∈Hp x,v be arbitrary. Then there exist ε, δ > 0 such that ∥x −εv −z∥p < ∥x −z∥p −δ. Using limn→∞∥x −εvn −z∥p = ∥x −εv −z∥p, we conclude that X(z) = 0.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "random",
+                "converges",
+                "variables",
+                "variable",
+                "Observe",
+                "εvn",
+                "sequence",
+                "point-wise",
+                "convergence",
+                "limn"
+            ]
+        }
+    },
+    {
+        "id": "9480b27f-8612-4a67-9d40-ccbd48ca2a7d",
+        "title": "",
+        "chunk_text": "In other words, we just proved that Rd \\ Hp x,v ⊆{z ∈Rd | X(z) = 0} and thus µ(Hp x,v) ≥EX. Plugging everything together, we obtain µ(Hp x,v) ≥t and hence v ∈Sd−1 \\ V, as desired. B Proof of Theorem 3.18 Theorem 3.18 (ℓp-Centerpoint Theorem for Finite Point Sets). Let p ∈[1, ∞) ∪{∞} be arbitrary, and let P ⊆Rd be a finite set of points. There exists a point c such that |Hp c,v ∩P| ≥ |P| d+1 for all v ∈Sd−1. Proof. Without loss of generality, assume that P ⊆(0, 1)d.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Theorem",
+                "words",
+                "Finite",
+                "proved",
+                "Proof",
+                "Point",
+                "Sets",
+                "set",
+                "Plugging",
+                "desired"
+            ]
+        }
+    },
+    {
+        "id": "205b92d8-4160-45d2-b8ae-2e8feda0f4a3",
+        "title": "",
+        "chunk_text": "Let r > 0 be arbitrary and consider the mass distribution µr on Rd obtained by replacing each point z in P with an ℓp-norm ball Bp(z, r) of radius r around z (without loss of generality, assume r is small enough such that the balls do not intersect and such that the support of µr is contained in [0, 1]d). Theorem 3.13 yields a centerpoint c(r) of µr. Moreover, by Lemma 3.19, these centerpoints are contained in [0, 1]d as well. Now consider the sequence of centerpoints c(r) as r goes to 0.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "generality",
+                "assume",
+                "ball",
+                "balls",
+                "contained",
+                "arbitrary",
+                "mass",
+                "distribution",
+                "obtained",
+                "replacing"
+            ]
+        }
+    },
+    {
+        "id": "46eabdd3-6018-4f33-a35c-77538dfc654f",
+        "title": "",
+        "chunk_text": "By the theorem of Bolzano- Weierstrass, this sequence has a convergent subsequence with limit c ∈[0, 1]d. From now on, we will use c(r) to refer to elements of this convergent subsequence. We claim that c is an ℓp-centerpoint of P. To prove this, fix v ∈Sd−1 and let z ∈P \\ Hp c,v be arbitrary. This means that there exists ε > 0 such that ∥c −z∥p > ∥c −εv −z∥p and thus even ∥c −z∥p > ∥c −εv −z∥p + δ for some δ > 0. By choosing r small enough, we can ensure both r ≤δ/4 and ∥c(r) −c∥p ≤δ/4.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Weierstrass",
+                "Bolzano",
+                "convergent",
+                "subsequence",
+                "theorem",
+                "sequence",
+                "limit",
+                "refer",
+                "elements",
+                "claim"
+            ]
+        }
+    },
+    {
+        "id": "420b7d33-7ae7-45f7-a289-ef92275907fa",
+        "title": "",
+        "chunk_text": "Using the triangle inequality, we then get ∥c(r) −z′∥p ≥∥c −z∥p −∥z′ −z∥p −∥c −c(r)∥p ≥∥c −z∥p −δ/2 > ∥c −εv −z∥p + δ/2 ≥∥c(r) −εv −z′∥p −∥z′ −z∥p −∥c −c(r)∥p + δ/2 ≥∥c(r) −εv −z′∥p 32 for all z′ ∈Bp(z, r). We conclude that Bp(z, r) ∩Hp c(r),v is empty. In fact, this derivation holds true for all sufficiently small r. This means that all balls around points z ∈P \\ Hp c,v will eventually (for small enough r) stop contributing to µr(Hp c(r),v).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "inequality",
+                "triangle",
+                "small",
+                "empty",
+                "conclude",
+                "fact",
+                "derivation",
+                "holds",
+                "true",
+                "sufficiently"
+            ]
+        }
+    },
+    {
+        "id": "33056b4b-9ca3-455f-99bc-b52b442b59df",
+        "title": "",
+        "chunk_text": "By µr(Hp c(r),v) ≥ 1 d+1µr(Rd), we conclude that there can be at most d d+1|P| such points z and thus we get |P ∩Hp c,v| ≥ |P| d+1, as desired. 33",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "desired",
+                "conclude",
+                "points"
+            ]
+        }
+    }
+]

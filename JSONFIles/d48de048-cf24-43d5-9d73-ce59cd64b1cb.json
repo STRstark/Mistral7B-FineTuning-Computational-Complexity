@@ -1,0 +1,3913 @@
+[
+    {
+        "id": "4a17528c-1af8-4161-beb2-b6818bc08865",
+        "title": "",
+        "chunk_text": "arXiv:2503.20550v1 [math.CO] 26 Mar 2025 On the order of the shortest solution sequences for the pebble motion problems Tomoki Nakamigawa 1 Department of Information Science Shonan Institute of Technology 1-1-25 Tsujido-Nishikaigan, Fujisawa 251-8511, Japan Tadashi Sakuma 2 Faculty of Science Yamagata University 1-4-12 Kojirakawa, Yamagata 990-8560, Japan Abstract Let G be a connected graph with N vertices.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Japan",
+                "Mar",
+                "Kojirakawa",
+                "Science",
+                "Yamagata",
+                "Nakamigawa",
+                "Department",
+                "Technology",
+                "Fujisawa",
+                "Sakuma"
+            ]
+        }
+    },
+    {
+        "id": "6fcaac73-ba36-4ff7-8629-545c8bf7a80e",
+        "title": "",
+        "chunk_text": "Let k be the number of vertices in a longest path of G such that every vertex on the path is a cut vertex of G, and every intermediate vertex of the path is a degree-two vertex of G. Let P = {1, . . . , n} be a set of pebbles with n + k < N. A conﬁguration of P on G is deﬁned as a function f from V (G) to {0, 1, . . . , n} with |f −1(i)| = 1 for 1 ≤i ≤n, where f −1(i) is a vertex occupied with the ith pebble for 1 ≤i ≤n and f −1(0) is a set of unoccupied vertices.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "path",
+                "vertex",
+                "number",
+                "longest",
+                "cut",
+                "intermediate",
+                "degree-two",
+                "set",
+                "vertices",
+                "pebbles"
+            ]
+        }
+    },
+    {
+        "id": "251faf4f-68da-4d6b-99da-35bd221589fd",
+        "title": "",
+        "chunk_text": "A move is deﬁned as shifting a pebble from a vertex to some unoccupied neighbor. The pebble motion problem on the pair (G, P) is to decide whether a given conﬁguration of pebbles is reachable from another by executing a sequence of moves.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "neighbor",
+                "pebble",
+                "deﬁned",
+                "shifting",
+                "vertex",
+                "unoccupied",
+                "move",
+                "moves",
+                "pebbles",
+                "pair"
+            ]
+        }
+    },
+    {
+        "id": "0b6f11d4-3bfd-4467-8b3e-2319f3825cb3",
+        "title": "",
+        "chunk_text": "In this paper, we show that the length of the shortest solution sequence of the pebble motion problem on the pair (G, P) is in O(Nn + n2 log(min{n, k})) if G is a N-vertex tree, and it is in O(N 2 + n3 N−n + n2 log(min{n, N −n})) if G is a connected general N-vertex graph. We provide an algorithm that can obtain a solution sequence of lengths that satisfy these orders, with the same computational complexity as the order of the length.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "log",
+                "min",
+                "N-vertex",
+                "sequence",
+                "solution",
+                "length",
+                "paper",
+                "pair",
+                "tree",
+                "graph"
+            ]
+        }
+    },
+    {
+        "id": "06379fd4-21b4-4ea6-9384-d63eeb8817e5",
+        "title": "",
+        "chunk_text": "Keywords: pebble motion, motion planning, multi-agent path ﬁnding, 15-puzzle, tree 1This work was supported by JSPS KAKENHI Grant Number JP16K05260. Email: nakamigwt@gmail.com 2This work was supported by JSPS KAKENHI Grant Number JP16K05260, JP26400185, JP18K03388. Email: sakuma@sci.kj.yamagata-u.ac.jp 1 Introduction Let G be a ﬁnite undirected graph with no multiple edges or loops. The vertex set of G and the edge set of G are denoted by V (G) and E(G), respectively. Let P = {1, . . .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Number",
+                "JSPS",
+                "KAKENHI",
+                "Grant",
+                "work",
+                "motion",
+                "Email",
+                "Keywords",
+                "tree",
+                "supported"
+            ]
+        }
+    },
+    {
+        "id": "9a60eb73-7628-4a21-bb82-91d421edf2a2",
+        "title": "",
+        "chunk_text": ", n} be a set of pebbles with n < |V (G)|. A conﬁguration of P on G is deﬁned as a function f from V (G) to {0, 1, . . . , n} with |f −1(i)| = 1 for 1 ≤i ≤n, where f −1(i) is a vertex occupied with the ith pebble for 1 ≤i ≤n and f −1(0) is a set of unoccupied vertices. A move is deﬁned as shifting a pebble from a vertex to some unoccupied neighbor.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "set",
+                "deﬁned",
+                "vertex",
+                "pebble",
+                "unoccupied",
+                "conﬁguration",
+                "function",
+                "pebbles",
+                "vertices",
+                "neighbor"
+            ]
+        }
+    },
+    {
+        "id": "c2b85bbf-0ec2-4853-b224-ed028dde6f58",
+        "title": "",
+        "chunk_text": "The pebble motion problem on the pair (G, P) is to decide whether a given conﬁguration of pebbles reachable from another by executing a sequence of moves. Regarding the notation ‘on the pair (G, P)’ used above, in this paper, we also allow the expression ‘on (G, n)’ when P = {1, . . . , n}. Furthermore, as long as there is no risk of misunderstanding, we will also permit the shorthand ‘on G’ that omits P and n. Let F(G, P) denote the set of all conﬁgurations on the pair (G, P).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "pair",
+                "pebble",
+                "pebbles",
+                "moves",
+                "motion",
+                "problem",
+                "decide",
+                "reachable",
+                "executing",
+                "sequence"
+            ]
+        }
+    },
+    {
+        "id": "c623f459-03b7-4586-8a57-f04853a89ed7",
+        "title": "",
+        "chunk_text": "The well-known puzzle named “15-puzzle” due to Loyd [38] is a typical example of this problem where the graph G is a 4 × 4-grid (cf. [3,30]). In 1974, Wilson [66] solved completely the feasibility problem (i.e. the problem of determining whether all the conﬁgurations of the puzzle are rearrangeable from one another or not) for the case of |f −1(0)| = 1 on general graphs, and followed by the result of Kornhauser, Miller and Spirakis (FOCS ’84) [34] for the case of |f −1(0)| ≥2.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Loyd",
+                "problem",
+                "puzzle",
+                "named",
+                "due",
+                "case",
+                "well-known",
+                "typical",
+                "Wilson",
+                "Kornhauser"
+            ]
+        }
+    },
+    {
+        "id": "b2a7674d-a752-45db-9dab-7dc1fa250069",
+        "title": "",
+        "chunk_text": "Papadimitriou, Raghavan, Sudan, and Tamaki (FOCS ’94) [45] consider the case that there exists a single special pebble (“robot”) and that the other pebbles (“obstacles”) are indistinguishable. They focus on the time complexity problems for optimal number of moves from an arbitrary given conﬁguration of the pebbles to a proper goal conﬁguration in which the robot is on the desired vertex.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Raghavan",
+                "Sudan",
+                "Tamaki",
+                "FOCS",
+                "Papadimitriou",
+                "obstacles",
+                "’94",
+                "indistinguishable",
+                "robot",
+                "pebbles"
+            ]
+        }
+    },
+    {
+        "id": "8fe77e8e-fece-43b9-8580-50444e26669b",
+        "title": "",
+        "chunk_text": "The pebble motion problems, and the multi-agent path ﬁnding problems, which are variants with some relaxed constraints, have not only theoretical interest but also broad applications across a wide range of ﬁelds in computer science, particularly in artiﬁcial intelligence and robotics. As a result, a vast amount of research [1–30, 32–74] has already been accumulated.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "problems",
+                "constraints",
+                "science",
+                "robotics",
+                "pebble",
+                "motion",
+                "multi-agent",
+                "path",
+                "ﬁnding",
+                "variants"
+            ]
+        }
+    },
+    {
+        "id": "f2e04612-b4d2-441a-a886-cb505bf01449",
+        "title": "",
+        "chunk_text": "Furthermore, in light of recent advancements in the ﬁeld of artiﬁcial intelligence, the number of research papers in this area has been following a signiﬁcant upward trend. That said, there is no question that the essential underlying model in the pebble motion problem is still the pebble motion problem on trees, i.e., the problem of restricting G to being a tree in the input pair (G, P). The pebble motion problem must be discussed on a connected graph because of its nature.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "pebble",
+                "motion",
+                "problem",
+                "intelligence",
+                "trend",
+                "light",
+                "recent",
+                "advancements",
+                "ﬁeld",
+                "artiﬁcial"
+            ]
+        }
+    },
+    {
+        "id": "d93d9e12-a6c1-4343-b8dc-827186173f1c",
+        "title": "",
+        "chunk_text": "On the other hand, since a connected graph always has a spanning tree as a subgraph, the pebble motion problem on trees is a versatile model that can be applied to all pebble motion problems.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "motion",
+                "pebble",
+                "hand",
+                "subgraph",
+                "connected",
+                "graph",
+                "spanning",
+                "versatile",
+                "model",
+                "applied"
+            ]
+        }
+    },
+    {
+        "id": "bfc519a3-f5fc-48c4-934d-50a2f81d001c",
+        "title": "",
+        "chunk_text": "As already pointed out in the monumental paper in the relevant ﬁeld, Kornhauser, Miller, and Spirakis [34], one of the main reasons why the computational complexity of the reconﬁguration algorithms for the pebble motion problem on an N-vertex board graph jumps to Θ(N 3) is due to the situation where an induced cycle of order Θ(N) is included in the board graph, in a way that it inevitably has to be used during the reconﬁguration of that part.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "reconﬁguration",
+                "board",
+                "graph",
+                "Kornhauser",
+                "Miller",
+                "Spirakis",
+                "N-vertex",
+                "ﬁeld",
+                "part",
+                "pointed"
+            ]
+        }
+    },
+    {
+        "id": "8ab5f275-8552-4da5-b6ce-f7839a1e7406",
+        "title": "",
+        "chunk_text": "Therefore, the question of how the computational complexity is evaluated in other structures (referred to as “separable graphs” in the aforementioned paper [34]) is essentially a fundamental issue related to the core of the pebble motion problem.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "structures",
+                "referred",
+                "separable",
+                "graphs",
+                "paper",
+                "problem",
+                "question",
+                "computational",
+                "complexity",
+                "evaluated"
+            ]
+        }
+    },
+    {
+        "id": "e8aff2c0-97f0-41c1-8ef3-93c4ee1bf386",
+        "title": "",
+        "chunk_text": "Actually, a fact revealed in this paper is that, except for highly speciﬁc cases where the size of the blank space, that is, the diﬀerence N −n between the number of vertices N of the board graph and the total number of pebbles n is at most O(1) with respect to N (in real-world applications, it is natural to consider that, this size, which represents the range of motion for the agents, increases with the number of vertices N of the board graph), 2 the time complexity of the reconﬁguration algorithm on the general N-vertex board graphs can indeed be bounded by o(N 3) by applying the reconﬁguration mechanism when the board graph is a tree locally or globally.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "board",
+                "number",
+                "graph",
+                "vertices",
+                "reconﬁguration",
+                "size",
+                "N-vertex",
+                "graphs",
+                "space",
+                "applications"
+            ]
+        }
+    },
+    {
+        "id": "292ca67c-0b0e-46d6-95d8-efa7e7a6a070",
+        "title": "",
+        "chunk_text": "The reconﬁguration algorithms for the pebble motion problem are used as fast solvers for the multi-agent path ﬁnding problems (c.f. [68]), which are actively researched today. Therefore, reducing their computational complexity would make a signiﬁcant contribution to directly enhancing the functionality of such solvers.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "today",
+                "solvers",
+                "reconﬁguration",
+                "algorithms",
+                "pebble",
+                "motion",
+                "fast",
+                "multi-agent",
+                "path",
+                "ﬁnding"
+            ]
+        }
+    },
+    {
+        "id": "39b900dc-e09c-483d-b887-6117883339b3",
+        "title": "",
+        "chunk_text": "Furthermore, many of the algorithms developed to solve the multi-agent path ﬁnding problems rely in some form on algorithms for the pebble motion problem that are restricted to a board graph constrained to a tree [4, 6, 33, 35]. Hence, the impact of improvements in the computational complexity evaluation of algorithms for solving the pebble motion problem on trees is signiﬁcant. Therefore, this paper addresses the following unresolved issue regarding this important problem. Open Problem.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "problem",
+                "algorithms",
+                "pebble",
+                "motion",
+                "developed",
+                "solve",
+                "multi-agent",
+                "path",
+                "ﬁnding",
+                "rely"
+            ]
+        }
+    },
+    {
+        "id": "32d47440-411b-43c8-b991-7c4b65f8e647",
+        "title": "",
+        "chunk_text": "Give an appropriate upper bound on the length of the shortest solution sequence to the pebble motion problem on N-vertex trees, with respect to N. Kornhauser, Miller, and Spirakis [34] mentioned, without any proof, that the upper bound for the above problem is O(N 2). Since then, including the authors of the original paper [34], no one has clariﬁed the truth of this statement.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "N-vertex",
+                "upper",
+                "bound",
+                "problem",
+                "Give",
+                "trees",
+                "length",
+                "shortest",
+                "solution",
+                "sequence"
+            ]
+        }
+    },
+    {
+        "id": "fcc3be88-a56e-4716-bcfe-8fc08e63a0a8",
+        "title": "",
+        "chunk_text": "Here we note that, in the worst case, it may take Ω(Nn) steps to move n pebbles from one end to another of an N-vertex board tree. Additionally, in the worst case, the parameter n may be in Ω(N). Therefore, their estimate O(N 2) in [34] can be replaced with Θ(N 2). For over 40 years, this problem has remained open. In fact, attempts to genuinely lower the upper bound of O(N 3) proven in [34] have been made up to the present day [6, 9].",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "N-vertex",
+                "case",
+                "worst",
+                "steps",
+                "tree",
+                "note",
+                "move",
+                "pebbles",
+                "end",
+                "board"
+            ]
+        }
+    },
+    {
+        "id": "62e90148-f58b-41b4-8be4-21f881647dca",
+        "title": "",
+        "chunk_text": "However, to the author’s knowledge, the current best result, as shown in the 2024 paper [6], still does not fall below the O(N 3) threshold. In this paper, we show that the problem mentioned above has a solution sequence of moves of length ˜O(N 2). A more precise description of the results obtained in this paper follows.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "paper",
+                "threshold",
+                "knowledge",
+                "author",
+                "current",
+                "shown",
+                "fall",
+                "length",
+                "result",
+                "results"
+            ]
+        }
+    },
+    {
+        "id": "61bcee4e-8f36-4920-bf91-9e9945a2b214",
+        "title": "",
+        "chunk_text": "A path I = v1 · · · vd of a connected graph G is called an isthmus if (1) every edge of I is a bridge of G, (2) every vertex of I is a cutvertex of G, and (3) degG(vi) = 2 for 1 < i < d. An isthmus with d vertices is called a d-isthmus. First, let us clarify one point. In the pebble motion problem on a general tree G, any two conﬁgurations of pebbles on G are not guaranteed to be rearrangeable through a sequence of moves.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "degG",
+                "called",
+                "isthmus",
+                "path",
+                "connected",
+                "graph",
+                "edge",
+                "bridge",
+                "vertex",
+                "cutvertex"
+            ]
+        }
+    },
+    {
+        "id": "f57785e8-62d9-480f-b631-c9a1350f1c86",
+        "title": "",
+        "chunk_text": "Therefore, we will only consider feasible puzzles, that is, the puzzles in which, given any two conﬁgurations f and g, a sequence of moves exists to rearrange from f to g. According to Theorem A discussed later, a given pair (G, P) is a feasible pebble motion puzzle if and only if the pair satisﬁes the inequality n + k < N, where n is the number |P| of pebbles on G, k is the maximum size of isthmuses in G, and N is the order of G.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "feasible",
+                "puzzles",
+                "conﬁgurations",
+                "sequence",
+                "moves",
+                "exists",
+                "rearrange",
+                "pair",
+                "Theorem",
+                "puzzle"
+            ]
+        }
+    },
+    {
+        "id": "5b50a411-539c-4eb2-97ac-72793e8a74ba",
+        "title": "",
+        "chunk_text": "Thus, we will restrict the instances of the following combinatorial problem, the PEBBLE MOTION PROBLEM ON TREES, to puzzles that satisfy such conditions. One more thing to clarify is that no pebble can move across an isthmus with a size greater than or equal to the number of empty spaces N −n. Therefore, in cases with such isthmuses, it is suﬃcient to handle the reconﬁguration only on the individual ’feasible’ connected components that are divided by these isthmuses.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "problem",
+                "TREES",
+                "MOTION",
+                "PEBBLE",
+                "conditions",
+                "restrict",
+                "instances",
+                "combinatorial",
+                "puzzles",
+                "satisfy"
+            ]
+        }
+    },
+    {
+        "id": "8ecaf5cc-32e6-41fb-b18b-9bc3528babf7",
+        "title": "",
+        "chunk_text": "Problem (PEBBLE MOTION PROBLEM ON TREES). Instance: A tree G with N vertices, the size k of a longest isthmus of G, the set of pebbles P := {1, . . . , n} such that n + k < N holds, the initial conﬁguration f and the goal conﬁguration g on the pair (G, P). Task: Output an explicit sequence of moves to rearrange from the initial conﬁguration f to the goal conﬁguration g. 3 The following is our main theorem. Theorem 1.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Problem",
+                "MOTION",
+                "conﬁguration",
+                "PEBBLE",
+                "TREES",
+                "tree",
+                "pebbles",
+                "initial",
+                "goal",
+                "theorem"
+            ]
+        }
+    },
+    {
+        "id": "698edbb1-a103-4223-9e2c-7111c1fbda1b",
+        "title": "",
+        "chunk_text": "The PEBBLE MOTION PROBLEM ON TREES can be solved with a time com- plexity of O(Nn + n2 log(min{n, k})). Let Lmin(G, P, f, g) denote the minimum number of moves to rearrange from a conﬁguration f to another conﬁguration g on the pair (G, P). The time complexity of the PEBBLE MOTION PROBLEM ON TREES is clearly in Ω(Lmin(G, P, f, g)). Hence we have: Corollary 2. The length of the shortest solution sequence of the PEBBLE MOTION PROBLEM ON TREES is in O(Nn + n2 log(min{n, k})).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "PEBBLE",
+                "MOTION",
+                "PROBLEM",
+                "TREES",
+                "Lmin",
+                "log",
+                "min",
+                "plexity",
+                "time",
+                "solved"
+            ]
+        }
+    },
+    {
+        "id": "1906e6d2-d4b5-43f5-b03b-cb62aefafcf3",
+        "title": "",
+        "chunk_text": "The above result is somewhat surprising. In fact, when the size k of a longest isthmus is in O(2N/n), the length of the shortest solution sequence belongs to O(Nn), and the estimate O(N 2) in [34] is established in a stronger form. We believe that the conjecture below will also hold. Conjecture 1. The length of the shortest solution sequence of the PEBBLE MOTION PROBLEM ON TREES is in Θ(Nn + n2 log(min{n, k})).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "surprising",
+                "result",
+                "length",
+                "shortest",
+                "solution",
+                "sequence",
+                "conjecture",
+                "PEBBLE",
+                "MOTION",
+                "PROBLEM"
+            ]
+        }
+    },
+    {
+        "id": "65b2dab6-c9b6-4d38-ba69-b2d826c5c948",
+        "title": "",
+        "chunk_text": "As a matter of fact, considering the combinatorial structure of the base cases described in Section 3, it would be extremely diﬃcult to further improve on the order of length of a minimum solution sequence we have given in this paper. We will refer to the problem of changing the input graph in the PEBBLE MOTION PROBLEM ON TREES to a general connected N-vertex graph as the PEBBLE MOTION PROBLEM ON GENERAL GRAPHS.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Section",
+                "problem",
+                "PEBBLE",
+                "MOTION",
+                "fact",
+                "paper",
+                "general",
+                "matter",
+                "combinatorial",
+                "structure"
+            ]
+        }
+    },
+    {
+        "id": "3e267d31-9b71-47c6-b798-736ca35a67fa",
+        "title": "",
+        "chunk_text": "Note that the input pair (G, P) of the problem is again restricted to be a feasible pair, that is, we assume that G is not a cycle and N −n ≥2. Then, the following statement is an immediate consequence of Theorem 1. Corollary 3. The PEBBLE MOTION PROBLEM ON GENERAL GRAPHS can be solved with time complexity of O(N 2 + n2 log n) if 2n < N holds.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "pair",
+                "Note",
+                "problem",
+                "input",
+                "restricted",
+                "feasible",
+                "assume",
+                "cycle",
+                "Theorem",
+                "PEBBLE"
+            ]
+        }
+    },
+    {
+        "id": "db8b270e-6bcd-4433-98fb-c117cee93fd2",
+        "title": "",
+        "chunk_text": "But astonishingly, by applying the results from this paper on the board trees, even the known time complexity of the reconﬁguration algorithm on general N-vertex board graphs, which is O(N 3), can be truly improved – except for the special case where N −n is in O(1) with respect to N, as follows: Theorem 4. The PEBBLE MOTION PROBLEM ON GENERAL GRAPHS can be solved with time complexity of O(N 2 + n3 N−n + n2 log(min{n, N −n})).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Theorem",
+                "board",
+                "N-vertex",
+                "general",
+                "graphs",
+                "complexity",
+                "time",
+                "astonishingly",
+                "trees",
+                "improved"
+            ]
+        }
+    },
+    {
+        "id": "a0b45230-2682-42f4-a9b1-522219cac29b",
+        "title": "",
+        "chunk_text": "Lastly, we would like to note that by making a few modiﬁcations to certain parts of the algorithm proposed in this paper, appropriate solutions to the multi-agent path ﬁnding problems on trees can also be obtained. 2 Prior Research In this section, we will discuss a previous research result that is closely related to our problem.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Lastly",
+                "paper",
+                "obtained",
+                "note",
+                "making",
+                "modiﬁcations",
+                "parts",
+                "algorithm",
+                "proposed",
+                "solutions"
+            ]
+        }
+    },
+    {
+        "id": "80bb894c-ffb5-4b17-a77e-3046436ba3ed",
+        "title": "",
+        "chunk_text": "For a graph X with N vertices, let n, q be a pair of positive integers with n+q = N, where p is the number of distinct pebbles and q is the number of unoccupied vertices. Let P = {1, 2, . . . , n} be the set of all the pebbles. 4 Let us deﬁne the puzzle graph puz∗(X, n) of X with n pebbles such that V (puz∗(X, n)) := F(X, n), E(puz∗(X, n)) := {(f, g) : f, g ∈F(X, n), f is rearrangeable into g by some moves}.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "vertices",
+                "number",
+                "puz",
+                "pebbles",
+                "pair",
+                "positive",
+                "integers",
+                "distinct",
+                "unoccupied",
+                "graph"
+            ]
+        }
+    },
+    {
+        "id": "363fc9d9-22c8-48d9-9a42-460be8b87f86",
+        "title": "",
+        "chunk_text": "We say that (X, n) is transitive if for any conﬁguration f ∈F(X, n) and for any vertex u of X, a pebble f(u) can be shifted to any other vertex by a sequence of ﬁnite moves. For a graph Z, let c(Z) be the number of connected components of Z. We say that (X, n) is feasible if c(puz∗(X, n)) = 1. Theorem A(Kornhauser, Miller, Spirakis [34]). Let 2 ≤q ≤N −1 and n+q = N. Let X be a connected graph with N vertices. Suppose that X is not a cycle. Then the following conditions are equivalent.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "vertex",
+                "moves",
+                "transitive",
+                "conﬁguration",
+                "pebble",
+                "shifted",
+                "sequence",
+                "ﬁnite",
+                "graph",
+                "connected"
+            ]
+        }
+    },
+    {
+        "id": "74bb08eb-e71b-4382-9ef5-7d0adaf0709d",
+        "title": "",
+        "chunk_text": "(1) X has no q-isthmus. (2) (X, n) is transitive. (3) (X, n) is feasible. 3 On the cases of suﬃcient blank space This section describes the base cases, where the size of the board N is signiﬁcantly larger than the number of pebbles n, which are the cornerstone of the proof.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "q-isthmus",
+                "cases",
+                "transitive",
+                "feasible",
+                "proof",
+                "suﬃcient",
+                "blank",
+                "space",
+                "section",
+                "describes"
+            ]
+        }
+    },
+    {
+        "id": "1d8b801e-69fa-406f-93a8-a9cc4d7b2b7b",
+        "title": "",
+        "chunk_text": "In the base case where n ≪N, we will demonstrate that for given conﬁgurations f, g ∈F(G, P), f can be transformed into g with O(Nn + n2 log n) moves, and that such a sequence of moves can also be computed with the same time complexity O(Nn + n2 log n). Firstly, we show the outline of the proof. • Under the condition n ≪N, there exists a subtree H of G such that the puzzle (H, P) is feasible and (H, P) can be divided into a family of sub-puzzles on H.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "log",
+                "moves",
+                "base",
+                "case",
+                "demonstrate",
+                "conﬁgurations",
+                "transformed",
+                "sequence",
+                "computed",
+                "time"
+            ]
+        }
+    },
+    {
+        "id": "92ac2118-5e8b-43a6-835a-bb1a0db7d79e",
+        "title": "",
+        "chunk_text": "• Choose a pair of conﬁgurations fH, gH ∈F(H, P) such that f and g can be transformed to fH and gH respectively with O(Nn) moves and eﬀort. • In order to transfer fH to gH with O(Nn + n2 log n) moves and eﬀort, we apply binary comparisons, where the puzzle (H, P) is divided into sub-puzzles, in which each sub-puzzle has a half number of original pebbles, based on a divide-conquer strategy.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Choose",
+                "moves",
+                "eﬀort",
+                "pair",
+                "conﬁgurations",
+                "transformed",
+                "log",
+                "comparisons",
+                "puzzle",
+                "pebbles"
+            ]
+        }
+    },
+    {
+        "id": "50a91fc4-d3a4-4cd2-9305-88b9e59cc63f",
+        "title": "",
+        "chunk_text": "• The algorithm works similarly to the merge sorting algorithm: it splits the puzzle into two halves until each sub-puzzle has one pebble, and merges the pebbles to build a target conﬁguration. We prepare an algorithm to move unlabeled pebbles from a set of vertices to another. Lemma 5. Let S1, S2 ⊂V (G) with |S1| = |S2| = n. Then there exists a sequence of moves of length O(Nn) which transfers all the pebbles from S1 to S2, and it can be calculated in O(Nn) time.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "pebbles",
+                "algorithm",
+                "conﬁguration",
+                "merge",
+                "merges",
+                "works",
+                "similarly",
+                "sorting",
+                "splits",
+                "puzzle"
+            ]
+        }
+    },
+    {
+        "id": "cc8d5615-f76e-49f4-ac19-07be0c9072ac",
+        "title": "",
+        "chunk_text": "For a conﬁguration π ∈F(G, P), the support of π is deﬁned as π−1(P), which is the subset of vertices of G occupied by P. We denote the support of π by sup(π). For two conﬁgurations π, π∗∈F(G, P), we say that π and π∗are strongly related, if there exists an algorithm which 5 transfers π to π∗in O(Nn) time. For any conﬁguration π and for any S ⊂V (G) with |S| = n, by applying Lemma 5, we have a conﬁguration π∗such that sup(π∗) is S and π∗is strongly related to π.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "support",
+                "conﬁguration",
+                "deﬁned",
+                "subset",
+                "vertices",
+                "occupied",
+                "denote",
+                "strongly",
+                "related",
+                "Lemma"
+            ]
+        }
+    },
+    {
+        "id": "7edbf03d-b8fe-42e3-bad1-83887db5e801",
+        "title": "",
+        "chunk_text": "Let us consider the puzzle (G, P) where G has a rivet, a vertex dividing a tree into two parts with a suitable size. Lemma 6. Let G be a tree having a vertex o with degGo ≥3 and its subtrees G1 and G2 such that V (G1) ∩V (G2) = {o}, and |V (Gi)| ≥n + O(1) for i = 1, 2. Then the PEBBLE MOTION PROBLEM ON TREES is solved in O(Nn + n2 log n) time. Let us consider the puzzle (G, P) where G has a long isthmus with respect to the number of pebbles. Lemma 7.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Lemma",
+                "rivet",
+                "size",
+                "puzzle",
+                "vertex",
+                "tree",
+                "dividing",
+                "parts",
+                "suitable",
+                "TREES"
+            ]
+        }
+    },
+    {
+        "id": "ec231dc2-d714-4264-8e00-d66c31cfdf8c",
+        "title": "",
+        "chunk_text": "Let G be a tree with an isthmus I of size at least n. Let G1 and G2 be the two subtrees induced by V (G) \\V0, where V0 is a set of inner vertices of I. If |V (Gi)| ≥n/2+ O(1) for i = 1, 2, then the PEBBLE MOTION PROBLEM ON TREES is solved in O(Nn + n2 log n) time. Combining Lemma 5, Lemma 6 and Lemma 7, we have the following theorem. Theorem 8. If the puzzle (G, P) satisﬁes N ≥3n, then the PEBBLE MOTION PROBLEM ON TREES is solved in O(Nn + n2 log n) time.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Lemma",
+                "PEBBLE",
+                "MOTION",
+                "PROBLEM",
+                "TREES",
+                "time",
+                "log",
+                "isthmus",
+                "size",
+                "solved"
+            ]
+        }
+    },
+    {
+        "id": "ee258ea6-ac4f-4e96-b18e-e1b9bdc510ec",
+        "title": "",
+        "chunk_text": "4 Splitting a tree into small subtrees To prove the main theorem, we need to decompose an instance puzzle into smaller sub-puzzles that satisfy the conditions of the base cases in the previous section. In this section, we will provide tools for this purpose.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Splitting",
+                "section",
+                "theorem",
+                "tree",
+                "small",
+                "subtrees",
+                "prove",
+                "main",
+                "decompose",
+                "instance"
+            ]
+        }
+    },
+    {
+        "id": "fd35f3fc-732b-4eb9-8fe2-a5874417d99c",
+        "title": "",
+        "chunk_text": "It is well-known that any tree T has a vertex v (which is called a centroid vertex of T) such that the order of each connected component of T −v does not exceed (|V (T)| −1)/2, or else it has an edge e (which is called a centroid edge of T) such that the order of each of the two connected components of T −e is exactly |V (T)|/2. Lemma 9 ([31]). Finding a centroid vertex or a centroid edge on a tree is possible in linear time. Using the above, we can derive the following lemma. Lemma 10.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "centroid",
+                "called",
+                "order",
+                "connected",
+                "vertex",
+                "edge",
+                "Lemma",
+                "component",
+                "components",
+                "exceed"
+            ]
+        }
+    },
+    {
+        "id": "1461bbb9-0614-41f6-bdf4-511df3c48c12",
+        "title": "",
+        "chunk_text": "Let T be an arbitrary tree with N vertices. Then one can ﬁnd, in O(N), a pair of subtrees (T1, T2) of T such that all of the following three conditions hold. 1. |V (T1) ∩V (T2)| ≤1; 2. V (T1) ∪V (T2) = V (T); 3. (N + 2)/3 ≤|V (T1)| ≤|V (T2)| ≤(N + 1)/2. Lemma 11. Let T be a tree such tha the size of a maximum isthmus of T is at most k. For any subtree T ′ of T such that the size of a maximum isthmus of T ′ is also at most k, the following statements hold.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "vertices",
+                "arbitrary",
+                "hold",
+                "size",
+                "maximum",
+                "isthmus",
+                "tree",
+                "ﬁnd",
+                "pair",
+                "conditions"
+            ]
+        }
+    },
+    {
+        "id": "d928a3cd-d978-4ab2-91de-df7f93f525c5",
+        "title": "",
+        "chunk_text": "• For any natural number d satisfying |V (T ′)| ≤d ≤|V (T)|, we can ﬁnd, in O(d), a d-vertex subtree T ′′ of T such that the size of a maximum isthmus of T ′′ is at most k and that T ′′ contains T ′ as a subgraph. 6 Lemma 12. There exists an algorithm for vertex covering a tree T of order n with 4n/k or fewer subtrees of order k(≤n) that share at most one vertex with each other. In the algorithm of Lemma 12, the subtrees covering T are stored and maintained in the following binary tree BT.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Lemma",
+                "satisfying",
+                "ﬁnd",
+                "subgraph",
+                "natural",
+                "number",
+                "d-vertex",
+                "size",
+                "maximum",
+                "isthmus"
+            ]
+        }
+    },
+    {
+        "id": "d30f1013-fc0e-4acf-86d1-365ac0456f75",
+        "title": "",
+        "chunk_text": "For each node x of BT, let p(x) denote its parent node and ci(x)(i = 1, 2) denote its child nodes. Each node x of BT should store the three objects • X(x), • Centroid(X(x)) := (CentroidVertex(X(x)), CentroidEdge(X(x))), • Joint(X(x)) := (JointVertex(X(x)), JointEdge(X(x))) deﬁned below as its attributes: First, X(x) is a subtree of T determined by the inductive procedure we will describe. If X(x) has a centroid vertex, it is stored in CentroidVertex(X(x)), otherwise CentroidVertex(X(x)) := ∅.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "denote",
+                "node",
+                "CentroidVertex",
+                "Centroid",
+                "nodes",
+                "parent",
+                "child",
+                "Joint",
+                "CentroidEdge",
+                "JointVertex"
+            ]
+        }
+    },
+    {
+        "id": "06dddf20-3286-4061-9878-8c3e230fb839",
+        "title": "",
+        "chunk_text": "In the same way, if X(x) has a centroid edge, it is stored in CentroidEdge(X(x)), otherwise CentroidEdge(X(x)) := ∅. If x is a leaf node of BT, let us deﬁne Centroid(X(x)) := (∅, ∅) to avoid wasting computation time. 1⃝For the root node r of BT, let X(r) := T, Joint(X(r)) := Centroid(X(r)).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "CentroidEdge",
+                "centroid",
+                "edge",
+                "stored",
+                "node",
+                "Joint",
+                "time",
+                "leaf",
+                "deﬁne",
+                "avoid"
+            ]
+        }
+    },
+    {
+        "id": "16024a90-80d7-4eb1-bd93-e8f6cdfed2ee",
+        "title": "",
+        "chunk_text": "2⃝When X(x) is stored in a non-leaf node x of BT, the objects X(ci(x)), Joint(X(ci(x))))(i = 1, 2) to be stored in its child nodes ci(x)(i = 1, 2) respectively are deﬁned inductively by the following procedure: ( 2⃝-a) Using Lemma 10, ﬁnd two subtrees X1 and X2 of X(x) satisfying V (X1) ∩V (X2) = {CentroidVertex(X(x))} and V (X1) ∪V (X2) = V (X(x)). If X(x) has a centroid edge, X1, X2 are the two subtrees obtained by removing the edge from X(x).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "stored",
+                "Joint",
+                "Lemma",
+                "subtrees",
+                "node",
+                "nodes",
+                "CentroidVertex",
+                "procedure",
+                "ﬁnd",
+                "satisfying"
+            ]
+        }
+    },
+    {
+        "id": "3fd30674-8177-430e-abb0-762265241f05",
+        "title": "",
+        "chunk_text": "( 2⃝-b) Of the two subtrees X1 and X2 of X(x), the one that contains JointVertex(X(x)) or one of the endpoints of JointEdge(X(x)) is stored at the second child node c2(x) of x, The other subtree is stored at the ﬁrst child node c1(x) of x. ( 2⃝-c) Joint(X(c2(x))) := Joint(X(x)) ( 2⃝-d) Joint(X(c1(x))) := Centroid(X(x)) It is necessary to use symbols such as pBT(x), cBT i (x), XBT(x), etc. to specify that they are functions on the node x of the binary tree BT.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Joint",
+                "stored",
+                "child",
+                "node",
+                "subtrees",
+                "subtree",
+                "JointVertex",
+                "JointEdge",
+                "endpoints",
+                "ﬁrst"
+            ]
+        }
+    },
+    {
+        "id": "130b65c1-f12a-4d0c-b0a1-caa331ef6761",
+        "title": "",
+        "chunk_text": "However, in this paper, to avoid notational compli- cations, even when multiple binary trees BT 1, BT 2, etc. are treated simultaneously, superscripts such as pBT 1, XBT 2 are omitted when there is no misunderstanding. Then, the following lemmata hold. Lemma 13.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "XBT",
+                "cations",
+                "paper",
+                "compli",
+                "etc.",
+                "simultaneously",
+                "superscripts",
+                "pBT",
+                "misunderstanding",
+                "avoid"
+            ]
+        }
+    },
+    {
+        "id": "26ea9640-2d90-46cd-8a13-b81e4d924482",
+        "title": "",
+        "chunk_text": "For any child node ci(r)(i = 1, 2) of the root node r of this binary tree BT, the following statement holds: • Regarding the leaf node ℓ(i) that can be reached by successively selecting only the ﬁrst child of each descendant of the node ci(r), even if we delete the part X(ℓ(i)) −JointVertex(X(ℓ(i))) from the graph X(r), the resulting graph X(r)−(X(ℓ(i))−JointVertex(X(ℓ(i)))) is connected. Lemma 14.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "node",
+                "JointVertex",
+                "graph",
+                "child",
+                "holds",
+                "connected",
+                "root",
+                "binary",
+                "tree",
+                "statement"
+            ]
+        }
+    },
+    {
+        "id": "f64ae5ea-7707-42af-aa44-1d1eb66792ad",
+        "title": "",
+        "chunk_text": "The eﬀort required to create the binary tree BT from a given tree T with n-vertices using the algorithm from Lemma 12 is O(n log n). 7 5 Main Algorithm In this section, we present the main algorithm for solving the PEBBLE MOTION PROBLEM ON TREES in O(Nn + n2 log(min{n, k})) without any additional constraints on the instances. First, let us consider the case where the size k of a longest isthmus is bounded above by a positive constant M (for example, M = 8), i.e., k ≤M ∈O(1).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "algorithm",
+                "Lemma",
+                "tree",
+                "Main",
+                "log",
+                "eﬀort",
+                "required",
+                "create",
+                "binary",
+                "n-vertices"
+            ]
+        }
+    },
+    {
+        "id": "07843cec-739a-473c-a66b-a1b28cdd3c7d",
+        "title": "",
+        "chunk_text": "In this case, by applying Lemma 11 and consecutively solving at most O(N) feasible sub-puzzles – each on a board tree with at most 2M + 2 vertices – along the path connecting any two pebbles, it is possible to swap their positions without altering the positions of the other pebbles. Since the size of each board tree is bounded by the constant 2M + 2 in these sub-puzzles, the eﬀort to rearrange any conﬁguration on such a board tree is also in constant order O(1).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "pebbles",
+                "Lemma",
+                "board",
+                "tree",
+                "positions",
+                "sub-puzzles",
+                "vertices",
+                "case",
+                "feasible",
+                "applying"
+            ]
+        }
+    },
+    {
+        "id": "fbf0d9ed-01d1-4b9e-88ff-7c284b06510f",
+        "title": "",
+        "chunk_text": "In general, after performing a suitable preprocessing of O(Nn) steps, the entire conﬁguration can be completed by repeating the operation of ’swapping the positions of two pebbles’ at most n −1 times. From these facts, it immediately follows that, in this case, the PEBBLE MOTION PROBLEM ON TREES can be solved with a time complexity of O(Nn). Therefore, in this paper, we will assume k ≫1 for all subsequent discussions.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "steps",
+                "general",
+                "performing",
+                "suitable",
+                "preprocessing",
+                "entire",
+                "conﬁguration",
+                "completed",
+                "repeating",
+                "operation"
+            ]
+        }
+    },
+    {
+        "id": "578b5116-16a2-420b-9833-055ad8bf459a",
+        "title": "",
+        "chunk_text": "Then, the outline of the remaining part of the main algorithm is as follows: 1. For the input (G, P), use Lemma 11 to ﬁnd a subtree T of G such that it has order n + k + 1 and the size of its maximum isthmus is k or less. Then, move all pebbles in the initial conﬁguration f on G onto T with O(Nn) eﬀort, and call this conﬁguration, which is strongly related to f, f ′. 2.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "outline",
+                "remaining",
+                "part",
+                "main",
+                "algorithm",
+                "Lemma",
+                "conﬁguration",
+                "input",
+                "eﬀort",
+                "ﬁnd"
+            ]
+        }
+    },
+    {
+        "id": "de503c68-7499-43d0-81a6-577cb2db927c",
+        "title": "",
+        "chunk_text": "Similarly, for the goal conﬁguration g on G, convert it in advance to a conﬁguration g′ on T that is strongly related to g and matches the operations from Step 4. 3. By using the algorithm from Lemma 12, decompose the tree T into subtrees of suﬃciently small order with respect to k. 4. Among the subtrees obtained from the procedure in Step 3, there is a tree T ′ such that removing all of T ′ except at most one vertex from T keeps the remaining graph connected.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Step",
+                "Lemma",
+                "conﬁguration",
+                "Similarly",
+                "tree",
+                "convert",
+                "decompose",
+                "subtrees",
+                "goal",
+                "advance"
+            ]
+        }
+    },
+    {
+        "id": "6ac0cae6-b4be-44a4-bb57-0490bfe3718d",
+        "title": "",
+        "chunk_text": "Therefore, starting from the conﬁguration f ′, repeat the following sequence of operations: ﬁnd one such tree T ′, place pebbles on it without empty space according to the conﬁguration g′, and then cut oﬀthat portion from the main body. In Step 4 of the outline above, in order to place pebbles according to the conﬁguration g′ on T ′, it is ﬁrst necessary to gather the set of pebbles g′(V (T ′)) \\ {0} that are scattered throughout the entire graph T near the vicinity of T ′.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "conﬁguration",
+                "pebbles",
+                "place",
+                "starting",
+                "repeat",
+                "operations",
+                "ﬁnd",
+                "body",
+                "sequence",
+                "tree"
+            ]
+        }
+    },
+    {
+        "id": "ec719a7a-be90-4cd9-8a04-0bfeeb56caba",
+        "title": "",
+        "chunk_text": "To achieve this, the following method will be used. • Using the method of Lemma 12 to decompose T, there will always be a subtree T ′′, aside from T ′ such that removing all but at most one vertex from T keeps the remaining graph connected. On such a subtree T ′′, tightly pack any pebbles that do not belong to g′(V (T ′)) and then ”temporarily” cut them oﬀfrom the whole.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "method",
+                "subtree",
+                "achieve",
+                "Lemma",
+                "connected",
+                "temporarily",
+                "decompose",
+                "removing",
+                "vertex",
+                "remaining"
+            ]
+        }
+    },
+    {
+        "id": "ece75b7e-a759-4a53-b64a-402c4a81871d",
+        "title": "",
+        "chunk_text": "Once the pebbles are arranged on T ′ according to the conﬁguration g′, all parts that were ”temporarily” removed in this operation will be restored. In the following sections of this paper, we will assume that each vertex v of the input tree G (and consequently all of its subgraphs) is associated with the following two attributes. Peb(v): A function that returns the pebble x(∈{1, . . . , n}) or a blank 0 placed on vertex v. 8 col(v): A function that returns the color of vertex v.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "temporarily",
+                "vertex",
+                "removed",
+                "restored",
+                "arranged",
+                "conﬁguration",
+                "parts",
+                "operation",
+                "function",
+                "returns"
+            ]
+        }
+    },
+    {
+        "id": "d8b8dc64-3427-4204-818b-0deb2493c0bc",
+        "title": "",
+        "chunk_text": "The possible colors are white, gray, or black. Regarding the meaning of the color, white indicates a vertex that has been completely removed from the graph, gray signiﬁes a vertex that is temporarily removed during the execution of the algorithm but will be restored later, and black represents a vertex that remains in the graph. In other words, the graphs are treated not just as simple graphs, but also as objects that also contain information about the conﬁgurations of pebbles on them.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "vertex",
+                "gray",
+                "white",
+                "black",
+                "graph",
+                "graphs",
+                "removed",
+                "colors",
+                "color",
+                "meaning"
+            ]
+        }
+    },
+    {
+        "id": "a1b4b511-7b78-470c-8d1b-2ddcdd052389",
+        "title": "",
+        "chunk_text": "In this algorithm, the shapes such as the graphs G and T, as well as the graphs X(x) stored in each node x of BT created by the operations in Step 3 of the outline above, do not change; however, the values of the functions Peb(v) and col(v) at each vertex v of the graphs continuously change.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "graphs",
+                "change",
+                "Step",
+                "Peb",
+                "algorithm",
+                "stored",
+                "col",
+                "shapes",
+                "node",
+                "created"
+            ]
+        }
+    },
+    {
+        "id": "da8aad2b-6b25-4f68-8b88-5a221ae2db43",
+        "title": "",
+        "chunk_text": "According to Theorem A, if the size of the pebble set P is n and the size of the maximum isthmus of the graph T is at most k, then if the order of T is at most n + k + 1, it is guaranteed that the pebble motion problem on (T, P) is feasible. Therefore, the algorithm presented in this paper ﬁrst uses Lemma 11 to ﬁnd a subtree T of the tree G from the input (G, P) such that its order is n + k + 1 and its size of a maximum isthmus is at most k.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "size",
+                "pebble",
+                "Theorem",
+                "maximum",
+                "isthmus",
+                "order",
+                "feasible",
+                "set",
+                "graph",
+                "guaranteed"
+            ]
+        }
+    },
+    {
+        "id": "c357da4d-9fce-41ad-9eb4-40b4bed17b30",
+        "title": "",
+        "chunk_text": "Furthermore, we rearrange the goal conﬁguration g on G into a ”suitable” conﬁguration g′ on T that is strongly related to g with a time complexity and number of moves of at most O(Nn). The algorithm used for this purpose is Alg . PackedConﬁg(BT, g) shown below. Algorithm 1 (Alg . PackedConﬁg(G, T, BT, g)).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "conﬁguration",
+                "Alg",
+                "PackedConﬁg",
+                "suitable",
+                "rearrange",
+                "goal",
+                "strongly",
+                "related",
+                "time",
+                "complexity"
+            ]
+        }
+    },
+    {
+        "id": "5b090288-26b8-49db-b07e-1e449922ba08",
+        "title": "",
+        "chunk_text": "Input: A tree G and its subtree T, the binary tree BT that stores the set of subtrees covering the tree T obtained from the algorithm stated in Lemma 12, and a conﬁguration g on the pair (G, P). Output: A conﬁguration g′ on (T, P) and a sequence of moves φ[r] · ψ to rearrange g into g′. 1⃝Set Peb := g. Set col(u) := black for each u ∈V (T). Set col(v) := white for each v ∈ V (G) \\ V (T).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "tree",
+                "Lemma",
+                "set",
+                "Input",
+                "conﬁguration",
+                "pair",
+                "subtree",
+                "subtrees",
+                "col",
+                "binary"
+            ]
+        }
+    },
+    {
+        "id": "883c9dfb-d4d3-4831-a946-ffdb185de488",
+        "title": "",
+        "chunk_text": "2⃝Rearrange the conﬁguration g on (G, P) to some conﬁguration on (T, P) which is strongly related to g, and remember the sequence of moves performed here as ψ. 3⃝Call Alg . Packing(T, BT, r) for the root node r of BT. 4⃝Return the sequence of moves φ[r] · ψ and the conﬁguration g′ := φ[r] · ψ(g) on (T, P). Algorithm 2 (Alg . Packing(T, BT, x)).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Rearrange",
+                "Packing",
+                "Alg",
+                "conﬁguration",
+                "sequence",
+                "moves",
+                "Call",
+                "strongly",
+                "related",
+                "remember"
+            ]
+        }
+    },
+    {
+        "id": "8f6f70b9-5538-47ba-8405-87dcec8bf553",
+        "title": "",
+        "chunk_text": "Input: A tree T, the binary tree BT that stores the set of subtrees covering the tree T obtained from the algorithm stated in Lemma 12, and a node x of BT. Output: A sequence of moves φ[x]. 1⃝If the node x is a leaf node of BT, else if there is no pebble on X(x), else if there is no unoccupied vertex in X(x) −JointVertex(X(x)), then return a zero-length sequence of moves (i.e., an identity transformation) as φ[x].",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "tree",
+                "Lemma",
+                "node",
+                "Input",
+                "binary",
+                "stores",
+                "set",
+                "subtrees",
+                "covering",
+                "obtained"
+            ]
+        }
+    },
+    {
+        "id": "dc17cdfc-323b-4fbe-8663-9cd6b2cbb204",
+        "title": "",
+        "chunk_text": "2⃝Fill the pebbles in the current conﬁguration into the portion of the tree X(c1(x)) except for JointVertex(X(c1(x))) as much as possible, and record the sequence of moves performed here as φ[x]. 9 3⃝Call Alg . Packing(T, BT, c1(x)) and Alg . Packing(T, BT, c2(x)). 4⃝Update φ[x] := φ[c2(x)] · φ[c1(x)] · φ[x] and return φ[x]. In the main algorithm, the initial conﬁguration f is ﬁrst rearranged to the conﬁguration g′ = φ[r]·ψ(g), which is the output of Alg . PackedConﬁg(BT, g).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Alg",
+                "Fill",
+                "Packing",
+                "conﬁguration",
+                "JointVertex",
+                "pebbles",
+                "current",
+                "portion",
+                "tree",
+                "record"
+            ]
+        }
+    },
+    {
+        "id": "b338717c-940d-475e-9d0d-422d7b71afe8",
+        "title": "",
+        "chunk_text": "Then, by applying the inverse sequence of moves ψ−1 · φ[r]−1 from g′ to g, we obtain g as ψ−1 · φ[r]−1(g′). After reducing the instance on (G, P) to the one on (T, P), we will use the following algorithm Alg .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "applying",
+                "inverse",
+                "sequence",
+                "moves",
+                "obtain",
+                "Alg",
+                "reducing",
+                "instance",
+                "algorithm"
+            ]
+        }
+    },
+    {
+        "id": "596db7d1-3326-442a-9c9f-ac0fe5554160",
+        "title": "",
+        "chunk_text": "CutOﬀ(G, T, BT, f, g′) to perform the following steps repeatedly: 1) ﬁnd a subtree at the tip of tree T that, when removed, does not cause the remaining parts to become disconnected (we will refer to this subtree as the target subtree), 2) ﬁll the target subtree with pebbles according to the conﬁguration g′, and 3) cut that portion oﬀfrom the whole. Algorithm 3 (Alg . CutOﬀ(G, T, BT, f, g′)).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "subtree",
+                "target",
+                "CutOﬀ",
+                "repeatedly",
+                "ﬁnd",
+                "removed",
+                "disconnected",
+                "ﬁll",
+                "cut",
+                "perform"
+            ]
+        }
+    },
+    {
+        "id": "0cefbee0-f8c6-46f7-9213-36f492d63637",
+        "title": "",
+        "chunk_text": "Input: An instance tree G of the PEBBLE MOTION PROBLEM ON TREES, and its subtree T of order n + k + 1 with the maximum isthmus size less than or equal to k, the binary tree BT that stores the set of subtrees covering the tree T obtained from the algorithm stated in Lemma 12, a conﬁguration f on (G, P), and an output conﬁguration g′ on (T, P) of Alg . PackedConﬁg(G, T, BT, g). Output: A sequence of moves σ to rearrange f into g′. 1⃝Set Peb := f. Set col(u) := black for each u ∈V (T).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "tree",
+                "Lemma",
+                "Alg",
+                "PEBBLE",
+                "MOTION",
+                "PROBLEM",
+                "conﬁguration",
+                "Input",
+                "PackedConﬁg",
+                "set"
+            ]
+        }
+    },
+    {
+        "id": "37d2fbfc-b600-4c49-92dc-50a7ff5bc147",
+        "title": "",
+        "chunk_text": "Set col(v) := white for each v ∈ V (G) \\ V (T). 2⃝Rearrange the conﬁguration f on G to some conﬁguration on T which is strongly related to f, and remember the sequence of moves performed here as σ. 3⃝If |V (X(r))| ≤3(k+1)/2 holds for the root node r of BT, then by using Theorem 8, calculate the sequence of moves σ0 to rearrange the last remaining parts according to the conﬁguration g′, update σ := σ0 · σ, and return the sequence of moves σ that have been performed so far.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "sequence",
+                "moves",
+                "conﬁguration",
+                "Rearrange",
+                "Set",
+                "col",
+                "white",
+                "performed",
+                "Theorem",
+                "strongly"
+            ]
+        }
+    },
+    {
+        "id": "5f60924c-4596-477c-8dff-654b005a9119",
+        "title": "",
+        "chunk_text": "(## Note that σ(f) = g′.) 4⃝Find the leaf node t that is reached by traversing the descendants of the ﬁrst child c1(r) of the root node r of BT by selecting only its ﬁrst child node from generation to generation. 5⃝Call Alg . Extraction(BT, g′, t). 6⃝Update σ := σt · σ. 7⃝Set col(v) = white for each v ∈V (X(t) −JointVertex(X(t))). 8⃝Set x := p(t), y := c2(x).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Note",
+                "Set",
+                "node",
+                "Find",
+                "ﬁrst",
+                "child",
+                "Extraction",
+                "generation",
+                "Call",
+                "Alg"
+            ]
+        }
+    },
+    {
+        "id": "54836425-eeb1-4bc4-9432-460a67cf81df",
+        "title": "",
+        "chunk_text": "(## Note that t = c1(x).) 9⃝If X(r) −(X(t) −JointVertex(X(t))) will have an isthmus of size k + 1 or more, to pre- vent this situation, choose an appropriate edge uv in the edge set {uv | u ∈V (X(t) − JointVertex(X(t))), v ∈X(y)}, change the color col(v) of v that was colored white in Step 7⃝back to black, ﬁnd a leaf node w of BT such that X(w) contains v, and update X(w) := X(w) + uv. 10 ⃝Delete the node t from BT and update x := y.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Note",
+                "JointVertex",
+                "update",
+                "edge",
+                "node",
+                "Step",
+                "Delete",
+                "pre",
+                "vent",
+                "situation"
+            ]
+        }
+    },
+    {
+        "id": "dfd1213e-7e6d-4599-9044-4ad20952a004",
+        "title": "",
+        "chunk_text": "10 11 ⃝If x is the root node of BT, then update Joint(X(x)) := Centroid(X(x)). 12 ⃝Go to Step 3⃝. In the algorithm Alg . CutOﬀ(G, T, BT, f, g′), it is necessary to gather the set of pebbles g′(V (X(t)))\\ {0}, which are scattered throughout the entire T, onto the target subtree X(t). For this purpose, the following Alg . Extraction(BT, h, t) is provided. Algorithm 4 (Alg . Extraction(T, BT, g′, t)).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Centroid",
+                "Joint",
+                "Alg",
+                "Extraction",
+                "root",
+                "node",
+                "update",
+                "Step",
+                "algorithm",
+                "CutOﬀ"
+            ]
+        }
+    },
+    {
+        "id": "bea34e06-feec-472d-821a-2d522f7eb24c",
+        "title": "",
+        "chunk_text": "Input: A tree T of order n + k + 1 with a maximum isthmus size less than or equal to k, a binary tree BT that stores subtrees of T, an output conﬁguration g′ on (T, P) of Alg . PackedConﬁg(G, T, BT, g), and a leaf node t of BT Output: A sequence of moves σt. 1⃝Copy the binary tree BT as a binary tree named BT 2.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "output",
+                "tree",
+                "Alg",
+                "binary",
+                "Input",
+                "PackedConﬁg",
+                "order",
+                "maximum",
+                "isthmus",
+                "size"
+            ]
+        }
+    },
+    {
+        "id": "9115e699-428a-4439-89e1-ef248bba0c09",
+        "title": "",
+        "chunk_text": "2⃝If the number of vertices in the tree X(r) stored in the root node r of the binary tree BT is at most 3(k + 1)/2, use Theorem 8 to place the pebbles g′(V (X(t))) \\ {0} on the tree X(t) in accordance with the conﬁguration g′. Then, change the color of all the gray vertices in T back to black, and return the sequence of moves σt that have been applied so far.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "tree",
+                "Theorem",
+                "vertices",
+                "stored",
+                "number",
+                "root",
+                "node",
+                "binary",
+                "place",
+                "pebbles"
+            ]
+        }
+    },
+    {
+        "id": "1be727cb-8bdd-45be-ba1f-e74ed9ff0c04",
+        "title": "",
+        "chunk_text": "3⃝Find the leaf node ℓby traversing the descendants of the second child c2(r) of the root node r of BT 2, selecting only the ﬁrst child node at each level of descent. 4⃝By using Lemma 11, ﬁnd a subtree H(ℓ) of T that includes the tree X(ℓ) as its subgraph, has an order of |V (X(t))| + |V (X(ℓ))| + k + 1, and its maximum isthmus size of k or less, consisting solely of black vertices. Then, move the k + 1 empty spaces over V (H(ℓ)) while recording the sequence of moves required for this task.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "node",
+                "Find",
+                "child",
+                "selecting",
+                "descent",
+                "leaf",
+                "ℓby",
+                "traversing",
+                "descendants",
+                "root"
+            ]
+        }
+    },
+    {
+        "id": "a2ed393b-0f06-48d0-b00c-1480a51de374",
+        "title": "",
+        "chunk_text": "5⃝By applying Theorem 8 to the region H(ℓ) identiﬁed in Step 4⃝, ﬁll X(ℓ)−JointVertex(X(ℓ)) with pebbles (anything that is not included in g′(V (X(t)))) without any unoccupied space, and record the sequence of moves required for this task. 6⃝Set x := p(ℓ) and set y to be the child node of x that is not ℓ. 7⃝Change the colors of the vertices V (X(ℓ) −JointVertex(X(ℓ))) to all gray.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Theorem",
+                "Step",
+                "JointVertex",
+                "identiﬁed",
+                "ﬁll",
+                "pebbles",
+                "space",
+                "task",
+                "Set",
+                "applying"
+            ]
+        }
+    },
+    {
+        "id": "c428e0b5-55dc-4fc7-aafc-198f164e22d2",
+        "title": "",
+        "chunk_text": "8⃝If X(r) −(X(ℓ) −JointVertex(X(ℓ))) has an isthmus of size k + 1 or more, to prevent this situation, select an edge uv from the set {uv | u ∈V (X(ℓ) −JointVertex(X(ℓ))), v ∈X(u)}, change the color col(u) of u from gray back to black, ﬁnd a leaf node w of BT such that X(w) contains v, and update X(w) := X(w) + uv. 9⃝Delete the node ℓfrom BT 2, and update x := y. 10 ⃝If x is the root node of BT 2, then set Joint(X(x)) := Centroid(X(x)). 11 ⃝Go to Step 2⃝. Lemma 15. Step 9⃝and Step 10 ⃝of Alg .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "JointVertex",
+                "node",
+                "Step",
+                "update",
+                "situation",
+                "select",
+                "change",
+                "col",
+                "black",
+                "ﬁnd"
+            ]
+        }
+    },
+    {
+        "id": "883af35f-d848-49eb-b10d-6452222e9a26",
+        "title": "",
+        "chunk_text": "CutOﬀ(G, T, BT, f, g′), as well as Step 8⃝and Step 9⃝ of Alg . Extraction(T, BT, g′, t), can each be achieved in O(k). 11 Lemma 16. The total cost of Step 4⃝of Alg . Extraction(T, BT, g′, t) is in O(k(k + n)). The following main algorithm is constructed by consolidating the functions of the series above of algorithms. Algorithm 5 (Main Algorithm: Alg . Main((G, P), f, g)). Input: A tree G with N vertices, the size k of a longest isthmus of G, the set of pebbles P := {1, . . .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Step",
+                "Alg",
+                "Extraction",
+                "main",
+                "CutOﬀ",
+                "algorithm",
+                "Lemma",
+                "achieved",
+                "algorithms",
+                "Input"
+            ]
+        }
+    },
+    {
+        "id": "a6a2a449-0fd9-42db-b396-5de49f18047d",
+        "title": "",
+        "chunk_text": ", n} such that n + k < N holds, the initial conﬁguration f and the goal conﬁguration g on the pair (G, P). Output: An explicit sequence of moves to rearrange from the initial conﬁguration f to the goal conﬁguration g. 1⃝By using Lemma 11, ﬁnd a subtree T of G with n + k + 1 vertices such that the maximum size of isthmuses in T is at most k. 2⃝By using the algorithm from Lemma 12, decompose the tree T into subtrees of order k/8 or less, and store their data in the binary tree BT. 3⃝By using Alg .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "conﬁguration",
+                "initial",
+                "goal",
+                "Lemma",
+                "holds",
+                "pair",
+                "tree",
+                "Alg",
+                "Output",
+                "explicit"
+            ]
+        }
+    },
+    {
+        "id": "ba3c579d-b4cd-4f04-ba95-e6800355af56",
+        "title": "",
+        "chunk_text": "PackedConﬁg(G, T, BT, g), obtain the conﬁguration g′ := φ[r] · ψ(g) on T. 4⃝Call Alg . CutOﬀ(G, T, BT, f, g′). 5⃝Return the sequence of moves ψ−1 · φ[r]−1 · σ. (## Note that g = ψ−1 · φ[r]−1 · σ(f).) 6 Proof of Theorem 1 Proof of Theorem 1. Since the correctness proof of Alg . Main((G, P), f, g) is clear, here we will show that the time complexity of the algorithm is in O(Nn + n2 log(min{n, k})). From a given input tree G, the eﬀort of ﬁnding its subtree T using Lemma 11 is O(n + k).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Proof",
+                "PackedConﬁg",
+                "Alg",
+                "Theorem",
+                "obtain",
+                "conﬁguration",
+                "Call",
+                "Return",
+                "Note",
+                "Main"
+            ]
+        }
+    },
+    {
+        "id": "d6ff5fe1-814b-4e13-a7f4-2d69fbfa34a4",
+        "title": "",
+        "chunk_text": "The task of creating a binary tree database BT from the obtained T using Lemma 14 has a cost of O((n+k) log(n+k)). Using Lemma 5 to convert the arrangements f and g on (G, P) into strongly related arrangements on (T < P) requires a time complexity and number of moves of at most O(Nn). In Alg . Main((G, P), f, g), the other parts are spent on repeatedly solving sub-puzzles of size O(k) (Steps 4⃝and 5⃝of Alg . Extraction(T, BT, h, t)) on (T, P).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Lemma",
+                "log",
+                "Alg",
+                "task",
+                "creating",
+                "binary",
+                "tree",
+                "database",
+                "obtained",
+                "cost"
+            ]
+        }
+    },
+    {
+        "id": "bfa9af94-6a75-414f-9996-55664fe65902",
+        "title": "",
+        "chunk_text": "According to Lemma 16, the repeated process of designating a suitable area of O(k) and gathering (k + 1) unoccupied spaces in that location (Step 4⃝of Alg . Extraction(T, BT, h, t)) for preparing those sub-puzzles has a time complexity and number of moves of at most O(k(k+n)) for the entire Alg . Extraction(T, BT, h, t). Therefore, in Alg . Main((G, P), f, g), the most eﬀort and number of moves required is from the rep- etition of sub-puzzles of size O(k) (Step 5⃝of Alg .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Extraction",
+                "Alg",
+                "Step",
+                "Lemma",
+                "number",
+                "moves",
+                "sub-puzzles",
+                "gathering",
+                "unoccupied",
+                "location"
+            ]
+        }
+    },
+    {
+        "id": "c53bce0f-e366-4aec-8af7-89b8668fb0ff",
+        "title": "",
+        "chunk_text": "Extraction(T, BT, g′, t)). This task is repeated O((n + k)/k) times each time Alg . Extraction(T, BT, g′, t) is called. If each of these sub-puzzles of size O(k) meets the prerequisites of Theorem 8 (the proof for this part will be postponed until the end), then the total eﬀort and number of moves for one call to Alg . Extraction(T, BT, h, t) is at most O(((n + k)/k) · (k2 log k)) = O((n + k)k log k). Alg . Extraction(T, BT, g′, t) is called O((n + k)/k) times within Alg .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Extraction",
+                "Alg",
+                "called",
+                "times",
+                "log",
+                "Theorem",
+                "time",
+                "task",
+                "repeated",
+                "meets"
+            ]
+        }
+    },
+    {
+        "id": "e56edd7a-86c2-453f-a36d-8fcdf1378f03",
+        "title": "",
+        "chunk_text": "CutOﬀ(G, T, BT, f, g′), so the total cost and estimate of moves here is O(((n + k)/k)(k(k + n) + (n + k)k log k)) = O((n + k)2 log k). 12 Since the operation of scaling down the input puzzles f, g on (G, P) to their strongly related puzzles on (T, P) requires O(Nn) eﬀort and moves, assuming n > k, the estimate for the total eﬀort and number of moves in the main algorithm is O(Nn+(n+k)2 log k) = O(Nn+n2 log k). On the other hand, if n ≤k, then Step 5⃝of Alg .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "log",
+                "moves",
+                "total",
+                "estimate",
+                "CutOﬀ",
+                "cost",
+                "eﬀort",
+                "puzzles",
+                "Step",
+                "Alg"
+            ]
+        }
+    },
+    {
+        "id": "aca14e1c-0cc5-4647-b4c1-5b3652344996",
+        "title": "",
+        "chunk_text": "Extraction(T, BT, g′, t) is repeated only a constant number of times for the entire main algorithm, so the total eﬀort estimate is O(Nn + n2 log n), just as stated in Theorem 8. Lastly, we will conﬁrm that repeatedly performing Step 9⃝of Alg . CutOﬀ(G, T, BT, f, g′) or Step 8⃝of Alg . Extraction(T, BT, g′, t) does not increase the order of X(w) beyond twice its orig- inal value.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Extraction",
+                "Theorem",
+                "Alg",
+                "Step",
+                "algorithm",
+                "log",
+                "repeated",
+                "constant",
+                "number",
+                "times"
+            ]
+        }
+    },
+    {
+        "id": "c961d07d-e838-41b3-a7f6-d963d1f87bbb",
+        "title": "",
+        "chunk_text": "In this process, the edge uv added to X(w) is a pendant edge, and since u is a leaf, by deﬁnition it is not a vertex on any isthmus. Therefore, even if this operation is repeated, no pen- dant edge will be added to u. By adding the edge uv, the size of a maximum isthmus has strictly decreased, which means that the degree of v in the current graph is 3 or more. Consequently, the degree of v in X(w) is either 3 or a unique vertex p outside X(w) is adjacent to v.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "edge",
+                "added",
+                "process",
+                "leaf",
+                "pendant",
+                "deﬁnition",
+                "isthmus",
+                "degree",
+                "vertex",
+                "repeated"
+            ]
+        }
+    },
+    {
+        "id": "f538e5f7-e640-4138-929d-3452954942c6",
+        "title": "",
+        "chunk_text": "By deﬁnition, a vertex with a degree of 3 or more is not an interior vertex of any isthmus, so as long as the degree of v in the current graph is 3, no further pendant edges will be added to v through the repetition of this operation. For the degree of v to again become 2, the only option is to delete the vertex p outside X(w) and the edge pv, but since u is not a vertex on any isthmus, the size of a maximum isthmus in the remaining graph will not increase by this deletion of pv.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "degree",
+                "vertex",
+                "isthmus",
+                "graph",
+                "deﬁnition",
+                "operation",
+                "interior",
+                "long",
+                "current",
+                "pendant"
+            ]
+        }
+    },
+    {
+        "id": "d0448613-bd1c-4641-9fb7-50fc0ca56749",
+        "title": "",
+        "chunk_text": "Therefore, the number of pendant edges that can potentially be added to each vertex of X(w) is at most 1, and since no pendant edges will be added to the newly added leaves, the order of X(w) can increase by at most a factor of 2. This implies that k+1 ≥k = 2(2(k/8)+2(k/8)) ≥2(|V (X(t))|+|V (X(ℓ))|) holds, and therefore the condition of Theorem 8 (i.e. |V (X(t))|+|V (X(ℓ))|+k+1 ≥3(|V (X(t))|+|V (X(ℓ))|)) is always satisﬁed in Step 5⃝of Alg . Extraction(T, BT, g′, t).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "added",
+                "pendant",
+                "edges",
+                "leaves",
+                "number",
+                "potentially",
+                "vertex",
+                "newly",
+                "order",
+                "increase"
+            ]
+        }
+    },
+    {
+        "id": "f2649e6c-dac5-4712-8476-53654a0bf4fa",
+        "title": "",
+        "chunk_text": "7 In the case of general board graphs In this section, we provide a proof of Theorem 4. Now that the eﬃcient algorithm for the PEBBLE MOTION PROBLEM ON TREES and its computational complexity evaluation has been clariﬁed in the previous sections, the actual proof of this theorem can be obtained in a simple manner. Lemma 17. If the board graphs are 2-connected, then the PEBBLE MOTION PROBLEM ON GENERAL GRAPHS can be solved with time complexity of O(N 2 + n3 N−n +n2 log(min{n, N −n})).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Theorem",
+                "graphs",
+                "PEBBLE",
+                "MOTION",
+                "PROBLEM",
+                "proof",
+                "general",
+                "case",
+                "provide",
+                "board"
+            ]
+        }
+    },
+    {
+        "id": "223dd630-e046-4e9d-a27a-c17551c3847e",
+        "title": "",
+        "chunk_text": "Proof of Lemma 17. By Corollary 3, we only need to consider the case where N ≤2n. The algorithm on the 2-connected board graphs G that we discuss here diﬀers from the algorithm on board trees only in that it uses an appropriate spanning tree T of G instead of the input board tree, and redeﬁnes the parameter k as k := N −n. It is the same in that T is decomposed into O(k) size subtrees and represented as binary tree data. The diﬀerence appears in the computational complexity evaluation.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Lemma",
+                "board",
+                "tree",
+                "Proof",
+                "Corollary",
+                "algorithm",
+                "case",
+                "trees",
+                "graphs",
+                "discuss"
+            ]
+        }
+    },
+    {
+        "id": "0fb8d3a5-0c75-4622-9143-5f74430edea9",
+        "title": "",
+        "chunk_text": "If the input board graph is 2-connected then the puzzle is feasible if and only if the board graph is not a cycle and has at least two unoccupied spaces. Therefore, no matter how the spanning subtree T of G is constructed, T may inevitably have to possess an isthmus with at least N −n + 1 vertices, and as a result, some of the subtrees in the decomposition of T may become subpaths of size O(N −n) on the isthmus. In such cases, to create a feasible sub-puzzle of size O(N −n) (c.f. Step 4 of Alg .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "graph",
+                "board",
+                "spaces",
+                "size",
+                "input",
+                "puzzle",
+                "cycle",
+                "unoccupied",
+                "feasible",
+                "isthmus"
+            ]
+        }
+    },
+    {
+        "id": "74b8f0b2-a7e1-4a13-8444-e271c5b418c1",
+        "title": "",
+        "chunk_text": "Extraction(T, BT, g′, t)), the puzzle must be constructed around a vertex v with degree 3 or higher located somewhere on a cycle of G that includes the isthmus. To 13 achieve this, the O(N −n) pebbles that make up the sub-puzzle must be brought around v. This operation requires O((N −n)n) moves per each sub-puzzle.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Extraction",
+                "degree",
+                "isthmus",
+                "puzzle",
+                "constructed",
+                "vertex",
+                "higher",
+                "located",
+                "cycle",
+                "includes"
+            ]
+        }
+    },
+    {
+        "id": "10618386-6b09-448e-a66e-0bed53003750",
+        "title": "",
+        "chunk_text": "In our algorithm, since we have to solve these sub-puzzles O(( n N−n)2) times, the cost of the above operations for the entire algorithm can be estimated as O(( n N−n)2×(N −n)n) = O( n3 N−n). The statement of our lemma can be directly derived from the above fact and Theorem 1. It should be clear that by combining Lemma 17 and Theorem 1, Theorem 4 follows immediately. Remark 1.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Theorem",
+                "algorithm",
+                "times",
+                "lemma",
+                "solve",
+                "sub-puzzles",
+                "cost",
+                "operations",
+                "entire",
+                "estimated"
+            ]
+        }
+    },
+    {
+        "id": "9dadc96e-9836-473b-8bf2-30802c8dc63f",
+        "title": "",
+        "chunk_text": "In Corollary 3, Lemma 17, and Theorem 4, it is necessary to ﬁnd the appropriate spanning tree or perform a 2-connected component decomposition on the given input board graph G, which requires O(N 2) computational complexity for each of these steps. However, when considering the shortest solution sequences for their pebble motion problems, it is suﬃcient to evaluate the number of moves for pebbles on the appropriate board graph after completing the above processes.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Lemma",
+                "Corollary",
+                "Theorem",
+                "board",
+                "graph",
+                "component",
+                "computational",
+                "steps",
+                "ﬁnd",
+                "spanning"
+            ]
+        }
+    },
+    {
+        "id": "6f89b7ff-dc68-4135-afc4-ec8ae58ac687",
+        "title": "",
+        "chunk_text": "Therefore, in the case of the order of the shortest solution sequences, it is possible to replace the O(N 2) part in the order notation of these propositions with O(Nn). Appendix Proof of Corollary 3. It suﬃces to show that, for any input board graph G, we can ﬁnd a spanning tree such that its longest isthmus consists of at most N −n −1 vertices, and this can be done in O(N 2) time. Let us consider the following algorithm.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "order",
+                "sequences",
+                "part",
+                "case",
+                "shortest",
+                "solution",
+                "replace",
+                "notation",
+                "propositions",
+                "Corollary"
+            ]
+        }
+    },
+    {
+        "id": "322228b5-001a-4121-8b38-52c5881e9c4d",
+        "title": "",
+        "chunk_text": "1⃝Find a spanning tree T of G that contains at least one vertex of degree 3 or higher. 2⃝If T has no isthmus with at least N −n vertices, return T. 3⃝Let I denote a unique isthmus of T with at least N −n vertices. If every interior vertex of I is a degree-2 vertex of G, then goto Step 4⃝. Find an edge of G −T that is incident to an interior vertex of I and denote it as e := uv, where v is an interior vertex of I and u is a vertex outside of I. Let C denote the unique cycle of T + e.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "vertex",
+                "Find",
+                "interior",
+                "vertices",
+                "denote",
+                "degree",
+                "higher",
+                "spanning",
+                "tree",
+                "isthmus"
+            ]
+        }
+    },
+    {
+        "id": "d7e8e8b7-8a40-4ec1-8a93-fd829df8de43",
+        "title": "",
+        "chunk_text": "Take the longest path P in the part of C such that all the interior vertices of P have degree 2 on T + e. The path P may consist of a single edge, but in that case, it should not include v as an end-vertex. Let e′ be one of the edges in the middle of P that is not incident to v. Set T := T + e −e′. goto Step 2⃝. 4⃝Find an edge e of G −T such that the unique cycle C in T + e contains all of I. Take the longest path P in the part of C such that all the interior vertices of P have degree 2 on T +e.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "path",
+                "degree",
+                "edge",
+                "longest",
+                "part",
+                "interior",
+                "vertices",
+                "Step",
+                "Find",
+                "case"
+            ]
+        }
+    },
+    {
+        "id": "51004a58-3f5b-4fac-9af5-0788c60aadcf",
+        "title": "",
+        "chunk_text": "Let e′ be one of the edges in the middle of P that is not incident to v. Set T := T + e −e′ and return T At Step 3⃝, the maximum isthmus length of T decreases strictly. The proof of this is as follows: Let the two connected components obtained by removing all edges of I from G be X and Y , where X is the component that contains vertex u, and Y is the other component. Let p be the end-vertex of I contained in X, and q be the other end-vertex of I contained in Y .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "middle",
+                "incident",
+                "edges",
+                "Step",
+                "contained",
+                "component",
+                "end-vertex",
+                "Set",
+                "strictly",
+                "return"
+            ]
+        }
+    },
+    {
+        "id": "a7541ee8-5d77-4e98-a25c-26e1a6766644",
+        "title": "",
+        "chunk_text": "If |E(P)| ≥3 holds, removing e′ will not aﬀect the degree of any vertex with degree 3 or more, so it is clear that the maximum isthmus length of the new T strictly decreases. Therefore, we now consider the case where the number of edges in P is 2 or fewer. Let P1 denote the subpath of P connecting p and v. Let X1 denote the connected component of T −e′ containing u, and let X2 := (X −e′)−X1. We have that 14 |E(P1)| ≤|E(P)| ≤2, |V (I ∪Y )| ≥N −n + 1, and |V (X)| ≤n.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "degree",
+                "holds",
+                "removing",
+                "decreases",
+                "denote",
+                "aﬀect",
+                "vertex",
+                "clear",
+                "maximum",
+                "isthmus"
+            ]
+        }
+    },
+    {
+        "id": "8a6b284c-f1b0-4a21-b4b8-1365d042fb01",
+        "title": "",
+        "chunk_text": "Then since |V (X1 + e′)| ≤n and |V (X2 + P1)| ≤n + 1 hold, the number of vertices in any isthmus contained in these subgraphs is also bounded above by N −n −1. Therefore, if T + e −e′ has an isthmus with at least N −n vertices, it must be a proper subpath of I. Step 2⃝and Step 3⃝can be accomplished in O(N) time each, while Step 1⃝and Step 4⃝can be achieved in O(N 2) time each. Since Step 2⃝and Step 3⃝are repeated at most N/2 times, the total time complexity of this algorithm is O(N 2).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Step",
+                "vertices",
+                "isthmus",
+                "hold",
+                "time",
+                "number",
+                "contained",
+                "subgraphs",
+                "bounded",
+                "times"
+            ]
+        }
+    },
+    {
+        "id": "4c1894be-d09f-4b6b-aa89-e4f05ad267f2",
+        "title": "",
+        "chunk_text": "Proof of Lemma 5. We apply the following algorithm. Algorithm 6 (Alg .sbs0(G, S1, S2)). Input: A tree G with N vertices. Subsets of vertices S1, S2 ⊂V (G) with |S1| = |S2| = n. Output: A sequence of moves which transfers all the pebbles from S1 to S2. 1⃝Make a list L of leaves of G. 2⃝If L = ∅, then stop. Take a leaf v ∈L. Let u be a neighbor of v. 3⃝If v ∈S1 ∩S2, then: Set S1 = S1 \\ {v}, S2 = S2 \\ {v}. else if v ∈S1 \\ S2, then: Find a shortest path eP from v to V (G) \\ S1.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Lemma",
+                "Proof",
+                "algorithm",
+                "vertices",
+                "Alg",
+                "Make",
+                "Set",
+                "apply",
+                "Find",
+                "Input"
+            ]
+        }
+    },
+    {
+        "id": "08cadbdc-68c6-4853-ad71-3f1798e2e5a4",
+        "title": "",
+        "chunk_text": "Let w be another endvertex of eP other than v. Move pebbles from V ( eP) \\ {w} to V ( eP) \\ {v}. Set S1 = (S1 \\ {v}) ∪{w}. else if v ∈S2 \\ S1, then: Find a shortest path eP from v to S1. Let w be another endvertex of eP other than v. Move a pebble from w to v. Set S1 = S1 \\ {w}, S2 = S2 \\ {v}. 4⃝Set T = T −v. Remove v from L. If u is a leaf of T, then add u to L. Goto step 2⃝. In step 4⃝, |V (G)| always decreases. Hence, we have ﬁnally L = ∅. The running time is dominated by step 3⃝.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Set",
+                "step",
+                "endvertex",
+                "Move",
+                "Find",
+                "pebbles",
+                "pebble",
+                "shortest",
+                "path",
+                "Remove"
+            ]
+        }
+    },
+    {
+        "id": "7a11f11f-de42-45aa-8b4e-093c7b609b4d",
+        "title": "",
+        "chunk_text": "In case v ∈S1 ∩S2 or v ̸∈S1 ∪S2, it takes a constant time. In case v ∈S1 \\ S2, it takes O(n) steps to move pebbles along eP. In this case, since N decreases by 1, by the inductive hypothesis, we get a total running time of O(n + n(N −1)) ≤O(Nn). In case v ∈S2 \\ S1, it takes O(N) steps to move pebbles along eP. In this case, since n decreases by 1, again by the inductive hypothesis, we get a total running time of O(N + (n −1)N) ≤O(Nn). Proof of Lemma 6. We prepare two algorithms for the proof.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "case",
+                "time",
+                "steps",
+                "move",
+                "pebbles",
+                "hypothesis",
+                "constant",
+                "decreases",
+                "inductive",
+                "total"
+            ]
+        }
+    },
+    {
+        "id": "25cc088f-12f4-47d7-afe4-a9a3c8d2e50d",
+        "title": "",
+        "chunk_text": "The ﬁrst algorithm is as follows. Algorithm 7 (Alg .sbs1A(G, Q1, Q2)). (Partition with a rivet) 15 Input: A tree G satisfying the assumption of Lemma 6. A conﬁguration π ∈F(G, P). A partition of pebbles P = Q1 ∪Q2 such that Q1 ∩Q2 = ∅and |Qi| = n/2 + O(1) for i = 1, 2. Output: A sequence of moves which transfers Qi to V (Gi) for i = 1, 2.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "algorithm",
+                "Alg",
+                "ﬁrst",
+                "Partition",
+                "Input",
+                "Lemma",
+                "rivet",
+                "Output",
+                "tree",
+                "satisfying"
+            ]
+        }
+    },
+    {
+        "id": "6541e01c-eba7-4b67-8149-df8a3390b634",
+        "title": "",
+        "chunk_text": "1⃝Find subsets Si of V (G) for 1 ≤i ≤4, such that |Si| = n/2 + O(1) for 1 ≤i ≤4, Si ∩Sj ̸= ∅ for 1 ≤i < j ≤4, S1, S2 ⊂V (G1), S3, S4 ⊂V (G2), S2 ∩S3 = {o}, and Si ∪Si+1 induces a subtree G(i, i + 1) of G for 1 ≤i ≤3. 2⃝Applying Alg .sbs0, move n/4 + O(1) pebbles to Si for 1 ≤i ≤4. Put Pi as a set of pebbles on Si for 1 ≤i ≤4. 3⃝Consider the puzzle (G(2, 3), P2 ∪P3) and transfer half of P2 ∪P3 to S2 and the other half to S3 such that pebbles of Q1 are moved to S2 as many as possible.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Find",
+                "Applying",
+                "Alg",
+                "pebbles",
+                "induces",
+                "move",
+                "subsets",
+                "subtree",
+                "half",
+                "Put"
+            ]
+        }
+    },
+    {
+        "id": "2674fa79-77bc-4206-94bb-331f2d1f6b5f",
+        "title": "",
+        "chunk_text": "Reset P2 and P3 as a set of pebbles on S2 and S3, respectively. 4⃝Remove P3 ∪P4 to S4. Load P1 ∪P2 to S2 ∪S3. Consider the puzzle (G(2, 3), P1 ∪P2) and transfer half of P1 ∪P2 to S2 and the other half to S3 such that pebbles of Q1 are moved to S2 as many as possible. Reset P1 and P2 as a set of pebbles on S2 and S3, respectively. 5⃝Remove P1 ∪P2 to S1. Load P3 ∪P4 to S2 ∪S3.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Remove",
+                "pebbles",
+                "Reset",
+                "Load",
+                "set",
+                "half",
+                "puzzle",
+                "transfer",
+                "moved"
+            ]
+        }
+    },
+    {
+        "id": "fb09ae8a-3f62-48cb-be3d-159dc408fcb2",
+        "title": "",
+        "chunk_text": "Consider the puzzle (G(2, 3), P3 ∪P4) and transfer half of P3 ∪P4 to S2 and the other half to S3 such that pebbles of Q1 are moved to S2 as many as possible. Reset P3 and P4 as a set of pebbles on S2 and S3, respectively. 6⃝Remove P4 to S4. Load P2 ∪P3 to S2 ∪S3. Consider the puzzle (G(2, 3), P2 ∪P3) and transfer half of P2 ∪P3 to S2 and the other half to S3 such that pebbles of Q1 are moved to S2 as many as possible. Reset P2 and P3 as a set of pebbles on S2 and S3, respectively.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "pebbles",
+                "half",
+                "Reset",
+                "puzzle",
+                "transfer",
+                "moved",
+                "Remove",
+                "set",
+                "Load"
+            ]
+        }
+    },
+    {
+        "id": "7e4a1dea-e08a-4f18-bebf-9e5b1a5a2a0e",
+        "title": "",
+        "chunk_text": "We claim that Alg .sbs1A works correctly, and it can be implemented to run in O(Nn+n2 log n) time. From steps 3⃝to 6⃝, Alg .sbs1A is recursively called four times with a half number of original pebbles. The worst case is Q1 = P3 ∪P4 initially. In this case, after step 3⃝, we have Q1 = P2 ∪P4, and after step 4⃝, we have Q1 = P1 ∪P4, and after step 5⃝, we have Q1 = P1 ∪P3, and ﬁnally after step 6⃝, we have Q1 = P1 ∪P2. Step 2⃝can be implemented in O(Nn) time by Lemma 5.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "step",
+                "Alg",
+                "works",
+                "correctly",
+                "log",
+                "time",
+                "claim",
+                "run",
+                "implemented",
+                "case"
+            ]
+        }
+    },
+    {
+        "id": "c9938643-7a15-4b97-aafe-f65bdc04fac6",
+        "title": "",
+        "chunk_text": "Let us denote the running time of the algorithm from step 3⃝to 6⃝by g1(n). We want to prove g1(n) ≤c1n2 log2 n with some constant c1. we proceed by induction on n. The number of steps of the removal, loading, and restoration phase is at most cn2 with some constant c, since |Si| = n/2+O(1) for 1 ≤i ≤4. Then, by the inductive hypothesis, we have g1(n) ≤ 4g1(n 2) + cn2 ≤ 4c1(n 2)2 log2(n 2 ) + cn2 = c1n2 log2 n −c1n2 + cn2. By choosing c1 = c, we have g1(n) ≤cn2 log2 n, as claimed.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "denote",
+                "running",
+                "time",
+                "algorithm",
+                "constant",
+                "step",
+                "steps",
+                "prove",
+                "loading",
+                "proceed"
+            ]
+        }
+    },
+    {
+        "id": "3d1eafe6-4662-43bf-91b2-4d4da8ea97b8",
+        "title": "",
+        "chunk_text": "Next, we prepare the second algorithm. Algorithm 8 (Alg .sbs1B(G, π1, π2)). (Sort with a rivet) 16 Input: A tree G satisfying the assumption of Lemma 6. Conﬁgurations π1, π2 ∈F(G, P). Output: A sequence of moves which transforms π1 to π2. 1⃝Find subsets Si of V (G) for 1 ≤i ≤4, such that |Si| = n/2 + O(1) for 1 ≤i ≤4, Si ∩Sj ̸= ∅ for 1 ≤i < j ≤4, S1, S2 ⊂V (G1), S3, S4 ⊂V (G2), S2 ∩S3 = {o}, and Si ∪Si+1 induces a subtree G(i, i + 1) of G for 1 ≤i ≤3.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "algorithm",
+                "prepare",
+                "Alg",
+                "Input",
+                "Sort",
+                "Lemma",
+                "Find",
+                "Conﬁgurations",
+                "rivet",
+                "Output"
+            ]
+        }
+    },
+    {
+        "id": "16c5ccf0-b70d-443b-b2a8-0f2bfe23beb7",
+        "title": "",
+        "chunk_text": "2⃝Choose a conﬁguration π∗ i for i = 1, 2 such that |sup(π∗ i ) ∩Sj| = n/4 + O(1) for 1 ≤j ≤4 and π∗ i is strongly related to πi for i = 1, 2. Transform π1 to π∗ 1. 3⃝Transfer π∗ 2(S1 ∪S2) to S1 ∪S2, and transfer π∗ 2(S3 ∪S4) to S3 ∪S4 by applying Alg .sbs1A. Reset Pi as a set of pebbles on Si for 1 ≤i ≤4. 4⃝Remove P3∪P4 from S3∪S4 to S4. Load P1∪P2 to S2∪S3. Consider the puzzle (G(2, 3), P1 ∪ P2) and build a conﬁguration π∗ 2,1 such that π∗ 2,1 and π∗ 2|S1∪S2 are strongly related.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Choose",
+                "Transfer",
+                "conﬁguration",
+                "strongly",
+                "related",
+                "Alg",
+                "Remove",
+                "Transform",
+                "applying",
+                "Reset"
+            ]
+        }
+    },
+    {
+        "id": "1bac5860-75a0-445e-9b63-43321a817c71",
+        "title": "",
+        "chunk_text": "5⃝Remove P1∪P2 from S2∪S3 to S1. Load P3∪P4 to S2∪S3. Consider the puzzle (G(2, 3), P3 ∪ P4) and build a conﬁguration π∗ 2,2 such that π∗ 2,2 and π∗ 2|S3∪S4 are strongly related. 6⃝Make π∗ 2. 7⃝Transform π∗ 2 to π2. We claim that Alg .sbs1B works correctly, and it can be implemented to run in O(n2 log n) time. In step 2⃝and step 7⃝, since πi and π∗ i are strongly related for i = 1, 2, the number of steps to transform π1 to π∗ 1 and to transform π∗ 2 to π2 are at most O(Nn) by applying Alg .sbs0.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Remove",
+                "Transform",
+                "Alg",
+                "strongly",
+                "related",
+                "step",
+                "Make",
+                "Load",
+                "puzzle",
+                "time"
+            ]
+        }
+    },
+    {
+        "id": "f3774017-e8a3-4c51-9b49-65dd675dcf8e",
+        "title": "",
+        "chunk_text": "The number of steps of the removal, loading, and restoration phase is at most cn2 with some constant c. In step 3⃝, by applying Alg .sbs1A, we have at most c1n2 log n time. Let f1(n) be the algorithm’s running time from step 3⃝to step 6⃝. We want to prove f1(n) ≤d1n2 log n with some constant d1. In step 4⃝and step 5⃝, by the inductive hypothesis, we have f1(n) ≤ 2f1(n 2 ) + c1n2 log n + cn2 ≤ 2d1(n 2 )2 log2(n 2) + c1n2 log n + cn2 = (c1 + d1 2 )n2 log2 n + (c −d1 2 )n2.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "log",
+                "step",
+                "loading",
+                "removal",
+                "constant",
+                "Alg",
+                "number",
+                "restoration",
+                "phase",
+                "time"
+            ]
+        }
+    },
+    {
+        "id": "49a3e0c5-3edb-4aa5-b709-c6e29f6d66fa",
+        "title": "",
+        "chunk_text": "By choosing d1 such that d1 ≥2 max{c, c1}, we have f1(n) ≤d1n2 log2 n. Proof of Lemma 7. We prepare two algorithms for the proof. The ﬁrst algorithm is as follows. Algorithm 9 (Alg .sbs2A(G, Q1, Q2)). (Partition with a long isthmus) Input: A tree G satisfying the assumption of Lemma 7. A conﬁguration π ∈F(G, P). A partition of pebbles P = Q1 ∪Q2 such that Q1 ∩Q2 = ∅and |Qi| = n/2 + O(1) for i = 1, 2. 17 Output: A sequence of moves which transfers Qi to V (Gi) for i = 1, 2.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Lemma",
+                "max",
+                "choosing",
+                "Proof",
+                "Partition",
+                "Alg",
+                "algorithm",
+                "Input",
+                "Output",
+                "prepare"
+            ]
+        }
+    },
+    {
+        "id": "fc732a07-8087-4bcb-88a5-05ac8c10893e",
+        "title": "",
+        "chunk_text": "1⃝Find subsets Si of V (G) for 1 ≤i ≤4, such that |Si| = n/4 + O(1) for 1 ≤i ≤4, Si ∩Sj ̸= ∅ for 1 ≤i < j ≤4, S1, S2 ⊂V (G1), S3, S4 ⊂V (G2), and Si ∪Si+1 ∪V (I) induces a subtree G(i, i + 1) for 1 ≤i ≤3. 2⃝Applying Alg .sbs0, move n/4 pebbles to Si for 1 ≤i ≤4. Put Pi as a set of pebbles on Si for 1 ≤i ≤4. 3⃝Consider the puzzle (G(2, 3), P2 ∪P3) and transfer half of P2 ∪P3 to S2 and the other half to S3 such that pebbles of Q1 are moved to S2 as many as possible.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Find",
+                "Applying",
+                "Alg",
+                "pebbles",
+                "induces",
+                "move",
+                "subsets",
+                "subtree",
+                "half",
+                "Put"
+            ]
+        }
+    },
+    {
+        "id": "3a650051-e484-48d4-806b-529345b64d19",
+        "title": "",
+        "chunk_text": "Reset P2 and P3 as a set of pebbles on S2 and S3, respectively. 4⃝Consider the puzzle (G(1, 2), P1 ∪P2) and transfer half of P1 ∪P2 to S1 and the other half to S2 such that pebbles of Q1 are moved to S1 as many as possible. Reset P1 and P2 as a set of pebbles on S1 and S2, respectively. 5⃝Consider the puzzle (G(3, 4), P3 ∪P4) and transfer half of P3 ∪P4 to S3 and the other half to S4 such that pebbles of Q1 are moved to S3 as many as possible.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "pebbles",
+                "half",
+                "Reset",
+                "set",
+                "puzzle",
+                "transfer",
+                "moved"
+            ]
+        }
+    },
+    {
+        "id": "7e4c0b58-fbbc-409a-bdc8-1bc9422dcfd1",
+        "title": "",
+        "chunk_text": "Reset P3 and P4 as a set of pebbles on S3 and S4, respectively. 6⃝Consider the puzzle (G(2, 3), P2 ∪P3) and transfer half of P2 ∪P3 to S2 and the other half to S3 such that pebbles of Q1 are moved to S2 as many as possible. Reset P2 and P3 as a set of pebbles on S2 and S3, respectively. We claim that Alg .sbs2A works correctly, and it can be implemented to run in O(Nn+n2 log n) time.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "pebbles",
+                "Reset",
+                "set",
+                "half",
+                "Alg",
+                "puzzle",
+                "transfer",
+                "moved",
+                "time",
+                "works"
+            ]
+        }
+    },
+    {
+        "id": "03b8967e-ba47-4cf1-8130-e8e96a5f533b",
+        "title": "",
+        "chunk_text": "In step 4⃝and step 5⃝, Alg .sbs1A is called two times with a half number of original pebbles, and in step 3⃝and step 6⃝, Alg .sbs2A is recursively called two times with a half number of original pebbles. The worst case is Q1 = P3 ∪P4 initially. In this case, after step 3⃝, we have Q1 = P2 ∪P4, and after step 4⃝, we have Q1 = P1 ∪P4, and after step 5⃝, we have Q1 = P1 ∪P3, and ﬁnally after step 6⃝, we have Q1 = P1 ∪P2. The running time g2(n) of the algorithm is dominated by step 3⃝- step 6⃝.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Alg",
+                "step",
+                "pebbles",
+                "half",
+                "number",
+                "original",
+                "called",
+                "times",
+                "recursively",
+                "case"
+            ]
+        }
+    },
+    {
+        "id": "9a3e266d-3929-4b03-a3aa-bbdaf0aabab0",
+        "title": "",
+        "chunk_text": "We want to prove g2(n) ≤Nn + c2n2 log2 n with some constant c2. we proceed by induction on n. The number of steps of removal, loading, and restoration phase is at most cn2 with some constant c, since |S1 ∪S2| = n/2 + O(1) and |S3 ∪S4| = n/2 + O(1). The cost of step 4⃝and step 5⃝is at most c1(n/2)2 log2(n/2) by Lemma 6.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "prove",
+                "constant",
+                "step",
+                "Lemma",
+                "loading",
+                "proceed",
+                "induction",
+                "steps",
+                "removal",
+                "number"
+            ]
+        }
+    },
+    {
+        "id": "63fe34a0-b1db-4f4c-a789-219db1ddade6",
+        "title": "",
+        "chunk_text": "Then, by the inductive hypothesis, we have g2(n) ≤ 2g2(n 2 ) + 2c1(n 2 )2 log2(n 2 ) + cn2 ≤ 2(N n 2 + c2(n 2 )2 log2(n 2 )) + 2c1(n 2)2 log2(n 2 ) + cn2 ≤ Nn + (c2 2 + c1 2 )n2 log2 n + (c −c2 2 −c1 2 )n2. By choosing c2 such that c2 ≥max{c1, 2c −c1}, we have g2(n) ≤Nn + c2n2 log2 n, as claimed. Next, we prepare the second algorithm. Algorithm 10 (Alg .sbs2B(G, π1, π2)). (Sort with a long isthmus) 18 Input: A tree G satisfying the assumption of Lemma 7. Conﬁgurations π1, π2 ∈F(G, P).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "hypothesis",
+                "inductive",
+                "algorithm",
+                "Alg",
+                "Input",
+                "Sort",
+                "Lemma",
+                "max",
+                "choosing",
+                "claimed"
+            ]
+        }
+    },
+    {
+        "id": "6a8fc284-4648-4989-80a2-7b299788565e",
+        "title": "",
+        "chunk_text": "Output: A sequence of moves which transforms π1 to π2. 1⃝Find subsets Si of V (G) for 1 ≤i ≤4, such that |Si| = n/4 + O(1) for 1 ≤i ≤4, Si ∩Sj ̸= ∅ for 1 ≤i < j ≤4, S1, S2 ⊂V (G1), S3, S4 ⊂V (G2), and Si ∪Si+1 ∪V (I) induces a subtree G(i, i + 1) for 1 ≤i ≤3. 2⃝Choose π∗ i for i = 1, 2 such that |sup(π∗ i ) ∩Sj| = n/4 + O(1) for 1 ≤j ≤4 and π∗ i is strongly related to πi for i = 1, 2. Transform π1 to π∗ 1.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Output",
+                "sequence",
+                "moves",
+                "Find",
+                "Choose",
+                "transforms",
+                "Transform",
+                "induces",
+                "subsets",
+                "subtree"
+            ]
+        }
+    },
+    {
+        "id": "d9d45ce9-3974-4adf-8435-ecbcd288300b",
+        "title": "",
+        "chunk_text": "3⃝Consider the puzzle (G, P) and transfer π∗ 2(S1 ∪S2) to S1 ∪S2 and transfer π∗ 2(S3 ∪S4) to S3 ∪S4 by applying Alg .sbs2A. Reset Pi as a set of pebbles on Si for 1 ≤i ≤4. 4⃝Consider the puzzle (G(1, 2), P1 ∪P2) and build a conﬁguration π∗ 2,1 such that π∗ 2,1 and π∗ 2|S1∪S2 are strongly related. 5⃝Consider the puzzle (G(3, 4), P3 ∪P4) and build a conﬁguration π∗ 2,2 such that π∗ 2,2 and π∗ 2|S3∪S4 are strongly related. 6⃝Make π∗ 2. 7⃝Transform π∗ 2 to π2.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "transfer",
+                "puzzle",
+                "Alg",
+                "related",
+                "build",
+                "conﬁguration",
+                "strongly",
+                "applying",
+                "Make",
+                "Transform"
+            ]
+        }
+    },
+    {
+        "id": "a000267f-ca4b-40c2-babc-7955d2235668",
+        "title": "",
+        "chunk_text": "We claim that Alg .sbs2B works correctly, and it can be implemented to run in O(Nn+n2 log n) time. In step 2⃝and step 7⃝, since πi and π∗ i are strongly related for i = 1, 2, the number of steps to transfer π1 to π∗ 1 and to transfer π∗ 2 to π2 are at most O(Nn) by applying Alg .sbs0. In step 3⃝, Alg .sbs2A is called, and in step 4⃝and step 5⃝, Alg .sbs1B is called two times with a half number of original pebbles. The running time f2(n) of the algorithm is dominated by step 3⃝- step 6⃝.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Alg",
+                "step",
+                "works",
+                "correctly",
+                "log",
+                "number",
+                "transfer",
+                "claim",
+                "implemented",
+                "run"
+            ]
+        }
+    },
+    {
+        "id": "228e5d2d-3c49-4742-9c61-22d4bd5507aa",
+        "title": "",
+        "chunk_text": "We want to prove f2(n) ≤Nn + d2n2 log2 n with some constant d2. The number of steps of removal, loading, and restoration phase is at most cn2 with some constant c. The cost of step 3⃝is at most Nn + c2n2 log2 n by Alg .sbs2A. The cost of steps 4⃝and 5⃝is at most d1(n/2)2 log2(n/2) by Alg .sbs1B. Then, we have f2(n) ≤ Nn + c2n2 log2 n + 2d1(n 2 )2 log2(n 2 ) + cn2 ≤ Nn + (c2 + d1 2 )n2 log2 n + (c −d1 2 )n2. By choosing d2 such that d2 ≥c2 + c, we have f2(n) ≤Nn + d2n2 log2 n. Proof of Theorem 8.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Alg",
+                "constant",
+                "steps",
+                "prove",
+                "cost",
+                "Theorem",
+                "step",
+                "loading",
+                "removal",
+                "number"
+            ]
+        }
+    },
+    {
+        "id": "65f97f20-0d84-49c5-b166-1e93922eb6e0",
+        "title": "",
+        "chunk_text": "Since G is a tree, G has a centroid vertex or a centroid edge. We consider two cases. Case 1. There exists a centroid o of degree at least 3. In this case, since N ≥3n, G has subtrees G1 and G2 such that V (G1) ∩V (G2) = {o} and |V (Gi)| ≥n + O(1) for i = 1, 2. Hence, by Lemma 6, the proof is ﬁnished. 19 Case 2. There exists no centroid of degree at least 3. In this case, the centroid is contained in an isthmus I. Let v1 and v2 be endvertices of I, and let V0 be the set of inner vertices of I.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Case",
+                "centroid",
+                "tree",
+                "edge",
+                "vertex",
+                "degree",
+                "exists",
+                "Lemma",
+                "cases",
+                "subtrees"
+            ]
+        }
+    },
+    {
+        "id": "35933fa4-19aa-401d-8887-b6c2036ac8ae",
+        "title": "",
+        "chunk_text": "We have two subtrees G1 and G2 induced by V (G) \\ V0 such that vi ∈V (Gi) for i = 1, 2. Put ni = |V (Gi)| for i = 1, 2. We may assume n1 ≤n2. Let k be the size of I. Subcase 2. 1. k < n. In this case, we have n2 ≥|V (G)\\V0|/2 > (N −n)/2 ≥n. On the other hand, since I contains the centroid, we have |V (G1) ∪V (I)| ≥N/2 ≥n. Hence, by taking v2 as the rivet in the assumption of Lemma 6, we can apply Lemma 6 to ﬁnish the proof. Subcase 2. 2. k ≥n.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "subtrees",
+                "induced",
+                "Lemma",
+                "Subcase",
+                "Put",
+                "assume",
+                "case",
+                "size",
+                "hand",
+                "centroid"
+            ]
+        }
+    },
+    {
+        "id": "4aaf6033-d682-417a-a92a-9fed68219dd5",
+        "title": "",
+        "chunk_text": "Let H be a subtree of G induced by V (I) ∪V (G2), and let K be a subtree of G induced by V (G1) ∪V (I) ∪V (G′ 2), where G′ 2 is a subtree of G2 containing v2 with n1 vertices. We will use Alg .sbs1B and Alg .sbs2B to solve the puzzle (G, P) as follows;. 1⃝Apply Alg .sbs1B for the puzzle (H, n2) with a rivet v2. 2⃝Apply Alg .sbs2B for the puzzle (K, 2n1) with an isthmus I. 3⃝Again, apply Alg .sbs1B for the puzzle (H, n2) with a rivet v2.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Alg",
+                "subtree",
+                "puzzle",
+                "Apply",
+                "induced",
+                "vertices",
+                "rivet",
+                "solve",
+                "isthmus"
+            ]
+        }
+    },
+    {
+        "id": "de357216-17d4-4893-9777-06612035ed35",
+        "title": "",
+        "chunk_text": "The running time of steps 1⃝- 3⃝is O(Nn+n2 log n) by Lemma 6 and Lemma 7. This completes the proof. Proof of Lemma 10. If T has a centroid edge, then by deﬁnition the statement of this lemma clearly holds. Hence let us assume that T has a centroid vertex o. Let us consider the set of components S of T −o. Without loss of generality, let X be a graph with the fewest order, and Y be a graph with the second-fewest order in the set S. Of course it is possible that |V (X)| = |V (Y )|.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Lemma",
+                "steps",
+                "log",
+                "running",
+                "time",
+                "proof",
+                "centroid",
+                "graph",
+                "set",
+                "order"
+            ]
+        }
+    },
+    {
+        "id": "033df7ca-89fd-4eb7-bc58-35665d64f4f3",
+        "title": "",
+        "chunk_text": "If m ≥3, since |V (X)| + |V (Y )| ≤2(N−1) 3 holds, let us denote Z := X ∪Y and update S := (S \\ {X, Y }) ∪{Z}. Repeating this operation, the size of the set S becomes 2. At that stage, let us denote S = {G, H}, and let us assume |V (G)| ≤|V (H)|. In this case, we can take T1 to be the subgraph of T induced by V (G) ∪{o}, and similarly T2 to be the subgraph of T induced by V (H) ∪{o}.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "holds",
+                "denote",
+                "update",
+                "subgraph",
+                "induced",
+                "Repeating",
+                "operation",
+                "size",
+                "set",
+                "stage"
+            ]
+        }
+    },
+    {
+        "id": "40f693f6-a986-42e9-a307-7e239289974b",
+        "title": "",
+        "chunk_text": "Since the size of each element of the set S is between 1 and n, we can sort and manage each element of S in order of its size using a 1 × n-array A(S) whose each cell is a list. Since the minimum of the orders of the graphs in S is monotonically non-decreasing, the task of identifying a graph with the smallest order and a graph with the second smallest order in A(S) takes only O(N) eﬀort in total. Proof of Lemma 11.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "element",
+                "order",
+                "size",
+                "n-array",
+                "list",
+                "graph",
+                "set",
+                "sort",
+                "manage",
+                "cell"
+            ]
+        }
+    },
+    {
+        "id": "2326b63e-0456-4631-ac0c-5454b449a8a3",
+        "title": "",
+        "chunk_text": "Let us consider the following algorithm: 1⃝If T ′ consists of a single edge e, let v be an end-vertex of e and set H := T. Otherwise, let H be the graph obtained by contracting all parts of T ′ except the pendant edges to a single vertex v. Let X be the subgraph of H corresponding to T ′.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "algorithm",
+                "consists",
+                "single",
+                "end-vertex",
+                "set",
+                "edge",
+                "edges",
+                "graph",
+                "obtained",
+                "contracting"
+            ]
+        }
+    },
+    {
+        "id": "6d29ea85-a303-47fd-8788-a90efed97a59",
+        "title": "",
+        "chunk_text": "2⃝Continue to add vertex u and edge vu to X (i.e., update to X := X + vu) as long as the rank of the subgraph T(X) of T corresponding to X is strictly less than d, and a neighboring vertex u of v that does not belong to X is found in H. 20 3⃝If the rank of the subgraph T(X) of T corresponding to X is strictly less than d, do: ( 3⃝-a) Find a vertex w outside X adjacent to some leaf ℓin X and add that vertex w and edge ℓw to X. The resulting X has the length 2 arm v −ℓ−w. ( 3⃝-b) Update X (resp.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "vertex",
+                "Continue",
+                "rank",
+                "subgraph",
+                "strictly",
+                "edge",
+                "update",
+                "add",
+                "long",
+                "neighboring"
+            ]
+        }
+    },
+    {
+        "id": "32cf6e98-3549-4592-aecd-f893b82ed57b",
+        "title": "",
+        "chunk_text": "H) as the graph obtained by contracting the edge vℓof X (resp. H) and identifying ℓwith v. ( 3⃝-c) Go to Step 2⃝ 4⃝Return the subgraph T(X) of T corresponding to X. Let us show the correctness of the above algorithm. To do so, we need only check the fact that the maximal isthmus size of the subgraph T(X) of T corresponding to X does not exceed the maximal isthmus size of T by the operation of Step 2⃝or Step 3⃝.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Step",
+                "resp.",
+                "graph",
+                "obtained",
+                "contracting",
+                "edge",
+                "vℓof",
+                "identifying",
+                "ℓwith",
+                "subgraph"
+            ]
+        }
+    },
+    {
+        "id": "77bbb16e-8135-41e2-81a7-428d5181c33d",
+        "title": "",
+        "chunk_text": "First, for the operation of Step 2⃝, the maximum isthmus size of T(X) is not increased, since the degree of the non-leaf vertices in T(X) is increased. Next, the vertex w that is added to T in Step 3⃝operation is not a cut vertex because it is a leaf of T(X), so it cannot be part of any isthmus in T(X). Therefore, the new isthmus arising in T(X) at this step has one end vertex at ℓ.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "increased",
+                "Step",
+                "isthmus",
+                "operation",
+                "vertex",
+                "maximum",
+                "size",
+                "degree",
+                "non-leaf",
+                "vertices"
+            ]
+        }
+    },
+    {
+        "id": "c90f37e1-1147-48cc-b8e9-fdf638ab7519",
+        "title": "",
+        "chunk_text": "On the other hand, just before entering the operation of Step 3⃝, the degree on T(X) and the degree on T are the same for any vertex other than leaves in T(X), so this newly generated isthmus in T(X) is just an isthmus of T itself. It is clear that the time complexity of this algorithm is linear. Proof of Lemma 12. Let us consider the operation X mentioned in Lemma 10 of dividing a given tree into two subtrees.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "degree",
+                "Step",
+                "isthmus",
+                "Lemma",
+                "hand",
+                "entering",
+                "vertex",
+                "leaves",
+                "newly",
+                "generated"
+            ]
+        }
+    },
+    {
+        "id": "db482e6f-786c-4c8b-ab59-c8f9702df424",
+        "title": "",
+        "chunk_text": "Let us recursively apply the operation X to each subtree of T to the point such that the order of each subtree is greater than or equal to k and that another X on those subtrees will reduce the order of the resulting subtrees to strictly less than k. Consequently, if r is the number of subtrees obtained so far, then 2n/k > (n −1)/(k −1) ≥r. In fact, one X operation increases the number of subtrees by one. Therefore, the total overlap of the vertices of the subtrees is at most r −1.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "order",
+                "subtrees",
+                "number",
+                "subtree",
+                "operation",
+                "recursively",
+                "apply",
+                "point",
+                "greater",
+                "equal"
+            ]
+        }
+    },
+    {
+        "id": "b34f519f-8dd4-4a52-ab2a-6262c3a8ecfd",
+        "title": "",
+        "chunk_text": "From this it follows that ((r −1) + n)/k ≥r, and solving this inequality yields n −1 ≥(k −1)r. Now, obviously, if k = 1, the degree of overlap is zero, hence we can assume k ≥2, so we have 2n/k > (n −1)/(k −1) ≥r. Therefore, even if we apply one more X operation to each subtree here, the number of subtrees can be kept to 4n/k. Thus, by this algorithm, T is covered by at most 4n/k subtrees satisfying the conditions of the theorem. Proof of Lemma 13.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "solving",
+                "inequality",
+                "yields",
+                "subtrees",
+                "Lemma",
+                "degree",
+                "overlap",
+                "assume",
+                "subtree",
+                "algorithm"
+            ]
+        }
+    },
+    {
+        "id": "3b136cea-07e2-4959-a5c8-26fcd68fcf44",
+        "title": "",
+        "chunk_text": "According to the deﬁnition of the subtree stored in the second child of each node in this binary tree BT (cf. Step 2b), for the sibling node c2(p(ℓ(i))) of ℓ(i), the graph X(r) −(X(ℓ(i)) −JointVertex(X(ℓ(i)))) includes the graph X(c2(p(ℓ(i)))). The statement of this lemma can be directly derived from this fact. Proof of Lemma 14. Let NodeSet(ℓ) be the set of nodes that are at distance ℓfrom the root node of the binary tree BT.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "graph",
+                "Step",
+                "JointVertex",
+                "node",
+                "lemma",
+                "includes",
+                "tree",
+                "deﬁnition",
+                "subtree",
+                "stored"
+            ]
+        }
+    },
+    {
+        "id": "943d0dc0-82cb-402e-8b33-5c34bad442f3",
+        "title": "",
+        "chunk_text": "Since ∀i, P x∈NS(i) |V (X(x))| ≤4n holds, according to Lemma 9, for any distance ℓ, the eﬀort required to correctly store all the objects that should be placed in all nodes of NodeSet(ℓ) is at most O(n). The height of BT is O(log n), so the total eﬀort required to complete BT is O(n log n). 21 Proof of Lemma 15. Since Step 9⃝(Step 10 ⃝, resp.) of Alg . CutOﬀ(G, T, BT, f, g′) and Step 8⃝ (Step 9⃝, resp.) of Alg .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Step",
+                "Lemma",
+                "holds",
+                "required",
+                "Alg",
+                "eﬀort",
+                "NodeSet",
+                "resp.",
+                "distance",
+                "correctly"
+            ]
+        }
+    },
+    {
+        "id": "df5015d0-3186-4678-802e-052ee6ee08bb",
+        "title": "",
+        "chunk_text": "Extraction(T, BT, g′, t) perform essentially the same operation, we will prove it only for the former. The change in the maximum isthmus size of X(r) −(X(t) − JointVertex(X(t))) can be achieved by checking at most an O(k) region around Joint(X(t)), which can be done in O(k) time.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Extraction",
+                "perform",
+                "operation",
+                "essentially",
+                "prove",
+                "Joint",
+                "JointVertex",
+                "time",
+                "region",
+                "change"
+            ]
+        }
+    },
+    {
+        "id": "d9905a2d-4080-420c-9ae3-dfcd823c8dbe",
+        "title": "",
+        "chunk_text": "During the initial construction of the binary tree BT, if we provide an array containing information for each vertex of tree T about which leaf node of BT stores the subtree that includes itself (a process that can be accomplished in total at most in O(n+k) time), then a leaf node w of BT such that X(w) contains the vertex v can be found in O(1) time.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "time",
+                "leaf",
+                "node",
+                "tree",
+                "vertex",
+                "initial",
+                "construction",
+                "binary",
+                "provide",
+                "array"
+            ]
+        }
+    },
+    {
+        "id": "b114a6be-6657-4d95-bd84-d636c0358239",
+        "title": "",
+        "chunk_text": "Note that, conversely, for each leaf node ℓof BT, if we provide data indicating the position of ℓin the list associated with each vertex of X(ℓ) (this task also can be handled in O(n + k) overall), then maintaining the lists associated with the vertices of T with the removal of ℓfrom BT at Step 10 ⃝ of Alg . CutOﬀ(G, T, BT, f, g′) can be done in O(k) time. Proof of Lemma 16. Let the set of all nodes in the binary tree BT 2 be denoted as NodeSet(BT 2).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Step",
+                "Alg",
+                "list",
+                "lists",
+                "conversely",
+                "CutOﬀ",
+                "time",
+                "Note",
+                "leaf",
+                "ℓof"
+            ]
+        }
+    },
+    {
+        "id": "a8eae2a3-c17b-434c-ba8d-be6d3773202b",
+        "title": "",
+        "chunk_text": "Let H be a subtree of T containing all the vertices {JointVertex(X(x)) | x ∈NodeSet(BT 2)} and all the edges {JointEdge(X(x)) | x ∈NodeSet(BT 2)}. The movement of the k + 1 unoccupied spaces through the repetition of Step 4 in the algorithm is accomplished, as a whole, by having a connected unoccupied space of size k + 1 traverse H in a depth-ﬁrst search order.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "NodeSet",
+                "JointVertex",
+                "JointEdge",
+                "vertices",
+                "edges",
+                "subtree",
+                "unoccupied",
+                "Step",
+                "accomplished",
+                "traverse"
+            ]
+        }
+    },
+    {
+        "id": "c354ac23-1338-4df3-a889-0e2af25ecff8",
+        "title": "",
+        "chunk_text": "The estimated number of moves for one unoccupied space (that is achieved by the sequence of swapping the positions of this unoccupied space and pebbles) is O(k + n), so the total eﬀort for swapping the unoccupied space of size k + 1 is bounded by O(k(k + n)). References [1] Hugo A. Akitaya, Matthew D. Jones, Matias Korman, Oliver Korten, Christopher Meier- frankenfeld, Michael J. Munje, Diane L. Souvaine, Michael Thramann, and Csaba D. Toth. Reconﬁguration of connected graph partitions.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "unoccupied",
+                "space",
+                "swapping",
+                "Michael",
+                "pebbles",
+                "estimated",
+                "number",
+                "moves",
+                "achieved",
+                "sequence"
+            ]
+        }
+    },
+    {
+        "id": "ca1af9e8-96e1-4552-a46b-7b125a7f4692",
+        "title": "",
+        "chunk_text": "JOURNAL OF GRAPH THEORY, 102(1):35– 66, JAN 2023. doi:10.1002/jgt.22856. [2] Anton Andreychuk, Konstantin Yakovlev, Pavel Surynek, Dor Atzmon, and Roni Stern. Multi- agent pathﬁnding with continuous time. ARTIFICIAL INTELLIGENCE, 305, APR 2022. doi:10.1016/j.artint.2022.103662. [3] AF Archer. A modern treatment of the 15 puzzle. AMERICAN MATHEMATICAL MONTHLY, 106(9):793–799, NOV 1999. doi:10.2307/2589612. [4] S. Ardizzoni, I. Saccani, L. Consolini, and M. Locatelli.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "JAN",
+                "JOURNAL",
+                "THEORY",
+                "doi",
+                "GRAPH",
+                "APR",
+                "Anton",
+                "Andreychuk",
+                "Konstantin",
+                "Yakovlev"
+            ]
+        }
+    },
+    {
+        "id": "c27ddd31-d2ee-45fb-a8f5-7a7b59d5f206",
+        "title": "",
+        "chunk_text": "Multi-agent path ﬁnding on strongly connected digraphs. In 2022 IEEE 61ST CONFERENCE ON DECISION AND CONTROL (CDC), IEEE Conference on Decision and Control, pages 7194–7199, 345 E 47TH ST, NEW YORK, NY 10017 USA, 2022. IEEE, IEEE. IEEE 61st Conference on Decision and Control (CDC), Cancun, MEXICO, DEC 06-09, 2022. doi:10.1109/CDC51059.2022.9992727. [5] S. Ardizzoni, I. Saccani, L. Consolini, and M. Locatelli. Local optimization of mapf so- lutions on directed graphs.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "IEEE",
+                "CONTROL",
+                "DECISION",
+                "CDC",
+                "CONFERENCE",
+                "USA",
+                "Multi-agent",
+                "digraphs",
+                "YORK",
+                "path"
+            ]
+        }
+    },
+    {
+        "id": "2272dd18-d2e8-4097-bc87-42a2dac150eb",
+        "title": "",
+        "chunk_text": "In 2023 62ND IEEE CONFERENCE ON DECISION AND CONTROL, CDC, IEEE Conference on Decision and Control, pages 8081–8086, 345 E 47TH 22 ST, NEW YORK, NY 10017 USA, 2023.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "IEEE",
+                "CONTROL",
+                "CDC",
+                "USA",
+                "CONFERENCE",
+                "DECISION",
+                "pages",
+                "YORK"
+            ]
+        }
+    },
+    {
+        "id": "23112379-5568-40eb-94d0-f7fa208183e5",
+        "title": "",
+        "chunk_text": "IEEE; Soc Ind & Appl Math; Japanese Soc In- strument & Control Engineers; European Control Assoc; Shanghai Jiaotong Univ; Shandong Univ Sci & Technol; MathWorks; Harbin Engn Univ; E China Univ Sci & Technol; Nanjing Univ Informat Sci & Technol; Tongji Univ; IEEE CAA Journal Automatica Sinica; AiTEN; Franklin Open; Huazhong Univ Sci & Technol, IEEE. 62nd IEEE Conference on Decision and Control (CDC), IEEE Control Syst Soc, Singapore, SINGAPORE, DEC 13-15, 2023. doi:10.1109/CDC49753.2023.10383280.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Technol",
+                "Univ",
+                "Sci",
+                "IEEE",
+                "Control",
+                "Soc",
+                "Ind",
+                "Appl",
+                "Math",
+                "Japanese"
+            ]
+        }
+    },
+    {
+        "id": "d7ea255c-428a-46ed-9557-d9a243ea50a5",
+        "title": "",
+        "chunk_text": "[6] Stefano Ardizzoni, Irene Saccani, Luca Consolini, Marco Locatelli, and Bernhard Nebel. An algorithm with improved complexity for pebble motion/multi-agent path ﬁnding on trees. JOURNAL OF ARTIFICIAL INTELLIGENCE RESEARCH, 79:483–514, 2024. [7] Aaron Atilano, Sebastian Bejos, and Christian Rubio-Montiel. Motions of a con- nected subgraph representing a swarm of robots inside a graph of work stations. ELECTRONIC JOURNAL OF GRAPH THEORY AND APPLICATIONS, 10(2):501–521, 2022.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Stefano",
+                "Ardizzoni",
+                "Irene",
+                "Saccani",
+                "Luca",
+                "Consolini",
+                "Marco",
+                "Locatelli",
+                "Nebel",
+                "Bernhard"
+            ]
+        }
+    },
+    {
+        "id": "702ac2de-5bc4-4eaa-b6d1-2a0f99f827dc",
+        "title": "",
+        "chunk_text": "doi:10.5614/ejgta.2022.10.2.12. [8] Dor Atzmon, Roni Tzvi Stern, Ariel Felner, Glenn Wagner, Roman Bartak, and Neng- Fa Zhou. Robust multi-agent path ﬁnding and executing. JOURNAL OF ARTIFICIAL INTELLIGENCE RESEARCH, 67:549–579, 2020. [9] V Auletta, A Monti, M Parente, and P Persiano. A linear-time algorithm for the feasibility of pebble motion on trees. ALGORITHMICA, 23(3):223–245, MAR 1999. doi:10.1007/PL00009259. [10] V Auletta and P Persiano. Optimal pebble motion on a tree.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "doi",
+                "Persiano",
+                "Auletta",
+                "Dor",
+                "Atzmon",
+                "Roni",
+                "Stern",
+                "Ariel",
+                "Felner",
+                "Glenn"
+            ]
+        }
+    },
+    {
+        "id": "f1b4d56e-8509-4e0b-a765-bc8524804059",
+        "title": "",
+        "chunk_text": "INFORMATION AND COMPUTATION, 165(1):42–68, FEB 25 2001. doi:10.1006/inco.2000.3005. [11] Pascal Bachor, Rolf-David Bergdoll, and Bernhard Nebel. The multi-agent transporta- tion problem. In B Williams, Y Chen, and J Neville, editors, THIRTY-SEVENTH AAAI CONFERENCE ON ARTIFICIAL INTELLIGENCE, VOL 37 NO 10, AAAI Conference on Artiﬁcial Intelligence, pages 11525–11532, 2275 E BAYSHORE RD, STE 160, PALO ALTO, CA 94303 USA, 2023.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "FEB",
+                "INFORMATION",
+                "COMPUTATION",
+                "AAAI",
+                "CONFERENCE",
+                "INTELLIGENCE",
+                "VOL",
+                "STE",
+                "USA",
+                "doi"
+            ]
+        }
+    },
+    {
+        "id": "c9451af3-130a-4b0a-b407-a5df513bc3f1",
+        "title": "",
+        "chunk_text": "Assoc Advancement Artiﬁcial Intelligence, ASSOC ADVANCEMENT ARTIFICIAL INTELLIGENCE. 37th AAAI Conference on Artiﬁcial Intelligence (AAAI) / 35th Conference on Innovative Applications of Artiﬁcial Intelligence / 13th Symposium on Educational Advances in Artiﬁcial Intelligence, Washington, DC, FEB 07-14, 2023. [12] Roman Bartak, Jiri Svancara, Vera Skopkova, David Nohejl, and Ivan Krasicenko. Multi- agent path ﬁnding on real robots. AI COMMUNICATIONS, 32(3):175–189, 2019. doi:10.3233/AIC-190621.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Intelligence",
+                "Assoc",
+                "Artiﬁcial",
+                "Advancement",
+                "ARTIFICIAL",
+                "AAAI",
+                "Conference",
+                "Washington",
+                "Symposium",
+                "FEB"
+            ]
+        }
+    },
+    {
+        "id": "ab26983f-7eb3-40a0-a7ad-90ff6f190b34",
+        "title": "",
+        "chunk_text": "[13] Ahmad Biniaz, Kshitij Jain, Anna Lubiw, Zuzana Masarova, Tillmann Miltzow, Debajyoti Mondal, Anurag Murty Naredla, Josef Tkadlec, and Alexi Turcotte. Token swapping on trees. DISCRETE MATHEMATICS AND THEORETICAL COMPUTER SCIENCE, 24(2), 2022. [14] Adi Botea, Davide Bonusi, and Pavel Surynek. Solving multi-agent path ﬁnding on strongly biconnected digraphs. JOURNAL OF ARTIFICIAL INTELLIGENCE RESEARCH, 62:273– 314, 2018. doi:10.1613/jair.1.11212.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Ahmad",
+                "Biniaz",
+                "Kshitij",
+                "Jain",
+                "Anna",
+                "Lubiw",
+                "Zuzana",
+                "Masarova",
+                "Tillmann",
+                "Miltzow"
+            ]
+        }
+    },
+    {
+        "id": "888d6a0d-8736-4a5d-aef2-8c724e66c715",
+        "title": "",
+        "chunk_text": "23 [15] Gruia Calinescu, Adrian Dumitrescu, and Janos Pach. Reconﬁgurations in graphs and grids. SIAM JOURNAL ON DISCRETE MATHEMATICS, 22(1):124–138, 2008. 7th Latin Amer- ican Symposium on Theoretical Informatics (LATIN 2006), Valdivia, CHILE, MAR 20-24, 2006. doi:10.1137/060652063. [16] Jan Chudy, Nestor Popov, and Pavel Surynek. Multi-agent path ﬁnding and acting with small reﬂex-based mobile robots.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Gruia",
+                "Calinescu",
+                "Adrian",
+                "Dumitrescu",
+                "Pach",
+                "Janos",
+                "Latin",
+                "Valdivia",
+                "CHILE",
+                "SIAM"
+            ]
+        }
+    },
+    {
+        "id": "16f5d826-ccda-4679-92ff-c71fd0694c1c",
+        "title": "",
+        "chunk_text": "In P Galambos, E Kayacan, and K Madani, editors, ROBOTICS, COMPUTER VISION AND INTELLIGENT SYSTEMS, ROBOVIS 2020, ROBOVIS 2021, volume 1667 of Communications in Computer and Information Science, pages 51–75, GEWERBESTRASSE 11, CHAM, CH-6330, SWITZERLAND, 2022. IN- STICC, SPRINGER INTERNATIONAL PUBLISHING AG. 2nd International Conference on Robotics, Computer Vision and Intelligent Systems (ROBOVIS), ELECTR NETWORK, OCT 27-28, 2021. doi:10.1007/978-3-031-19650-8\\_3.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "ROBOVIS",
+                "GEWERBESTRASSE",
+                "CHAM",
+                "SWITZERLAND",
+                "Galambos",
+                "Kayacan",
+                "Madani",
+                "Science",
+                "Communications",
+                "Information"
+            ]
+        }
+    },
+    {
+        "id": "01a96020-0483-4809-8874-50adb872410a",
+        "title": "",
+        "chunk_text": "[17] Greyson Daugherty, Spyros Reveliotis, and Greg Mohler. Optimized multiagent routing for a class of guidepath-based transport systems. IEEE TRANSACTIONS ON AUTOMATION SCIENCE AND ENGINEERING, 16(1):363–381, JAN 2019. doi:10.1109/TASE.2018.2798630. [18] Boris de Wilde, Adriaan W. ter Mors, and Cees Witteveen. Push and rotate: a complete multi- agent pathﬁnding algorithm. JOURNAL OF ARTIFICIAL INTELLIGENCE RESEARCH, 51:443–492, 2014. doi:10.1613/jair.4447. [19] Erik D. Demaine, Sandor P.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Greyson",
+                "Daugherty",
+                "Spyros",
+                "Reveliotis",
+                "Mohler",
+                "Greg",
+                "doi",
+                "JAN",
+                "IEEE",
+                "ENGINEERING"
+            ]
+        }
+    },
+    {
+        "id": "3d15cbbd-d29d-460d-9406-49c872f24186",
+        "title": "",
+        "chunk_text": "Fekete, Phillip Keldenich, Henk Meijer, and Christian Scheﬀer. Coordinated motion planning: Reconﬁguring a swarm of labeled robots with bounded stretch. SIAM JOURNAL ON COMPUTING, 48(6):1727–1762, 2019. doi:10.1137/18M1194341. [20] Sandor P. Fekete, Peter Kramer, Christian Rieck, Christian Scheﬀer, and Arne Schmidt. Eﬃciently reconﬁguring a connected swarm of labeled robots. AUTONOMOUS AGENTS AND MULTI-AGENT SYSTEMS, 38(2), DEC 2024. doi:10.1007/s10458-024-09668-3.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Phillip",
+                "Keldenich",
+                "Henk",
+                "Meijer",
+                "Scheﬀer",
+                "Christian",
+                "doi",
+                "Fekete",
+                "Reconﬁguring",
+                "labeled"
+            ]
+        }
+    },
+    {
+        "id": "3d44fbef-2126-4d5a-97fa-d0edd920cb3a",
+        "title": "",
+        "chunk_text": "[21] Alex Fink and Richard Guy. Rick’s tricky six puzzle: S5 sits specially in S6. Math. Mag., 82(2):83–102, 2009. [22] Shinya Fujita, Tomoki Nakamigawa, and Tadashi Sakuma. Colored pebble motion on graphs. EUROPEAN JOURNAL OF COMBINATORICS, 33(5, SI):884–892, JUL 2012. doi:10.1016/j.ejc.2011.09.019. [23] Shinya Fujita, Tomoki Nakamigawa, and Tadashi Sakuma. Pebble exchange on graphs. Discrete Appl. Math., 184:139–145, 2015. doi:10.1016/j.dam.2013.03.009. [24] Gilad Goraly and Refael Hassin.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Alex",
+                "Guy",
+                "Fink",
+                "Richard",
+                "Shinya",
+                "Fujita",
+                "Tomoki",
+                "Nakamigawa",
+                "Sakuma",
+                "Tadashi"
+            ]
+        }
+    },
+    {
+        "id": "d8b654a8-c88b-42f6-91cb-6d7f46e28c25",
+        "title": "",
+        "chunk_text": "Multi-color pebble motion on graphs. ALGORITHMICA, 58(3):610–636, NOV 2010. doi:10.1007/s00453-009-9290-7. [25] Marcus Gozon and Jingjin Yu. On computing makespan-optimal solutions for generalized sliding-tile puzzles. In M Wooldridge, J Dy, and S Natarajan, editors, THIRTY-EIGHTH AAAI CONFERENCE ON ARTIFICIAL INTELLIGENCE, VOL 38 NO 9, AAAI Confer- ence on Artiﬁcial Intelligence, pages 10288–10296, 2275 E BAYSHORE RD, STE 160, PALO ALTO, CA 94303 USA, 2024.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Multi-color",
+                "graphs",
+                "ALGORITHMICA",
+                "NOV",
+                "pebble",
+                "motion",
+                "INTELLIGENCE",
+                "AAAI",
+                "VOL",
+                "STE"
+            ]
+        }
+    },
+    {
+        "id": "46d8add5-c6a8-49e6-9920-c5932bff2fd9",
+        "title": "",
+        "chunk_text": "Assoc Advancement Artiﬁcial Intelligence, ASSOC ADVANCE- MENT ARTIFICIAL INTELLIGENCE. 38th AAAI Conference on Artiﬁcial Intelligence 24 (AAAI) / 36th Conference on Innovative Applications of Artiﬁcial Intelligence / 14th Sympo- sium on Educational Advances in Artiﬁcial Intelligence, Vancouver, CANADA, FEB 20-27, 2024. [26] Teng Guo and Jingjin Yu. Sub-1.5 time-optimal multi-robot path planning on grids in poly- nomial time.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Intelligence",
+                "Artiﬁcial",
+                "Assoc",
+                "MENT",
+                "Advancement",
+                "ARTIFICIAL",
+                "AAAI",
+                "Conference",
+                "Sympo",
+                "Vancouver"
+            ]
+        }
+    },
+    {
+        "id": "dda8774b-0d44-492c-b3f0-a73dbe219b5a",
+        "title": "",
+        "chunk_text": "In K Hauser, D Shell, and S Huang, editors, ROBOTICS: SCIENCE AND SYSTEM XVIII, Robotics - Science and Systems, C/O HADAS KRESS-GAZIT CORNELL UNIV SIBLEY SCH MECHANICAL & AEROSPACE ENGINEERING UPSON HALL, RM 551, ITHACA, NY, UNITED STATES, 2022. Columbia Univ; Amazon Robot; Toyota Res Inst; Dexterity; Raytheon Technologies; Raytheon Technologies Res Ctr; Mitsubishi Elect; ZOOX; Lockheed Martin; Intrinsic, RSS FOUNDATION-ROBOTICS SCIENCE & SYS- TEMS FOUNDATION.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "ROBOTICS",
+                "ITHACA",
+                "Hauser",
+                "Shell",
+                "Huang",
+                "XVIII",
+                "MECHANICAL",
+                "AEROSPACE",
+                "HALL",
+                "UNITED"
+            ]
+        }
+    },
+    {
+        "id": "d09b206b-b69b-4e88-a168-b2fcfef51fe6",
+        "title": "",
+        "chunk_text": "Conference on Robotics - Science and Systems (RSS), New York City, NY, JUN 27-JUL 01, 2022. [27] Teng Guo and Jingjin Yu. Eﬃcient heuristics for multi-robot path planning in crowded environments. In 2023 IEEE/RSJ INTERNATIONAL CONFERENCE ON INTELLIGENT ROBOTS AND SYSTEMS (IROS), IEEE International Conference on Intelligent Robots and Systems, pages 6749–6756, 345 E 47TH ST, NEW YORK, NY 10017 USA, 2023. IEEE; RSJ, IEEE.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "RSS",
+                "JUN",
+                "Systems",
+                "Robotics",
+                "Science",
+                "City",
+                "IEEE",
+                "Conference",
+                "RSJ",
+                "York"
+            ]
+        }
+    },
+    {
+        "id": "cd86e6b2-2234-4b67-8a2e-07770de7b43a",
+        "title": "",
+        "chunk_text": "IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS), Detroit, MI, OCT 01-05, 2023. doi:10.1109/IROS55552.2023.10341800. [28] Teng Guo and Jingjin Yu. Expected 1 .x makespan-optimal multi-agent path ﬁnding on grid graphs in low polynomial time. JOURNAL OF ARTIFICIAL INTELLIGENCE RESEARCH, 81:443–479, 2024. [29] Wolfgang Honig, T. K. Satish Kumar, Liron Cohen, Hang Ma, Hong Xu, Nora Aya- nian, and Sven Koenig. Summary: Multi-agent path ﬁnding with kinematic constraints.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "IEEE",
+                "IROS",
+                "Detroit",
+                "RSJ",
+                "Systems",
+                "OCT",
+                "International",
+                "Conference",
+                "Intelligent",
+                "Robots"
+            ]
+        }
+    },
+    {
+        "id": "cd669447-0a3e-4581-82eb-81a1e5a63971",
+        "title": "",
+        "chunk_text": "In C Sierra, editor, PROCEEDINGS OF THE TWENTY-SIXTH INTERNATIONAL JOINT CONFERENCE ON ARTIFICIAL INTELLIGENCE, pages 4869–4873, ALBERT- LUDWIGS UNIV FREIBURG GEORGES-KOHLER-ALLEE, INST INFORMATIK, GEB 052, FREIBURG, D-79110, GERMANY, 2017.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "ALBERT",
+                "GEB",
+                "GERMANY",
+                "FREIBURG",
+                "editor",
+                "pages",
+                "Sierra",
+                "PROCEEDINGS",
+                "INTELLIGENCE",
+                "LUDWIGS"
+            ]
+        }
+    },
+    {
+        "id": "ffa1ea97-4760-4241-95d8-17872323bb0f",
+        "title": "",
+        "chunk_text": "Int Joint Conf Artiﬁcal Intelligence; Victo- ria Govt; Melbourne Convent Bur; Artiﬁcial Intelligence Journal; Alibaba Grp; Xiaoi; Ten- cent; JD.com; Meitu Inc; Didi ChuXing; Baidu; Ant Financial Serv Grp; Australian Comp Soc; Natl Sci Fdn; Univ Technol Sydney; Griﬃth Univ; Univ Sydney; Royal Melbourne Inst Technol Univ; Melbourne Univ; Australian Natl Univ; King Abdullah Univ Sci & Technol; Data61; Adobe; IBM; NNAISENCE; AUBOT; So Univ Sci & Technol; Monash Univ; Auck- land Univ Technol; Univ New S Wales; Assumption University of Thailand; Future Univ Hakodate; Deakin Univ; Joint NTU-UBC Research Centre of Excellence in Active Living for the Elderly, Nanyang Technological University; Federation Univ; Univ Queensland; Facebook; Microsoft; BigML; Essence; Nuance; NVIDIA; XENON, IJCAI-INT JOINT CONF ARTIF INTELL.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Univ",
+                "Technol",
+                "Sci",
+                "Melbourne",
+                "Joint",
+                "Grp",
+                "Australian",
+                "Sydney",
+                "Intelligence",
+                "Natl"
+            ]
+        }
+    },
+    {
+        "id": "db86a960-fb8c-43d3-9a93-8c390fcdf1c6",
+        "title": "",
+        "chunk_text": "26th International Joint Conference on Artiﬁcial Intelligence (IJCAI), Melbourne, AUSTRALIA, AUG 19-25, 2017. [30] Wm. Woolsey Johnson and William E. Story. Notes on the ”15” puzzle. American Journal of Mathematics, 2(4):397–404, 1879. URL: http://www.jstor.org/stable/2369492. [31] Andy N. C. Kang and David A. Ault. Some properties of a centroid of a free tree. Information Processing Lett., 4(1):18–20, 1975/76. doi:10.1016/0020-0190(75)90055-1.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "IJCAI",
+                "Melbourne",
+                "AUSTRALIA",
+                "International",
+                "Intelligence",
+                "AUG",
+                "Joint",
+                "Conference",
+                "Artiﬁcial",
+                "19-25"
+            ]
+        }
+    },
+    {
+        "id": "65787248-db2d-467b-9bb9-9a20701ebca2",
+        "title": "",
+        "chunk_text": "25 [32] Tatsuoki Kato, Tomoki Nakamigawa, and Tadashi Sakuma. Pebble exchange group of graphs. Eur. J. Comb., 95:11, 2021. Id/No 103325. doi:10.1016/j.ejc.2021.103325. [33] Mokhtar M. Khorshid, Robert C. Holte, and Nathan R Sturtevant. A polynomial-time al- gorithm for non-optimal multi-agent pathﬁnding. In Symposium on Combinatorial Search, 2011. URL: https://api.semanticscholar.org/CorpusID:15391281. [34] D. Kornhauser, G. Miller, and P. Spirakis.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Tatsuoki",
+                "Kato",
+                "Tomoki",
+                "Nakamigawa",
+                "Sakuma",
+                "Tadashi",
+                "Comb.",
+                "URL",
+                "Eur",
+                "Pebble"
+            ]
+        }
+    },
+    {
+        "id": "a101e1d8-7db9-449b-bcda-62b4135f2a9d",
+        "title": "",
+        "chunk_text": "Coordinating pebble motion on graphs, the diam- eter of permutation groups, and applications. In 25th Annual Symposium on Foundations of Computer Science, 1984., pages 241–250, 1984. doi:10.1109/SFCS.1984.715921. [35] Athanasios Krontiris, Ryan Luna, and Kostas E. Bekris. From feasibility tests to path planners for multi-agent pathﬁnding. In Symposium on Combinatorial Search, 2013. URL: https://api.semanticscholar.org/CorpusID:6606518. [36] Miroslav Kulich, Tomas Novak, and Libor Preucil.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Coordinating",
+                "graphs",
+                "diam",
+                "eter",
+                "groups",
+                "applications",
+                "Symposium",
+                "Annual",
+                "Science",
+                "pebble"
+            ]
+        }
+    },
+    {
+        "id": "fbefa6b7-d930-4b1c-9183-ecebdbd8b7e9",
+        "title": "",
+        "chunk_text": "Push, stop, and replan: An application of pebble motion on graphs to planning in automated warehouses. In 2019 IEEE INTELLIGENT TRANSPORTATION SYSTEMS CONFERENCE (ITSC), IEEE International Conference on Intelligent Transportation Systems-ITSC, pages 4456–4463. IEEE; Intel; Griﬃth Univ; Auck- land Tourism Events & Econ Dev, 2019. IEEE Intelligent Transportation Systems Conference (IEEE-ITSC), Auckland, NEW ZEALAND, OCT 27-30, 2019. [37] Geunho Lee and Cornelis Francois van Eeden.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "IEEE",
+                "INTELLIGENT",
+                "TRANSPORTATION",
+                "Push",
+                "stop",
+                "CONFERENCE",
+                "SYSTEMS",
+                "ITSC",
+                "replan",
+                "warehouses"
+            ]
+        }
+    },
+    {
+        "id": "b31e241f-83bb-4b6d-aad7-9816717e8496",
+        "title": "",
+        "chunk_text": "Visiting pebbles on rectangular grids: coordi- nating multiple robots in mobile fulﬁlment systems. INTELLIGENT SERVICE ROBOTICS, 14(1):79–97, MAR 2021. doi:10.1007/s11370-021-00350-1. [38] S. Loyd and M. Gardner. Mathematical Puzzles. Number Volume 1 in Dover Math Games and Puzzles Series. Dover Publications, 1959. URL: https://books.google.co.jp/books?id=QCy6DzgqcI4C. [39] Hang Ma, T. K. Satish Kumar, and Sven Koenig. Multi-agent path ﬁnding with delay prob- abilities.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "coordi",
+                "MAR",
+                "Visiting",
+                "grids",
+                "nating",
+                "systems",
+                "INTELLIGENT",
+                "ROBOTICS",
+                "pebbles",
+                "rectangular"
+            ]
+        }
+    },
+    {
+        "id": "affa30e3-b3eb-4d2b-86b1-c804be936b50",
+        "title": "",
+        "chunk_text": "In THIRTY-FIRST AAAI CONFERENCE ON ARTIFICIAL INTELLIGENCE, AAAI Conference on Artiﬁcial Intelligence, pages 3605–3612, 2275 E BAYSHORE RD, STE 160, PALO ALTO, CA 94303 USA, 2017. Assoc Advancement Artiﬁcial Intelligence, AS- SOC ADVANCEMENT ARTIFICIAL INTELLIGENCE. 31st AAAI Conference on Artiﬁcial Intelligence, San Francisco, CA, FEB 04-09, 2017. [40] Hang Ma, Craig Tovey, Guni Sharon, T. K. Satish Kumar, and Sven Koenig.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "INTELLIGENCE",
+                "STE",
+                "USA",
+                "Artiﬁcial",
+                "CONFERENCE",
+                "AAAI",
+                "PALO",
+                "ALTO",
+                "ARTIFICIAL",
+                "BAYSHORE"
+            ]
+        }
+    },
+    {
+        "id": "e735c521-96ba-4217-b2e2-19d575546d0e",
+        "title": "",
+        "chunk_text": "Multi-agent path ﬁnding with payload transfers and the package-exchange robot-routing problem. In THIRTIETH AAAI CONFERENCE ON ARTIFICIAL INTELLIGENCE, AAAI Confer- ence on Artiﬁcial Intelligence, pages 3166–3173, 2275 E BAYSHORE RD, STE 160, PALO ALTO, CA 94303 USA, 2016. Assoc Advancement Artiﬁcial Intelligence, ASSOC ADVANCE- MENT ARTIFICIAL INTELLIGENCE. 30th Association-for-the-Advancement-of-Artiﬁcial- Intelligence (AAAI) Conference on Artiﬁcial Intelligence, Phoenix, AZ, FEB 12-17, 2016.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "INTELLIGENCE",
+                "Artiﬁcial",
+                "AAAI",
+                "ARTIFICIAL",
+                "Assoc",
+                "Multi-agent",
+                "problem",
+                "CONFERENCE",
+                "STE",
+                "USA"
+            ]
+        }
+    },
+    {
+        "id": "a6cc2805-078c-4ced-a6d4-5e655a1e5d79",
+        "title": "",
+        "chunk_text": "[41] Bernhard Nebel. The computational complexity of multi-agent pathﬁnding on directed graphs. ARTIFICIAL INTELLIGENCE, 328, MAR 2024. doi:10.1016/j.artint.2023.104063. [42] Naomi Nishimura. Introduction to reconﬁguration. ALGORITHMS, 11(4), APR 2018. doi:10.3390/a11040052. 26 [43] Keisuke Okumura and Xavier Defago. Solving simultaneous target assignment and path planning eﬃciently with time-independent execution. ARTIFICIAL INTELLIGENCE, 321, AUG 2023. doi:10.1016/j.artint.2023.103946.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Bernhard",
+                "Nebel",
+                "doi",
+                "ARTIFICIAL",
+                "INTELLIGENCE",
+                "MAR",
+                "ALGORITHMS",
+                "APR",
+                "AUG",
+                "Naomi"
+            ]
+        }
+    },
+    {
+        "id": "dfd69bd8-5c7b-47dd-bdb1-2b4d0ee4c7de",
+        "title": "",
+        "chunk_text": "[44] Keisuke Okumura, Manao Machida, Xavier Defago, and Yasumasa Tamura. Prior- ity inheritance with backtracking for iterative multi-agent path ﬁnding. ARTIFICIAL INTELLIGENCE, 310, SEP 2022. doi:10.1016/j.artint.2022.103752. [45] C.H. Papadimitriou, P. Raghavan, M. Sudan, and H. Tamaki. Motion planning on a graph. In Proceedings 35th Annual Symposium on Foundations of Computer Science, pages 511–520, 1994. doi:10.1109/SFCS.1994.365740. [46] Daniel Ratner and Manfred Warmuth.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Keisuke",
+                "Okumura",
+                "Manao",
+                "Machida",
+                "Xavier",
+                "Defago",
+                "Tamura",
+                "Yasumasa",
+                "doi",
+                "SEP"
+            ]
+        }
+    },
+    {
+        "id": "04f695a0-8604-496c-8caa-0aa4eb360dde",
+        "title": "",
+        "chunk_text": "The (n2 −1)-puzzle and related relocation problems. J. Symb. Comput., 10(2):111–137, 1990. doi:10.1016/S0747-7171(08)80001-6. [47] Vojtech Rybar and Pavel Surynek. Highways in warehouse multi-agent path ﬁnding: A case study. In AP Rocha, L Steels, and J VandenHerik, editors, ICAART: PROCEEDINGS OF THE 14TH INTERNATIONAL CONFERENCE ON AGENTS AND ARTIFICIAL INTELLIGENCE - VOL 1, ICAART, pages 274–281, AV D MANUELL, 27A 2 ESQ, SETUBAL, 2910-595, PORTUGAL, 2022. SCITEPRESS.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "ICAART",
+                "puzzle",
+                "problems",
+                "related",
+                "relocation",
+                "Symb",
+                "VOL",
+                "ESQ",
+                "SETUBAL",
+                "PORTUGAL"
+            ]
+        }
+    },
+    {
+        "id": "93eeca30-38d5-4e8a-9f0d-5f15dc71715d",
+        "title": "",
+        "chunk_text": "14th International Conference on Agents and Artiﬁcial Intelligence (ICAART), ELECTR NETWORK, FEB 03-05, 2022. doi:10.5220/0010845200003116. [48] Enrico Saccon, Luigi Palopoli, and Marco Roveri. Comparing multi-agent path ﬁnding al- gorithms in a real industrial scenario. In A Dovier, A Montanari, and A Orlandini, editors, AIXIA 2022 - ADVANCES IN ARTIFICIAL INTELLIGENCE, volume 13796 of Lecture Notes in Artiﬁcial Intelligence, pages 184–197, GEWERBESTRASSE 11, CHAM, CH-6330, SWITZERLAND, 2023.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "ICAART",
+                "International",
+                "ELECTR",
+                "NETWORK",
+                "FEB",
+                "Intelligence",
+                "Conference",
+                "Agents",
+                "Artiﬁcial",
+                "03-05"
+            ]
+        }
+    },
+    {
+        "id": "546aad99-75c1-4714-8927-c0a6c58ddec3",
+        "title": "",
+        "chunk_text": "Italian Assoc Artiﬁcial Intelligence; EUSTEMA; Danieli Automat; Generali; Intesa Sanpaolo; TechEdge; OverIT; Previnet; U Blox; BeanTech; SMC; Conﬁnd- ustria Udine, SPRINGER INTERNATIONAL PUBLISHING AG. 21st International Con- ference of the Italian-Association-for-Artiﬁcial-Intelligence (AIxIA), Udine, ITALY, NOV 28- DEC 02, 2022. doi:10.1007/978-3-031-27181-6\\_13. [49] Basudev Saha, Bidyut Das, Vineeta Shukla, and Mukta Majumder.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "EUSTEMA",
+                "Generali",
+                "Previnet",
+                "SMC",
+                "Conﬁnd",
+                "Intelligence",
+                "Danieli",
+                "Automat",
+                "Intesa",
+                "Sanpaolo"
+            ]
+        }
+    },
+    {
+        "id": "b343f667-5b5a-43eb-ac7a-0dcb8f89bbb5",
+        "title": "",
+        "chunk_text": "Pebble traversal-based fault detection and advanced reconﬁguration technique for digital microﬂuidic biochips. JOURNAL OF ELECTRONIC TESTING-THEORY AND APPLICATIONS, 40(4):573–587, AUG 2024. doi:10.1007/s10836-024-06137-3. [50] Joao Salvado, Masoumeh Mansouri, and Federico Pecora. A network-ﬂow reduction for the multi-robot goal allocation and motion planning problem.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Pebble",
+                "biochips",
+                "AUG",
+                "traversal-based",
+                "fault",
+                "detection",
+                "advanced",
+                "reconﬁguration",
+                "technique",
+                "digital"
+            ]
+        }
+    },
+    {
+        "id": "fd600f98-3faf-483c-be88-e3acb476688e",
+        "title": "",
+        "chunk_text": "In 2021 IEEE 17TH INTERNATIONAL CONFERENCE ON AUTOMATION SCIENCE AND ENGINEERING (CASE), IEEE International Conference on Automation Science and Engineering, pages 2194– 2201, 345 E 47TH ST, NEW YORK, NY 10017 USA, 2021. IEEE, IEEE. 17th IEEE Inter- national Conference on Automation Science and Engineering (CASE), Lyon, FRANCE, AUG 23-27, 2021. doi:10.1109/CASE49439.2021.9551640. [51] Dhruv Mauria Saxena and Maxim Likhachev.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "IEEE",
+                "ENGINEERING",
+                "INTERNATIONAL",
+                "USA",
+                "AUTOMATION",
+                "SCIENCE",
+                "CASE",
+                "YORK",
+                "CONFERENCE",
+                "pages"
+            ]
+        }
+    },
+    {
+        "id": "64b12427-9940-4854-ba9b-e1ec5672810b",
+        "title": "",
+        "chunk_text": "Planning for complex non-prehensile ma- nipulation among movable objects by interleaving multi-agent pathﬁnding and physics- based simulation. In 2023 IEEE INTERNATIONAL CONFERENCE ON ROBOTICS 27 AND AUTOMATION (ICRA 2023), IEEE International Conference on Robotics and Automation ICRA, pages 8141–8147, 345 E 47TH ST, NEW YORK, NY 10017 USA, 2023. IEEE; IEEE Robot & Automat Soc, IEEE. IEEE International Conference on Robotics and Automation (ICRA), London, ENGLAND, MAY 29-JUN 02, 2023.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "IEEE",
+                "ICRA",
+                "INTERNATIONAL",
+                "CONFERENCE",
+                "ROBOTICS",
+                "AUTOMATION",
+                "USA",
+                "Planning",
+                "nipulation",
+                "physics"
+            ]
+        }
+    },
+    {
+        "id": "ff7df049-e194-44c7-91d7-99a877d25cd2",
+        "title": "",
+        "chunk_text": "doi:10.1109/ICRA48891.2023.10161006. [52] Guni Sharon, Roni Stern, Ariel Felner, and Nathan R. Sturtevant. Conﬂict-based search for optimal multi-agent pathﬁnding. ARTIFICIAL INTELLIGENCE, 219:40–66, FEB 2015. doi:10.1016/j.artint.2014.11.006. [53] Rahul Shome, Kiril Solovey, Andrew Dobson, Dan Halperin, and Kostas E. Bekris. drrt*: Scalable and informed asymptotically-optimal multi-robot motion planning. AUTONOMOUS ROBOTS, 44(3-4, SI):443–467, MAR 2020. doi:10.1007/s10514-019-09832-9.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "doi",
+                "Guni",
+                "Sharon",
+                "Roni",
+                "Stern",
+                "Ariel",
+                "Felner",
+                "Sturtevant",
+                "FEB",
+                "Nathan"
+            ]
+        }
+    },
+    {
+        "id": "d785fdd1-6db8-47e4-8a55-63cb070584a8",
+        "title": "",
+        "chunk_text": "[54] Kiril Solovey and Dan Halperin. k-color multi-robot motion planning. INTERNATIONAL JOURNAL OF ROBOTICS RESEARCH, 33(1, SI):82–97, JAN 2014. doi:10.1177/0278364913506268. [55] Roni Stern. Multi-agent path ﬁnding - an overview. In GS Osipov, AI Panov, and KS Yakovlev, editors, ARTIFICIAL INTELLIGENCE, volume 11866 of Lecture Notes in Artiﬁcial Intelligence, pages 96–115, GEWERBESTRASSE 11, CHAM, CH-6330, SWITZER- LAND, 2019.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Kiril",
+                "Halperin",
+                "Solovey",
+                "Dan",
+                "JAN",
+                "INTELLIGENCE",
+                "GEWERBESTRASSE",
+                "CHAM",
+                "SWITZER",
+                "LAND"
+            ]
+        }
+    },
+    {
+        "id": "03f858d1-dd3f-44ec-87ea-21883bdc4db4",
+        "title": "",
+        "chunk_text": "Russian Assoc Artiﬁcial Intelligence; Yandex; Huawei; AimTech; NLMK; Tin- koﬀ, SPRINGER INTERNATIONAL PUBLISHING AG. 5th RAAI Summer School on Ar- tiﬁcial Intelligence, Moscow Inst Phys & Technol, Dolgoprudy, RUSSIA, JUL 04-07, 2019. doi:10.1007/978-3-030-33274-7\\_6. [56] Roni Stern, Nathan R. Sturtevant, Ariel Felner, Sven Koenig, Hang Ma, Thayne T. Walker, Jiaoyang Li, Dor Atzmon, Liron Cohen, T. K. Satish Kumar, Roman Bart´ak, and Eli Bo- yarski.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Yandex",
+                "Huawei",
+                "NLMK",
+                "Tin",
+                "SPRINGER",
+                "AimTech",
+                "koﬀ",
+                "Intelligence",
+                "Assoc",
+                "Artiﬁcial"
+            ]
+        }
+    },
+    {
+        "id": "b00b62d2-d55c-4f2d-b56f-ab21ff134a8c",
+        "title": "",
+        "chunk_text": "Multi-agent pathﬁnding: Deﬁnitions, variants, and benchmarks. In Pavel Surynek and William Yeoh, editors, Proceedings of the Twelfth International Symposium on Combinatorial Search, SOCS 2019, Napa, California, 16-17 July 2019, pages 151–158. AAAI Press, 2019. URL: https://doi.org/10.1609/socs.v10i1.18510, doi:10.1609/SOCS.V10I1.18510. [57] Pavel Surynek. An application of pebble motion on graphs to abstract multi-robot path planning.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Deﬁnitions",
+                "variants",
+                "SOCS",
+                "Napa",
+                "California",
+                "Multi-agent",
+                "pathﬁnding",
+                "benchmarks",
+                "Pavel",
+                "Surynek"
+            ]
+        }
+    },
+    {
+        "id": "1dc887a3-ed23-48cd-bddc-4b2d75bf40ab",
+        "title": "",
+        "chunk_text": "In ICTAI: 2009 21ST INTERNATIONAL CONFERENCE ON TOOLS WITH ARTIFICIAL INTELLIGENCE, Proceedings-International Conference on Tools With Ar- tiﬁcial Intelligence, pages 151–158, 345 E 47TH ST, NEW YORK, NY 10017 USA, 2009. IEEE Comp Soc; Biol & Artiﬁcial Intelligent Soc, IEEE. 21st IEEE Interna- tional Conference on Tools with Artiﬁcial Intelligence, Newark, NJ, NOV 02-04, 2009. doi:10.1109/ICTAI.2009.62. [58] Pavel Surynek.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "USA",
+                "TOOLS",
+                "ICTAI",
+                "INTERNATIONAL",
+                "YORK",
+                "IEEE",
+                "INTELLIGENCE",
+                "ARTIFICIAL",
+                "CONFERENCE",
+                "Soc"
+            ]
+        }
+    },
+    {
+        "id": "c4e39117-3c6a-45a8-8477-1cd30275a9b3",
+        "title": "",
+        "chunk_text": "Time-expanded graph-based propositional encodings for makespan-optimal solving of cooperative path ﬁnding problems. ANNALS OF MATHEMATICS AND ARTIFICIAL INTELLIGENCE, 81(3-4):329–375, DEC 2017. doi:10.1007/s10472-017-9560-z. [59] Pavel Surynek. Unifying search-based and compilation-based approaches to multi-agent path ﬁnding through satisﬁability modulo theories.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "DEC",
+                "Time-expanded",
+                "problems",
+                "ANNALS",
+                "INTELLIGENCE",
+                "graph-based",
+                "propositional",
+                "encodings",
+                "makespan-optimal",
+                "solving"
+            ]
+        }
+    },
+    {
+        "id": "af0ebbf4-a4ef-4af8-a158-f20468f85642",
+        "title": "",
+        "chunk_text": "In S Kraus, editor, PROCEEDINGS OF THE TWENTY-EIGHTH INTERNATIONAL JOINT CONFERENCE ON ARTIFICIAL 28 INTELLIGENCE, pages 1177–1183, ALBERT-LUDWIGS UNIV FREIBURG GEORGES- KOHLER-ALLEE, INST INFORMATIK, GEB 052, FREIBURG, D-79110, GERMANY, 2019. Int Joint Conf Artiﬁcal Intelligence, IJCAI-INT JOINT CONF ARTIF INTELL. 28th International Joint Conference on Artiﬁcial Intelligence, Macao, PEOPLES R CHINA, AUG 10-16, 2019. [60] Pavel Surynek.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "FREIBURG",
+                "GEB",
+                "GERMANY",
+                "JOINT",
+                "INTELLIGENCE",
+                "Kraus",
+                "PROCEEDINGS",
+                "ARTIFICIAL",
+                "GEORGES",
+                "INST"
+            ]
+        }
+    },
+    {
+        "id": "df1e4fb8-79ae-42cc-b5bc-4d2c4a601d06",
+        "title": "",
+        "chunk_text": "Bounded sub-optimal multi-robot path planning using satisﬁability mod- ulo theory (smt) approach. In 2020 IEEE/RSJ INTERNATIONAL CONFERENCE ON INTELLIGENT ROBOTS AND SYSTEMS (IROS), IEEE International Conference on In- telligent Robots and Systems, pages 11631–11637, 345 E 47TH ST, NEW YORK, NY 10017 USA, 2020. IEEE; RSJ, IEEE. IEEE/RSJ International Conference on Intelli- gent Robots and Systems (IROS), ELECTR NETWORK, OCT 24-JAN 24, 2020-2021. doi:10.1109/IROS45743.2020.9341047.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "IEEE",
+                "RSJ",
+                "SYSTEMS",
+                "CONFERENCE",
+                "IROS",
+                "INTERNATIONAL",
+                "ROBOTS",
+                "smt",
+                "approach",
+                "USA"
+            ]
+        }
+    },
+    {
+        "id": "f582f031-767a-4e64-bf82-ee645392c4be",
+        "title": "",
+        "chunk_text": "[61] Pavel Surynek and Petr Michalik. The joint movement of pebbles in solving the ()-puzzle suboptimally and its applications in rule-based cooperative path-ﬁnding. AUTONOMOUS AGENTS AND MULTI-AGENT SYSTEMS, 31(3):715–763, MAY 2017. doi:10.1007/s10458-016-9343-7. [62] Pavel Surynek, Roni Stern, Eli Boyarski, and Ariel Felner. Migrating techniques from search- based multi-agent path ﬁnding solvers to sat-based approach. JOURNAL OF ARTIFICIAL INTELLIGENCE RESEARCH, 73:553–618, 2022.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Michalik",
+                "Petr",
+                "Pavel",
+                "Surynek",
+                "AUTONOMOUS",
+                "SYSTEMS",
+                "MULTI-AGENT",
+                "AGENTS",
+                "Roni",
+                "Stern"
+            ]
+        }
+    },
+    {
+        "id": "a396214c-868d-464c-a508-0febe96617bf",
+        "title": "",
+        "chunk_text": "[63] Mario Szegedy and Jingjin Yu. Rubik tables and object rearrangement. INTERNATIONAL JOURNAL OF ROBOTICS RESEARCH, 42(6, SI):459–472, MAY 2023. doi:10.1177/02783649211059844. [64] Glenn Wagner and Howie Choset. Subdimensional expansion for multi- robot path planning. ARTIFICIAL INTELLIGENCE, 219:1–24, FEB 2015. doi:10.1016/j.artint.2014.11.001. [65] Ke Wang, Wei Liang, Huaguang Shi, Jialin Zhang, and Qi Wang. Driving line-based two-stage path planning in the agv sorting system.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Mario",
+                "Szegedy",
+                "Jingjin",
+                "doi",
+                "Wang",
+                "INTERNATIONAL",
+                "RESEARCH",
+                "FEB",
+                "path",
+                "planning"
+            ]
+        }
+    },
+    {
+        "id": "d80acd46-acad-4784-871f-3d05927f242a",
+        "title": "",
+        "chunk_text": "ROBOTICS AND AUTONOMOUS SYSTEMS, 169, NOV 2023. doi:10.1016/j.robot.2023.104505. [66] Richard M. Wilson. Graph puzzles, homotopy, and the alternating group. J. Comb. Theory, Ser. B, 16:86–96, 1974. doi:10.1016/0095-8956(74)90098-7. [67] Shao-Ci Wu, Wei-Yu Chiu, and Chien-Feng Wu. Deep reinforcement learning for task as- signment and shelf reallocation in smart warehouses. IEEE ACCESS, 12:58915–58926, 2024. doi:10.1109/ACCESS.2024.3392752. [68] Shao-Ci Wu, Wei-Yu Chiu, and Chien-Feng Wu.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "NOV",
+                "ROBOTICS",
+                "SYSTEMS",
+                "AUTONOMOUS",
+                "doi",
+                "Chiu",
+                "Shao-Ci",
+                "Wei-Yu",
+                "Richard",
+                "Wilson"
+            ]
+        }
+    },
+    {
+        "id": "9f7e87c8-b793-4c85-a4ee-d113a25d685b",
+        "title": "",
+        "chunk_text": "Deep reinforcement learning for task as- signment and shelf reallocation in smart warehouses. IEEE Access, 12:58915–58926, 2024. doi:10.1109/ACCESS.2024.3392752. [69] Jianbin Xin, Xuwen Wu, Andrea D’Ariano, Rudy Negenborn, and Fangfang Zhang. Model predictive path planning of agvs: Mixed logical dynamical formulation and distributed co- ordination. IEEE TRANSACTIONS ON INTELLIGENT TRANSPORTATION SYSTEMS, 24(7):6943–6954, JUL 2023. doi:10.1109/TITS.2023.3254147. 29 [70] K. S. Yakovlev, A. A.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "doi",
+                "IEEE",
+                "Deep",
+                "signment",
+                "warehouses",
+                "Access",
+                "reinforcement",
+                "learning",
+                "task",
+                "shelf"
+            ]
+        }
+    },
+    {
+        "id": "672c150d-0c1b-4194-838e-1449a732fc53",
+        "title": "",
+        "chunk_text": "Andreychuk, A. A. Skrynnik, and A. I. Panov. Planning and learning in multi-agent path ﬁnding. DOKLADY MATHEMATICS, 106(SUPPL 1, 1):S79–S84, DEC 2022. doi:10.1134/S1064562422060229. [71] Jingjin Yu. Intractability of optimal multirobot path planning on planar graphs. IEEE ROBOTICS AND AUTOMATION LETTERS, 1(1):33–40, JAN 2016. doi:10.1109/LRA.2015.2503143. [72] Jingjin Yu. Constant-factor time-optimal multi-robot routing on high-dimensional grids.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Skrynnik",
+                "Panov",
+                "Andreychuk",
+                "Jingjin",
+                "doi",
+                "SUPPL",
+                "DEC",
+                "DOKLADY",
+                "MATHEMATICS",
+                "Planning"
+            ]
+        }
+    },
+    {
+        "id": "0d364e00-2eb9-499f-acf0-3e545af98a24",
+        "title": "",
+        "chunk_text": "In H KressGazit, S Srinivasa, T Howard, and N Atanasov, editors, ROBOTICS: SCIENCE AND SYSTEMS XIV, ONE ROGERS ST, CAMBRIDGE, MA 02142 USA, 2018. MIT PRESS. 14th Conference on Robotics - Science and Systems, Carnegie Mellon Univ, Pittsburgh, PA, JUN 26-30, 2018. [73] Jingjin Yu and Steven M. LaValle. Optimal multirobot path planning on graphs: Complete algorithms and eﬀective heuristics. IEEE TRANSACTIONS ON ROBOTICS, 32(5):1163– 1177, OCT 2016. doi:10.1109/TRO.2016.2593448.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "CAMBRIDGE",
+                "USA",
+                "ROBOTICS",
+                "Srinivasa",
+                "Howard",
+                "Atanasov",
+                "XIV",
+                "ROGERS",
+                "SCIENCE",
+                "editors"
+            ]
+        }
+    },
+    {
+        "id": "f3f0b02e-3bf2-45d4-837f-e10c1599c383",
+        "title": "",
+        "chunk_text": "[74] Jingjin Yu and Daniela Rus. Pebble motion on graphs with rotations: Eﬃcient feasibility tests and planning algorithms. In HL Akin, NM Amato, V Isler, and AF VanDerStappen, ed- itors, ALGORITHMIC FOUNDATIONS OF ROBOTICS XI, volume 107 of Springer Tracts in Advanced Robotics, pages 729–746, HEIDELBERGER PLATZ 3, D-14197 BERLIN, GER- MANY, 2015. Springer Tracts Adv Robot, SPRINGER-VERLAG BERLIN.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Jingjin",
+                "Rus",
+                "Daniela",
+                "BERLIN",
+                "Tracts",
+                "GER",
+                "Eﬃcient",
+                "Springer",
+                "ROBOTICS",
+                "Akin"
+            ]
+        }
+    },
+    {
+        "id": "b04ca24e-0b39-45a9-8101-c6df3287a67c",
+        "title": "",
+        "chunk_text": "11th Workshop on Algorithmic Foundations of Robotics (WAFR), Bogazici Univ, Istanbul, TURKEY, AUG 03-05, 2014. doi:10.1007/978-3-319-16595-0\\_42. 30",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "WAFR",
+                "Istanbul",
+                "TURKEY",
+                "Workshop",
+                "Robotics",
+                "Bogazici",
+                "Univ",
+                "AUG",
+                "Algorithmic",
+                "Foundations"
+            ]
+        }
+    }
+]

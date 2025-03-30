@@ -1,0 +1,2038 @@
+[
+    {
+        "id": "82225b65-be4e-4db4-862a-2fefeb3d6988",
+        "title": "",
+        "chunk_text": "arXiv:2503.17844v1 [cs.CC] 22 Mar 2025 1 Privacy-Preserving Hamming Distance Computation with Property-Preserving Hashing Dongfang Zhao University of Washington, USA dzhao@cs.washington.edu Abstract We study the problem of approximating Hamming distance in sublinear time under property-preserving hashing (PPH), where only hashed representations of inputs are available.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Mar",
+                "USA",
+                "PPH",
+                "Hamming",
+                "Distance",
+                "Hashing",
+                "Washington",
+                "Abstract",
+                "arXiv",
+                "cs.CC"
+            ]
+        }
+    },
+    {
+        "id": "1688138e-c6ab-4dd7-a788-e8524b6689b0",
+        "title": "",
+        "chunk_text": "Building on the threshold evaluation framework of Fleischhacker, Larsen, and Simkin (EUROCRYPT 2022), we present a sequence of constructions with progressively improved complexity: a baseline binary search algorithm, a reﬁned variant with constant repetition per query, and a novel hash design that enables constant-time approximation without oracle access.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Larsen",
+                "EUROCRYPT",
+                "Fleischhacker",
+                "Simkin",
+                "Building",
+                "complexity",
+                "algorithm",
+                "query",
+                "access",
+                "threshold"
+            ]
+        }
+    },
+    {
+        "id": "d003dd0f-a1e1-49ac-ad61-82ad124dab47",
+        "title": "",
+        "chunk_text": "Our results demonstrate that approximate distance recovery is possible under strong cryptographic guarantees, bridging efﬁciency and security in similarity estimation. I. INTRODUCTION Estimating similarity between data points lies at the heart of numerous algorithmic tasks, from nearest-neighbor search to clustering, learning, and data deduplication. In many such applications, computing distances directly may be infeasible due to performance or privacy constraints.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "guarantees",
+                "bridging",
+                "estimation",
+                "learning",
+                "similarity",
+                "results",
+                "demonstrate",
+                "approximate",
+                "recovery",
+                "strong"
+            ]
+        }
+    },
+    {
+        "id": "249af621-ca8b-4c33-85ef-76a5a1318fd1",
+        "title": "",
+        "chunk_text": "This challenge has sparked a rich line of research on hashing-based approximations, most notably in the form of Locality-Sensitive Hashing (LSH) [IM98], [KOR00], [OWZ11], which enables sublinear-time similarity search by correlating hash collisions with proximity. However, LSH techniques are typically heuristic and fragile under adversarial manipulation, limiting their applicability in cryptographic or privacy-sensitive contexts.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Hashing",
+                "LSH",
+                "approximations",
+                "proximity",
+                "challenge",
+                "sparked",
+                "rich",
+                "line",
+                "research",
+                "hashing-based"
+            ]
+        }
+    },
+    {
+        "id": "c0101c8d-240a-4a0f-b512-de7c52a920fc",
+        "title": "",
+        "chunk_text": "To address these limitations, the framework of Property-Preserving Hashing (PPH) was introduced by Boyle, LaVigne, and Vaikuntanathan [BLV19], initiating a program to design hash functions that retain speciﬁc structural properties of the input—such as Hamming distance—while offering provable security guarantees.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "PPH",
+                "LaVigne",
+                "Hashing",
+                "Boyle",
+                "Vaikuntanathan",
+                "Hamming",
+                "limitations",
+                "initiating",
+                "input",
+                "distance"
+            ]
+        }
+    },
+    {
+        "id": "612eac19-bf23-4f6c-bd6f-8c0e44b47119",
+        "title": "",
+        "chunk_text": "This line of work was extended by Fleischhacker and Simkin [FS21] to exact distance predicates, culminating in the recent construction by Fleischhacker, Larsen, and Simkin [FLS22], who gave the ﬁrst PPH for threshold-Hamming comparison from standard cryptographic assumptions. Their approach combines robust set encodings with a non-interactive evaluation protocol, enabling binary distance comparisons between hashes while maintaining indistinguishability.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Simkin",
+                "Larsen",
+                "Fleischhacker",
+                "PPH",
+                "predicates",
+                "culminating",
+                "assumptions",
+                "distance",
+                "line",
+                "work"
+            ]
+        }
+    },
+    {
+        "id": "831f24d9-fd10-4b37-b616-8cb727e023d2",
+        "title": "",
+        "chunk_text": "Despite these advances, prior work has focused primarily on decisional predicates, such as testing whether the Hamming distance exceeds a ﬁxed threshold. The question of whether one can efﬁciently estimate the distance itself—particularly in sublinear time and under strong cryptographic guarantees—remains largely unexplored. In this paper, we initiate a systematic study of approximate Hamming distance computation under PPH.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Hamming",
+                "advances",
+                "prior",
+                "predicates",
+                "threshold",
+                "distance",
+                "work",
+                "focused",
+                "primarily",
+                "decisional"
+            ]
+        }
+    },
+    {
+        "id": "d5bbb176-33bf-43c9-b588-abab4044a263",
+        "title": "",
+        "chunk_text": "Our goal is to determine how much information about the distance can be efﬁciently and securely extracted from hash outputs, and what algorithmic mechanisms allow such recovery. We present three contributions, each building on and extending the threshold-Hamming framework of [FLS22]: • Binary Search over Thresholds. We ﬁrst show that repeated calls to the evaluation predicate enable approx- imate recovery of the Hamming distance via binary search.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "outputs",
+                "Binary",
+                "Search",
+                "goal",
+                "determine",
+                "information",
+                "efﬁciently",
+                "securely",
+                "extracted",
+                "hash"
+            ]
+        }
+    },
+    {
+        "id": "6a4f1038-4acb-4876-8e2e-5f90f88d35d1",
+        "title": "",
+        "chunk_text": "This naive baseline requires O(log n) threshold queries, each revealing a single bit of information. While simple, this approach incurs cumulative error and quadratic overhead under standard ampliﬁcation. • Optimized Evaluation with Constant Repetition. We then reﬁne the search algorithm by analyzing the error structure of the evaluation predicate.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "log",
+                "threshold",
+                "queries",
+                "information",
+                "naive",
+                "baseline",
+                "requires",
+                "revealing",
+                "single",
+                "bit"
+            ]
+        }
+    },
+    {
+        "id": "40b577d4-ef66-4627-8b87-17e009204314",
+        "title": "",
+        "chunk_text": "By exploiting its statistical reliability away from the transition threshold, we demonstrate that a small, constant number of repetitions per query sufﬁces to suppress cumulative error. This reduces the total query complexity to O(log n), without compromising correctness or security. • Constant-Time Distance Estimation. Finally, we propose a new PPH construction that encodes distance directly into the hash output.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "threshold",
+                "small",
+                "constant",
+                "error",
+                "query",
+                "exploiting",
+                "statistical",
+                "reliability",
+                "transition",
+                "demonstrate"
+            ]
+        }
+    },
+    {
+        "id": "580fbbff-a167-4647-8b6b-553019e32fbc",
+        "title": "",
+        "chunk_text": "Inspired by Bloom ﬁlter techniques [GM11], our scheme avoids interaction and supports constant-time approximation of Hamming distance with high statistical accuracy. The construction is provably indistinguishable and signiﬁcantly improves computational efﬁciency. Our results demonstrate that approximate Hamming distance can be computed securely in sublinear—or even constant—time from property-preserving hashes.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Bloom",
+                "Hamming",
+                "Inspired",
+                "techniques",
+                "accuracy",
+                "distance",
+                "ﬁlter",
+                "scheme",
+                "avoids",
+                "interaction"
+            ]
+        }
+    },
+    {
+        "id": "6f834010-5f77-463f-83be-192f09bd7c33",
+        "title": "",
+        "chunk_text": "This opens new avenues for efﬁcient secure computation, approx- imate data retrieval, and privacy-preserving analytics, and bridges the gap between algorithmic similarity search and cryptographic functionality-preserving compression. II. PRELIMINARIES AND RELATED WORK Let a, b ∈{0, 1}n be two binary strings of length n. The Hamming distance between a and b is deﬁned as dH(a, b) = n X i=1 1ai̸=bi, where 1ai̸=bi is the indicator function.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "approx",
+                "computation",
+                "imate",
+                "retrieval",
+                "analytics",
+                "compression",
+                "opens",
+                "avenues",
+                "efﬁcient",
+                "secure"
+            ]
+        }
+    },
+    {
+        "id": "b46c1633-b508-44a9-9806-fda346f2ef5d",
+        "title": "",
+        "chunk_text": "Our objective is to approximate dH(a, b) in sublinear time using only their hashed representations under a public property-preserving hash (PPH) function. We now review foundational and related work in three areas. A. Property-Preserving Hashing and Hamming Distance The notion of Property-Preserving Hashing was introduced by Boyle, LaVigne, and Vaikuntanathan [BLV19], who showed how to preserve speciﬁc predicates such as gap-Hamming distance through compact encodings.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "PPH",
+                "function",
+                "hash",
+                "property-preserving",
+                "Hashing",
+                "objective",
+                "approximate",
+                "sublinear",
+                "time",
+                "hashed"
+            ]
+        }
+    },
+    {
+        "id": "fd65fe6a-43da-44ad-8a3e-9db072506594",
+        "title": "",
+        "chunk_text": "Fleischhacker and Simkin [FS21] extended this line of work to exact Hamming distance. The construction by Fleischhacker, Larsen, and Simkin [FLS22] (FLS22) gave the ﬁrst PPH for the threshold-Hamming predicate from standard assumptions, using robust set encodings and probabilistic evaluation functions. Beyond PPH, the locality-sensitive hashing (LSH) paradigm [IM98], [KOR00], [OWZ11] offers approximate similarity search via hash collisions.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Simkin",
+                "Hamming",
+                "Fleischhacker",
+                "extended",
+                "distance",
+                "PPH",
+                "Larsen",
+                "line",
+                "work",
+                "exact"
+            ]
+        }
+    },
+    {
+        "id": "08b98b88-0fe0-4f3f-a4b6-780792190074",
+        "title": "",
+        "chunk_text": "However, standard LSH schemes lack adversarial robustness and do not support threshold predicates. Variants such as asymmetric similarity search [MNSW98] and streaming-based similarity estimation [AMS96] offer additional perspectives but remain unsuitable in adversarial models. Our work builds on the security guarantees of PPH constructions while improving computational efﬁciency for Hamming estimation. B.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "LSH",
+                "standard",
+                "predicates",
+                "estimation",
+                "adversarial",
+                "schemes",
+                "lack",
+                "robustness",
+                "support",
+                "threshold"
+            ]
+        }
+    },
+    {
+        "id": "e70abd1d-3dd1-4ed3-a3f7-bafc77011a52",
+        "title": "",
+        "chunk_text": "Robust Encodings and Set Difference Recovery The FLS22 construction builds on robust encodings of sets with bounded difference. Invertible Bloom Lookup Tables (IBLTs) [GM11] are central to this approach, supporting set reconciliation under noise. Additional techniques include list-decodable codes [GR09], [GGM10], [BOZ82], robust streaming under adversarial access [MNS08], [HW13], [NY15], [BJWY20], and secure difference encoding with low error [DORS08].",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Recovery",
+                "Difference",
+                "construction",
+                "Robust",
+                "Set",
+                "Encodings",
+                "Tables",
+                "builds",
+                "bounded",
+                "Bloom"
+            ]
+        }
+    },
+    {
+        "id": "4824ecc7-b68f-4e94-be40-085ad9afa40a",
+        "title": "",
+        "chunk_text": "The Bloom ﬁlter [Blo70], while originally designed for approximate membership testing, underpins many of these constructions and remains fundamental to compact hashing. Variants such as compressed sensing [Don06] and robust sparse signal recovery [BY20] also inform the information-theoretic limits of reconstruction from lossy encodings. Our proposed modiﬁcations retain the decoding framework while augmenting it with decodable statistical signals that enable constant-time estimation. C.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Bloom",
+                "ﬁlter",
+                "testing",
+                "underpins",
+                "hashing",
+                "originally",
+                "designed",
+                "approximate",
+                "membership",
+                "constructions"
+            ]
+        }
+    },
+    {
+        "id": "18250781-55eb-4284-b864-dbca602d8028",
+        "title": "",
+        "chunk_text": "Cryptographic Hashing and Indistinguishability Property-preserving hashing aims to balance functionality and security. Standard cryptographic hash functions (e.g., collision-resistant constructions [Ped92]) provide strong privacy but no semantic structure. In contrast, PPH functions deliberately encode semantic information and require formal indistinguishability guarantees, typically deﬁned via simulation or total variation bounds.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Hashing",
+                "Property-preserving",
+                "security",
+                "Indistinguishability",
+                "Cryptographic",
+                "aims",
+                "balance",
+                "functionality",
+                "functions",
+                "semantic"
+            ]
+        }
+    },
+    {
+        "id": "3fcf2637-f772-448d-b86a-65208e394cf7",
+        "title": "",
+        "chunk_text": "FLS22 proved security in the presence of a single hash function instance, under standard hardness assumptions. Recent works have analyzed the leakage proﬁles of probabilistic data structures under adversarial models [CPS19], [RRR21], and studied how small changes in encoding distributions affect distinguishability [CN22]. Our modiﬁca- tions maintain this security by bounding the statistical distance between original and modiﬁed encodings.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "proved",
+                "instance",
+                "assumptions",
+                "presence",
+                "single",
+                "hash",
+                "function",
+                "standard",
+                "hardness",
+                "security"
+            ]
+        }
+    },
+    {
+        "id": "30342c2f-2590-4a4a-82c1-4c5551412467",
+        "title": "",
+        "chunk_text": "In addition, recent cryptographic reductions (e.g., LWE/SIS [MP13]) and lattice-based indistinguishability proofs [LLL82] offer broader theoretical tools that inspire our security reasoning. 2 III. POLYLOGARITHMIC HAMMING COMPUTATION FROM THRESHOLD HAMMING-PPH A. Binary Search Algorithm We describe a simple method to estimate dH(a, b) using black-box access to the threshold predicate Eval(h(a), h(b), t). The algorithm performs binary search over t ∈{0, 1, . .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "LWE",
+                "SIS",
+                "addition",
+                "recent",
+                "reductions",
+                "proofs",
+                "offer",
+                "reasoning",
+                "III",
+                "cryptographic"
+            ]
+        }
+    },
+    {
+        "id": "90fdedca-804c-444e-a4a8-c9e8fd758605",
+        "title": "",
+        "chunk_text": "., n}, reﬁning the search interval based on the response of Eval.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Eval",
+                "reﬁning",
+                "search",
+                "interval",
+                "based",
+                "response"
+            ]
+        }
+    },
+    {
+        "id": "a3baf645-1a44-44b2-8145-5bf6bc629a27",
+        "title": "",
+        "chunk_text": "Algorithm 1 Binary Search Approximate Hamming Distance 1: Input: Hash values h(a), h(b); oracle access to Eval(h(a), h(b), t) 2: Output: Estimated Hamming distance ˜d 3: tmin ←0, tmax ←n 4: while tmin < tmax do 5: tmid ←⌊(tmin + tmax)/2⌋ 6: if Eval(h(a), h(b), tmid) = 1 then 7: tmin ←tmid + 1 8: else 9: tmax ←tmid 10: end if 11: end while 12: return tmin The algorithm terminates with tmin = tmax, and returns the smallest threshold t such that Eval(h(a), h(b), t) = 0.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "tmid",
+                "Eval",
+                "tmax",
+                "Distance",
+                "Hamming",
+                "tmin",
+                "Input",
+                "Output",
+                "end",
+                "Binary"
+            ]
+        }
+    },
+    {
+        "id": "2d071f55-87fc-4154-852b-1003ffce5a86",
+        "title": "",
+        "chunk_text": "Under ideal conditions, this corresponds to the true value of dH(a, b). The number of oracle queries is bounded by ⌈log2(n+1)⌉, since the search interval is halved in each iteration. Each invocation of Eval reveals only the outcome of a single threshold comparison—namely, whether dH(a, b) > t—and does not leak any other information about the inputs. This restricted model necessitates the use of adaptive querying to recover the approximate distance.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "conditions",
+                "ideal",
+                "corresponds",
+                "true",
+                "Eval",
+                "iteration",
+                "number",
+                "oracle",
+                "queries",
+                "bounded"
+            ]
+        }
+    },
+    {
+        "id": "f77252da-ff3a-435d-9c59-b160b97d3e9f",
+        "title": "",
+        "chunk_text": "In the next subsection, we analyze how error in Eval propagates through the binary search procedure and quantify its impact on the returned estimate. B. Error Growth in Iterative Queries The correctness of Algorithm 1 depends critically on the reliability of the threshold predicate Eval(h(a), h(b), t). In the construction of Fleischhacker, Larsen, and Simkin [FLS22], this predicate is implemented via randomized encodings and supports only approximate evaluation. For any ﬁxed threshold t ∈{0, . .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Eval",
+                "error",
+                "subsection",
+                "estimate",
+                "analyze",
+                "propagates",
+                "binary",
+                "search",
+                "procedure",
+                "quantify"
+            ]
+        }
+    },
+    {
+        "id": "2f1b9acd-8523-4a20-8498-2442f0919787",
+        "title": "",
+        "chunk_text": "., n}, the predicate satisﬁes Pr[Eval(h(a), h(b), t) = 1dH(a,b)>t] ≥1 −δ, where δ ∈(0, 1/2) is the maximum per-call error probability and dH(a, b) denotes the Hamming distance between a and b. Algorithm 1 performs up to ⌈log2(n + 1)⌉adaptive queries to Eval, with the threshold values chosen based on earlier responses. The sequential nature of these queries raises the possibility of error propagation.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Eval",
+                "Hamming",
+                "denotes",
+                "predicate",
+                "satisﬁes",
+                "maximum",
+                "per-call",
+                "probability",
+                "distance",
+                "error"
+            ]
+        }
+    },
+    {
+        "id": "63bad7a1-fa6b-4872-ab9c-9a175b4c2a2b",
+        "title": "",
+        "chunk_text": "In particular, even if each query fails with probability at most δ, multiple queries may compound into a global error. If all Eval invocations were independent, a union bound would yield: Pr[any query fails] ≤log n · δ. To ensure a global failure probability of at most ε, this would require δ ≤ε/ log n. However, [FLS22] implements threshold evaluation using shared encodings of the input, and decoding errors may be correlated across thresholds.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "log",
+                "multiple",
+                "query",
+                "fails",
+                "global",
+                "queries",
+                "compound",
+                "probability",
+                "Eval",
+                "independent"
+            ]
+        }
+    },
+    {
+        "id": "836db656-aafa-406a-87b8-f263e9705ff6",
+        "title": "",
+        "chunk_text": "Let Si ∈{0, 1} denote the correctness of the i-th threshold query, where Si = 1 indicates success and Si = 0 indicates failure. The sequence (S1, . . . , Sk) may exhibit statistical dependence due to common decoding artifacts. To mitigate this issue, we apply an ampliﬁcation strategy: each Eval query is repeated k times independently, and the majority vote is returned. Let δ′ denote the error probability after ampliﬁcation.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "failure",
+                "correctness",
+                "i-th",
+                "threshold",
+                "success",
+                "denote",
+                "query",
+                "ampliﬁcation",
+                "sequence",
+                "Eval"
+            ]
+        }
+    },
+    {
+        "id": "23e20a14-58c8-4317-b3e9-62c95b18aad9",
+        "title": "",
+        "chunk_text": "Assuming independence among repetitions, a standard Chernoff bound gives: δ′ ≤exp \u0000−2k(1/2 −δ)2\u0001 . 3 Let ε ∈(0, 1) denote the desired total error bound for the binary search algorithm. Since the number of threshold evaluations is at most log n, it sufﬁces to require: log n · δ′ ≤ε. Solving for k yields: k ≥ 1 2(1/2 −δ)2 · \u0012 log log n + log 1 ε \u0013 .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Chernoff",
+                "log",
+                "bound",
+                "exp",
+                "Assuming",
+                "repetitions",
+                "denote",
+                "algorithm",
+                "independence",
+                "standard"
+            ]
+        }
+    },
+    {
+        "id": "4a03d5e4-8a89-40a5-b0d9-0b620f20a79c",
+        "title": "",
+        "chunk_text": "Thus, the total number of oracle calls becomes: O(k log n) = O \u0012log n(log log n + log(1/ε)) (1/2 −δ)2 \u0013 , which remains sublinear for any inverse-polynomial ε ≥1/poly(n). This shows that accurate approximation is still feasible under probabilistic evaluation, provided that per-query error is sufﬁciently ampliﬁed. If both the per-query error rate δ and the overall error bound ε are negligible functions in n, as is standard in cryptographic applications, the expression for k can be simpliﬁed.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "log",
+                "poly",
+                "error",
+                "total",
+                "number",
+                "oracle",
+                "calls",
+                "remains",
+                "sublinear",
+                "inverse-polynomial"
+            ]
+        }
+    },
+    {
+        "id": "7dfad643-90b7-4f59-b68a-80698abccb46",
+        "title": "",
+        "chunk_text": "Speciﬁcally, since log(1/ε) = Θ(log n) and log log n = o(log n), we have: log log n + log 1 ε = Θ(log n). Furthermore, as δ →0, the term (1/2 −δ)2 = Θ(1). Substituting into the expression for the total number of oracle calls, O \u0012log n(log log n + log(1/ε)) (1/2 −δ)2 \u0013 , we obtain: O(log2 n). Hence, under negligible-error assumptions, the binary search algorithm requires only polylogarithmic overhead while maintaining correctness. IV.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "log",
+                "Speciﬁcally",
+                "term",
+                "Substituting",
+                "calls",
+                "obtain",
+                "expression",
+                "total",
+                "number",
+                "oracle"
+            ]
+        }
+    },
+    {
+        "id": "68740756-23cb-4bcb-88be-be8f7cf61a4c",
+        "title": "",
+        "chunk_text": "A LOGARITHMIC-TIME APPROXIMATION SCHEME WITHOUT AMPLIFICATION A. Problem Setup and Motivation In Section III, we presented a binary-search-based method for approximating the Hamming distance using a threshold property-preserving hash function (PPH). While this construction achieves correctness with negligible error probability, it relies on ampliﬁcation to suppress the per-query error rate.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "APPROXIMATION",
+                "SCHEME",
+                "AMPLIFICATION",
+                "PPH",
+                "LOGARITHMIC-TIME",
+                "III",
+                "Setup",
+                "Motivation",
+                "Section",
+                "Hamming"
+            ]
+        }
+    },
+    {
+        "id": "e8827838-6eed-4744-b9d0-ba7e453d72aa",
+        "title": "",
+        "chunk_text": "Speciﬁcally, each threshold query Eval(h(a), h(b), t) is repeated k = Θ(log n) times, resulting in a total query complexity of O(log2 n). This raises the natural question: can we eliminate the ampliﬁcation step while still retaining sublinear complexity and negligible error? In this section, we investigate the possibility of directly using the threshold predicate without repetition—that is, invoking Eval(h(a), h(b), t) only a constant number of times per threshold in the binary search.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Eval",
+                "query",
+                "Speciﬁcally",
+                "log",
+                "resulting",
+                "threshold",
+                "complexity",
+                "repeated",
+                "total",
+                "times"
+            ]
+        }
+    },
+    {
+        "id": "c4301434-6fee-434c-ae7e-2d57cdec8329",
+        "title": "",
+        "chunk_text": "At ﬁrst glance, this may seem to introduce unacceptable error accumulation: without ampliﬁcation, the overall failure probability becomes ε = log n·δ, where δ is the error of a single Eval call. However, this bound can still be negligible provided that δ itself is sufﬁciently small. In particular, if the underlying PPH construction (e.g., [FLS22]) admits instantiation with cryptographic parameters such that δ = O(n−c) for some constant c > 1, then ε = log n · δ = O \u0012log n nc \u0013 = negl(n).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "log",
+                "Eval",
+                "error",
+                "glance",
+                "accumulation",
+                "ampliﬁcation",
+                "call",
+                "ﬁrst",
+                "introduce",
+                "unacceptable"
+            ]
+        }
+    },
+    {
+        "id": "e260d51d-a825-40b6-b178-4182c8cc862f",
+        "title": "",
+        "chunk_text": "This observation leads to a new regime of approximation in which we trade off ampliﬁcation cost for stronger per-query reliability, enabling a total complexity of O(log n) without degrading correctness. In the following subsection, we formalize this simpliﬁed algorithm and analyze its error behavior under mild cryptographic assumptions on the base construction. 4 B.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "reliability",
+                "enabling",
+                "log",
+                "correctness",
+                "observation",
+                "leads",
+                "regime",
+                "approximation",
+                "trade",
+                "ampliﬁcation"
+            ]
+        }
+    },
+    {
+        "id": "5543958a-da91-4a78-a669-e5af408af10a",
+        "title": "",
+        "chunk_text": "Binary Search with Constant Repetition While the baseline construction in Section III requires logarithmic repetition per threshold to ensure correctness, we now show that the number of repetitions can be reduced to a small constant under mild structural constraints. This substantially improves efﬁciency, reducing the total query complexity from O(log2 n) to O(log n). Our insight builds on the internal structure of the FLS22 threshold predicate [FLS22].",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Constant",
+                "Repetition",
+                "Search",
+                "Section",
+                "III",
+                "Binary",
+                "correctness",
+                "constraints",
+                "baseline",
+                "construction"
+            ]
+        }
+    },
+    {
+        "id": "51fea966-61bd-4a72-ab2b-0fd5fffdb544",
+        "title": "",
+        "chunk_text": "In their construction, the evaluation error is not uniformly distributed across all thresholds; instead, it is concentrated near the critical transition region where t ≈dH(a, b). When the queried threshold t is signiﬁcantly above or below the true Hamming distance, the outcome of Eval(h(a), h(b), t) is highly reliable—often correct with overwhelming probability, even without ampliﬁcation. We exploit this non-uniformity by carefully controlling the search trajectory.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "construction",
+                "evaluation",
+                "error",
+                "uniformly",
+                "distributed",
+                "concentrated",
+                "critical",
+                "transition",
+                "region",
+                "Eval"
+            ]
+        }
+    },
+    {
+        "id": "28571d74-fa60-4643-bef0-b7fd7fdb1913",
+        "title": "",
+        "chunk_text": "In particular, the binary search algorithm begins with coarse estimates of t and only gradually approaches the transition region. This ensures that the majority of queries are issued at thresholds satisfying |t −dH(a, b)| > τ, where τ is the width of the transition band in which the predicate becomes unreliable. For such thresholds, the predicate behaves almost deterministically. To formalize this, we introduce a piecewise error model.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "transition",
+                "region",
+                "binary",
+                "search",
+                "algorithm",
+                "begins",
+                "coarse",
+                "estimates",
+                "gradually",
+                "approaches"
+            ]
+        }
+    },
+    {
+        "id": "769e942b-937e-4bf2-88b1-8f05a24e6e27",
+        "title": "",
+        "chunk_text": "Let δ(t) denote the error probability of Eval(h(a), h(b), t). We assume the existence of a transition width parameter τ ∈N such that: δ(t) ≤ ( δmax if |t −dH(a, b)| ≤τ, δfar if |t −dH(a, b)| > τ, where δmax < 1 2 −γ for some constant γ > 0, and δfar ≪δmax. Intuitively, δmax bounds the uncertainty near the threshold, while δfar accounts for negligible ﬂuctuations far from the decision boundary.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Eval",
+                "δmax",
+                "denote",
+                "δfar",
+                "error",
+                "probability",
+                "Intuitively",
+                "assume",
+                "existence",
+                "transition"
+            ]
+        }
+    },
+    {
+        "id": "559d6bce-51eb-4e48-ae9f-f8f4d9c3e455",
+        "title": "",
+        "chunk_text": "In the FLS22 encoding framework, the value of τ can be made constant (e.g., τ = 1 or 2) by tuning the robustness of the set-difference encoding and controlling the overlap structure of the underlying families X0, X1. This adjustment affects only the decoding ambiguity and has no impact on the hash output distribution. Let Πorig denote the original FLS22 construction, and Πτ denote our modiﬁed instantiation with reduced overlap to restrict the transition width to constant τ.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "encoding",
+                "framework",
+                "families",
+                "made",
+                "tuning",
+                "robustness",
+                "set-difference",
+                "controlling",
+                "structure",
+                "underlying"
+            ]
+        }
+    },
+    {
+        "id": "fc0d7776-d894-4d06-9cf0-081a3d96f46b",
+        "title": "",
+        "chunk_text": "We now formalize that this modiﬁcation preserves the indistinguishability guarantees of the original scheme. Lemma 1. For any probabilistic polynomial-time adversary A, its advantage in distinguishing Πτ from Πorig is negligible: |Pr[A(hτ(x)) = 1] −Pr[A(horig(x)) = 1]| = negl(n). Proof Sketch. We consider the standard IND-style security game where the adversary receives a hash value of a challenge input x, produced either using Πτ or Πorig, and must guess which construction was used.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "scheme",
+                "Πorig",
+                "formalize",
+                "modiﬁcation",
+                "preserves",
+                "indistinguishability",
+                "guarantees",
+                "original",
+                "adversary",
+                "Lemma"
+            ]
+        }
+    },
+    {
+        "id": "52ea0d06-901f-4d9c-9f15-b821600c6cbf",
+        "title": "",
+        "chunk_text": "Let Dτ and Dorig denote the respective output distributions. The adversary’s advantage is bounded by the total variation distance: AdvA ≤∆(Dτ, Dorig). To bound this distance, we note that both constructions encode each bit as a random subset drawn from set families X0, X1 ⊆[N], where N = Θ(λ). The only difference is that Πτ reduces the overlap between X0 and X1, thereby increasing decoding robustness.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Dorig",
+                "distributions",
+                "distance",
+                "denote",
+                "respective",
+                "output",
+                "AdvA",
+                "adversary",
+                "advantage",
+                "bounded"
+            ]
+        }
+    },
+    {
+        "id": "19607250-c97a-4605-bdb3-ae9e76a959c7",
+        "title": "",
+        "chunk_text": "This change does not affect the leakage proﬁle, as the output distribution remains randomized over the same universe. We employ a hybrid argument: let h(0)(x), h(1)(x), . . . , h(λ)(x) be a sequence where h(i)(x) uses the modiﬁed encoding for the ﬁrst i bits and the original encoding for the remaining λ −i bits. Then, ∆(Dτ, Dorig) ≤ λ X i=1 ∆(h(i)(x), h(i−1)(x)). Each hybrid transition changes one encoded bit from the original to the modiﬁed version.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "proﬁle",
+                "universe",
+                "affect",
+                "leakage",
+                "output",
+                "distribution",
+                "remains",
+                "randomized",
+                "bits",
+                "encoding"
+            ]
+        }
+    },
+    {
+        "id": "96501fb9-d77b-4dd9-8564-07c30ecca8ae",
+        "title": "",
+        "chunk_text": "Because the overlap reduction shifts only a small fraction of probability mass, we have ∆(h(i)(x), h(i−1)(x)) ≤exp(−cλ), for some constant c > 0. Summing over all λ positions gives ∆(Dτ, Dorig) ≤λ · exp(−cλ) = exp(−cλ + log λ) = exp(−Ω(λ)), 5 where we use the fact that log λ = o(λ), so the exponent remains −Ω(λ). Since λ = Θ(n), the statistical distance is negligible in n, completing the proof.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "exp",
+                "mass",
+                "overlap",
+                "reduction",
+                "shifts",
+                "small",
+                "fraction",
+                "probability",
+                "constant",
+                "Dorig"
+            ]
+        }
+    },
+    {
+        "id": "58f0e6b2-4662-4393-9695-1f36aafa9abe",
+        "title": "",
+        "chunk_text": "With indistinguishability established, we now analyze the failure probability of binary search with constant repetition. Each threshold evaluation is repeated k ∈O(1) times and the majority vote is taken. By the Chernoff bound, the effective error after ampliﬁcation is: δ′(t) ≤exp \u0000−2k(1/2 −δ(t))2\u0001 . Only a constant number of thresholds fall within the unreliable region |t −dH(a, b)| ≤τ, while the remaining O(log n) thresholds lie in the stable region.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "established",
+                "repetition",
+                "indistinguishability",
+                "analyze",
+                "failure",
+                "probability",
+                "binary",
+                "search",
+                "constant",
+                "region"
+            ]
+        }
+    },
+    {
+        "id": "3cae8027-945b-4dd2-af6b-34c7278fad43",
+        "title": "",
+        "chunk_text": "Thus, the total failure probability is bounded by: ε = log n X i=1 δ′(ti) ≤2τ · exp \u0000−2kγ2\u0001 + o(1), which is negligible in n for constant τ and sufﬁciently large constant k. For example, if δmax ≤1/4 and τ ≤2, setting k = 5 yields ε ≤4 · exp(−2k · (1/4)2) = 4 · exp(−k/8), which is below 1/nc for moderate n and any desired constant c.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "exp",
+                "constant",
+                "log",
+                "total",
+                "failure",
+                "probability",
+                "bounded",
+                "negligible",
+                "sufﬁciently",
+                "large"
+            ]
+        }
+    },
+    {
+        "id": "cd1acfb3-dc0c-46f7-86d4-645e3a35b8d0",
+        "title": "",
+        "chunk_text": "Thus, by leveraging the error structure of the threshold predicate and avoiding worst-case uniformity assumptions, we derive a logarithmic-time algorithm with constant repetition. This construction shows that full ampliﬁcation is unnecessary: a reﬁned understanding of the predicate’s internal geometry yields near-optimal efﬁciency with no sacriﬁce in correctness or security. C.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "assumptions",
+                "repetition",
+                "predicate",
+                "leveraging",
+                "error",
+                "structure",
+                "threshold",
+                "avoiding",
+                "worst-case",
+                "uniformity"
+            ]
+        }
+    },
+    {
+        "id": "a283c7c2-4838-476a-98ba-7daaafb33cc8",
+        "title": "",
+        "chunk_text": "Accuracy–Complexity Trade-off The binary search construction with constant repetition achieves a signiﬁcant improvement in query complex- ity—from O(log2 n) to O(log n)—by exploiting the structure of the threshold predicate and its asymmetric error proﬁle. This method demonstrates that full ampliﬁcation is not strictly necessary when the evaluation errors are well-behaved and non-uniformly distributed. However, this efﬁciency gain hinges on two key assumptions.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Complexity",
+                "Trade-off",
+                "Accuracy",
+                "ity",
+                "complex",
+                "log",
+                "proﬁle",
+                "binary",
+                "search",
+                "construction"
+            ]
+        }
+    },
+    {
+        "id": "8456a2f5-b928-458b-9b16-ef712c731408",
+        "title": "",
+        "chunk_text": "First, it relies on the existence of a narrow transition region τ where the predicate is unreliable, and assumes that Eval behaves almost deterministically outside this region. Second, the algorithm assumes access to a threshold predicate with the speciﬁc structure provided by [FLS22], which supports monotonic and ordered queries over t. This monotonicity is what enables the binary search to minimize the number of interactions.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "region",
+                "Eval",
+                "unreliable",
+                "predicate",
+                "assumes",
+                "relies",
+                "existence",
+                "narrow",
+                "transition",
+                "behaves"
+            ]
+        }
+    },
+    {
+        "id": "1729118d-0386-4dce-8341-a196e5c45975",
+        "title": "",
+        "chunk_text": "As a result, the current scheme, while efﬁcient, is not interaction-free. It still requires adaptively querying the predicate Eval(h(a), h(b), t) at multiple values of t, and its performance depends on the trajectory of binary search. Moreover, the construction is not directly applicable to more general classes of property-preserving hash functions, particularly those that do not support threshold-style decomposition.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "result",
+                "scheme",
+                "efﬁcient",
+                "interaction-free",
+                "current",
+                "Eval",
+                "search",
+                "requires",
+                "adaptively",
+                "querying"
+            ]
+        }
+    },
+    {
+        "id": "9562c035-c8b8-4373-9f2d-03e75fa88324",
+        "title": "",
+        "chunk_text": "These limitations raise a natural question: can one design a hash function h such that the approximate Hamming distance dH(a, b) can be estimated directly from h(a) and h(b) in constant time, without any interaction or auxiliary predicate? That is, can we construct a property-preserving hashing scheme where distance estimation becomes a pure decoding problem? The remainder of this paper is devoted to addressing this question.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Hamming",
+                "time",
+                "predicate",
+                "question",
+                "distance",
+                "limitations",
+                "raise",
+                "natural",
+                "design",
+                "hash"
+            ]
+        }
+    },
+    {
+        "id": "e7be37ad-7273-4660-b5fb-0e40468dcba3",
+        "title": "",
+        "chunk_text": "We propose new constructions that embed approximate Hamming distance into a compact hash structure, allowing it to be recovered in O(1) time with provable guarantees. These results provide a conceptual and technical stepping stone toward fully noninteractive and constant-time PPH schemes. V. CONSTANT-TIME ESTIMATION OF HAMMING DISTANCE A.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "structure",
+                "allowing",
+                "time",
+                "guarantees",
+                "Hamming",
+                "distance",
+                "propose",
+                "constructions",
+                "embed",
+                "approximate"
+            ]
+        }
+    },
+    {
+        "id": "8d24c4ac-a99b-4867-8498-71dffb4cd825",
+        "title": "",
+        "chunk_text": "Design Goals and Technical Challenges Our objective in this section is to design a property-preserving hashing scheme that supports constant-time estimation of Hamming distance.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Goals",
+                "Technical",
+                "Challenges",
+                "Hamming",
+                "distance",
+                "Design",
+                "objective",
+                "section",
+                "property-preserving",
+                "hashing"
+            ]
+        }
+    },
+    {
+        "id": "a489a5ac-7eff-47ac-b424-fe5babf56ec0",
+        "title": "",
+        "chunk_text": "Speciﬁcally, we aim to construct a hash function h: {0, 1}n →{0, 1}m and a decoding function Dist: {0, 1}m × {0, 1}m →R such that Dist(h(a), h(b)) ≈dH(a, b) for all a, b ∈{0, 1}n, 6 with approximation error bounded by a negligible or constant additive term, and computational complexity O(1), independent of the input length n.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Dist",
+                "function",
+                "Speciﬁcally",
+                "term",
+                "independent",
+                "aim",
+                "construct",
+                "hash",
+                "decoding",
+                "approximation"
+            ]
+        }
+    },
+    {
+        "id": "7c133384-c8c6-4aa4-b1d8-9da0a47b2431",
+        "title": "",
+        "chunk_text": "This goal departs sharply from prior constructions, such as the threshold-evaluation-based schemes of FLS22 [FLS22], which require interactive protocols involving O(log2 n) queries to estimate Hamming distance. Those methods treat the hash outputs h(a), h(b) as opaque representations, and rely on auxiliary comparison procedures to test whether dH(a, b) > t for a given threshold t.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Hamming",
+                "constructions",
+                "schemes",
+                "queries",
+                "distance",
+                "goal",
+                "departs",
+                "sharply",
+                "prior",
+                "require"
+            ]
+        }
+    },
+    {
+        "id": "192401cc-824f-46f3-a42d-b97b0feca95d",
+        "title": "",
+        "chunk_text": "While efﬁcient and provably secure, such constructions inherently embed distance only implicitly, making direct decoding impossible without repeated predicate invocations. The core challenge we face is structural: the FLS22 construction was fundamentally designed to support robust threshold predicates, not direct metric estimation.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "secure",
+                "implicitly",
+                "making",
+                "invocations",
+                "direct",
+                "efﬁcient",
+                "provably",
+                "inherently",
+                "embed",
+                "distance"
+            ]
+        }
+    },
+    {
+        "id": "5b64bbf5-2cb5-403d-9975-8c3333c6f004",
+        "title": "",
+        "chunk_text": "The encoding of each input bit into a random subset of a universe [N], drawn from one of two overlapping families X0, X1, is optimized for enabling differential tests such as Eval(h(a), h(b), t). However, this subset-based design obscures ﬁne-grained information about dH(a, b), since it collapses the actual distance into a one-bit signal. To overcome this, we propose to carefully expose internal structure from within the FLS22 encoding pro- cess—without compromising its security properties.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Eval",
+                "universe",
+                "drawn",
+                "families",
+                "input",
+                "bit",
+                "random",
+                "subset",
+                "overlapping",
+                "optimized"
+            ]
+        }
+    },
+    {
+        "id": "a448701d-b08b-4444-b169-6cca3dc5890c",
+        "title": "",
+        "chunk_text": "Rather than treating Eval as a black-box threshold predicate, we aim to reinterpret the underlying encodings as structured sketches from which distance can be decoded analytically. The central design question becomes Can we design a randomized encoding such that the expected symmetric difference reveals dH(a, b)? This formulation enables the estimator Dist(h(a), h(b)) to return a numerical approximation of Hamming distance, by computing a normalized difference between the hashed subsets.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Eval",
+                "predicate",
+                "analytically",
+                "treating",
+                "black-box",
+                "threshold",
+                "aim",
+                "reinterpret",
+                "underlying",
+                "structured"
+            ]
+        }
+    },
+    {
+        "id": "bfc98521-656e-4794-a66b-b4a1eea0dde2",
+        "title": "",
+        "chunk_text": "If the encoding satisﬁes sufﬁcient concentration and statistical regularity, such an estimator may achieve accurate approximation with only constant-time access to the hash values—no interaction, no queries, and no adaptive reﬁnement. The difﬁculty, of course, lies in the trade-off: exposing too much internal structure may leak sensitive infor- mation, weakening the cryptographic guarantees of property-preserving hashing.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "regularity",
+                "interaction",
+                "queries",
+                "reﬁnement",
+                "encoding",
+                "satisﬁes",
+                "sufﬁcient",
+                "concentration",
+                "statistical",
+                "estimator"
+            ]
+        }
+    },
+    {
+        "id": "7630dd43-1b86-4d10-b11a-12b404fdfd80",
+        "title": "",
+        "chunk_text": "Thus, the design must balance decodability with indistinguishability, ensuring that the hash outputs retain their semantic security while remaining computationally meaningful. In the following subsections, we deconstruct the FLS22 encoding framework, identify the statistical features that correlate with Hamming distance, and introduce our enhanced encoding design that embeds this information directly into the hash output in a secure and analyzable manner. B.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "hash",
+                "indistinguishability",
+                "ensuring",
+                "meaningful",
+                "design",
+                "balance",
+                "decodability",
+                "retain",
+                "semantic",
+                "security"
+            ]
+        }
+    },
+    {
+        "id": "ba8f42b8-737d-4f0e-b1af-a39ead27d34b",
+        "title": "",
+        "chunk_text": "Revisiting the FLS22 Encoding Structure The FLS22 construction [FLS22] encodes each input string x ∈{0, 1}n into a subset of a large universe [N], via a randomized mapping that preserves threshold Hamming predicates. Each bit xi is independently encoded as a random subset Si ⊆[N], drawn from one of two families: xi = 0 ⇒Si ∼D0, xi = 1 ⇒Si ∼D1, where D0, D1 are distributions over subsets with overlapping support. The ﬁnal hash value is the union h(x) = n [ i=1 Si.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Encoding",
+                "Structure",
+                "Hamming",
+                "construction",
+                "Revisiting",
+                "encodes",
+                "universe",
+                "predicates",
+                "subset",
+                "input"
+            ]
+        }
+    },
+    {
+        "id": "c5d6a328-b964-4557-b428-0bb8f23f81bb",
+        "title": "",
+        "chunk_text": "The core idea behind this construction is that the Hamming distance dH(a, b) between two inputs a and b correlates with the expected size of the symmetric difference D(a, b) := h(a)△h(b), since each differing bit contributes a fresh random subset drawn from the opposite family. The more positions where ai ̸= bi, the more disjoint sets enter the union, resulting in a larger difference.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Hamming",
+                "difference",
+                "family",
+                "core",
+                "idea",
+                "construction",
+                "distance",
+                "inputs",
+                "correlates",
+                "expected"
+            ]
+        }
+    },
+    {
+        "id": "1784280f-9b43-4235-85ce-dd69d6a63da7",
+        "title": "",
+        "chunk_text": "This statistical behavior underlies the threshold predicate Eval(h(a), h(b), t), which tests whether |D(a, b)| > θ(t) for some calibrated threshold function θ: N →N. However, in the original construction, the value |D(a, b)| is not directly revealed to the evaluator; instead, it is obfuscated and tested via a separate mechanism using set-difference encodings and error-correcting thresholds.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Eval",
+                "statistical",
+                "behavior",
+                "underlies",
+                "predicate",
+                "tests",
+                "calibrated",
+                "function",
+                "threshold",
+                "construction"
+            ]
+        }
+    },
+    {
+        "id": "1d1f00ed-2f1e-4704-b76d-3a86f387ddf6",
+        "title": "",
+        "chunk_text": "As such, while the symmetric difference carries latent information about dH(a, b), it is not explicitly accessible. 7 To enable constant-time decoding, we revisit this encoding structure with a new perspective. Suppose we could evaluate—or approximate—the size of D(a, b) directly from h(a) and h(b), without auxiliary tests or interaction.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "accessible",
+                "symmetric",
+                "difference",
+                "carries",
+                "latent",
+                "information",
+                "explicitly",
+                "decoding",
+                "perspective",
+                "enable"
+            ]
+        }
+    },
+    {
+        "id": "49ceb6db-b356-41ff-b296-aa007a9f582f",
+        "title": "",
+        "chunk_text": "Then, if the mapping from dH(a, b) to E[|D(a, b)|] is well-behaved (e.g., afﬁne or Lipschitz), we could invert it to recover an estimate of dH(a, b) up to additive error. This motivates us to treat the FLS22 encoding not merely as a vehicle for threshold testing, but as a high- dimensional randomized sketch of input structure—one in which Hamming distance is softly embedded in the geometry of the hash subsets.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Lipschitz",
+                "well-behaved",
+                "afﬁne",
+                "error",
+                "mapping",
+                "invert",
+                "recover",
+                "estimate",
+                "additive",
+                "Hamming"
+            ]
+        }
+    },
+    {
+        "id": "f987b684-613a-403a-b266-0827489c1a8c",
+        "title": "",
+        "chunk_text": "To make this idea concrete, the next subsection develops a modiﬁed encoding and a decoding function that together allow direct estimation of dH(a, b) from their hashes. We remark that the ﬁnal FLS22 construction maps each subset Si into a Bloom ﬁlter representation to ensure ﬁxed-size outputs and facilitate efﬁcient approximate set operations.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "concrete",
+                "hashes",
+                "make",
+                "idea",
+                "subsection",
+                "develops",
+                "modiﬁed",
+                "encoding",
+                "decoding",
+                "function"
+            ]
+        }
+    },
+    {
+        "id": "62153eb3-32ed-4e04-bbcc-414801f85b6c",
+        "title": "",
+        "chunk_text": "In this section, we focus on the subset-level structure for clarity; the interaction between Bloom ﬁlters and distance estimation will be addressed in the next subsection. C. Construction: Embedding Distance in Hash Outputs To support constant-time estimation of Hamming distance, we propose a modiﬁed encoding scheme that directly embeds distance information into the hash output.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Bloom",
+                "distance",
+                "section",
+                "clarity",
+                "subsection",
+                "Hash",
+                "estimation",
+                "focus",
+                "subset-level",
+                "structure"
+            ]
+        }
+    },
+    {
+        "id": "ee573ec1-d635-4dc6-adcf-1e6f814cfb17",
+        "title": "",
+        "chunk_text": "Our construction is inspired by the structure of FLS22 [FLS22] but departs from its threshold-evaluation paradigm: instead of repeatedly querying a predicate, we extract approximate distance analytically from the encoded representation. 1) Encoding Scheme: Let x ∈{0, 1}n be an input vector. For each coordinate i ∈[n], we deﬁne two disjoint collections of indices H0(i), H1(i) ⊆[m], where each set is sampled uniformly at random with ﬁxed cardinality r, and H0(i) ∩H1(i) = ∅.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "paradigm",
+                "predicate",
+                "representation",
+                "construction",
+                "inspired",
+                "structure",
+                "departs",
+                "threshold-evaluation",
+                "repeatedly",
+                "querying"
+            ]
+        }
+    },
+    {
+        "id": "5819929b-d0a5-482f-9bfd-9c9bdec1c528",
+        "title": "",
+        "chunk_text": "These mapping sets are public and deterministic. The hash output h(x) ∈{0, 1}m is then computed as follows: hj(x) = _ i:j∈Hxi (i) 1. That is, position j in the hash is set to 1 if any coordinate i maps to j via its corresponding family Hxi(i). This generalizes the Bloom ﬁlter idea but enforces disjoint support between encodings of 0 and 1, yielding a sharper statistical separation. 2) Estimator and Expected Value: Let a, b ∈{0, 1}n be two inputs, and deﬁne D(a, b) = m X j=1 (hj(a) ⊕hj(b)).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Hxi",
+                "deterministic",
+                "mapping",
+                "public",
+                "hash",
+                "Estimator",
+                "Bloom",
+                "sets",
+                "set",
+                "Expected"
+            ]
+        }
+    },
+    {
+        "id": "c9e40fd4-2a7e-4f21-ab22-7710068e2284",
+        "title": "",
+        "chunk_text": "This raw symmetric difference reﬂects the number of positions where the hash outputs differ. Since each differing coordinate i contributes 2r positions (due to disjoint support), and overlapping encodings across coordinates may cause collisions, we deﬁne a normalizing factor: α := 2r(1 −ρ), where ρ ∈[0, 1) denotes the expected fraction of overlaps between independently chosen mapping sets.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "differ",
+                "positions",
+                "raw",
+                "symmetric",
+                "difference",
+                "reﬂects",
+                "number",
+                "hash",
+                "outputs",
+                "contributes"
+            ]
+        }
+    },
+    {
+        "id": "cf172051-eeea-49e1-b16c-de57bb1f0df2",
+        "title": "",
+        "chunk_text": "Our distance estimator is given by: Dist(h(a), h(b)) := 1 α · D(a, b), with expectation: E[Dist(h(a), h(b))] = dH(a, b). 3) Correctness and Concentration: The output bits hj(a), hj(b) are each determined by independent random insertions, so the sum D(a, b) is concentrated around its mean. By standard Chernoff bounds, for any ε > 0, Pr [|Dist(h(a), h(b)) −dH(a, b)| > εn] ≤exp(−Θ(ε2n)). Thus, the estimator achieves additive εn error with high probability in constant time.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Dist",
+                "expectation",
+                "distance",
+                "estimator",
+                "Correctness",
+                "Concentration",
+                "Chernoff",
+                "insertions",
+                "exp",
+                "output"
+            ]
+        }
+    },
+    {
+        "id": "d1378c6e-4990-4588-8eab-bf0483c84b55",
+        "title": "",
+        "chunk_text": "8 4) Hash Length and Compression: Since each input bit contributes to r positions, the total number of insertions is nr. If mappings are fully disjoint, then m ≥nr. However, allowing controlled overlaps improves entropy diffusion and space efﬁciency. We choose m = Θ(n log n) and r = Θ(log n), consistent with FLS22, balancing output compactness and concentration quality.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Hash",
+                "Compression",
+                "Length",
+                "positions",
+                "disjoint",
+                "allowing",
+                "efﬁciency",
+                "input",
+                "bit",
+                "contributes"
+            ]
+        }
+    },
+    {
+        "id": "4e00d01d-ff66-49aa-a393-0f5a0f024226",
+        "title": "",
+        "chunk_text": "This regime guarantees: (1) Hash length remains sublinear in the input domain, supporting compression; (2) Output bits retain high entropy, preventing input leakage; (3) Estimation remains sharp with provable guarantees. 5) Computational Efﬁciency: Hash computation takes O(nr) time, and the estimator Dist(h(a), h(b)) runs in O(m).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Output",
+                "Estimation",
+                "Hash",
+                "guarantees",
+                "domain",
+                "supporting",
+                "compression",
+                "entropy",
+                "preventing",
+                "leakage"
+            ]
+        }
+    },
+    {
+        "id": "826c1d0c-b2d0-4be8-a688-06c6a424c684",
+        "title": "",
+        "chunk_text": "To further reduce evaluation cost, one can subsample a constant number of hash positions and compute an unbiased estimator with larger variance but lower complexity—useful in time-critical applications. 6) Security Considerations: Although the estimator reveals approximate distance, the hash remains lossy and randomized. For uniformly distributed inputs, the output distribution is statistically close to uniform over bounded- weight bitstrings in {0, 1}m.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "cost",
+                "complexity",
+                "applications",
+                "hash",
+                "estimator",
+                "reduce",
+                "evaluation",
+                "subsample",
+                "constant",
+                "number"
+            ]
+        }
+    },
+    {
+        "id": "3a778f2b-fd08-455d-a6cd-0316cb9b8bf1",
+        "title": "",
+        "chunk_text": "Since each output bit is affected by multiple random subsets, no single bit leaks information about a speciﬁc coordinate. We defer formal indistinguishability proofs and adversarial advantage bounds to the next section. D. Security Analysis 1) Security Deﬁnition: We adopt the standard indistinguishability-based formulation of property-preserving hash- ing (PPH), as introduced in [FLS22]. Let h : {0, 1}n →{0, 1}m be a randomized hash function.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "bit",
+                "subsets",
+                "coordinate",
+                "Security",
+                "PPH",
+                "output",
+                "affected",
+                "multiple",
+                "random",
+                "single"
+            ]
+        }
+    },
+    {
+        "id": "23333af4-f134-47e7-9add-e97d29432a44",
+        "title": "",
+        "chunk_text": "The security goal is to ensure that, even if h approximately preserves a property (e.g., Hamming distance), it does not leak additional information about the input. Formally, let A be a probabilistic polynomial-time adversary. Consider the following indistinguishability game between A and a challenger: • The challenger samples a bit b ←{0, 1}, and then: – If b = 0, it samples x ←{0, 1}n uniformly at random.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Hamming",
+                "property",
+                "distance",
+                "input",
+                "security",
+                "goal",
+                "ensure",
+                "approximately",
+                "preserves",
+                "leak"
+            ]
+        }
+    },
+    {
+        "id": "4338e4d8-85fb-4cb8-8918-cedc68e81717",
+        "title": "",
+        "chunk_text": "– If b = 1, it samples x ←D, for some distribution D chosen by A (subject to min-entropy constraints). • The challenger computes h(x) and sends it to A. • The adversary outputs a guess b′ ∈{0, 1}. The adversary’s advantage is deﬁned as: AdvA = Pr[b′ = b] −1 2 . We say that the hash function h satisﬁes distributional indistinguishability if, for all PPT adversaries A, this advantage is negligible in the security parameter λ, assuming that D has min-entropy at least λ.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "subject",
+                "constraints",
+                "samples",
+                "distribution",
+                "chosen",
+                "min-entropy",
+                "adversary",
+                "advantage",
+                "PPT",
+                "AdvA"
+            ]
+        }
+    },
+    {
+        "id": "cecb53f3-0e07-4cc9-b8fb-2f3e3372195b",
+        "title": "",
+        "chunk_text": "Intuitively, this captures that the hash output h(x) reveals no more than what is implied by the preserved property (in our case, approximate distance), and does not enable recovery or signiﬁcant inference about the input x. 2) Game-Based Indistinguishability: To formalize security under our constant-time estimator, we instantiate the above deﬁnition with our distance-preserving hash h : {0, 1}n →{0, 1}m constructed in Section V-C.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Intuitively",
+                "reveals",
+                "property",
+                "case",
+                "approximate",
+                "distance",
+                "hash",
+                "captures",
+                "output",
+                "implied"
+            ]
+        }
+    },
+    {
+        "id": "c1a74167-2076-4d90-b030-268d33541aaf",
+        "title": "",
+        "chunk_text": "The goal is to show that, despite enabling estimation of dH(a, b), the hash output h(x) remains computationally indistinguishable from one generated using uniformly random input, except for information implied by the approximate Hamming distance itself. Let A be any PPT adversary participating in the following game: • The challenger chooses a secret bit b ∈{0, 1}. • If b = 0: sample x ←{0, 1}n uniformly at random.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Hamming",
+                "remains",
+                "input",
+                "goal",
+                "show",
+                "enabling",
+                "estimation",
+                "hash",
+                "output",
+                "computationally"
+            ]
+        }
+    },
+    {
+        "id": "2760e413-e628-4eba-82a3-3a0c5f758166",
+        "title": "",
+        "chunk_text": "If b = 1: sample x ←D, a distribution selected by A (but ﬁxed before the game starts), with min-entropy at least λ. • The challenger computes y ←h(x) and sends y to A. • The adversary outputs a guess b′ ∈{0, 1}. As before, the adversary’s advantage is deﬁned as AdvA := Pr[b′ = b] −1 2 . 9 Our aim is to prove that AdvA ≤negl(λ), meaning the adversary cannot distinguish whether the input was drawn from D or uniform, even after observing h(x).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "sample",
+                "starts",
+                "adversary",
+                "distribution",
+                "selected",
+                "ﬁxed",
+                "game",
+                "min-entropy",
+                "AdvA",
+                "challenger"
+            ]
+        }
+    },
+    {
+        "id": "4f85ce12-6a5a-4c11-90b4-72564f00106b",
+        "title": "",
+        "chunk_text": "The only information leaked is an approximation of pairwise Hamming distance between inputs, which is insufﬁcient to recover x when D has sufﬁcient entropy. We will use a hybrid argument to show this, reducing the distinguishing advantage to a sequence of negligible differences induced by local randomizations in the encoding structure. 3) Hybrid Argument and Output Distribution: Let h(x) ∈{0, 1}m be the hash output under our construction for input x ∈{0, 1}n.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Hamming",
+                "entropy",
+                "hybrid",
+                "argument",
+                "information",
+                "leaked",
+                "approximation",
+                "pairwise",
+                "distance",
+                "insufﬁcient"
+            ]
+        }
+    },
+    {
+        "id": "2f82e05e-f8dc-494c-8213-2883d092aab4",
+        "title": "",
+        "chunk_text": "The output h(x) is generated by inserting bit indices into m positions based on the randomized families H0(i), H1(i) ⊆[m], which are public and ﬁxed at setup. Let r be the number of indices assigned per input bit, and assume r = Θ(log n), m = Θ(n log n). To prove indistinguishability, we compare the distribution of h(x) when x ←{0, 1}n (uniform) versus x ←D, where D is any distribution over {0, 1}n with min-entropy at least λ.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "families",
+                "setup",
+                "bit",
+                "indices",
+                "output",
+                "generated",
+                "inserting",
+                "positions",
+                "based",
+                "randomized"
+            ]
+        }
+    },
+    {
+        "id": "3d1537b1-57a4-478a-a2ed-7f8adc794e83",
+        "title": "",
+        "chunk_text": "We show that the statistical distance between the output distributions is negligible in λ, using a hybrid argument over the bit-level encodings of x. Let h(0)(x), h(1)(x), . . .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "show",
+                "statistical",
+                "distance",
+                "output",
+                "distributions",
+                "negligible",
+                "hybrid",
+                "argument",
+                "bit-level",
+                "encodings"
+            ]
+        }
+    },
+    {
+        "id": "38e064fa-db56-450e-80c0-4f2f9c429b14",
+        "title": "",
+        "chunk_text": ", h(n)(x) be a hybrid sequence such that: (i) In h(i)(x), the ﬁrst i bits of x are replaced with uniformly random bits, and the remaining n−i bits are drawn from the original input x ∼D, and (ii) The hash output h(i)(x) is computed using the same deterministic families Hb(j), but with randomized encodings depending on whether bit j was replaced. Note that we have: ∆(h(0)(x), h(n)(x)) ≤ n X i=1 ∆(h(i)(x), h(i−1)(x)), where ∆denotes total variation distance.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "bits",
+                "replaced",
+                "bit",
+                "hybrid",
+                "sequence",
+                "ﬁrst",
+                "uniformly",
+                "random",
+                "remaining",
+                "drawn"
+            ]
+        }
+    },
+    {
+        "id": "edc16547-2dac-4840-b4be-926f36e60a76",
+        "title": "",
+        "chunk_text": "We now analyze each transition ∆(h(i)(x), h(i−1)(x)). The only difference between these two hybrids is the encoding of the i-th bit: in h(i−1)(x), the bit is drawn from D; in h(i)(x), it is replaced with a uniformly random bit. Let us denote the contribution of the i-th bit to the hash output as a binary vector vi ∈{0, 1}m, where: (vi)j = ( 1 if j ∈Hxi(i), 0 otherwise.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "bit",
+                "transition",
+                "i-th",
+                "analyze",
+                "Hxi",
+                "difference",
+                "hybrids",
+                "encoding",
+                "drawn",
+                "replaced"
+            ]
+        }
+    },
+    {
+        "id": "bed7e3df-b48c-49c2-baf1-ba24534e112e",
+        "title": "",
+        "chunk_text": "Replacing xi with a random bit b ∈{0, 1} changes this distribution to: P[(vi)j = 1] = r m, for each j ∈H0(i) ∪H1(i), with probability 1/2 for each of H0(i), H1(i). Since H0(i) and H1(i) are disjoint, and the supports are randomized across different coordinates, we can bound the statistical distance between the two encodings as follows. Let µi be the distribution over the positions of vi under xi ∼D, and let νi be the distribution under xi ∼Unif({0, 1}).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "distribution",
+                "Replacing",
+                "probability",
+                "random",
+                "bit",
+                "Unif",
+                "disjoint",
+                "coordinates",
+                "supports",
+                "randomized"
+            ]
+        }
+    },
+    {
+        "id": "43870604-fbb3-4305-ba0f-c023c9703e77",
+        "title": "",
+        "chunk_text": "Then: ∆(µi, νi) ≤max b∈{0,1} P[xi = b | x ∼D] −1 2 · ∥Hb(i)∥1. By assumption, the marginal bias |P[xi = b] −1/2| is bounded for each i, since D has min-entropy at least λ. More formally, for any i ∈[n], the min-entropy constraint implies: P[xi = b] ≤1 −1 2λ . Thus, the per-bit variation from uniform is at most ε := 1 2λ , and the contribution to the total distance is: ∆(h(i)(x), h(i−1)(x)) ≤r · ε = r 2λ . Summing over all n hybrids: ∆(h(0)(x), h(n)(x)) ≤ n X i=1 r 2λ = nr 2λ .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "max",
+                "min-entropy",
+                "Summing",
+                "assumption",
+                "bias",
+                "marginal",
+                "bounded",
+                "formally",
+                "implies",
+                "hybrids"
+            ]
+        }
+    },
+    {
+        "id": "74cf799e-f7a6-4dd2-88f4-96493e26dd37",
+        "title": "",
+        "chunk_text": "Finally, since r = Θ(log n), and λ = ω(log n), we conclude that: ∆(h(x)x∼D, h(x)x∼Unif) = negl(λ). This completes the indistinguishability proof: the adversary cannot distinguish the distribution of hash outputs under x ∼D from that under x ∼Unif, except with negligible probability. 10 VI. CONCLUSION AND OPEN PROBLEMS We proposed a new line of sublinear-time algorithms for estimating the Hamming distance between binary vectors in the property-preserving hashing (PPH) model.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Unif",
+                "log",
+                "Finally",
+                "negl",
+                "conclude",
+                "PPH",
+                "CONCLUSION",
+                "proof",
+                "probability",
+                "OPEN"
+            ]
+        }
+    },
+    {
+        "id": "45e5c0d4-d1fe-4a3e-a5ce-8c5115458c1c",
+        "title": "",
+        "chunk_text": "Our contributions consist of three constructions with increasingly stronger efﬁciency guarantees: • Polylogarithmic-Time via Binary Search: We ﬁrst demonstrated that, by leveraging the threshold evaluation primitive from [FLS22], one can approximate Hamming distance using a binary search strategy. This yields an estimator with O(log n) query complexity, but to ensure negligible error, each threshold query must be ampliﬁed via O(log n) repetitions, leading to an overall complexity of O(log2 n).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Binary",
+                "Search",
+                "Hamming",
+                "log",
+                "guarantees",
+                "Polylogarithmic-Time",
+                "strategy",
+                "threshold",
+                "contributions",
+                "consist"
+            ]
+        }
+    },
+    {
+        "id": "9ef66e60-00a2-4962-9409-95a4ff737739",
+        "title": "",
+        "chunk_text": "• Logarithmic-Time with Constant Repetition: Under a structural reﬁnement of the FLS22 encoding—speciﬁcally, assuming bounded-width transition bands and non-uniform error distribution across thresholds—we showed that only a constant number of repetitions per query sufﬁces to suppress the overall error. This reduces the total complexity to O(log n), while maintaining correctness and indistinguishability. The analysis relies on a piecewise error model and a tailored hybrid argument.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Constant",
+                "encoding",
+                "speciﬁcally",
+                "Repetition",
+                "Logarithmic-Time",
+                "assuming",
+                "thresholds",
+                "error",
+                "structural",
+                "reﬁnement"
+            ]
+        }
+    },
+    {
+        "id": "7298d8da-1f15-4e80-a878-0054bc07c3a2",
+        "title": "",
+        "chunk_text": "• Constant-Time Estimation via Embedded Encodings: Finally, we introduced a new PPH construction that embeds distance information directly into the hash output. This enables constant-time estimation with additive approximation guarantees and exponentially small error. Unlike prior constructions, our scheme eliminates threshold evaluation altogether, while preserving cryptographic security.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Finally",
+                "Encodings",
+                "Embedded",
+                "PPH",
+                "Estimation",
+                "output",
+                "Constant-Time",
+                "introduced",
+                "embeds",
+                "distance"
+            ]
+        }
+    },
+    {
+        "id": "2c2c1133-3288-4055-8416-9536041eb9a9",
+        "title": "",
+        "chunk_text": "Each construction captures a different point in the trade-off space between accuracy, efﬁciency, and structural as- sumptions. Our techniques highlight the interplay between encoding design, statistical concentration, and adversarial indistinguishability. Our work raises several theoretical directions. Can these techniques be extended to other distance metrics (e.g., edit distance, Jaccard distance)? Is it possible to generalize our constant-time scheme to support dynamic or streaming inputs?",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "efﬁciency",
+                "sumptions",
+                "accuracy",
+                "construction",
+                "captures",
+                "point",
+                "trade-off",
+                "space",
+                "structural",
+                "distance"
+            ]
+        }
+    },
+    {
+        "id": "3320fb7a-d9f8-43aa-a0fa-6dad90e8c56f",
+        "title": "",
+        "chunk_text": "Finally, we ask whether our constructions are optimal: are there matching lower bounds on the query complexity or hash length for approximate distance recovery under PPH constraints? We leave these questions for future investigation. REFERENCES [AMS96] Noga Alon, Yossi Matias, and Mario Szegedy. The space complexity of approximating the frequency moments. In STOC, pages 20–29, 1996. [BJWY20] Omri Ben-Eliezer, Rajesh Jayaram, David P. Woodruff, and Eylon Yogev.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Finally",
+                "PPH",
+                "optimal",
+                "constraints",
+                "REFERENCES",
+                "constructions",
+                "matching",
+                "lower",
+                "bounds",
+                "query"
+            ]
+        }
+    },
+    {
+        "id": "cb57087d-f7fe-4742-a8b3-81a81b00525c",
+        "title": "",
+        "chunk_text": "A framework for adversarially robust streaming algorithms. In PODS, pages 63–80, 2020. [Blo70] Burton H. Bloom. Space/time trade-offs in hash coding with allowable errors. Communications of the ACM, 13(7):422–426, 1970. [BLV19] Elette Boyle, Rio LaVigne, and Vinod Vaikuntanathan. Adversarially robust property-preserving hash functions. In ITCS, pages 16:1–16:20. Schloss Dagstuhl–Leibniz-Zentrum f¨ur Informatik, 2019. [BOZ82] Michael Ben-Or and Richard E. Zippel.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "algorithms",
+                "PODS",
+                "framework",
+                "streaming",
+                "pages",
+                "adversarially",
+                "robust",
+                "Burton",
+                "Bloom",
+                "hash"
+            ]
+        }
+    },
+    {
+        "id": "1206acd7-1eca-4289-9ae7-d133ad790ca3",
+        "title": "",
+        "chunk_text": "Cayley graphs and randomized algorithms. In Foundations of Computer Science (FOCS), pages 168–177. IEEE, 1982. [BY20] Omri Ben-Eliezer and Eylon Yogev. The adversarial robustness of sampling. In PODS, pages 49–62, 2020. [CN22] Ronald Cramer and Rachel Nauta. Compactly hiding and robustly reconstructing sets. In Theory of Cryptography - TCC 2022, Part I, volume 13787 of Lecture Notes in Computer Science, pages 57–89. Springer, November 2022.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "pages",
+                "Science",
+                "FOCS",
+                "Cayley",
+                "algorithms",
+                "Computer",
+                "IEEE",
+                "graphs",
+                "randomized",
+                "Foundations"
+            ]
+        }
+    },
+    {
+        "id": "18e5a52a-0691-41c8-8dfe-5925cbe3cb3c",
+        "title": "",
+        "chunk_text": "[CPS19] David Clayton, Christopher Patton, and Thomas Shrimpton. Probabilistic data structures in adversarial environments. In CCS, pages 1317–1334, 2019. [Don06] David L. Donoho. Compressed sensing. In IEEE Transactions on Information Theory, volume 52, pages 1289–1306, 2006. [DORS08] Yevgeniy Dodis, Rafail Ostrovsky, Leonid Reyzin, and Adam Smith. Fuzzy extractors: How to generate strong keys from biometrics and other noisy data. In Nigel P.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Clayton",
+                "Christopher",
+                "Patton",
+                "Shrimpton",
+                "Thomas",
+                "David",
+                "pages",
+                "CCS",
+                "Donoho",
+                "data"
+            ]
+        }
+    },
+    {
+        "id": "025e847a-2b38-4beb-8a1f-acb36ed33bcc",
+        "title": "",
+        "chunk_text": "Smart, editor, Advances in Cryptology – EUROCRYPT 2008, volume 4965 of Lecture Notes in Computer Science, pages 523–540. Springer, 2008. [FLS22] Nils Fleischhacker, Kasper Green Larsen, and Mark Simkin. Property-preserving hash functions for hamming distance from standard assumptions. In Orr Dunkelman and Stefan Dziembowski, editors, Advances in Cryptology - EUROCRYPT 2022, pages 764–781, Cham, 2022. Springer International Publishing. [FS21] Nils Fleischhacker and Mark Simkin.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Science",
+                "EUROCRYPT",
+                "Lecture",
+                "Notes",
+                "Computer",
+                "Advances",
+                "Cryptology",
+                "Smart",
+                "volume",
+                "pages"
+            ]
+        }
+    },
+    {
+        "id": "f4297cdf-33ff-4426-ba3a-37d0a848108b",
+        "title": "",
+        "chunk_text": "Robust property-preserving hash functions for hamming distance and more. In EUROCRYPT. Springer, 2021. [GGM10] Oded Goldreich, Tom Gur, and Yishay Mansour. Distribution-free testing of monotone conjunctions. In Approximation, Randomization, and Combinatorial Optimization. Algorithms and Techniques (APPROX/RANDOM), volume 6302 of Lecture Notes in Computer Science, pages 307–318. Springer, 2010. [GM11] Michael T. Goodrich and Michael Mitzenmacher. Invertible bloom lookup tables.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Robust",
+                "Springer",
+                "property-preserving",
+                "hash",
+                "functions",
+                "hamming",
+                "distance",
+                "EUROCRYPT",
+                "Michael",
+                "Randomization"
+            ]
+        }
+    },
+    {
+        "id": "733ff9a6-bc4e-424d-93a9-f08c746abf83",
+        "title": "",
+        "chunk_text": "In 49th Annual Allerton Conference on Communication, Control, and Computing (Allerton), pages 792–799. IEEE, 2011. [GR09] Oded Goldreich and Dana Ron. A sublinear bipartiteness tester for dense graphs. Combinatorica, 19(3):335–373, 2009. [HW13] Moritz Hardt and David P. Woodruff. How robust are linear sketches to adaptive inputs? In STOC, pages 121–130, 2013. [IM98] Piotr Indyk and Rajeev Motwani. Approximate nearest neighbors: Towards removing the curse of dimensionality.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Allerton",
+                "Control",
+                "Annual",
+                "Communication",
+                "Computing",
+                "Conference",
+                "pages",
+                "IEEE",
+                "Oded",
+                "Ron"
+            ]
+        }
+    },
+    {
+        "id": "78aaa33d-16ba-42c7-af4b-edbfb3d4bd00",
+        "title": "",
+        "chunk_text": "In STOC, pages 604–613, 1998. 11 [KOR00] Eyal Kushilevitz, Rafail Ostrovsky, and Yuval Rabani. Efﬁcient search for approximate nearest neighbor in high dimensional spaces. SIAM Journal on Computing, 30(2):457–474, 2000. [LLL82] Arjen K. Lenstra, Hendrik W. Lenstra, and L´aszl´o Lov´asz. Factoring polynomials with rational coefﬁcients. Mathematische Annalen, 261:515–534, 1982. [MNS08] Ilya Mironov, Moni Naor, and Gil Segev. Sketching in adversarial environments. In STOC, pages 651–660, 2008.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "STOC",
+                "pages",
+                "Lenstra",
+                "Eyal",
+                "Kushilevitz",
+                "Rafail",
+                "Ostrovsky",
+                "Rabani",
+                "Yuval",
+                "SIAM"
+            ]
+        }
+    },
+    {
+        "id": "431cfd40-37db-4e28-9370-0b7a149bd406",
+        "title": "",
+        "chunk_text": "[MNSW98] Peter Bro Miltersen, Noam Nisan, Shmuel Safra, and Avi Wigderson. On data structures and asymmetric communication complexity. volume 57, pages 37–49, 1998. [MP13] Daniele Micciancio and Chris Peikert. Hardness of sis and lwe with small parameters. In CRYPTO, pages 21–39, 2013. [NY15] Moni Naor and Eylon Yogev. Bloom ﬁlters in adversarial environments. In CRYPTO, pages 565–584. Springer, 2015. [OWZ11] Ryan O’Donnell, Yi Wu, and Yuan Zhou.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Peter",
+                "Miltersen",
+                "Noam",
+                "Nisan",
+                "Shmuel",
+                "Safra",
+                "Wigderson",
+                "Bro",
+                "Avi",
+                "pages"
+            ]
+        }
+    },
+    {
+        "id": "a2df369e-3e0d-4f5c-bfa0-713cf520fa6c",
+        "title": "",
+        "chunk_text": "Optimal lower bounds for locality sensitive hashing (except when q is tiny). In Proceedings of the 2nd Symposium on Innovations in Computer Science (ICS), pages 273–282. Tsinghua University Press, 2011. [Ped92] Torben P. Pedersen. Non-interactive and information-theoretic secure veriﬁable secret sharing. In Advances in Cryptology - CRYPTO ’91, volume 576 of Lecture Notes in Computer Science, pages 129–140. Springer, 1992. [RRR21] Guy N. Rothblum, Ron D. Rothblum, and Omer Reingold.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Science",
+                "Computer",
+                "pages",
+                "Optimal",
+                "hashing",
+                "tiny",
+                "ICS",
+                "Rothblum",
+                "lower",
+                "bounds"
+            ]
+        }
+    },
+    {
+        "id": "ee318ccb-b7eb-41dd-ae24-ef5d041a52a8",
+        "title": "",
+        "chunk_text": "Proofs of proximity with polylog overhead. In Theory of Cryptography - TCC 2021, Part III, volume 13043 of Lecture Notes in Computer Science, pages 145–175. Springer, November 2021. 12",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "TCC",
+                "Proofs",
+                "overhead",
+                "November",
+                "Cryptography",
+                "Part",
+                "III",
+                "Science",
+                "proximity",
+                "polylog"
+            ]
+        }
+    }
+]

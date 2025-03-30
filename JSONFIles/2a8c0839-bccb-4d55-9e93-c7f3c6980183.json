@@ -1,0 +1,4012 @@
+[
+    {
+        "id": "e533533c-ed54-43b2-932a-b939dd5130ad",
+        "title": "",
+        "chunk_text": "A Galois-Theoretic Complexity Measure for Solving Systems of Algebraic Equations Timothy Duff March 25, 2025 Abstract Motivated by applications of algebraic geometry, we introduce the Ga- lois width, a quantity characterizing the complexity of solving algebraic equations in a restricted model of computation allowing only field arith- metic and adjoining polynomial roots.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Algebraic",
+                "Equations",
+                "March",
+                "Abstract",
+                "Complexity",
+                "Solving",
+                "Measure",
+                "Systems",
+                "Timothy",
+                "Duff"
+            ]
+        }
+    },
+    {
+        "id": "4f0f07a9-2cf8-40ce-9799-473d541dd5d9",
+        "title": "",
+        "chunk_text": "We explain why practical heuristics such as monodromy give (at least) lower bounds on this quantity, and dis- cuss problems in geometry, optimization, statistics, and computer vision for which knowledge of the Galois width either leads to improvements over standard solution techniques or rules out this possibility entirely. Contents 1 Introduction 1 2 Galois Width 3 2.1 Preliminaries . . . . . . . . . . . . . . . . . . . . . . . . . . 3 2.2 Algebraic Computation Model . . . . . . . . . . . . . .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "optimization",
+                "statistics",
+                "Galois",
+                "Introduction",
+                "Preliminaries",
+                "width",
+                "give",
+                "lower",
+                "quantity",
+                "dis"
+            ]
+        }
+    },
+    {
+        "id": "39409634-ee20-430a-805a-225bf42c429a",
+        "title": "",
+        "chunk_text": ". . . 5 2.3 Properties of Galois Width . . . . . . . . . . . . . . . . . . 7 3 Solving Algebraic Equations 9 3.1 Branched Covers and Thin Sets . . . . . . . . . . . . . . . . 9 3.2 Homotopies and Optimal Solving . . . . . . . . . . . . . . . 13 4 Applications 17 4.1 Metric Algebraic Geometry . . . . . . . . . . . . . . . . . . 17 4.2 Algebraic Statistics . . . . . . . . . . . . . . . . . . . . . . . 21 4.3 Algebraic Vision . . . . . . . . . . . . . . . . . . . . . . . .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Algebraic",
+                "Solving",
+                "Properties",
+                "Width",
+                "Galois",
+                "Applications",
+                "Equations",
+                "Branched",
+                "Sets",
+                "Homotopies"
+            ]
+        }
+    },
+    {
+        "id": "dca3db61-4984-4f62-9ccb-09b6440016f5",
+        "title": "",
+        "chunk_text": "24 1 Introduction Galois theory, since its inception, has provided a powerful toolkit for an- swering questions of computability and complexity in algebra. Building on the classical impossibility theorems, more recent works span a diverse ar- ray of applications, including complex dynamics [24], computer vision [72], enumerative geometry [38], graph drawing [6], and optimization [5].",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Introduction",
+                "Galois",
+                "theory",
+                "inception",
+                "swering",
+                "algebra",
+                "provided",
+                "powerful",
+                "toolkit",
+                "questions"
+            ]
+        }
+    },
+    {
+        "id": "191740c6-45ab-4d37-aa45-629c2afa5242",
+        "title": "",
+        "chunk_text": "1 arXiv:2503.17884v1 [math.AG] 22 Mar 2025 In this paper, our main motivation is the increasingly important role of Galois theory in applications of algebraic geometry—especially for prob- lems where the goal is to compute solutions of a system of algebraic equa- tions.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Mar",
+                "arXiv",
+                "math.AG",
+                "tions",
+                "algebraic",
+                "Galois",
+                "paper",
+                "geometry",
+                "prob",
+                "lems"
+            ]
+        }
+    },
+    {
+        "id": "de3b6367-bb8d-4504-8613-f1cde4ac597b",
+        "title": "",
+        "chunk_text": "In practice, these equations are multivariate polynomials or rational functions with coefficients in Q, and the number of complex solutions (the degree of the system) has often been proposed as a measure of a problem’s complexity. Section 4 recalls such problems in detail. The purpose of this paper is to introduce a Galois-theoretic refinement of the degree that better reflects the practical complexity of solving.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "practice",
+                "solutions",
+                "system",
+                "degree",
+                "equations",
+                "multivariate",
+                "polynomials",
+                "rational",
+                "functions",
+                "coefficients"
+            ]
+        }
+    },
+    {
+        "id": "6a264f08-7e4f-4622-990e-37e30cd2eb07",
+        "title": "",
+        "chunk_text": "In contrast to existing theories, which focus on upper bounds for the com- plexity of solving, our framework naturally facilitates complexity lower bounds on the complexity of solving in a simplified, yet plausible, alge- braic model of computation. At the same time, for some highly-structured problems, the Galois width is smaller than a priori upper bounds suggest, which can be exploited to develop more efficient algorithms.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "solving",
+                "alge",
+                "complexity",
+                "bounds",
+                "theories",
+                "plexity",
+                "simplified",
+                "plausible",
+                "braic",
+                "computation"
+            ]
+        }
+    },
+    {
+        "id": "f1ce07c1-ca9a-462b-9f79-949ec50c5202",
+        "title": "",
+        "chunk_text": "Section 2 contains the definitions and results at the core of this work. We define the Galois width gw(α) of an algebraic number α ∈Q, a min- imax measure of how much a solution costs in our computational model. A similar cost gw(G) may be defined for any finite group G. Theorem 2 states that the Galois width of α and the Galois group of its minimal poly- nomial coincide.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Galois",
+                "Section",
+                "work",
+                "definitions",
+                "results",
+                "core",
+                "width",
+                "group",
+                "min",
+                "imax"
+            ]
+        }
+    },
+    {
+        "id": "7e1b318c-c348-49cc-b0ee-c9da71d9f92c",
+        "title": "",
+        "chunk_text": "The latter can be computed explicitly using composition series and minimal permutation degrees of simple groups (Theorem 3.) Before turning to illustrate our theory on examples, we first describe in Section 3.1 a general setup to which they all adhere. We propose to study gw(•) for concrete systems of equations via Galois group compu- tation, including heuristics based in both exact computation (eg. Frobe- nius elements) and inexact numerical methods (eg.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Theorem",
+                "computed",
+                "explicitly",
+                "composition",
+                "series",
+                "minimal",
+                "permutation",
+                "degrees",
+                "simple",
+                "Section"
+            ]
+        }
+    },
+    {
+        "id": "90f3fe32-12d0-4870-b23b-1b78a13a3a0c",
+        "title": "",
+        "chunk_text": "monodromy.) For the latter, Corollary 2 uses Hilbert’s irreducibility theorem [76, Ch. 3] to precisely state the following principle: the Galois/monodromy group of a parametrized system of algebraic equations provides a lower bound on the Galois width of its solutions for a dense subset of rational parameters. We note two limitations of the aforementioned Galois group heuristics: (1) they might only identify a subgroup of the full Galois group, and (2) the numerical methods are not certified.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Galois",
+                "monodromy",
+                "group",
+                "Corollary",
+                "Hilbert",
+                "theorem",
+                "irreducibility",
+                "principle",
+                "parameters",
+                "heuristics"
+            ]
+        }
+    },
+    {
+        "id": "f9bb1de7-4950-40de-9410-c5d292b2ebaa",
+        "title": "",
+        "chunk_text": "Nevertheless, heuristics offer insight into examples that might otherwise be inaccessible. On the other hand, as long as our goal is to obtain lower bounds on gw(•), then its monotonicity (Theorem 4) suggests that Limitation (1) need not be a concern in practice. Limitation (2) can also be addressed with rigorous, certified numerical path-tracking—see eg. [42, 33] and references therein.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "heuristics",
+                "inaccessible",
+                "Limitation",
+                "Theorem",
+                "offer",
+                "insight",
+                "hand",
+                "monotonicity",
+                "suggests",
+                "practice"
+            ]
+        }
+    },
+    {
+        "id": "39738786-92b5-4130-b42b-80d4710d544d",
+        "title": "",
+        "chunk_text": "Our work is close in spirit to recent studies of decomposable branched covers, and various proposals for “optimal” numerical homotopy contin- uation methods. Section 3.2 reviews this related work in the context of Galois width. We must also mention the work [72], discussed further in Section 4.3, which inspired our computational model. To the best of our knowledge, Galois width has not been explicitly studied in the literature.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "optimal",
+                "Section",
+                "Galois",
+                "covers",
+                "numerical",
+                "contin",
+                "uation",
+                "methods",
+                "work",
+                "close"
+            ]
+        }
+    },
+    {
+        "id": "798bbda5-23c7-4e28-a302-9ebac76a1808",
+        "title": "",
+        "chunk_text": "The paper concludes by discussing three topics where Galois width has, at least in hindsight, already played an important role: metric algebraic geometry (Section 4.1), algebraic statistics (Section 4.2), and algebraic vision (Section 4.3.) We hope the perspective and tools developed here will aid readers pursuing their own applications. 2 2 Galois Width 2.1 Preliminaries We first establish notation and state (mostly standard) results that will play a key role in what follows.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Section",
+                "algebraic",
+                "Galois",
+                "width",
+                "hindsight",
+                "metric",
+                "geometry",
+                "statistics",
+                "vision",
+                "paper"
+            ]
+        }
+    },
+    {
+        "id": "b9919d4c-a28b-4b47-a925-215e2700269a",
+        "title": "",
+        "chunk_text": "We denote by Q ⊂C the usual field of algebraic numbers. An intermediate field Q ⊂K ⊂Q is called a number field if K/Q is a finite extension. Many of our results will remain intact after replacing Q/Q with more a general field extension. However, this level of generality is not necessary for the applications given later. In our setting, the compositum KL of two number fields K and L is the intersection of all subfields of Q containing both K and L.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "field",
+                "number",
+                "extension",
+                "denote",
+                "usual",
+                "algebraic",
+                "numbers",
+                "fields",
+                "intermediate",
+                "called"
+            ]
+        }
+    },
+    {
+        "id": "7b061e49-488e-4f17-b6dd-f65deb4d4dc7",
+        "title": "",
+        "chunk_text": "Any element of KL may be written as an L-linear combination of elements in K. Proposition 1. Let F, K, L be number fields with F ⊂K. Then [K : F] ≥[KL : FL]. Proof. Let α be a primitive element for K/F, so that the powers αi, for i = 0, . . . , [K : F] −1, form a F-basis for K. Promoting these powers under the inclusion map K ,→KL produces a spanning set for KL over FL. We now state a useful group-theoretic fact. The argument relates to the notion of a stabilizer chain (see eg.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "L-linear",
+                "written",
+                "combination",
+                "element",
+                "powers",
+                "Proposition",
+                "F-basis",
+                "elements",
+                "Proof",
+                "number"
+            ]
+        }
+    },
+    {
+        "id": "73f85602-64a7-4318-ad80-9a4b72537199",
+        "title": "",
+        "chunk_text": "[15, §1.13].) Lemma 1. Let G ≤Sd be a transitive permutation group. Then there exists a chain of subgroups G = H0 ≥H1 ≥H2 ≥. . . ≥Hd = id such that d = [H0 : H1] > [Hi : Hi+1] for all i = 1, . . . , d −1. Proof. Set W0 = Sd, and for i = 1 . . . , d, define subgroups Wi = i\\ j=1 StabSd(i) ≤Sd, (1) Hi = Wi ∩G ≤G. (2) We claim that the chain G = H0 ≥H1 ≥. . . ≥Hd = id (3) satisfies the desired conclusion. First note [H0 : H1] = d by the orbit- stabilizer theorem.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "subgroups",
+                "chain",
+                "Lemma",
+                "group",
+                "transitive",
+                "permutation",
+                "Proof",
+                "Set",
+                "exists",
+                "StabSd"
+            ]
+        }
+    },
+    {
+        "id": "02fad01c-5d1b-428c-babc-9dd2b237f6fa",
+        "title": "",
+        "chunk_text": "Then, comparing the chain in G against the corre- sponding chain in Sd, namely Sd = W0 ≥W1 ≥. . . ≥Wd = id, (4) we bound the remaining indices for i = 1, . . . , d: [Hi : Hi+1] = |Wi ∩G| |Wi+1 ∩G| = |Wi+1G| |WiG| · |Wi||G| |Wi+1||G| = |Wi+1G| |WiG| · [Wi : Wi+1] ≤[Wi : Wi+1] = (d −i)! (d −i −1)! = d −i < d. 3 Corollary 1. Let G be a finite simple group with a subgroup H ⊂G. Then there exists a chain of subgroups G = H0 ≥H = H1 ≥H2 ≥. . .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "comparing",
+                "corre",
+                "sponding",
+                "chain",
+                "WiG",
+                "Corollary",
+                "bound",
+                "remaining",
+                "indices",
+                "subgroup"
+            ]
+        }
+    },
+    {
+        "id": "2008420c-a518-496e-be90-633284bd94d3",
+        "title": "",
+        "chunk_text": "≥Hd = id such that [H0 : H1] > [Hi : Hi+1] for all i = 1, . . . , d −1. Remark 1. More generally, although we will not need it, the conclusion of Corollary 1 holds when H is core-free in G, meaning ∩g∈gg−1Hg = id . Proof. Set d = [G : H1], and note that G acts transitively on left cosets of H, giving a group homomorphism G →Sd. Since G is simple, we may identify it with its image under this homomorphism, and H1 with the stabilizer of a point. The conclusion now follows as in Lemma 1.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "conclusion",
+                "Proof",
+                "homomorphism",
+                "Corollary",
+                "Lemma",
+                "Remark",
+                "meaning",
+                "generally",
+                "holds",
+                "Set"
+            ]
+        }
+    },
+    {
+        "id": "66eb4bfb-0c3b-432a-a76a-f592d1567a4a",
+        "title": "",
+        "chunk_text": "The interplay between abstract finite groups and their permutation representations is a reoccurring theme in this work. In particular, we will need to collect some useful results on the well-studied topic of minimum faithful permutation degrees. Definition 1. For any finite group G, we define µ(G) to be the minimum degree of a faithful permutation representation of G. That is, µ(G) = min {d ∈Z≥0 | ∃φ ∈Hom(G, Sd) w/ ker φ = id} . Such a representation is minimal if its degree is µ(G).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "permutation",
+                "work",
+                "interplay",
+                "abstract",
+                "reoccurring",
+                "theme",
+                "finite",
+                "faithful",
+                "representation",
+                "minimum"
+            ]
+        }
+    },
+    {
+        "id": "ecc16150-d949-49b7-88b4-395ffd93ce69",
+        "title": "",
+        "chunk_text": "Faithful permutation representations remain faithful when restricted to subgroups: thus, if H ≤G is any subgroup, we have µ(H) ≤µ(G). (5) One should bear in mind that a minimal faithful permutation representa- tion φ : G →Sd need not give a transitive subgroup of Sd. For example, if G = Z/2Z × Z/3Z, then µ(G) = 5, and if φ : G →S5 is minimal then φ(G) is generated by disjoint cycles of length 2 and 3. Fortunately, when G is simple, minimality implies transitivity. Proposition 2.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Faithful",
+                "permutation",
+                "subgroup",
+                "representations",
+                "remain",
+                "restricted",
+                "minimal",
+                "subgroups",
+                "representa",
+                "tion"
+            ]
+        }
+    },
+    {
+        "id": "c7e2ca41-4055-4a73-a462-5e452f053a06",
+        "title": "",
+        "chunk_text": "If G is a finite simple group with µ(G) = d, then µ(G) = min M<G maximal[G : M] = min H<G [G : H], and any minimal faithful representation of G is transitive. A short proof of Proposition 2 is given in [52, Proposition 1 (i)]. In contrast to the case of subgroups, the behavior of µ(•) for quotients is more subtle. This behavior was studied by Kov´acs and Praeger, who proved the following result. Theorem 1. ([56, Theorem 1]) Let H be a finite group with a normal subgroup N ⊴H.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "min",
+                "Proposition",
+                "Theorem",
+                "maximal",
+                "transitive",
+                "simple",
+                "minimal",
+                "faithful",
+                "representation",
+                "finite"
+            ]
+        }
+    },
+    {
+        "id": "1bcf8f1b-5bbe-457f-9619-5329502af26b",
+        "title": "",
+        "chunk_text": "If H/N has no nontrivial abelian normal subgroup (in particular, if H/N is simple), then µ(H/N) ≤µ(H). Theorem 1 is key to our proof of Theorem 4. Finally, we will use the following criterion recognizing when a transitive group is full-symmetric. Lemma 2. Let G ⊂Sd act transitively on {1, . . . , d}. If Sk × Sd−k ⊂G, where 1 ≤k < d/2, then G = Sd. 4 Proof. Maximal subgroups of Sd which are intransitive are precisely those of the form Sk × Sd−k, where 1 ≤k < d/2. See eg. [15, Theorem 4.8].",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Theorem",
+                "simple",
+                "nontrivial",
+                "abelian",
+                "normal",
+                "proof",
+                "Finally",
+                "Lemma",
+                "key",
+                "full-symmetric"
+            ]
+        }
+    },
+    {
+        "id": "e84234b9-7864-4ba5-ae8a-629903fc87a8",
+        "title": "",
+        "chunk_text": "Remark 2. The conclusion of Lemma 2 fails when n is even, k = d/2, and G = Sk ≀S2 is the wreath product containing all permutations in Sd that preserve the partition {1, . . . , k} ⊔{k + 1, . . . , d}. 2.2 Algebraic Computation Model We now address the question of how to define the complexity of an alge- braic number α ∈Q. To answer this question, we must define a model of computation and a class of admissible algorithms. We begin with a slightly informal description.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Remark",
+                "Lemma",
+                "Computation",
+                "Model",
+                "question",
+                "define",
+                "Algebraic",
+                "fails",
+                "partition",
+                "conclusion"
+            ]
+        }
+    },
+    {
+        "id": "dd8d693a-f263-4808-b225-a565932391a7",
+        "title": "",
+        "chunk_text": "Our algorithms will execute a finite number of steps m, and maintain a working field Fk ⊂Q for each step k = 1, . . . , m. We initialize F0 ←Q. At each step k ≥1, an algorithm can perform one of the following two “oracle steps”: 1. Perform arithmetic in the field Fk−1 (and set Fk ←Fk−1), or 2. Compute a root αk ∈Q of some polynomial pk(x) ∈Fk−1[x], and extend the working field Fk ←Fk−1(αk). Finally, the output of the algorithm is given by αm.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "field",
+                "execute",
+                "finite",
+                "number",
+                "maintain",
+                "steps",
+                "step",
+                "working",
+                "algorithm",
+                "perform"
+            ]
+        }
+    },
+    {
+        "id": "4800cf4c-3cc8-432b-b503-77b2025fd4a9",
+        "title": "",
+        "chunk_text": "We note that any arithmetic operation of type 1 is in fact a special case of the root-finding operation of type 2; indeed, for any operation op ∈{+, −, ×, ÷}, the polynomial x −(α op β) ∈Fk−1[x] has a unique root given by α op β. The next definition, although more abstract, captures all of the essen- tial data needed to analyze the complexity of an algorithm in this model. It is exactly the same as in [72, Definition 2.2]. Definition 2. Let α ∈Q.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "type",
+                "operation",
+                "definition",
+                "note",
+                "arithmetic",
+                "fact",
+                "special",
+                "case",
+                "root-finding",
+                "polynomial"
+            ]
+        }
+    },
+    {
+        "id": "13e7ad39-7755-46dc-af90-25b852cdda62",
+        "title": "",
+        "chunk_text": "An algorithm is tower of field extensions Q = F0 ⊂F1 ⊂F2 ⊂· · · ⊂Fm ∋α. (6) We will measure the cost of the k-th step in algorithm by the degree of the working field extension [Fk : Fk−1].",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "field",
+                "algorithm",
+                "tower",
+                "extensions",
+                "extension",
+                "measure",
+                "cost",
+                "k-th",
+                "step",
+                "degree"
+            ]
+        }
+    },
+    {
+        "id": "bc7b3417-f1e9-4438-9370-4c498ff8b7e4",
+        "title": "",
+        "chunk_text": "We point out out that, in order to obtain an interesting theory, it is crucial to allow the working field to depend on the results of previous computations; if we were to work in the simpler setting where the working field is always the rational numbers, then the cost of an algebraic number would just be its degree over Q. We now propose measuring the total cost of an algorithm in this model by its most costly step(s).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "working",
+                "field",
+                "cost",
+                "theory",
+                "computations",
+                "numbers",
+                "number",
+                "point",
+                "order",
+                "obtain"
+            ]
+        }
+    },
+    {
+        "id": "e7968f68-e6d1-41cf-9624-d5163989bf6f",
+        "title": "",
+        "chunk_text": "We would like, then, for any α ∈Q, to under- stand which algorithms computing α minimize the most costly step. This leads to the following definition. Definition 3. The Galois width of α ∈Q is the quantity gw(α) = min algorithms Q=F0⊂···⊂Fm∋α \u0012 max 0≤i<m [Fi+1 : Fi] \u0013 . We now define a parallel notion for a finite group G. We define the cost of a chain of subgroups G ≥H0 ≥. . . ≥Hn 5 to be the maximum value of the indices [Hi : Hi+1] for i = 0, . . . , n −1.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "stand",
+                "step",
+                "definition",
+                "computing",
+                "minimize",
+                "costly",
+                "algorithms",
+                "define",
+                "Galois",
+                "leads"
+            ]
+        }
+    },
+    {
+        "id": "c9cf93c2-473a-4319-a99f-9492955ff03b",
+        "title": "",
+        "chunk_text": "To compute the cost of such a subgroup chain, we may assume without loss of generality that all inclusions are strict, Hi > Hi+1. The length of the chain (7) is defined to be n, and we say this chain is maximal if it cannot be refined to a longer chain by inserting strict subgroups. Definition 4. The Galois width of a finite group G is the minimum cost taken over all maximal chains of subgroups G = H0 > . . . > Hn = id . (7) We denote this quantity by gw(G). We now relate Definitions 3 and 4.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "chain",
+                "strict",
+                "subgroups",
+                "compute",
+                "assume",
+                "loss",
+                "generality",
+                "inclusions",
+                "cost",
+                "maximal"
+            ]
+        }
+    },
+    {
+        "id": "62878d7b-ccc9-4baf-baca-421a2f75716d",
+        "title": "",
+        "chunk_text": "Theorem 2. If f ∈Q[x] is an irreducible polynomial with Galois group G, and α is any root of f, then gw(α) = gw(G). Remark 3. Although the Galois correspondence makes Theorem 2 plau- sible, some care is required. Note that the minimum in Definition 4 is taken over a finite set, whereas the set of algorithms in Definition 3 is infinite. Moreover, the final field Fm in an algorithm computing α need not be inclusion-wise comparable with the splitting field of f. Proof.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Theorem",
+                "Definition",
+                "Galois",
+                "set",
+                "field",
+                "Remark",
+                "plau",
+                "sible",
+                "irreducible",
+                "polynomial"
+            ]
+        }
+    },
+    {
+        "id": "6aa1c84a-988d-49e1-a053-1c32bcf9a62e",
+        "title": "",
+        "chunk_text": "Throughout, we let F ⊂Q denote the Galois closure of the exten- sion Q(α)/Q. First, we observe that gw(α) ≤gw(G). Indeed, under the Galois correspondence, a maximal chain of subgroups of G attaining the minimum cost gw(G) corresponds to a chain of fields Q = F0 ⊂F1 ⊂· · · ⊂Fm = F (8) such that [Fi : Fi−1] ≤gw(G) for all i. It remains to prove gw(α) ≥gw(G). Consider any tower of fields Q = F′ 0 ⊂F′ 1 ⊂· · · ⊂F′ m ∋α (9) attaining the minimum cost gw(α).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Galois",
+                "exten",
+                "sion",
+                "denote",
+                "closure",
+                "minimum",
+                "cost",
+                "fields",
+                "chain",
+                "attaining"
+            ]
+        }
+    },
+    {
+        "id": "06e837a5-453d-4a6e-b8b9-d0a229f37ef7",
+        "title": "",
+        "chunk_text": "Let F′ denote the Galois closure the extension F′ m/Q, with G′ its Galois group. Since F ⊂F′, the Galois correspondence implies that G ∼= G′/N ′ for some normal subgroup of N ′ ⊴G′. Corresponding to (9) are both the subgroup chain in G′ given by G′ = H′ 0 ≥· · · ≥H′ m (10) as well as the subgroup chain in G given by G = H0 ≥· · · ≥Hm, (11) where Hi := N ′H′ i/N ′. The latter chain corresponds to the tower of fields Q = eF0 ⊂eF1 ⊂· · · ⊂eFm, (12) where eFi = F′ i ∩F.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Galois",
+                "subgroup",
+                "chain",
+                "group",
+                "denote",
+                "closure",
+                "extension",
+                "correspondence",
+                "implies",
+                "normal"
+            ]
+        }
+    },
+    {
+        "id": "a81c07e1-1e82-4170-bf10-dceaaba99e24",
+        "title": "",
+        "chunk_text": "Since Hi ∼= H′ i/(H′ i ∩N), we have [Hi : Hi+1] = [H′ i : H′ i+1] [H′ i ∩N ′ : H′ i+1 ∩N ′] ≤[H′ i : H′ i+1] ≤gw(α), 6 and it will suffice to prove that the subgroup chain (11) has cost at least gw(G). To do so, we extend the tower (12) as follows: let β be a primitive element for the extension eFm/Q, and γ = g·β one of its Galois conjugates. We may then form the tower of composite extensions Q(β) = eFm ⊂eFm \u0010 g · eF1 \u0011 ⊂· · · ⊂eFm \u0010 g · eFm \u0011 = Q(β, γ).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "eFm",
+                "chain",
+                "suffice",
+                "prove",
+                "subgroup",
+                "cost",
+                "tower",
+                "Galois",
+                "conjugates",
+                "extension"
+            ]
+        }
+    },
+    {
+        "id": "0f5f1485-587c-474f-8312-5bee9fd7ccce",
+        "title": "",
+        "chunk_text": "(13) By Proposition 1, we have h eFm \u0010 g · eFi+1 \u0011 : eFm \u0010 g · eFi \u0011i ≤ h g · eFi+1 : g · eFi i = h eFi+1 : eFi i . If Q(β, γ) ⊊F, we construct yet another chain as in (13), but starting from Q(β, γ). Continuing this process, we eventually obtain a tower of fields from Q to F, corresponding to an extension of the subgroup chain (11), G = H0 ≥· · · ≥Hm ≥· · · ≥Hl = id, (14) with the property that [Hi : Hi+1] ≤gw(α) for all i ≥m.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "eFi",
+                "eFm",
+                "Proposition",
+                "chain",
+                "construct",
+                "starting",
+                "Continuing",
+                "process",
+                "eventually",
+                "obtain"
+            ]
+        }
+    },
+    {
+        "id": "375435bf-e2b9-414d-a173-b9fe6daad5d1",
+        "title": "",
+        "chunk_text": "Thus, the cost of both subgroup chains (11) and (14) is at most gw(α). Since the cost of (14) is at least gw(G), this completes the proof. 2.3 Properties of Galois Width Having now established the Galois width as the principal quantity of in- terest in our computation model, we turn to the problem of computing this quantity.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "cost",
+                "chains",
+                "Galois",
+                "subgroup",
+                "Width",
+                "quantity",
+                "Properties",
+                "proof",
+                "completes",
+                "terest"
+            ]
+        }
+    },
+    {
+        "id": "c089f609-be46-43c6-9d65-97ba649c1986",
+        "title": "",
+        "chunk_text": "Since Definition 4 is essentially a minimax formulation, it would be natural to consider methods from combinatorial optimization— and indeed, a subgroup chain in G attaining the minimum cost gw(G) may in principal be found using network flow on the lattice of subgroups. However, the graph of all subgroups (or even conjugacy classes thereof) is much too cumbersome to work with in practice. Thus, it is desirable to express gw(G) in terms of group-theoretic primitives.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Definition",
+                "formulation",
+                "optimization",
+                "subgroups",
+                "essentially",
+                "minimax",
+                "natural",
+                "methods",
+                "combinatorial",
+                "chain"
+            ]
+        }
+    },
+    {
+        "id": "544f8999-391e-4e56-9c3f-d63005e2c290",
+        "title": "",
+        "chunk_text": "Theorem 3 ex- presses gw(G) in terms as the maximum over all minimal faithful permu- tation degrees of the composition factors of G. We also use this section to prove Theorem 4, a monotonicity property for the Galois width. We begin with a key splitting property. Proposition 3. For any normal subgroup N ⊴G, we have that gw(G) = max (gw(G/N), gw(N)) . (15) Proof. First, we argue that the left-hand-side in (15) is bounded by the right-hand-side.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Theorem",
+                "presses",
+                "permu",
+                "tation",
+                "terms",
+                "maximum",
+                "minimal",
+                "faithful",
+                "degrees",
+                "composition"
+            ]
+        }
+    },
+    {
+        "id": "6f989592-d67f-414f-9860-71f50d4d4fac",
+        "title": "",
+        "chunk_text": "To see this, note that the lattice isomorphism theorem identifies any maximal chain of subgroups in G/N with a chain of sub- groups G > . . . > N. Such a chain attaining the minimum cost gw(G/N) may be prepended to a maximal chain of subgroups of N which attains the minimum cost gw(N). This produces a maximal chain in G whose cost equals max (gw(G/N), gw(N)). Thus gw(G) ≤max (gw(G/N), gw(N)) . We now prove the reverse inequality.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "chain",
+                "maximal",
+                "cost",
+                "note",
+                "groups",
+                "subgroups",
+                "lattice",
+                "isomorphism",
+                "theorem",
+                "identifies"
+            ]
+        }
+    },
+    {
+        "id": "d7cd98cf-a450-4ffc-a26a-3380917f0f58",
+        "title": "",
+        "chunk_text": "Consider a maximal chain (7) whose 7 cost attains the minimum gw(G). We may “reroute” this chain through N using intersections and subgroup products as follows: G = NH0 ≥. . . ≥NHn = N = H0 ∩N ≥. . . ≥Hn ∩N = id. The cost of this rerouted chain is at least max (gw(G/N), gw(N)) . From the product formula [Hi : Hi+1] = [Hi ∩N : Hi+1 ∩N][NHi : NHi+1], and the bound xy ≥max(x, y), valid for any positive integers x and y, it follows that the rerouted chain also attains the minimum cost gw(G).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "chain",
+                "cost",
+                "maximal",
+                "NHi",
+                "attains",
+                "minimum",
+                "max",
+                "rerouted",
+                "reroute",
+                "intersections"
+            ]
+        }
+    },
+    {
+        "id": "62ce8028-cc00-4733-aa62-d64854d7e595",
+        "title": "",
+        "chunk_text": "Thus max (gw(G/N), gw(N)) ≤gw(G). Proposition 3 shows that the Galois width is determined by its values on simple groups. Moreover, when the group G is simple, it turns out that gw(G) equals the minimum (faithful) permutation degree µ(G). This in turn implies a clean formula for the Galois width of any finite group G.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Galois",
+                "max",
+                "group",
+                "width",
+                "simple",
+                "Proposition",
+                "shows",
+                "faithful",
+                "groups",
+                "determined"
+            ]
+        }
+    },
+    {
+        "id": "789f8fa0-e8b5-46e9-8a33-c502ea35d180",
+        "title": "",
+        "chunk_text": "Recall that the Jordan-H¨older Theorem states that G always has a composition series: that is, a chain G = N0 ⊵N1 · · · ⊵Nn = id (16) such that all successive quotient groups Ni/Ni+1, called composition fac- tors, are simple. The chain (16) is subnormal: ie., Nj need not be normal in Ni for i < j −1. Multiple composition series for a group may exist; however, the multiset of composition factors is uniquely determined. Theorem 3.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "tors",
+                "composition",
+                "Recall",
+                "Jordan-H",
+                "older",
+                "called",
+                "fac",
+                "simple",
+                "chain",
+                "Theorem"
+            ]
+        }
+    },
+    {
+        "id": "25602f2c-f222-4826-8e8a-d387d545bcb2",
+        "title": "",
+        "chunk_text": "If G is any finite group with composition series (16), then gw(G) = max 0≤i≤n−1 µ(Ni/Ni+1). (17) Proof. It is enough to prove the result when G is simple—the general case then follows by repeated application of Proposition 3. Let M < G be a maximal subgroup. Applying Corollary 1, we have that gw(G) ≤[G : M]. (18) Moreover, the reverse inequality must hold for any maximal subgroup M which appears in a chain attaining the minimum cost gw(G). Such an M is clearly a subgroup of minimum index in G.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "max",
+                "series",
+                "subgroup",
+                "Proof",
+                "finite",
+                "group",
+                "composition",
+                "maximal",
+                "Proposition",
+                "minimum"
+            ]
+        }
+    },
+    {
+        "id": "b6680cea-f304-4400-9786-d8a493d070a8",
+        "title": "",
+        "chunk_text": "Thus, using Proposition 2, we conclude that gw(G) = [G : M] = µ(G). Theorem 3 allows us to easily evaluate gw(G) for many familiar families of groups. For example, if G is solvable, then gw(G) equals the largest prime dividing the group order |G|. For the symmetric and alternating groups, we have the composition series Sn ⊵An ⊵id. Recall that, when n ≥5, the group An is simple and has no subgroup of index less than n.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Proposition",
+                "conclude",
+                "groups",
+                "group",
+                "Theorem",
+                "easily",
+                "evaluate",
+                "familiar",
+                "families",
+                "solvable"
+            ]
+        }
+    },
+    {
+        "id": "d0f1f544-c96b-4f59-ad16-17fa1730712b",
+        "title": "",
+        "chunk_text": "For A4, on the other hand, we have the subgroup chain A4 ≥Z/2Z × Z/2Z ≥Z/2Z ≥id, 8 which attains the minimum cost of 3. Altogether, this gives gw(Sn) = gw(An) = ( 3 if n = 4, n else. (19) For a Galois-theoretic interpretation of formula (19), recall that the roots of a general univariate quartic equation may be expressed in terms of the roots of its resolvent cubic and additional square roots thereof. For larger values of n, no such reduction is generally possible.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "hand",
+                "chain",
+                "roots",
+                "subgroup",
+                "attains",
+                "minimum",
+                "cost",
+                "Altogether",
+                "Galois-theoretic",
+                "formula"
+            ]
+        }
+    },
+    {
+        "id": "6dd660ce-04bd-46f3-a6df-de022da5a94c",
+        "title": "",
+        "chunk_text": "We now prove that gw(•) is monotonic with respect to inclusion. Theorem 4. gw(H) ≤gw(G) for any subgroup H ≤G. (20) Proof. We induct twice: first on the order of G, then on the order H. The base cases where G or H are trivial follow trivially. Consider first the case where H contains a nontrivial normal subgroup of G, say N ⊴G. Then H/N ≤G/N, and we have gw(H) = max (gw(H/N), gw(N)) (by Proposition 3) ≤max (gw(G/N), gw(N)) (by induction) = gw(G).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "inclusion",
+                "prove",
+                "monotonic",
+                "respect",
+                "max",
+                "order",
+                "subgroup",
+                "Proof",
+                "Theorem",
+                "Proposition"
+            ]
+        }
+    },
+    {
+        "id": "dabb076e-b3a0-4135-a897-b1960adc2d1a",
+        "title": "",
+        "chunk_text": "More generally, suppose N ′ ⊴G is a nontrivial normal subgroup of G, and set N = N ′ ∩H. Either N ̸= id, in which case the previous argument works, or H ∼= N ′H/N ′. The latter case yields gw(H) = gw(N ′H/N ′) ≤gw(N ′H) ≤gw(G), where the last inequality follows from the case previously considered. It remains to treat the case where G is simple. Taking now N ⊴H to be a proper normal subgroup with H/N simple, we then have gw(H/N) = µ(H/N) (Theorem 3) ≤µ(H) (Theorem 1) ≤µ(G) (eq. (5)) = gw(G).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "case",
+                "Theorem",
+                "generally",
+                "suppose",
+                "nontrivial",
+                "set",
+                "normal",
+                "subgroup",
+                "simple",
+                "works"
+            ]
+        }
+    },
+    {
+        "id": "fe572a1a-c69f-4464-90bf-a12afa55ee9b",
+        "title": "",
+        "chunk_text": "(Theorem 3) By induction, gw(N) ≤gw(G). Thus, combining Proposition 3 and the inequality above, we conclude that gw(H) = max(gw(N), gw(H/N)) ≤gw(G). 3 Solving Algebraic Equations 3.1 Branched Covers and Thin Sets In this section, we pass from univariate polynomials to multivariate sys- tems of equations. For a more detailed exposition of Galois groups arising in polynomial system solving, we recommend the recent survey [78].",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Theorem",
+                "induction",
+                "Equations",
+                "Solving",
+                "Proposition",
+                "Branched",
+                "max",
+                "Algebraic",
+                "Covers",
+                "Thin"
+            ]
+        }
+    },
+    {
+        "id": "4c192c1c-cee6-49c5-9b0a-e1b2204ef590",
+        "title": "",
+        "chunk_text": "9 Consider an algebraic variety X ⊂Cm × Cn whose points (p, x) are problem-solution pairs. Solutions to a particular problem instance p ∈Cm, then, may be identified with points in the fiber π−1(p), where π : X →Cm, (p, x) 7→p (21) projects X onto the space of problems. We assume: A1 For a generic problem instance p ∈Cm, there exists a finite, nonzero number of solutions, d = #π−1(p).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "points",
+                "pairs",
+                "instance",
+                "algebraic",
+                "variety",
+                "problem-solution",
+                "problem",
+                "Solutions",
+                "problems",
+                "projects"
+            ]
+        }
+    },
+    {
+        "id": "f423ac3c-2ce4-4a06-a5c4-ff73cd3d76f1",
+        "title": "",
+        "chunk_text": "More precisely, for all p in some nonempty Zariski-open U ⊂Cm (depending on π), the set π−1(p) consists of d ≥1 distinct points. A2 The variety X is irreducible. In other words, the map π is a branched cover. More generally, we define a branched cover π : X 99K Z to be a dominant rational map between quasiprojective varieties of equal dimension over C. The degree of π, denoted deg(π), is the number of points #π−1(z) in a generic fiber.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Zariski-open",
+                "precisely",
+                "depending",
+                "consists",
+                "distinct",
+                "nonempty",
+                "set",
+                "points",
+                "branched",
+                "cover"
+            ]
+        }
+    },
+    {
+        "id": "dc697490-33ef-4e95-8c75-f0e9fe65fbc4",
+        "title": "",
+        "chunk_text": "Assumption A1 essentially requires that problems are well-posed. As- sumption A2, although strong, is often satisfied in practice. A common theme among the examples to be presented is that problems may be writ- ten as rational functions of their solutions, in which case X would be the graph of a rational map Cm 99K Cm. Much of our ensuing discussion could be adapted to reducible varieties by working component-by-component.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Assumption",
+                "essentially",
+                "well-posed",
+                "problems",
+                "requires",
+                "sumption",
+                "rational",
+                "strong",
+                "practice",
+                "satisfied"
+            ]
+        }
+    },
+    {
+        "id": "40b2f3da-d64f-4714-9389-ad04381cbf99",
+        "title": "",
+        "chunk_text": "Since X is irreducible, we may consider a primitive element f for the extension of function fields C(X)/C(p1, . . . , pm), f(y; p) = yd + c1(p)yd−1 + . . . + cd(p). (22) The Galois/monodromy group Gal(π) may be defined as the Galois group of the polynomial f over C(p1, . . . , pm). Alternatively, one may define Gal(π) via the monodromy action of Gal(π) on a fiber π−1(p) of size deg(π). This is a group homomorphism π1(U; p) →Sd, where π1(•) de- notes the topological fundamental group.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Gal",
+                "group",
+                "irreducible",
+                "Galois",
+                "primitive",
+                "element",
+                "extension",
+                "function",
+                "fields",
+                "monodromy"
+            ]
+        }
+    },
+    {
+        "id": "83e3f8ac-d4b7-4e46-8160-28dd4155966c",
+        "title": "",
+        "chunk_text": "The permutations in Gal(π) are obtained by lifting paths in U based at p up to X. Numerical homotopy continuation methods that compute approximations of these lifts are the basis of popular heuristics for computing Gal(π)—see eg. [29, 69, 63, 11, 46]. Assumption A2 implies that Gal(π) acts transitively on π−1(p). A third assumption often holding in practice is that the variety X is defined by polynomials with rational coefficients: A3 The variety X is defined over Q.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Gal",
+                "permutations",
+                "obtained",
+                "lifting",
+                "paths",
+                "based",
+                "variety",
+                "defined",
+                "Assumption",
+                "Numerical"
+            ]
+        }
+    },
+    {
+        "id": "94a7990a-e14e-48d5-bb32-46f0fdcb0cfa",
+        "title": "",
+        "chunk_text": "In this case, a suitable f may be computed (at least in principle) using Gr¨obner bases [40]. Let I ⊂R = Q(p)[x1, . . . , xn] be the ideal obtained from the vanishing ideal of X by extension of scalars. This is a polynomial ideal of dimension 0 and degree d. For generic (a1, . . . , an) ∈Qn, consider the linear form y = a1x1 +. . .+anxn. We endow the polynomial ring R = Q(p)[x1, . . . , xn−1, y] with the lexicographic order x1 > · · · > xn−1 > y.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "case",
+                "computed",
+                "principle",
+                "obner",
+                "bases",
+                "ideal",
+                "suitable",
+                "polynomial",
+                "scalars",
+                "anxn"
+            ]
+        }
+    },
+    {
+        "id": "e8ed373a-c040-408d-a9a2-21b7a89ef71f",
+        "title": "",
+        "chunk_text": "The elimination ideal I ∩Q(p)[y] is then generated by f of the form (22). From our preceding discussion, it becomes natural to consider three types of Galois group: Gal(π), the Galois group of the univariate poly- nomial f(y; p) ∈Q(p)[y], and Galois groups of specializations f(y; ˜p) for 10 particular problem instances ˜p ∈Qm. When needed, we denote the latter two groups by GalQ(p)(f) and GalQ(f(y; ˜p)), respectively.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Galois",
+                "form",
+                "group",
+                "groups",
+                "Gal",
+                "elimination",
+                "ideal",
+                "generated",
+                "GalQ",
+                "discussion"
+            ]
+        }
+    },
+    {
+        "id": "236ac849-f900-4bec-a2c6-2d9b4f9a5f37",
+        "title": "",
+        "chunk_text": "The theory de- veloped in Section 2 applies most directly to the last of these types. In general, the three types of groups may all be different. Example 1. Consider the branched cover π : X →C1 given by X = {(p, x) ∈C1 × C1 | f(x; p) = 0}, f(x; p) = x3 −p. We have Gal(π) ∼= A3, yet the Galois group of f ∈Q(p)[x] is S3.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Section",
+                "veloped",
+                "applies",
+                "types",
+                "theory",
+                "directly",
+                "Gal",
+                "general",
+                "Galois",
+                "groups"
+            ]
+        }
+    },
+    {
+        "id": "50153090-41ab-476c-b267-45d221e0e2b7",
+        "title": "",
+        "chunk_text": "Although S3 is also typically the Galois group after specialization, this is not the case for certain unlucky specializations like ˜p = 0, in which case the Galois group is trivial. This example shows that Gal(π) and the specialized Galois groups are generally not comparable inclusion-wise. The notion of a thin set defined in [76, Ch. 3] captures the essence of “unlucky” specializations such as in the example above.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Galois",
+                "case",
+                "group",
+                "trivial",
+                "typically",
+                "unlucky",
+                "specializations",
+                "Gal",
+                "groups",
+                "inclusion-wise"
+            ]
+        }
+    },
+    {
+        "id": "2a27c7fd-f0c6-4f9d-8dd9-660da4a80d3d",
+        "title": "",
+        "chunk_text": "We say a ∆⊂Qm has type C1 if it is contained in a proper Zariski-closed subset of Cm, and type C2 if there is a branched cover π : X →Cm with deg(π) ≥2 and ∆⊂π(XQ) (here XQ denotes the set of Q-valued points in X.) Definition 5. A set ∆⊂Qm is said to be thin if it is contained in a finite union of sets of types C1 or C2. Example 2. Continuing with Example 1, we show that the set ∆= {p ∈Q | GalQ(x3 −p) ̸= S3}. is thin.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Zariski-closed",
+                "Q-valued",
+                "set",
+                "type",
+                "contained",
+                "deg",
+                "proper",
+                "subset",
+                "branched",
+                "cover"
+            ]
+        }
+    },
+    {
+        "id": "9dce3a52-f9a5-47ab-97d0-fe3ed00855e3",
+        "title": "",
+        "chunk_text": "If ˜p is chosen such that x3 −˜p has a rational root, then the Galois group GalQ(x3 −˜p) is contained in the subgroup S2: we define XS2 = {(p, a, b, c) ∈C4 | x3 −p = (x −a)(x2 + bx + c)}. The condition that p ∈XS2 Q may be found by equating coefficients in x, p = ac = a2b = a3. Furthermore, the map π : XS2 →C1 defined by (p, a, b, c) 7→p is a branched cover of degree 3. Thus, we see that π(XS2 Q ) ⊂Q, the set of rational perfect cubes, is thin.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Galois",
+                "root",
+                "GalQ",
+                "subgroup",
+                "define",
+                "chosen",
+                "group",
+                "contained",
+                "rational",
+                "condition"
+            ]
+        }
+    },
+    {
+        "id": "9a0d9178-9c05-4022-8488-d4e0c48310fe",
+        "title": "",
+        "chunk_text": "One may also rule out GalQ(x3 −˜p) ⊂A3 by computing the discriminant, 27p2 = 0 ⇒p = 0. Since A3 and S2 are the maximal subgroups of S3, we conclude that ∆= π(XS2 Q ) is thin. Example 2 generalizes significantly. Theorem 5. [76, Proposition 3.3.5] For f as in equation (22), there exists a thin set ∆⊂Qm such that if ˜p /∈∆, then ˜p is not a pole of any of the rational functions c1(p), . . .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "GalQ",
+                "discriminant",
+                "rule",
+                "computing",
+                "thin",
+                "Proposition",
+                "Theorem",
+                "maximal",
+                "subgroups",
+                "conclude"
+            ]
+        }
+    },
+    {
+        "id": "c4e938a8-9e35-45fc-9b58-547f4e80d07c",
+        "title": "",
+        "chunk_text": ", cd(p), the polynomial f(y; ˜p) ∈Q[y] is irreducible over Q, and its Galois group equals that of f over Q(p). We define the Galois width gw(π) of a branched cover π in the obvious manner to be the Galois width of its Galois/monodromy group Gal(π) as in Definition 4. Using Theorem 5, we may relate the three different incarnations of Galois width studied thus far. 11 Corollary 2.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Galois",
+                "width",
+                "group",
+                "Gal",
+                "Definition",
+                "polynomial",
+                "irreducible",
+                "equals",
+                "Corollary",
+                "Theorem"
+            ]
+        }
+    },
+    {
+        "id": "f05277ab-60fc-44f2-b61d-75d7849dc705",
+        "title": "",
+        "chunk_text": "With π : X →Cm and f satisfying assumptions A1–A3 above, there exists a thin set ∆⊂Qm with the following property: for any ˜p /∈∆and any α with f(α; ˜p) = 0, we have gw (π) ≤gw \u0000GalQ(p)(f) \u0001 = gw(α). (23) Furthermore, for any ˜p ∈Qm and any α with f(α; ˜p) = 0, we have gw(α) ≤gw(GalQ(p)(f)). (24) Proof. Taking ∆to be the thin set guaranteed by Theorem 5, we have for any ˜p /∈∆that gw(α) = gw \u0000GalQ(p)(f) \u0001 . Now, Gal(π) ≤GalQ(p)(f), as explained eg.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "GalQ",
+                "assumptions",
+                "property",
+                "satisfying",
+                "exists",
+                "thin",
+                "set",
+                "Proof",
+                "Gal",
+                "Theorem"
+            ]
+        }
+    },
+    {
+        "id": "f6c04e98-f87a-4a71-b22c-b0f00ee46f9b",
+        "title": "",
+        "chunk_text": "in [78, §1.2]; in fact, Gal(π)⊴GalQ(p)(f), since the base of π is the rational variety Cm. Thus Theorem 4 gives us the needed inequality in (23). Inequality (24) may be deduced from the proof of [76, Proposition 3.1.1], which expresses ∆as a union of thin sets for which some proper subgroup H < GalQ(p)(f) occurs as the specialized Galois group. It is worth emphasizing that the thin set appearing in Corollary 2 is “small” in multiple senses of the word.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Gal",
+                "GalQ",
+                "fact",
+                "base",
+                "rational",
+                "variety",
+                "Theorem",
+                "inequality",
+                "thin",
+                "Proposition"
+            ]
+        }
+    },
+    {
+        "id": "0b2a879e-1c43-4125-a261-d22e1bffa71d",
+        "title": "",
+        "chunk_text": "Indeed, several number-theoretic results show that thin sets are of small natural density. For instance, [76, Theorem 3.4.4] provides an asymptotic count of integral points in ∆, # (∆∩Zm ∩[−N, N]) = O \u0010 N m−1 2 log N \u0011 ≪O(N m). (25) Corollary 2 also offers takeaways for practitioners of both symbolic and numerical computation. In the symbolic approach, a family of prob- lems may be studied by fixing a particular problem instance ˜p ∈Qm and computing GalQ(f(x; ˜p)).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "density",
+                "Theorem",
+                "number-theoretic",
+                "results",
+                "show",
+                "thin",
+                "sets",
+                "small",
+                "natural",
+                "instance"
+            ]
+        }
+    },
+    {
+        "id": "dea16f87-5e63-4dc5-ad48-ba0897d2189d",
+        "title": "",
+        "chunk_text": "When the latter can be carried out algo- rithmically (eg. using Stauduhar’s method [79]), either of the inequalities in Theorem 5 may then provide information; the Galois width for a spe- cific problem instance provides a lower bound for the generic case ˜p /∈∆. In other cases, heuristics such Frobenius elements may be used to show GalQ(p)(f) = Sd (see eg. Example 8.) Numerical approaches typically compute a subgroup of monodromy permutations H ≤Gal(π).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Theorem",
+                "Stauduhar",
+                "Galois",
+                "rithmically",
+                "algo",
+                "method",
+                "information",
+                "spe",
+                "cific",
+                "carried"
+            ]
+        }
+    },
+    {
+        "id": "4bf2be21-d6a8-49e1-a7ea-8507c9300f6a",
+        "title": "",
+        "chunk_text": "One may also hope for equality; the branch point method of [46] guarantees this, although it may be slower than other heuristics and more difficult to certify. Once more, Theorem 4 shows that even a partial computation of Gal(π) can provide a useful lower bound on the complexity of solving a generic problem instance. We note that inequality (24) may also be applied when the equality gw(GalQ(p)(f)) = gw(Gal(π)) is known a priori.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Gal",
+                "guarantees",
+                "certify",
+                "Theorem",
+                "hope",
+                "branch",
+                "point",
+                "method",
+                "slower",
+                "heuristics"
+            ]
+        }
+    },
+    {
+        "id": "cd3d4695-2a75-4171-b6b4-f9fb9a7b4a9d",
+        "title": "",
+        "chunk_text": "This often arises when deg(f) ≥5 and GalQ(p)(f) is full-symmetric; this forces Gal(π) to either be full-symmetric or full-alternating, and in either case the Galois widths are equal. Numerical methods have (at least) one decisive advantage over sym- bolic computation: complete equations describing X are not needed, much less the primitive element (22).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Gal",
+                "Galois",
+                "deg",
+                "GalQ",
+                "full-alternating",
+                "equal",
+                "full-symmetric",
+                "arises",
+                "forces",
+                "case"
+            ]
+        }
+    },
+    {
+        "id": "8c201e17-60ef-4568-b1f8-88e39f13b829",
+        "title": "",
+        "chunk_text": "All that we need in practice are n equa- tions cutting out X locally (these may be polynomial or rational) and some method for sampling generic points on X. 12 3.2 Homotopies and Optimal Solving In the homotopy continuation literature, there have been various propos- als of “optimal homotopies”. Since rigorous analysis of numerical path- tracking is very difficult, the usual objective is to minimize number of so- lution paths tracked.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "equa",
+                "tions",
+                "locally",
+                "rational",
+                "Homotopies",
+                "Optimal",
+                "practice",
+                "cutting",
+                "polynomial",
+                "method"
+            ]
+        }
+    },
+    {
+        "id": "fb876ae7-6935-4c91-a1b2-babea2acddc2",
+        "title": "",
+        "chunk_text": "Even for such a coarse measure of complexity, none of the various proposals is completely satisfactory. Our present study was partially motivated by the author’s desire to settle the question, once- and-for-all, of what makes a homotopy optimal. This section is partly a reflection on his failure to find clear answers. Polyhedral homotopies constitute a well-studied class of homotopies sometimes considered to be optimal.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "complexity",
+                "satisfactory",
+                "coarse",
+                "measure",
+                "proposals",
+                "completely",
+                "optimal",
+                "homotopies",
+                "question",
+                "present"
+            ]
+        }
+    },
+    {
+        "id": "8be00670-da0a-4969-8989-db6d7e9d584c",
+        "title": "",
+        "chunk_text": "They arise when solving n equa- tions in n unknowns, where each equation is a (Laurent) polynomial with prescribed monomial support. We denote by A• = (A1, . . . , An) the sys- tem’s prescribed support sets, Ai ⊂Zn, and abuse notation by writing A• = #A1 + . . . + #An for the total number of monomials in the system. With some mild conditions on A•, we may consider the branched cover πA• : XA• →CA•, (p, x) 7→p, XA• =   (p, x) ∈CA• × (C∗)n | X α∈Ai pi,α xα = 0, 1 ≤i ≤n   .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Laurent",
+                "equa",
+                "tions",
+                "unknowns",
+                "polynomial",
+                "arise",
+                "solving",
+                "equation",
+                "prescribed",
+                "support"
+            ]
+        }
+    },
+    {
+        "id": "fbf8ffa9-8865-45dc-b033-265727b91a14",
+        "title": "",
+        "chunk_text": "The Bernstein-Kushnirenko (BK) theorem [7, 55] writes the degree of πA• as the mixed volume of the n equations’ Newton polytopes, deg(πA•) = MV(A•) := MV(conv(A1), . . . , conv(An)). (26) Correspondingly, the polyhedral homotopy method, introduced by Huber and Sturmfels [51], involves tracking MV(A•) solution paths. This method is optimal in the sense that all paths lead to a solution for “most” systems p ∈CA•.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Newton",
+                "conv",
+                "theorem",
+                "deg",
+                "Bernstein-Kushnirenko",
+                "writes",
+                "polytopes",
+                "degree",
+                "mixed",
+                "volume"
+            ]
+        }
+    },
+    {
+        "id": "7bfd6ce3-ec21-4db0-87e2-2aa73982587f",
+        "title": "",
+        "chunk_text": "However, there are two major caveats: (1) In many applications, we are led naturally to consider a branched cover (21) which is not of the form πA•. (2) Even if we are interested in πA•, it may be possible to track fewer than MV(A•)-many paths by exploiting symmetry or decomposabil- ity into branched covers of lower degree. In both of these scenarios, the BK theorem typically overestimates both the Galois width and the number of homotopy paths needed.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "caveats",
+                "applications",
+                "branched",
+                "major",
+                "led",
+                "naturally",
+                "form",
+                "paths",
+                "cover",
+                "covers"
+            ]
+        }
+    },
+    {
+        "id": "e15a417d-2353-4133-badd-83a02f1686bb",
+        "title": "",
+        "chunk_text": "Similar caveats apply to various other root-counting technologies used to con- struct start systems for homotopy continuation: namely, extensions of the BK theorem via methods based on Khovanskii bases [14, 8] or tropi- cal geometry [47, 64], and most of the classical approaches cataloged in [77, Ch. 8]. In contrast, the parameter homotopy paradigm of [77, Ch. 7] is well-adapted to the setting of this paper, and gw(•) may be viewed as a general complexity measure for this approach.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Khovanskii",
+                "Similar",
+                "con",
+                "struct",
+                "continuation",
+                "extensions",
+                "bases",
+                "tropi",
+                "cal",
+                "geometry"
+            ]
+        }
+    },
+    {
+        "id": "3fa67c23-9f71-4507-9ca4-0ebf11da0f7c",
+        "title": "",
+        "chunk_text": "Caveats (1) and (2) above are well-known to applied algebraic geome- ters. For example, the maximum-likelihood estimation problems of Sec- tion 4.2 provide one notable illustration of Caveat (1), as shown by the 13 problems in [45, Table 1] where BK overcounts by multiple orders of mag- nitude. Caveat (2) was addressed in work of Brysiewicz et al. [12], which showed how polyhedral homotopy could be made more efficient by ex- ploiting special structure in the support sets A•.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "ters",
+                "Caveat",
+                "geome",
+                "Table",
+                "well-known",
+                "applied",
+                "algebraic",
+                "Sec",
+                "Caveats",
+                "problems"
+            ]
+        }
+    },
+    {
+        "id": "91ed799e-73c3-40c2-995d-beafdc779f5c",
+        "title": "",
+        "chunk_text": "Prior to this work, Es- terov [36, Theorem 6] characterized the supports for which Gal(πA•) is full-symmetric, ie. the symmetric group acting on MV(A•) letters. We recall a reformulation of this result in the terminology of [12, 78]. The support sets A1, . . . , An ⊂Zn are said to be strictly lacunary if they span a proper sublattice of Zn of index less than deg(πA•).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Theorem",
+                "Gal",
+                "terov",
+                "letters",
+                "Prior",
+                "work",
+                "characterized",
+                "full-symmetric",
+                "symmetric",
+                "group"
+            ]
+        }
+    },
+    {
+        "id": "eb464547-07b4-4909-8164-e4a057886239",
+        "title": "",
+        "chunk_text": "We also say A• is triangular if there exists a proper subset of supports AI = {Ai | i ∈I}, |I| = k < n, spanning a sublattice in Zn of rank k; if this holds, then up to unimodular transformation, we may assume then that AI ⊂Zk, and say that A• is strictly triangular if 1 < MV(AI) < MV(A•). Theorem 6. (Esterov, [36]) If MV(A•) > 0, then Gal(πA) is full-symmetric if and only if A• is neither strictly triangular nor strictly lacunary. Example 3.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "triangular",
+                "strictly",
+                "spanning",
+                "holds",
+                "transformation",
+                "exists",
+                "proper",
+                "subset",
+                "supports",
+                "sublattice"
+            ]
+        }
+    },
+    {
+        "id": "a6f52558-65fa-4487-b039-83a399fadf63",
+        "title": "",
+        "chunk_text": "Let Ai = {0, 2ei}, where 0, ei ∈Zn are the zero and i-th standard basis vector, for i = 1, . . . , n. This encodes the sparse system p1,1x2 1 + p1,2 = . . . = pn,1x2 n + pn,2 = 0. (27) conv(Ai) is a segment, and MV(A•) is the volume of the zonotope conv(A1) + . . . + conv(An) = [0, 2]×n, (28) as expected since deg(πA•) = 2n. In this case, the supports A• are both strictly lacunary and strictly triangular. The function field C(XA•) is a Galois extension of C(CA•), and Gal(πA•) ∼= (Z/Z2)×n.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "vector",
+                "conv",
+                "i-th",
+                "standard",
+                "basis",
+                "strictly",
+                "Gal",
+                "Galois",
+                "system",
+                "encodes"
+            ]
+        }
+    },
+    {
+        "id": "6b8cd480-74b2-4e69-a2e9-b69d23326f8f",
+        "title": "",
+        "chunk_text": "For this example, the gap between Galois width and degree is exponential in n: gw(πA•) = 2 < 2n = deg(πA). The two conditions appearing in Theorem 6 reflect two birational in- variants of a general branched cover related to its Galois width: namely, the group of deck transformations and decomposability. Definition 6. Let π : X 99K Z be a branched cover. A rational map Ψ : X 99K X is said to be a deck transformation if π(Ψ(x)) = π(x) for all x in a common domain of definition.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Galois",
+                "deg",
+                "width",
+                "gap",
+                "degree",
+                "exponential",
+                "Theorem",
+                "Definition",
+                "branched",
+                "cover"
+            ]
+        }
+    },
+    {
+        "id": "5e83ea0a-32fe-4f8d-a1da-910d212f4c4b",
+        "title": "",
+        "chunk_text": "If π1 : X 99K Y and π2 : Y 99K Z are branched covers of degree strictly less than deg(π) with π = π2 ◦π1 on a common domain of definition, we say that π is decomposable, and say that the πi give a decomposition of π. The deck transformations form a group Deck(π) with respect to com- position; if this group is nontrivial, then X 99K X/ Deck(π) 99K Z is a decomposition unless Gal(π) is a cyclic group of prime order, in which case also Gal(π) ∼= Deck(π).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "deck",
+                "Gal",
+                "decomposition",
+                "deg",
+                "definition",
+                "decomposable",
+                "group",
+                "branched",
+                "covers",
+                "degree"
+            ]
+        }
+    },
+    {
+        "id": "1c1f3d92-78a7-492d-947c-0c47dd3400e5",
+        "title": "",
+        "chunk_text": "When Gal(π) ∼= Deck(π), we say that π is a Galois cover. Many previous works have utilized either deck transforma- tions or decompositions, at least implicitly, to speed up numerical homo- topy continuation methods. One may consult [77, §7.6] for a discussion in 14 the context of parameter homotopy. Recent articles such as [12, 32, 31, 2] provide further applications.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Gal",
+                "Galois",
+                "Deck",
+                "cover",
+                "transforma",
+                "tions",
+                "decompositions",
+                "implicitly",
+                "homo",
+                "topy"
+            ]
+        }
+    },
+    {
+        "id": "1fd5d402-c079-4c2c-8441-2c4d9ba4e778",
+        "title": "",
+        "chunk_text": "Much like Proposition 3, there is a clean splitting principle that relates the Galois widths of a branched cover and its various decompositions. Proposition 4. If π = π2 ◦π1 is a decomposition, then gw (π) = max (gw (π1) , gw (π2)) . Proof. First, note that Gal(π2) is a homomorphic image of Gal(π) arising from the action of Gal(π) on fibers π−1 2 (z). Thus, Proposition 3 implies gw (Gal(π2)) ≤gw (Gal(π)).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Gal",
+                "Proposition",
+                "Galois",
+                "clean",
+                "splitting",
+                "principle",
+                "relates",
+                "widths",
+                "branched",
+                "cover"
+            ]
+        }
+    },
+    {
+        "id": "bb2b0bcd-8ea4-48d7-a8d9-31489467c449",
+        "title": "",
+        "chunk_text": "Similarly, fixing y ∈π−1 2 (z), Gal(π1) is a homomorphic image of the subgroup of Gal(π) that stabilizes π−1 1 (y) setwise. Thus, applying now both Proposition 3 and Theorem 4, we obtain that gw (Gal(π1)) ≤gw (Gal(π)) . Finally, since Gal(π) is a subgroup of the wreath product Gal(π1) ≀Gal(π2) = Gal(π1)deg(π2) ⋊Gal(π2), we may use Proposition 3 and Theorem 4 to deduce that gw(Gal(π)) ≤max (gw (Gal(π1), Gal(π2))) .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Gal",
+                "Theorem",
+                "Proposition",
+                "subgroup",
+                "Similarly",
+                "setwise",
+                "fixing",
+                "homomorphic",
+                "image",
+                "stabilizes"
+            ]
+        }
+    },
+    {
+        "id": "fd414831-7332-43b5-a450-f049dcb1c940",
+        "title": "",
+        "chunk_text": "Now, briefly returning to the setting of sparse systems, we note a corollary of Esterov’s Theorem 6 and Proposition 4. Corollary 3. The equivalent conditions of Theorem 6 are satisfied if and only if gw (πA•) = MV(A•). This follows since if A• is either strictly lacunary or strictly triangular, then πA• is decomposable, as observed in [12]. Galois groups in the de- composable cases are not known, despite continued attention and partial results [37].",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Proposition",
+                "Esterov",
+                "Theorem",
+                "briefly",
+                "systems",
+                "corollary",
+                "returning",
+                "setting",
+                "sparse",
+                "note"
+            ]
+        }
+    },
+    {
+        "id": "2b79ecf2-26a0-443c-97a6-1f8998b2c67f",
+        "title": "",
+        "chunk_text": "Determining Galois widths may be more manageable. Our study of Galois width falls in line with a general philosophy that intrinsic complexity of solving algebraic equations is best measured through birational invariants of the associated branched covers. Degree, Galois width, decomposability, and deck transformations may thus all be viewed as intrinsic measures of complexity for parametric systems of polynomial equations, whereas various bounds on the degree like BK generally cannot be.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Galois",
+                "Determining",
+                "manageable",
+                "width",
+                "intrinsic",
+                "complexity",
+                "equations",
+                "Degree",
+                "widths",
+                "covers"
+            ]
+        }
+    },
+    {
+        "id": "a2bb7802-fd15-4409-8034-f70981118ac2",
+        "title": "",
+        "chunk_text": "This can be contrasted with several interesting, yet fundamentally less intrinsic, studies of when the BK bound is tight (eg. [17, 10, 67].) From a practical point of view, many of the problems presented in Sec- tion 4, decompose into solving one very costly “bottleneck” subproblem and other, smaller, subproblems, and it is tempting to conclude that gw(•) measures not only the complexity of optimal algebraic algorithms as in Section 2, but also an optimal parameter homotopy.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "interesting",
+                "intrinsic",
+                "studies",
+                "tight",
+                "contrasted",
+                "fundamentally",
+                "bound",
+                "Sec",
+                "Section",
+                "optimal"
+            ]
+        }
+    },
+    {
+        "id": "93500d43-a05c-485d-857a-af48581204b9",
+        "title": "",
+        "chunk_text": "This tempting conclusion, however, should be met with some resistance. The proof of Theorem 2 can be adapted into a complete procedure for optimally decomposing a Galois cover. Unfortunately, this procedure is impractical for all but the simplest examples, as it relies on finding irreducible components of iterated fiber products. Given a branched cover π : X 99K Z and an integer k, we recall the k-th fiber product Xk Z = {(x1, . . . , xk, z) ∈X×k × Z | π(xi) = z, 1 ≤i ≤k}.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "conclusion",
+                "resistance",
+                "tempting",
+                "met",
+                "Theorem",
+                "procedure",
+                "Galois",
+                "fiber",
+                "cover",
+                "proof"
+            ]
+        }
+    },
+    {
+        "id": "22714dc5-397a-48c2-a808-616672c05529",
+        "title": "",
+        "chunk_text": "(29) 15 (Note: the notation in Equation (29) assumes that π is clear from the context.) When 1 ≤k ≤deg(π), there is a nonempty variety X(k) Z := Xk Z \\ ∆ (30) where ∆is the “big diagonal” containing all points where xi = xj for some i ̸= j. The variety X(k) Z is irreducible if and only if Gal(π) acts transitively on ordered k-tuples of solutions (x1, . . . , xk).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Note",
+                "Equation",
+                "assumes",
+                "context",
+                "notation",
+                "clear",
+                "variety",
+                "deg",
+                "Gal",
+                "big"
+            ]
+        }
+    },
+    {
+        "id": "a1298ef0-015f-4b83-a424-31fb8ff3dc58",
+        "title": "",
+        "chunk_text": "When k = deg(π), each top-dimensional irreducible component of X(k) Z \\ ∆is a variety ˆ X whose function field C( ˆ X) is a Galois closure for the extension C(X)/C(Z). The Galois covers ˆπ : ˆ X →Z are quite unlike the branched covers one usually meets in practice. Note, for example, that the ability to sample a generic point on ˆ X is the same as computing an entire fiber of π, which would obviate the need for any solving.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Galois",
+                "deg",
+                "top-dimensional",
+                "irreducible",
+                "component",
+                "variety",
+                "function",
+                "field",
+                "closure",
+                "extension"
+            ]
+        }
+    },
+    {
+        "id": "48f02377-8529-4ae3-b564-b1181dd1d981",
+        "title": "",
+        "chunk_text": "Although the argument in Theorem 2 shows that decomposing ˆπ along a chain of subcovers is theoretically optimal, an ad-hoc approach analyzing the original branched cover π is far more likely to yield practical results. On the other hand, decomposing π itself may not be optimal. We close with an example from enumerative geometry which reflects some of these difficulties. Example 4. We consider the problem of computing determinantal rep- resentations of cubic surfaces.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Theorem",
+                "optimal",
+                "shows",
+                "results",
+                "decomposing",
+                "argument",
+                "chain",
+                "subcovers",
+                "theoretically",
+                "ad-hoc"
+            ]
+        }
+    },
+    {
+        "id": "1e9fa10a-797e-4c6a-a900-5647f9e9ee14",
+        "title": "",
+        "chunk_text": "Given a homogeneous polynomial of degree 3, f ∈C[x0, . . . , x3]3, can we find M0, . . . , M3 ∈C3×3 with f(x0, x1, x2, x3) ∝det (x0M0 + x1M1 + x2M2 + x3M3)? If f is generic, then up to the action of GL×2 3 defined by (H1, H2) · Mi = H1MiH−1 2 , we may restrict to determinantal representations of the form M0 = I, M1 = diag(x1, x2, x3), M2 =   x4 x5 x6 x5 x7 x8 x9 x8 x10  , M3 =   x11 x12 x13 x14 x15 x16 x17 x18 x19  .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "degree",
+                "homogeneous",
+                "polynomial",
+                "det",
+                "diag",
+                "find",
+                "generic",
+                "defined",
+                "form",
+                "action"
+            ]
+        }
+    },
+    {
+        "id": "de0855b0-49fa-41fe-ad3b-f27af600fffd",
+        "title": "",
+        "chunk_text": "This determines a branched cover, π : X →P19, ((M0, M1, M2, M3), f) 7→f. It is known classically that a smooth cubic surface f has exactly 72 distinct orbits of determinantal representations under the GL×2 3 -action. In our chosen parametrization, we have deg(π) = 1728 = 24·72. The deck trans- formation group Deck(π) has order 48; it is generated by the map sending Mi 7→M T i and a subgroup of order 24 which preserves GL×2 3 -orbits.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "cover",
+                "determines",
+                "branched",
+                "order",
+                "action",
+                "deck",
+                "orbits",
+                "distinct",
+                "parametrization",
+                "deg"
+            ]
+        }
+    },
+    {
+        "id": "f2f87f40-9747-40f4-83dd-ac93e738c75b",
+        "title": "",
+        "chunk_text": "Thus, we have a decomposition π = π2 ◦π1, where π1 : X 99K X/ Deck(π) is a Galois cover with gw (π1) = 4 and π2 : X/ Deck(f) 99K P19 with deg(π2) = 36. As it turns out, π1 is not decomposable, so we might rea- sonably guess that gw (π) = gw (π2) = 36. But, in fact, gw (π) = gw (π2) = 27, due to the fact that the determinantal representations of f are rational functions of the 27 lines on f (cf.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Deck",
+                "Galois",
+                "deg",
+                "decomposition",
+                "cover",
+                "fact",
+                "decomposable",
+                "rea",
+                "sonably",
+                "turns"
+            ]
+        }
+    },
+    {
+        "id": "c84e3468-3709-499a-863a-534bec167ca9",
+        "title": "",
+        "chunk_text": "[23, 13].) With respect to the computa- tional model in Section 2.2, using these rational functions of the 27 lines is algebraically optimal for computing these determinantal representations. 16 4 Applications 4.1 Metric Algebraic Geometry Figure 1: Minimizing the distance from a point in R3 to the surface of Example 5. The emerging field of metric algebraic geometry [9] [86] studies inter- actions between algebraic varieties and metric structures on spaces they inhabit.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Algebraic",
+                "Metric",
+                "Geometry",
+                "Section",
+                "Applications",
+                "Figure",
+                "Minimizing",
+                "computa",
+                "tional",
+                "lines"
+            ]
+        }
+    },
+    {
+        "id": "fc92cad6-daa9-4895-9906-6d9196c7eec2",
+        "title": "",
+        "chunk_text": "One of the foundational problems in this field is solving the nearest point problem for a real algebraic variety. A general measure of algebraic complexity for this problem is the Euclidean Distance (ED) de- gree. The systematic study of the ED degree was initiated in [25], and the subject has received significant attention since. As we will illustrate, the Galois width captures more refined information about the nearest- point problem and its variants.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "problem",
+                "algebraic",
+                "variety",
+                "foundational",
+                "field",
+                "solving",
+                "real",
+                "nearest",
+                "point",
+                "Distance"
+            ]
+        }
+    },
+    {
+        "id": "aefed538-b955-41d4-a9fc-223f8dd5a28e",
+        "title": "",
+        "chunk_text": "For certain, highly-structured problems, we will see how the Galois width characterizes the difficulty of solving the nearest-point problem more accurately than the ED degree. Let X ⊂Cn be a closed, irreducible subvariety. We assume that the set of real points XR = X ∩Rn contains a smooth point x ∈Xsm. Given a data point u = (u1, . . . , un) ∈Rn, the nearest-point problem is min x∈XR ∥u −x∥2. (31) 17 Here ∥• ∥is the usual 2-norm on Rn. Note that the minimum is attained since XR ⊂Rn is closed.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Galois",
+                "highly-structured",
+                "degree",
+                "width",
+                "characterizes",
+                "difficulty",
+                "solving",
+                "accurately",
+                "nearest-point",
+                "problem"
+            ]
+        }
+    },
+    {
+        "id": "0a7e0c36-36c5-4ca6-aed8-dd7cc16093c2",
+        "title": "",
+        "chunk_text": "From an algebraic point of view, the minimizer x in (31) is just one of many critical points. These points can be studied using the Euclidean Distance Correspondence EX = n (u, x) ∈Cn × Xsm | (x −u) ∈(Tx(X))⊥o (32) and an associated branched cover πEX : EX →Cn, (u, x) 7→u, (33) whose fibers π−1 EX (u) are the complex-valued critical points over u. The ED degree ED(X), then, is simply the number of points in the fiber for generic u ∈Cn.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "points",
+                "critical",
+                "view",
+                "Xsm",
+                "algebraic",
+                "minimizer",
+                "Euclidean",
+                "Distance",
+                "Correspondence",
+                "point"
+            ]
+        }
+    },
+    {
+        "id": "d5c44f04-51bb-4dc6-b24d-53e6c13d66e5",
+        "title": "",
+        "chunk_text": "When u ∈Rn, the real points in π−1 EX (u) provide candidates for the global minimizer of (31). An additional candidate that must be checked is the closest point to u on the singular locus Xsing R . Noting the general inequality gw (πEX ) ≤ED(X), (34) we now consider an example where this inequality is strict. Example 5. Consider the irreducible surface X = {x ∈C3 | f(x) = 0}, f(x1, x2, x3) = x4 3 −(x2 1 + x2 2)3.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "provide",
+                "real",
+                "global",
+                "minimizer",
+                "Noting",
+                "inequality",
+                "Xsing",
+                "points",
+                "candidates",
+                "candidate"
+            ]
+        }
+    },
+    {
+        "id": "1c48ca0b-fa19-4ad4-a2ad-8079ed009119",
+        "title": "",
+        "chunk_text": "(35) Given a data point u = (u1, u2, u3) ∈R3, we may may minimize the squared Euclidean distance function d(x; u) = (x1 −u1)2 + (x2 −u2)2 + (x3 −u3)2. (36) over x ∈XR by introducing a Lagrange multiplier λ and writing down the first-order conditions for optimality, ∇x,λ (d + λf) =   2(x1 −u1) −3λ(x2 1 + x2 2)2x1 2(x2 −u2) −3λ(x2 1 + x2 2)2x2 2(x3 −u3) + 4λx3 3 f(x1, x2, x3)  =   0 0 0 0  .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Euclidean",
+                "data",
+                "point",
+                "minimize",
+                "squared",
+                "distance",
+                "function",
+                "Lagrange",
+                "optimality",
+                "introducing"
+            ]
+        }
+    },
+    {
+        "id": "780fb39f-c1b4-411e-8d09-1510f98ac0a5",
+        "title": "",
+        "chunk_text": "(37) Using the first two equations in (37), we see for generic u that any solution (x1, x2, x3) must lie in the plane x2(x1 −u1) −x1(x2 −u2) = u2x1 −u1x2 = 0. (38) Intersecting this plane with X, as shown in Figure 1, we obtain a plane curve which is the union of two touching cuspidal cubics, \u0012 x2 3 − q\u00001 + (u2/u1)2\u0001 x3 1 \u0013 \u0012 x2 3 + q\u00001 + (u2/u1)2\u0001 x3 1 \u0013 = 0. (39) The ED cover π : EX →C3 decomposes as π = π2 ◦π1, where π1 : EX →Y, π2 : Y →C3, Y = {(s, u1, u2, u3) ∈C4 | u2 1(s2 −1) −u2 2 = 0}.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "plane",
+                "solution",
+                "equations",
+                "generic",
+                "lie",
+                "Intersecting",
+                "Figure",
+                "cubics",
+                "shown",
+                "obtain"
+            ]
+        }
+    },
+    {
+        "id": "7eeb0aef-02f0-48d2-9af7-e8d1162f68ee",
+        "title": "",
+        "chunk_text": "18 Note that deg(π2) = 2. The cuspidal cubics have ED degree 4—this may be verified directly from their usual monomial parametrizations. From this observation, it also follows that deg(π1) = 4. Thus, gw (Gal(πEX )) ≤gw(S4≀S2) = gw(S2 4⋊S2) = min(4, 2) = 4 < 8 = ED(X). A curious feature of this example is that Xsing R = {(0, 0, 0)} only attains the minimum in (31) when u = (0, 0, 0).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Note",
+                "deg",
+                "Gal",
+                "degree",
+                "parametrizations",
+                "Xsing",
+                "cuspidal",
+                "cubics",
+                "verified",
+                "directly"
+            ]
+        }
+    },
+    {
+        "id": "5f6071d2-fdbb-4cb2-9a88-efa6dfab4f6a",
+        "title": "",
+        "chunk_text": "For either one of the cuspidal cubics in (39), its cusp attains the minimum distance precisely when u belongs to a Voronoi cell in the opposite half-plane (see [19, Fig. 2].) The two opposite Voronoi cells intersect only in the origin. In summary, although ED(X) = 8, the Galois width reveals that nearest-point problem for X admits a closed-form solution in radicals.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Fig.",
+                "Voronoi",
+                "half-plane",
+                "opposite",
+                "cuspidal",
+                "cubics",
+                "cusp",
+                "attains",
+                "minimum",
+                "distance"
+            ]
+        }
+    },
+    {
+        "id": "89e71b0d-dde9-4949-b693-f5014dfb85dd",
+        "title": "",
+        "chunk_text": "For real varieties with highly-structured Euclidean geometry, like the surface of revolution in Example 5, computing the Galois width may pro- vide a critical first clue towards a practical solution to the nearest-point problem. Our next two examples belong to another such special class of varieties, the orthogonally-invariant matrix varieties studied in [28, 27]. Example 6.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Euclidean",
+                "Galois",
+                "varieties",
+                "geometry",
+                "computing",
+                "pro",
+                "vide",
+                "problem",
+                "real",
+                "highly-structured"
+            ]
+        }
+    },
+    {
+        "id": "79db20c9-80e2-44ac-b368-a34e4863c02b",
+        "title": "",
+        "chunk_text": "Consider the affine cone of essential matrices, Xes = {E ∈C3×3 | EET E −(1/2) tr(EET )E = 0, det E = 0}, (40) a much-studied object in computer vision. Over the reals, this variety has a well-known spectral characterization: a nonzero matrix E belongs to Xes R if it has rank 2 and two of its singular values are equal. In fact, given a generic matrix F ∈R3×3, one may compute the closest point E∗∈Xes R to F via its singular value decomposition (see eg.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "EET",
+                "Xes",
+                "matrices",
+                "det",
+                "vision",
+                "singular",
+                "affine",
+                "cone",
+                "essential",
+                "much-studied"
+            ]
+        }
+    },
+    {
+        "id": "2a3bf629-838c-466f-bcb4-c896d55175db",
+        "title": "",
+        "chunk_text": "[68, Theorem 5.9]), F = U diag (σ1, σ2, σ3) V T ⇒ E∗= U diag \u0010σ1 + σ2 2 , σ1 + σ2 2 , 0 \u0011 V T . Furthermore, [27, Example 2.7] implies that all critical points are real: π−1 EXes (F) = n \u0010 F, U diag \u0010σ1 ± σ2 2 , σ2 ± σ1 2 , 0 \u0011 V T \u0011 , \u0010 F, U diag \u0010σ1 ± σ3 2 , 0, σ3 ± σ1 2 \u0011 V T \u0011 , \u0010 F, U diag \u0010 0, σ2 ± σ3 2 , σ3 ± σ2 2 \u0011 V T \u0011 o . Thus ED(Xes) = 6. However, gw (πEXes ) = 3.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "diag",
+                "Theorem",
+                "Xes",
+                "EXes",
+                "implies",
+                "real",
+                "critical",
+                "points",
+                "πEXes"
+            ]
+        }
+    },
+    {
+        "id": "dbd9ea3a-1962-461e-8324-0ccf7a0a1881",
+        "title": "",
+        "chunk_text": "Unlike in Example 5, the ED cover for this example has a nontrivial deck transformation, Ψ : EXes →EXes, (F, E) 7→(F, F −E). Here, again, the Galois width reflects the algebraic difficulty of obtaining a solution—namely, the cost of eigendecomposing a 3 × 3 matrix. As the next example shows, the gap between the Galois width and ED degree can be exponentially large. Example 7. Fix integers m ≥n ≥r ≥1, and let Xm,n,r ⊂Rm×n be the closed subvariety of m × n matrices whose rank is at most r.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "EXes",
+                "Galois",
+                "Unlike",
+                "transformation",
+                "cover",
+                "nontrivial",
+                "deck",
+                "width",
+                "matrix",
+                "solution"
+            ]
+        }
+    },
+    {
+        "id": "dbaa1641-3849-448f-9ae8-8edb161b892b",
+        "title": "",
+        "chunk_text": "There 19 is an “enhanced” version of the celebrated Eckart-Young theorem for the Frobenius norm (see eg. [9, Theorem 2.9]), which implies that ED(Xm,n,r) = n r ! , and that all ED-critical points are real and may be obtained via SVD: A = n X i=1 σiuivT i ⇒ π−1 EXm,n,r (A) = (X i∈S σiuivT i | S ∈ [n] r !) . The following result establishes gw(πEXm,n,r ) = n, (41) an exponential improvement over the ED degree: for even n, gw(πEXm,n,n/2 ) = n ≪ED(Xm,n,n/2) = n n/2 ! ≈4n/√πn.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "theorem",
+                "σiuivT",
+                "SVD",
+                "Frobenius",
+                "enhanced",
+                "version",
+                "norm",
+                "celebrated",
+                "Eckart-Young",
+                "implies"
+            ]
+        }
+    },
+    {
+        "id": "2c3a59ce-4b99-47d3-9623-3b17fe928f1b",
+        "title": "",
+        "chunk_text": "Once more, the Galois width better reflects the algebraic cost of solving the nearest-point problem (eigendecomposing a n × n matrix.) Theorem 7. As a permutation group, Gal(πEXm,n,r ) is the symmetric group Sn acting on \u0000[n] r \u0001 , the set of all r-element subsets of [n] = {1, . . . , n}. Proof. Consider first the case r = 1, which we prove by induction on n. The base case n = 1 is immediate. Suppose the result result holds for matrices with fewer than n columns.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Galois",
+                "problem",
+                "eigendecomposing",
+                "matrix",
+                "width",
+                "reflects",
+                "algebraic",
+                "cost",
+                "solving",
+                "nearest-point"
+            ]
+        }
+    },
+    {
+        "id": "19e00360-5221-4c8a-9d79-8b259bb6543c",
+        "title": "",
+        "chunk_text": "Fix A′ to be a real matrix of size (m −1) × (n −1) with distinct singular values. Let σ1 be a real number greater than the singular values of A′, and set A = \u0014σ1 0 0 A′ \u0015 ∈Cm×n. Our inductive hypothesis provides loops based at A which generate a subgroup Sn−1 × S1 ⊂Gal(πEm,n,r). Lemma 2 gives Gal(πEm,n,r) = Sn. For r > 1, consider the Galois closure (eq. (30)) for the rank-1 case, ˆEXm,n,1 = \u0000EXm,n,1 \u0001(n) Cm×n .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Gal",
+                "real",
+                "singular",
+                "Fix",
+                "size",
+                "matrix",
+                "distinct",
+                "Galois",
+                "Lemma",
+                "number"
+            ]
+        }
+    },
+    {
+        "id": "356ef43b-bb9f-4d95-8112-827f75bec146",
+        "title": "",
+        "chunk_text": "(42) The map ˆπ : ˆEXm,n,1 →Cm×n factors through πEXm,n,r , for instance via the map that sends an ordered n-tuple of rank-1 matrices to the sum of the first r matrices. Thus, the monodromy action on EXm,n,r is induced by that of the group Gal(ˆπ), which is Sn by the r = 1 case. We point out that in Example 5 the number of real critical points for generic real-valued data may vary, whereas in Examples 6 and 7 they are always real.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "map",
+                "matrices",
+                "factors",
+                "instance",
+                "sends",
+                "ordered",
+                "n-tuple",
+                "sum",
+                "Gal",
+                "real"
+            ]
+        }
+    },
+    {
+        "id": "fa9187c0-da96-496d-ae0f-750295ced471",
+        "title": "",
+        "chunk_text": "Overall, it is an interesting challenge to determine the Galois widths of nearest-point problems on varieties. The same is true for numerous variations of this problem found in the literature which arise from weighted nearest-point problems [73], p-norm optimization [59], or ED degrees with respect to general inner products [57]. All of these 20 problems correspond to branched covers, and it is interesting to ask when their Galois/monodromy group are full-symmetric.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Galois",
+                "problems",
+                "nearest-point",
+                "varieties",
+                "challenge",
+                "determine",
+                "widths",
+                "interesting",
+                "p-norm",
+                "optimization"
+            ]
+        }
+    },
+    {
+        "id": "3643e3ef-8d03-465f-94a9-d636a7c615e3",
+        "title": "",
+        "chunk_text": "In the case of weighted ED degrees, the surface X from Example 5 again provides the answer “not always.” To minimize the weighted distance function d(x; u, w) = w1(x1 −u1)2 + w2(x2 −u2)2 + w3(x3 −u3)2. (43) over X from Example 5, solving the critical equations again reduces to the case of two touching cuspidal cubics, x2 3 = ± q\u00001 + ((w2u2)/(w1u1))2\u0001 x3 1, (44) and once more we find s 8 critical points of Galois width 4.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "case",
+                "degrees",
+                "answer",
+                "weighted",
+                "surface",
+                "critical",
+                "Galois",
+                "minimize",
+                "distance",
+                "function"
+            ]
+        }
+    },
+    {
+        "id": "02927962-a393-4914-b298-80d3d27d2b40",
+        "title": "",
+        "chunk_text": "On the other hand, for the case of low-rank matrix approximation, the generic weighted ED jumps dramatically—see eg. [57, eq. 3.11]. It seems plausible in this case that the Galois/monodromy group is not merely symmetric (as in Theorem 7), but full-symmetric. 4.2 Algebraic Statistics In this section, we further motivate the Galois width with applications to statistical parameter estimation, one of the primary topics in the ac- tive field of algebraic statistics [83].",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Galois",
+                "case",
+                "hand",
+                "approximation",
+                "dramatically",
+                "low-rank",
+                "matrix",
+                "generic",
+                "weighted",
+                "jumps"
+            ]
+        }
+    },
+    {
+        "id": "6e488b3c-39cf-44dc-b067-14dae1d4214e",
+        "title": "",
+        "chunk_text": "Our discussion is brief, and partly expository—for the experts, we highlight Conjectures 1 and 2. Much like the ED degree, the Maximum-Likelihood (ML) degree [48, 16] bounds the algebraic complexity of minimizing the log-likelihood ℓ(p; u) = n X i=0 ui log(pi), where u is a given data vector, over points [p0 : · · · : pn] of an irreducible projective variety X ⊂Pn which lie in the affine chart Pn i=0 pi = 1 and satisfy pi ̸= 0 for all i.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Conjectures",
+                "expository",
+                "experts",
+                "degree",
+                "discussion",
+                "partly",
+                "highlight",
+                "Maximum-Likelihood",
+                "bounds",
+                "log"
+            ]
+        }
+    },
+    {
+        "id": "2c284dd3-c7bf-4d19-83ef-8d9b377a802a",
+        "title": "",
+        "chunk_text": "To construct the associated branched cover, con- sider first the vanishing ideal IX = ⟨g1, . . . , gk⟩and the rational map ΨX : X \\ \u0010 Xsing ∪Hn \u0011 × Pk →Pn ([p0 : · · · : pn], [λ0 : · · · : λk+1]) 7→ \" λ0 + k X i=1 λipi dgi dpj (p; u) | 0 ≤j ≤n # , where Hn = V (p0 · · · pn · (P pi)) is the union of the n + 2 hyperplanes. The image of the graph of ΨX under the coordinate projection Gr(ΨX) →Pn × Pn, (p, λ, u) 7→(u, p) is known as the likelihood correspondence LX.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "con",
+                "cover",
+                "sider",
+                "construct",
+                "branched",
+                "vanishing",
+                "ideal",
+                "Xsing",
+                "hyperplanes",
+                "λipi"
+            ]
+        }
+    },
+    {
+        "id": "82cd226f-a8d4-494a-a0f6-54b7605e8cd5",
+        "title": "",
+        "chunk_text": "When the projection πLX : LX →Pn, (u, p) 7→u is a branched cover, its degree, ML(X) := deg(πLX ), is known as the ML degree of X. For generic u, this number counts the complex-valued critical points p ∈X \\ \u0000Xsing ∪Hn \u0001 for the log-likelihood ℓ(p; u). 21 Example 8. If V ⊂Pn is a generic linear space of codimension r, then ML(V ) = n r ! , (45) as shown in [16, Theorem 13], which states furthermore that for real data all critical points are real.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "πLX",
+                "deg",
+                "degree",
+                "cover",
+                "Xsing",
+                "projection",
+                "branched",
+                "critical",
+                "points",
+                "Theorem"
+            ]
+        }
+    },
+    {
+        "id": "5cd02350-3838-459e-8b6c-e11471a7f424",
+        "title": "",
+        "chunk_text": "Although the number of (real) critical points for this problem and low-rank matrix approximation from Example 7 co- incide, Galois widths imply that this problem is much harder. For exam- ple, if we take (n, r) = (4, 2), low-rank approximation has Galois width 4 < 6 = \u00004 2 \u0001 . In contrast, this problem for generic V ∈Gr(P2, P4) has Galois width 6 and cannot be solved in radicals.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Galois",
+                "real",
+                "incide",
+                "problem",
+                "critical",
+                "harder",
+                "width",
+                "low-rank",
+                "approximation",
+                "number"
+            ]
+        }
+    },
+    {
+        "id": "fdafb11e-4238-49f2-918f-42997443097a",
+        "title": "",
+        "chunk_text": "We may take u = \u0002 6 4 5 3 12 \u0003 , V = V(ℓ1(p), ℓ2(p)), where ℓ1(p) = p1 + p2 + 2p3 −5p4 −2p0, ℓ2(p) = 3p1 + 2p2 −p3 −3p4 + 4p0. Solutions to this ML problem are the points on V \\ H4 where the matrix   u0 u1 u2 u3 u4 p0 p1 p2 p3 p4 p0 · ∂ℓ1 ∂p0 p1 · ∂ℓ1 ∂p1 p2 · ∂ℓ1 ∂p2 p3 · ∂ℓ1 ∂p3 p4 · ∂ℓ1 ∂p4 p0 · ∂ℓ2 ∂p0 p1 · ∂ℓ2 ∂p1 p2 · ∂ℓ2 ∂p2 p3 · ∂ℓ2 ∂p3 p4 · ∂ℓ2 ∂p4   drops rank.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Solutions",
+                "matrix",
+                "drops",
+                "rank",
+                "problem",
+                "points"
+            ]
+        }
+    },
+    {
+        "id": "43f9b718-4325-4ce2-9970-ad5adc1cccb8",
+        "title": "",
+        "chunk_text": "With a little help from Macaulay2 [41], we may obtain a homogenized primitive element f =1 126 944 p6 0 + 4 127 767 p5 0p1 −2 310 180 p4 0p2 1 −2 105 058 p3 0p3 1 + 434 717 p2 0p4 1 + 170 397 p0p5 1 + 5 670 p6 1, and check that Gal(f) = S6. This follows after reducing f modulo the primes 29 and 141 and factoring, thereby showing that Gal(f) contains Frobenius elements which are, respectively, a 5-cycle and a transposition.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Gal",
+                "obtain",
+                "homogenized",
+                "primitive",
+                "check",
+                "Frobenius",
+                "element",
+                "elements",
+                "primes",
+                "factoring"
+            ]
+        }
+    },
+    {
+        "id": "d5060c0b-5fb3-4319-9abd-b5024fb67a89",
+        "title": "",
+        "chunk_text": "Although we expect the Galois groups for maximum-likelihood in many cases to be full-symmetric like in Example 8, this is not always the case. Example 9. Consider the projectivization Ym,n,r = P(Xm,n,r) of the variety of m×n rank ≤r matrices from Example 7. As before, we assume r ≤n ≤m. Using numerical homotopy continuation methods, the values ML(Ym,n,r) for m ≤6 were completely tabulated in [45].",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Galois",
+                "cases",
+                "case",
+                "expect",
+                "groups",
+                "maximum-likelihood",
+                "full-symmetric",
+                "projectivization",
+                "rank",
+                "variety"
+            ]
+        }
+    },
+    {
+        "id": "73c33051-b72f-424e-b734-f226a46b5786",
+        "title": "",
+        "chunk_text": "An analogous table produced ML degrees for rank-constrained symmetric matrices, Zn,r =          p ∈P(n+2)(n−1)/2 | rank   2p1,1 p1,2 · · · p1,n p1,2 2p2,2 · · · p2,n ... ... ... ... p1,n p2,n · · · pn,n  ≤r          , (46) for 1 ≤r ≤n ≤6, except the missing cases ML(Z6,3) = ML(Z6,4) = 68774 announced in [34, Figure 15].",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Zn,r",
+                "rank",
+                "matrices",
+                "analogous",
+                "table",
+                "produced",
+                "degrees",
+                "rank-constrained",
+                "symmetric",
+                "Figure"
+            ]
+        }
+    },
+    {
+        "id": "ebbace82-95cc-48c7-9d22-036e0be177f6",
+        "title": "",
+        "chunk_text": "For the particular case of Z3,2, it was noticed in [45, Proposition 1] that the Galois group was S4 acting on 6 = \u00004 2 \u0001 22 solutions corresponding to pairs 1 ≤i < j ≤4. As a consequence, the maximum-likelihood estimate in this case is solvable in radicals. This fact can be deduced immediately from the existence of an order-2 deck transformation for the branched cover πLZ3,2 .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Proposition",
+                "Galois",
+                "acting",
+                "solutions",
+                "pairs",
+                "case",
+                "noticed",
+                "group",
+                "consequence",
+                "radicals"
+            ]
+        }
+    },
+    {
+        "id": "1a12f40c-9522-4721-9d3b-4fe0e9dad67a",
+        "title": "",
+        "chunk_text": "If we set P =   2 p1,1 p1,2 p1,3 p1,2 2 p2,2 p2,3 p1,3 p2,3 2 p3,3  , U =   2 u1,1 u1,2 u1,3 u1,2 2 u2,2 u2,3 u1,3 u2,3 2 u3,3  , D(U) = diag (2u1,1 + u1,2 + u1,3, u2,1 + 2u2,2 + u2,3, u3,1 + u3,2 + 2u3,3) , then this deck transformation may be given explicitly as Ψ : LZ4,2 99K LZ4,2 (U, P) 7→        U, 32 (tr(U))3 · D(U) ·   u1,1 p1,1 u1,2 p1,2 u1,3 p1,3 u1,2 p1,2 u2,2 p2,2 u2,3 p2,3 u1,3 p1,3 u2,3 p2,3 u3,3 p3,3   · D(U)        .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "diag",
+                "set",
+                "deck",
+                "transformation",
+                "explicitly"
+            ]
+        }
+    },
+    {
+        "id": "cca361e6-37d3-4da4-a611-091f4c975813",
+        "title": "",
+        "chunk_text": "This is a special case of a maximum-likelihood duality result due to Draisma and Rodriguez, which has an analogue for rectangular, non- symmetric matrices ([26, Theorems 11 and 6, respectively]). In general, when n is odd and r = (n + 1)/2, these duality results specialize to for- mulas for deck transformations like Ψ given above. Based on this discussion, we propose the following conjecture. Conjecture 1.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Theorems",
+                "Rodriguez",
+                "Draisma",
+                "rectangular",
+                "symmetric",
+                "matrices",
+                "duality",
+                "special",
+                "case",
+                "maximum-likelihood"
+            ]
+        }
+    },
+    {
+        "id": "569efdb1-eb0e-457f-a349-d02559e6fbb3",
+        "title": "",
+        "chunk_text": "For any integers 1 ≤r ≤n ≤m, we have gw \u0010 πLXm,n,r \u0011 = ( ML(Ym,n,r)/2 for n odd, r = (n + 1)/2, ML(Ym,n,r) else, gw \u0010 πLZn,r \u0011 = ( ML(Zn,r)/2 for n odd, r = (n + 1)/2, ML(Z,r) else. We note that deck transformations in maximum-likelihood may also arise due to label-swapping symmetries—see eg. [82, §5]. We next recall how such symmetries arise in another statistical parameter estimation problem: the method-of-moments for mixture models.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "odd",
+                "Zn,r",
+                "πLZn,r",
+                "integers",
+                "arise",
+                "symmetries",
+                "note",
+                "deck",
+                "transformations",
+                "maximum-likelihood"
+            ]
+        }
+    },
+    {
+        "id": "0c9409e7-8d30-421c-8479-7689d223eaa0",
+        "title": "",
+        "chunk_text": "For concreteness, we consider the classical setting, pioneered by Pearson over a century ago [74], of univariate Gaussian mixture models. For a mixture of k Gaussians N(µ1, σ1), . . . , N(µk, σk), the moments (Mi,k(µ, σ, λ))i≥0 are a sequence of polynomials depending on the mean parameters µ = (µ1, . . . , µk), standard deviations σ = (σ1, . . . , σk), and mixing coefficients λ = (λ1, . . . , λk−1). These polynomials may be com- puted recursively by the rules Mi,k(µ, σ, λ) = λ1mi(µ1, σ1) + . . .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Pearson",
+                "concreteness",
+                "setting",
+                "pioneered",
+                "ago",
+                "models",
+                "Mi,k",
+                "mixture",
+                "Gaussian",
+                "Gaussians"
+            ]
+        }
+    },
+    {
+        "id": "ba3fa135-9483-471d-8bad-0dbdd85c4fac",
+        "title": "",
+        "chunk_text": "+ (1 −λ1 −. . . −λk−1)mi(µk, σk), mi(µ, σ) =    1 i = 0, µ mi−1(µ, σ) + σ2 d dµmi−1(µ, σ) i > 0. (47) 23 The method of moments hypothesizes that data x1, . . . , xn ∈R are sam- ples drawn from a mixture of Gaussians with unknown parameters (µ, σ, λ). To recover these parameters, a sequence of sample moments is computed, si = (1/n)(xi 1 + . . . + xi n), 1 ≤i ≤e, and one may expect Mi,k(µ, σ, λ) ≈si for all i if the sample size n is large enough.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "parameters",
+                "moments",
+                "sample",
+                "Mi,k",
+                "Gaussians",
+                "dµmi",
+                "data",
+                "sam",
+                "ples",
+                "method"
+            ]
+        }
+    },
+    {
+        "id": "7f494540-9f70-4552-93a7-0a6c996b7276",
+        "title": "",
+        "chunk_text": "Thus, we are led naturally to consider the map πe,k : C3k−1 →Ce, (µ, σ, λ) 7→(Mi(µ, σ, λ) | 1 ≤i ≤e) . (48) Solving the moment equations si −Mi,k(µ, σ, λ) for i = 1, . . . , e may be understood as inverting the map πe,k. An algebro-geometric study of these maps was initiated in the work [1], which also posed a conjecture consisting of three parts (cf. [1, Conjecture 3]): 1. (Algebraic identifiability) The map π3k−1,k is a branched cover.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Mi,k",
+                "Solving",
+                "πe,k",
+                "map",
+                "led",
+                "naturally",
+                "moment",
+                "equations",
+                "conjecture",
+                "Algebraic"
+            ]
+        }
+    },
+    {
+        "id": "1d125c87-49dd-4359-9c61-1ee575e5ba1c",
+        "title": "",
+        "chunk_text": "In other words, 3k−1 moments from a generic Gaussian mixture model suffice to recover the parameters up to finitely-many possibilities. This was later settled in the affirmative [3], where it was also dis- covered that generalizations to multivariate Gaussians may fail. 2. (Rational identifiability) The map π3k,k is generically a degree k! (Galois) branched cover over its image.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "words",
+                "moments",
+                "possibilities",
+                "generic",
+                "mixture",
+                "model",
+                "suffice",
+                "recover",
+                "parameters",
+                "finitely-many"
+            ]
+        }
+    },
+    {
+        "id": "af5a69b5-2c63-4159-bfe5-be10319a3659",
+        "title": "",
+        "chunk_text": "In other words, 3k exact moments suffice to recover the parameters of the mixture model up to the label-swapping action by Sk. This remains open, although the same result for 3k +2 moments is established in [66], with analogous results when some parameters are known or known to be equal. 3. (Degree of algebraic identifiability) The authors in [1] made a “wild guess” that deg(π3k,k) = k!",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "words",
+                "exact",
+                "moments",
+                "parameters",
+                "suffice",
+                "recover",
+                "mixture",
+                "model",
+                "label-swapping",
+                "action"
+            ]
+        }
+    },
+    {
+        "id": "e575dd35-e6b7-4d08-9103-5cdeac861879",
+        "title": "",
+        "chunk_text": "((2k −1)!!)2 based on computations for k = 2, 3, but numerical results for the case k = 4 in [2] provide strong evidence that this is incorrect. Although a degree formula remains elusive, we may loosely interpret the spirit of their conjecture to mean that the moment equations have no “hidden symmetries.” Conjecture 2. For all k ≥1, gw (π3k−1,k) = deg(π3k−1,k)/k! In summary, the Galois width provides a novel tool for studying the algebraic complexity of statistical parameter estimation problems.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "based",
+                "incorrect",
+                "computations",
+                "numerical",
+                "results",
+                "case",
+                "strong",
+                "evidence",
+                "conjecture",
+                "elusive"
+            ]
+        }
+    },
+    {
+        "id": "3cc12696-4a36-4c3c-968a-f83a7e2517c4",
+        "title": "",
+        "chunk_text": "We feel optimistic that it will find further applications in the study of identi- fiability questions and in concrete parameter estimation scenarios. 4.3 Algebraic Vision The computational model studied in Section 2 originates from work of Hartley, Nist´er, and Stew´enius [72], who pioneered the application of Ga- lois theory to the study of 3D reconstruction and related problems in com- puter vision.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "study",
+                "identi",
+                "fiability",
+                "scenarios",
+                "Nist´er",
+                "Vision",
+                "feel",
+                "optimistic",
+                "find",
+                "questions"
+            ]
+        }
+    },
+    {
+        "id": "8cffb09a-fd61-4ea1-934d-b3529c365522",
+        "title": "",
+        "chunk_text": "More specifically, their paper outlined a framework based on symbolic computation that could be applied to estimation problems with Galois groups that are full-symmetric/alternating. In many respects, our work is an extension of theirs: we have characterized complexity in our model for any finite group, and can obtain lower bounds on this complex- ity using more practical numerical heuristics.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "alternating",
+                "Galois",
+                "specifically",
+                "full-symmetric",
+                "paper",
+                "outlined",
+                "framework",
+                "based",
+                "symbolic",
+                "computation"
+            ]
+        }
+    },
+    {
+        "id": "eea7e58b-ae72-401a-b1ee-12fca22255c7",
+        "title": "",
+        "chunk_text": "24 On the other hand, there are some notable differences between the setup of [72] and ours; for example, their work treats extracting n-th roots in the working field as a unit-cost operation, and possibly additional ora- cles like the SVD of an arbitrarily-large matrix with real entries. It would certainly be worthwhile to extend the computational model of Section 2 to such settings, but this is beyond our current scope.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "SVD",
+                "hand",
+                "operation",
+                "ora",
+                "cles",
+                "entries",
+                "notable",
+                "differences",
+                "setup",
+                "work"
+            ]
+        }
+    },
+    {
+        "id": "1a86ea03-c190-40a0-bbb5-8b1ad0235587",
+        "title": "",
+        "chunk_text": "Rather, we see a discussion of motivating problems from computer vision as a fitting end to this paper. Although we can only offer a glimpse of these problems and their practical importance, we recommend the recent survey of Kileel and Kohn [54] as one entry point into the expanding field of algebraic vision.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "paper",
+                "problems",
+                "vision",
+                "discussion",
+                "motivating",
+                "computer",
+                "fitting",
+                "end",
+                "Kohn",
+                "Kileel"
+            ]
+        }
+    },
+    {
+        "id": "b8974df8-d99b-432a-b8df-031fa6dfec32",
+        "title": "",
+        "chunk_text": "Interest in algebraic complexity from the computer vision community stems largely (but not exclusively) from the use of minimal solvers [60, 61] in outlier-robust estimation schemes such as RanSaC (“Random Sampling and Consensus”) [39]. The rough idea behind these methods is this: un- known quantities are estimated multiple times using random subsamples of the data, and these estimates are aggregated so as to filter outliers and produce a more robust estimate.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Consensus",
+                "Sampling",
+                "Random",
+                "Interest",
+                "largely",
+                "exclusively",
+                "solvers",
+                "RanSaC",
+                "algebraic",
+                "complexity"
+            ]
+        }
+    },
+    {
+        "id": "8d094341-b6a9-4a8e-ac64-bf4e03074679",
+        "title": "",
+        "chunk_text": "To minimize the influence of outliers, the subsamples should ideally be as small as possible (“minimal”). Algebraic methods such as Gr¨obner bases are currently the favored approach for constructing minimal solvers. The Galois width measures a fundamental limit of what degree of algebraic simplification these solvers can achieve. Aside from minimal problems, the algebraic complexity of nonlinear least-squares problems in vision has also attracted significant interest.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "minimal",
+                "outliers",
+                "Algebraic",
+                "minimize",
+                "influence",
+                "subsamples",
+                "ideally",
+                "small",
+                "solvers",
+                "problems"
+            ]
+        }
+    },
+    {
+        "id": "d0913688-bdf0-41a2-9cd6-adf9013f6207",
+        "title": "",
+        "chunk_text": "We revisit the problem of ℓ2-optimal triangulation in Example 10 below. In this paper, we adopt the point of view that estimation problems in vision, minimal or not, may be profitably studied via branched covers (eg. the joint camera map of [30].) The Galois width provides a general tool for measuring both the difficulty of these problems and optimality of proposed solutions which is more refined than the degrees of these branched covers.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "covers",
+                "triangulation",
+                "revisit",
+                "problems",
+                "branched",
+                "Galois",
+                "problem",
+                "paper",
+                "vision",
+                "minimal"
+            ]
+        }
+    },
+    {
+        "id": "a3dde302-f778-4b31-9b7f-9453a425b82b",
+        "title": "",
+        "chunk_text": "If the Galois width of a problem is large, then it is truly hard in the sense of [50]. If, however, the Galois width is smaller than the degree, then there is an opportunity for a more efficient algebraic solution. Example 10 (Triangulation). The standard model for the pinhole camera is a 3 × 4 matrix P of rank 3 [43, Ch. 6].",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Galois",
+                "width",
+                "large",
+                "problem",
+                "hard",
+                "sense",
+                "Triangulation",
+                "degree",
+                "solution",
+                "smaller"
+            ]
+        }
+    },
+    {
+        "id": "d004def9-f215-46ed-b920-61c4bc5a9600",
+        "title": "",
+        "chunk_text": "We model a world point X ∈P3 as a 4 × 1 vector of homogeneous coordinates, so that P3 99K P2, X 7→P · X associates each 3D point X ∈P3 \\ {[ker P]} with a 2D point in 3 × 1 homogeneous coordinates. In practice, of course, one must work with affine pixel coordinates in the image, and hence also the rational map P3 99K C2, X 7→Π(P · X), where Π(x, y, z) = (x/z, y/z). If we have an arrangement of multiple cameras P• = (P1, . . .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "point",
+                "homogeneous",
+                "coordinates",
+                "vector",
+                "ker",
+                "model",
+                "world",
+                "associates",
+                "practice",
+                "image"
+            ]
+        }
+    },
+    {
+        "id": "4c20f3d6-ff45-4931-bf4a-977250266865",
+        "title": "",
+        "chunk_text": ", Pn), then one is naturally led to consider the affine multiview variety, a variety MP• ⊂C2n obtained as the Zariski closure of the image of P3 99K C2n, X 7→(Π(P1 · X), . . . , Π(Pn · X)) . In the computer vision literature, the ℓ2-optimal triangulation prob- lem [44, 80] is an instance of the Euclidean distance minimization problem, already studied in Section 4.1, for which the following result is known. 25 Theorem 8.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "variety",
+                "Zariski",
+                "obtained",
+                "naturally",
+                "led",
+                "affine",
+                "multiview",
+                "closure",
+                "image",
+                "Section"
+            ]
+        }
+    },
+    {
+        "id": "c270df9c-b0f9-4705-a1e0-27990b646c03",
+        "title": "",
+        "chunk_text": "[70] If P• is a generic arrangement of n ≥2 cameras, then ED (MP•) = 9 2n3 −21 2 n2 + 8n −4. (49) We propose a refinement of this result. Conjecture 3. With notation as in Theorem 8, the Euclidean distance cover π : EMP• →C2n has full-symmetric Galois/monodromy group, and thus its Galois width is thus also given by the formula (49).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "cameras",
+                "EMP",
+                "Galois",
+                "generic",
+                "arrangement",
+                "Conjecture",
+                "Theorem",
+                "result",
+                "Euclidean",
+                "propose"
+            ]
+        }
+    },
+    {
+        "id": "58f28f4e-36b9-4ce3-b66f-fd8652202f62",
+        "title": "",
+        "chunk_text": "When n = 2, Conjecture 3 was verified in [72] by direct symbolic computation; using numerical homotopy continuation methods, we have verified it (heuristically) for a few larger values of n. We note that, due to different formulations of the problem, different root counts have been reported in the literature. For example, when n = 3, when the ED degree equals 47, but [18, Table 2] reports 94 = 2 · 47 solutions; nevertheless, the branched cover implicit in their work still has Galois width 47.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Conjecture",
+                "heuristically",
+                "verified",
+                "computation",
+                "methods",
+                "direct",
+                "symbolic",
+                "numerical",
+                "homotopy",
+                "continuation"
+            ]
+        }
+    },
+    {
+        "id": "1f55f56e-ed92-4356-9ae5-7d914e26b415",
+        "title": "",
+        "chunk_text": "Analogously to [57] in the case of low-rank matrix approximation, recent work of Rydell et al. [75] shows that certain weighted variants of 2- view triangulation are solvable in radicals. Although we believe the Galois width may be useful for analyzing similar problems, our framework does not address the question of how the “best” weights might be chosen. Example 11 (Resectioning / Absolute Camera Pose).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Rydell",
+                "Analogously",
+                "approximation",
+                "recent",
+                "case",
+                "low-rank",
+                "matrix",
+                "work",
+                "Resectioning",
+                "Absolute"
+            ]
+        }
+    },
+    {
+        "id": "e428b1dc-d81d-4c53-9b20-56c401a39ebf",
+        "title": "",
+        "chunk_text": "The triangulation problem can be understood as fitting the best 3D point to n observed 2D projections under known cameras. Dually, the camera resectioning problem requires fitting an unknown camera to n known 3D-2D point correspondences. In general, n ≥6 correspondences are needed to solve the problem resectioning. ED degree conjectures for such problems, of a similar flavor to Theorem 8, appear in [20, 35].",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "point",
+                "observed",
+                "projections",
+                "problem",
+                "fitting",
+                "camera",
+                "triangulation",
+                "understood",
+                "resectioning",
+                "correspondences"
+            ]
+        }
+    },
+    {
+        "id": "c9cf491e-a329-40f5-b269-e9b20fd4874b",
+        "title": "",
+        "chunk_text": "Resectioning can be solved with n < 6 correspondences if the camera is known to be calibrated; that is, when P is given up to scale as an element of the special Euclidean group, P ∝(R | t) ∈SE3 . Calibrated resectioning in the minimal case of n = 3 points is known as the Perspective-3-Point problem, or P3P. Early solutions to this problem date back to Lagrange in 1700s and Grunert (see [81] for a history), and involve computing the roots of a univariate quartic.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "calibrated",
+                "Euclidean",
+                "Resectioning",
+                "correspondences",
+                "group",
+                "points",
+                "problem",
+                "solved",
+                "camera",
+                "scale"
+            ]
+        }
+    },
+    {
+        "id": "1abc60c7-573c-40c2-9b04-42280888a599",
+        "title": "",
+        "chunk_text": "From (19), it follows that the solutions to this problem have Galois width at most 3, and in [72] it was verified that equality holds. We note that several solutions to P3P naturally reduce to the case of a cubic equation, without using resolvents (see eg. [22].) A Galois-theoretic study of camera resectioning with minimal combi- nations of point and line features was recently carried out in [32].",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Galois",
+                "holds",
+                "solutions",
+                "problem",
+                "width",
+                "verified",
+                "equality",
+                "Galois-theoretic",
+                "naturally",
+                "equation"
+            ]
+        }
+    },
+    {
+        "id": "a83dccaa-f2d2-4222-a0d1-43fc89d2db74",
+        "title": "",
+        "chunk_text": "Letting p and l be nonnegative integers with p + l = 3, and Gk,m denote the Grassmannian of k-planes in Pm, then a minimal solution to the resec- tioning problem with p point-point correspondences and l line-line corre- spondences amounts to inverting a branched cover of the form πp,l : (P)×p (G1,3)×l × SE3 99K \u0000P3 × P2\u0001×p × (G1,3 × G1,2)×l . The main result in [32, §3] implies that gw(π3,0) = gw(π1,2) = 3, gw(π2,1) = 2, gw(π0,3) = 8.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Gk,m",
+                "Grassmannian",
+                "Letting",
+                "resec",
+                "tioning",
+                "corre",
+                "spondences",
+                "πp,l",
+                "implies",
+                "nonnegative"
+            ]
+        }
+    },
+    {
+        "id": "56e150ab-e683-43b2-badb-1701e1698b78",
+        "title": "",
+        "chunk_text": "(50) 26 Practical consequences of this result were recently realized in [49], in which the authors developed new solutions to the minimal cases with (p, l) ∈{(2, 1), (1, 2)}. These minimal solvers were vetted in experiments in which they outperformed the previous state-of-the-art for these prob- lems in terms of both accuracy and speed. Exploiting the gap between Galois width and degree was a key factor that made this possible. Example 12 (Reconstruction / Relative Camera Pose).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Practical",
+                "minimal",
+                "consequences",
+                "result",
+                "recently",
+                "realized",
+                "authors",
+                "developed",
+                "solutions",
+                "cases"
+            ]
+        }
+    },
+    {
+        "id": "46e76643-6c69-46a8-8bdf-b5c5c7eab6d4",
+        "title": "",
+        "chunk_text": "When both cam- eras and 3D points are unknown, and only 2D points are given, we are faced with the full 3D reconstruction problem, which has been extensively studied in both the uncalibrated and the calibrated cases. In either set- ting, there is an inherent ambiguity due to choice of coordinates; in other words, solutions are defined up to the action of the projective group PGL4 or its subgroup consisting of 3D similarity transformations, respectively.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "points",
+                "cam",
+                "eras",
+                "unknown",
+                "full",
+                "reconstruction",
+                "problem",
+                "cases",
+                "faced",
+                "extensively"
+            ]
+        }
+    },
+    {
+        "id": "beaaaf07-b81f-4ce8-9f39-960e42f43e8c",
+        "title": "",
+        "chunk_text": "Since knowledge of calibration is often available, and necessary for obtain- ing metrically-accurate reconstructions, we mostly focus on this case. In [30], minimal problems for reconstructing a configuration of points and lines in space were completely classified under the assumptions of cal- ibrated cameras and complete correspondences across multiple images.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "obtain",
+                "ing",
+                "reconstructions",
+                "case",
+                "knowledge",
+                "calibration",
+                "metrically-accurate",
+                "focus",
+                "minimal",
+                "cal"
+            ]
+        }
+    },
+    {
+        "id": "40b32d8e-9ecd-4f3c-a145-39c669682bfc",
+        "title": "",
+        "chunk_text": "A key player in this story was the joint camera map of such a configuration, a branched cover which sends an equivalence class of solutions (configu- ration + cameras) to multiple 2D projections. Recent work [53] extends this result to the uncalibrated case, and also suggests novel a novel strat- egy for checking that the joint camera map is decomposable in the sense of Definition 6.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "configu",
+                "ration",
+                "projections",
+                "joint",
+                "camera",
+                "configuration",
+                "solutions",
+                "multiple",
+                "map",
+                "key"
+            ]
+        }
+    },
+    {
+        "id": "003e6c3a-0b29-4822-ae73-479460d39e4f",
+        "title": "",
+        "chunk_text": "In the calibrated case, the simplest instance of this joint camera map arises for a configuration of five points in space. We define π5pp : \u0000P3\u0001×5 × C5pp 99K \u0000P2\u0001×10 (51) (X1, . . . , X5, P1, P2) 7→(P1 · X1, . . . , P1 · X5, P2 · X1, . . . , P2 · X5) , where C5pp is a variety whose points represent generic pairs of calibrated cameras up to world similarity transformation, specifically C5pp = {(P1, P2) ∈(SE3)×2 | P1 = \u0002 I | 0 \u0003 , P2 = \u0002 R | t \u0003 , t3 = 1}.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "case",
+                "space",
+                "simplest",
+                "instance",
+                "joint",
+                "map",
+                "arises",
+                "configuration",
+                "calibrated",
+                "points"
+            ]
+        }
+    },
+    {
+        "id": "b331aae3-61d9-4c4a-b006-f452f4b6d242",
+        "title": "",
+        "chunk_text": "(52) Computing fibers of π5pp over generic data (x1, . . . , x5, y1, . . . , y5) ∈ \u0000P2\u0001×10 is the celebrated five-point relative pose problem. Work on this problem dates back to Kruppa in 1912 [58], whose work implies deg(π5pp) ≤22. This was sharpened much later by Demazure in 1988 [21], who showed that deg(π5pp) = 20.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Computing",
+                "data",
+                "fibers",
+                "generic",
+                "deg",
+                "problem",
+                "Work",
+                "Kruppa",
+                "Demazure",
+                "celebrated"
+            ]
+        }
+    },
+    {
+        "id": "7066903a-3532-43b2-9858-1cff34cb229e",
+        "title": "",
+        "chunk_text": "His proof implicitly relied on a decomposition of the joint camera map, π5pp = π2◦π1, based on a projectivization P(Xes) ⊂P8 of the essential matrix variety already discussed in Example 6. We take Y5pp = {(E, x1, . . . , x5,y1, . . . , y5) ∈P(Xes) × \u0000P2\u0001×10 | yT i Exi = 0}, (53) π1 : \u0000P3\u00015 × C5pp 99K Y, (X1, . . . , X5, P1, P2) 7→(E(P1, P2), P1 · X1, . . . , P1 · X5, P2 · X1, . . .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Xes",
+                "map",
+                "based",
+                "proof",
+                "implicitly",
+                "relied",
+                "decomposition",
+                "joint",
+                "camera",
+                "projectivization"
+            ]
+        }
+    },
+    {
+        "id": "ccc4ba59-ab67-4d5e-9099-e3d1d28b2470",
+        "title": "",
+        "chunk_text": ", P2 · X5) , where E(P1, P2) ∈P(Xes) is a 3 × 3 matrix whose (i, j)-th entry equals ei,j = (−1)i+j det \u0014 P1[{1, 2, 3} \\ {i}, :] P2[{1, 2, 3} \\ {j}, :] \u0015 , (54) 27 and π2 : Y → \u0000P2\u00012 is the coordinate projection. We have deg(π1) = 10, and deg(π2) = 2, implying that Gal(π5pp) is a subgroup of the wreath product S2 ≀S10. In [32, §4], the authors obtained strong evidence that Gal(π5pp) ∼= S2 ≀S10 ∩A20 ∼= S9 2 ⋊S10 using numerical homotopy continu- ation methods.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Xes",
+                "Gal",
+                "matrix",
+                "ei,j",
+                "det",
+                "projection",
+                "deg",
+                "entry",
+                "equals",
+                "coordinate"
+            ]
+        }
+    },
+    {
+        "id": "10c268f3-78c0-4faa-be48-7e8d3f8d862d",
+        "title": "",
+        "chunk_text": "They also proved that the natural map Gal(π5pp) →S10 is surjective. Thus, gw(π5pp) = 10. (55) This agrees with a result of [72], implying that general methods for solv- ing five-point relative pose, such as Nist´er’s popular solution [71], must invariably resort to computing the roots of a degree-10 polynomial. Figure 2: A 3D point (blue) and its 1-dimensional radial projection (red.) We conclude with a recent example of a minimal reconstruction prob- lem solved by Hruby et al.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Gal",
+                "surjective",
+                "proved",
+                "natural",
+                "map",
+                "Nist´er’s",
+                "polynomial",
+                "Hruby",
+                "Figure",
+                "point"
+            ]
+        }
+    },
+    {
+        "id": "768687ab-e5eb-49fa-943e-8ccfd79935c6",
+        "title": "",
+        "chunk_text": "[50], where the gap between the degree of the branched cover and its Galois width is dramatic. The problem arises from a non-pinhole camera model known as the radial camera model [85, 84, 62, 50]. This model addresses the physical phenomenon of lens distor- tion, a common source of deviations between image measurements and the pinhole model.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Galois",
+                "model",
+                "dramatic",
+                "gap",
+                "degree",
+                "branched",
+                "cover",
+                "width",
+                "camera",
+                "tion"
+            ]
+        }
+    },
+    {
+        "id": "7c11207b-66ee-429f-8c2e-9745edb82707",
+        "title": "",
+        "chunk_text": "Figure 2 illustrates a case of “barrel distortion”; un- der pinhole projection, straight lines in P3 map to straight lines in P2, but 28 distortion causes these lines to bend outward. To remove the effects of distortion, a number of parametric distortion models have been proposed in the literature.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "lines",
+                "straight",
+                "Figure",
+                "distortion",
+                "illustrates",
+                "barrel",
+                "der",
+                "projection",
+                "map",
+                "outward"
+            ]
+        }
+    },
+    {
+        "id": "7d1ab3a7-614e-4683-961a-75064be192b1",
+        "title": "",
+        "chunk_text": "In contrast, the radial camera model may be seen as a relaxation of the pinhole model, under the assumption that distortion is radially symmetric about some point in the image (the center of dis- tortion.) With this assumption, the straight line through the center of distortion and perspective projection of a 3D point also passes through any point obtained by distorting that projection. This is the radial line illustrated in Figure 2.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "model",
+                "point",
+                "center",
+                "tortion",
+                "assumption",
+                "distortion",
+                "contrast",
+                "image",
+                "dis",
+                "radial"
+            ]
+        }
+    },
+    {
+        "id": "0eba1d86-b642-40a9-a676-cf12473bf52b",
+        "title": "",
+        "chunk_text": "The pencil of lines through the center of distortion forms a P1, and the mapping P3 99K P1 from 3D points to radial lines is projective-linear, as we now explain. Consider a pinhole camera P. With- out loss of generality, we may assume that the image’s center of distortion is the point e3 = [0 : 0 : 1] ∈P2.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "lines",
+                "mapping",
+                "projective-linear",
+                "explain",
+                "center",
+                "distortion",
+                "pencil",
+                "forms",
+                "radial",
+                "points"
+            ]
+        }
+    },
+    {
+        "id": "66f2b2c7-f20c-493a-a2b0-febc32b6afce",
+        "title": "",
+        "chunk_text": "For any 3D point X ∈P3, we then have spanP2 (P · X, e3) = span \u0012\u0014 ˜P 0 \u0015 · X, e3 \u0013 , (56) where ˜P = P[1:2, :] is a 2 × 4 matrix, representing the radial camera ˜P : P3 99K P1 associated to P. Given a radial line ℓ∈P1 and a radial camera ˜P : P3 99K P1, note that the fiber ˜P −1(ℓ) is a plane. Thus, in order to obtain a nontrivial constraint on a 3D point X, it should be seen by at least 4 radial cameras ˜P1, . . . , ˜P4. If we assume the original pinhole cameras P1, . . .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "radial",
+                "camera",
+                "cameras",
+                "point",
+                "span",
+                "matrix",
+                "representing",
+                "note",
+                "fiber",
+                "plane"
+            ]
+        }
+    },
+    {
+        "id": "ab87ed64-d4b4-421c-ace2-669f2fd8e877",
+        "title": "",
+        "chunk_text": ", P4 are calibrated, then ˜Pi = \u0014rT i1 ti,1 rT i2 ti,2 \u0015 where rT i1ri1 = rT i2ri2 = 1, rT i1 ri2 = 0. (57) Up to similarity transformation in R3, we may assume A1 = \u00141 0 0 0 0 1 0 0 \u0015 , A2 = \u0014rT 21 0 rT 22 1 \u0015 , (58) and define C13pp = { ˜P1, . . . , ˜P4) ∈C2×4 | (57) and (58) hold}. (59) Observe that dim(C13pp) = 13. Thus, it is little surprise that the map πrad : \u0000P3\u000113 × C13pp 99K \u0000P1\u0001×52 (X1, . . . , X13, ˜P1, . . . , ˜P4) 7→( ˜P1 · X1, . . . , ˜P4 · X13) (60) is a branched cover.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "calibrated",
+                "Observe",
+                "assume",
+                "define",
+                "similarity",
+                "transformation",
+                "hold",
+                "dim",
+                "πrad",
+                "surprise"
+            ]
+        }
+    },
+    {
+        "id": "9b3ed3cc-ab54-47df-8c60-7d695eee6940",
+        "title": "",
+        "chunk_text": "What is more surprising is the following. Theorem 9. gw(π13pp) = 28 < deg(π13pp) = 3584. Proof. In [50], it was shown that π13pp has a decomposition of the form π13pp = π4 ◦π3 ◦π2 ◦π1, where deg(π1) = 16, deg(π2) = 4, deg(π3) = 2, and deg(π1) = 28. Now, applying Proposition 4 and Theorem 4, we have that gw(π4) = 28 ⇒ gw(π13pp) = 28. (61) 29 To see that gw(π4) = 28, consider the branched cover π′ = π3 ◦π2 ◦π1.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "deg",
+                "Theorem",
+                "surprising",
+                "Proposition",
+                "Proof",
+                "form",
+                "applying",
+                "shown",
+                "decomposition",
+                "branched"
+            ]
+        }
+    },
+    {
+        "id": "c04e15bf-6e81-400d-ae58-740c73751d90",
+        "title": "",
+        "chunk_text": "We recall, also from [50], a description of this map analogous to (62); π′ : \u0000P3\u00015 × C5pp 99K Y13pp, (62) Y13pp = {(T, ℓ1,1, . . . , ℓ13,4) ∈Xquad × \u0000P1\u0001×52 | T(ℓi,1, . . . , ℓi,4) = 0}, where Xquad ⊂P(C2×2×2×2) is the projective variety of binary tensors T whose entries are given by Ti,j,k,l = (−1)i+j+k+l det   ˜P1[{1, 2} \\ {i}, :] ˜P2[{1, 2} \\ {j}, :] ˜P3[{1, 2} \\ {k}, :] ˜P4[{1, 2} \\ {l}, :]  .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Xquad",
+                "recall",
+                "description",
+                "map",
+                "analogous",
+                "det",
+                "projective",
+                "variety",
+                "binary",
+                "tensors"
+            ]
+        }
+    },
+    {
+        "id": "2055dc92-fb7c-4e00-91da-11e8a62c9025",
+        "title": "",
+        "chunk_text": "(63) This is a 13-dimensional variety of degree 28, which happens to coin- cide with the image of the 4 × 4 principal minor map studied in [65]. The map π4 : Y13pp → \u0000P1\u0001×52 is given by coordinate projection. Each 4-tuple T(ℓi,1, . . . , ℓi,4) gives rise to a linear form in the entries of the tensor T. Considering all such linear forms, we obtain a rational map \u0000P1\u000152 99K G13,15. A computatation in local coordinates shows that this map is dominant.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "map",
+                "variety",
+                "degree",
+                "coin",
+                "cide",
+                "principal",
+                "image",
+                "minor",
+                "studied",
+                "linear"
+            ]
+        }
+    },
+    {
+        "id": "ba9ed339-6b8a-4c69-a793-21ff724dadc7",
+        "title": "",
+        "chunk_text": "As such, we may consider the monodromy action of the G13,15 on points in Y13pp obtained by slicing, which is well-known to be S28 [4, pp. 11-12]. Thus, by Corollary 2, a generic instance of the 13-point problem with rational coordinates has Galois group S28. Since Gal(π4) ⊴S28, we deduce that gw(π4) = 28 as well. The decomposition used in the proof of Theorem 9 was also used in [50] to devise an efficient homotopy continuation solver for the minimal radial camera reconstruction problem.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "obtained",
+                "slicing",
+                "11-12",
+                "monodromy",
+                "action",
+                "points",
+                "well-known",
+                "Corollary",
+                "Galois",
+                "problem"
+            ]
+        }
+    },
+    {
+        "id": "d738be9e-0fd4-447d-8bbe-881e94fe8ff6",
+        "title": "",
+        "chunk_text": "At the time of writing, a practical sym- bolic solution to this problem is still unknown. Naturally, tracking 28 representative solution paths is more efficient than tracking all 3584. This final example embodies the main takeaway from this paper: Don’t give up right away on solving a “hard” system of algebraic equations; first, determine the problem’s Galois width, then, plan accordingly.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "writing",
+                "sym",
+                "bolic",
+                "unknown",
+                "solution",
+                "time",
+                "practical",
+                "problem",
+                "Naturally",
+                "tracking"
+            ]
+        }
+    },
+    {
+        "id": "dadec54c-054a-4cc2-9fb9-65c660135c55",
+        "title": "",
+        "chunk_text": "Acknowledgements I wish to thank the following individuals for helpful conversations and comments during the preparation of this work: Jon Hauenstein, Kathl´en Kohn, Kisun Lee, Julia Lindberg, and Jose Israel Rodriguez. References [1] Carlos Am´endola, Jean-Charles Faug`ere, and Bernd Sturmfels. Mo- ment varieties of Gaussian mixtures. Journal of Algebraic Statistics, 7(1):14–28, 2016. [2] Carlos Am´endola, Julia Lindberg, and Jose Israel Rodriguez.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Jon",
+                "Hauenstein",
+                "Kathl´en",
+                "Kohn",
+                "Kisun",
+                "Lee",
+                "Julia",
+                "Lindberg",
+                "Rodriguez",
+                "Carlos"
+            ]
+        }
+    },
+    {
+        "id": "e38a7706-21c2-4b37-9202-6b609847ccf0",
+        "title": "",
+        "chunk_text": "Solving parameterized polynomial systems with decomposable projections. arXiv preprint arXiv:1612.08807, 2016. 30 [3] Carlos Am´endola, Kristian Ranestad, and Bernd Sturmfels. Alge- braic identifiability of Gaussian mixtures. International Mathematics Research Notices. IMRN, (21):6556–6580, 2018. [4] Enrico Arbarello, Maurizio Cornalba, Phillip Augustus Griffiths, and Joseph Harris. Geometry of algebraic curves. Vol. I. Springer-Verlag, New York, 1985. [5] Chanderjit Bajaj.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Solving",
+                "projections",
+                "IMRN",
+                "parameterized",
+                "polynomial",
+                "systems",
+                "decomposable",
+                "Carlos",
+                "Am´endola",
+                "Kristian"
+            ]
+        }
+    },
+    {
+        "id": "459f69da-dd36-4b32-b28b-f9335e18bdf3",
+        "title": "",
+        "chunk_text": "The algebraic degree of geometric optimization problems. Discrete & Computational Geometry. An International Journal of Mathematics and Computer Science, 3(2):177–191, 1988. [6] Michael J. Bannister, William E. Devanny, David Eppstein, and Michael T. Goodrich. The galois complexity of graph drawing: Why numerical solutions are ubiquitous for force-directed, spectral, and circle packing drawings. Journal of Graph Algorithms and Applica- tions, 19(2):619–656, 2015. [7] D. N. Bernstein.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "problems",
+                "Michael",
+                "Computational",
+                "Geometry",
+                "algebraic",
+                "degree",
+                "geometric",
+                "optimization",
+                "Journal",
+                "graph"
+            ]
+        }
+    },
+    {
+        "id": "0b5b627e-1a13-4836-88a1-4977e83acc4f",
+        "title": "",
+        "chunk_text": "The number of roots of a system of equations. Funkcional. Anal. i Priloˇzen., 9(3):1–4, 1975. [8] Viktoriia Borovik, Paul Breiding, Javier del Pino, Mateusz Micha lek, and Oded Zilberberg. Khovanskii bases for semimixed systems of polynomial equations–approximating stationary nonlinear newtonian dynamics. Journal de Math´ematiques Pures et Appliqu´ees, 182:195– 222, 2024. [9] Paul Breiding, Kathl´en Kohn, and Bernd Sturmfels. Metric algebraic geometry, volume 53 of Oberwolfach Seminars.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Paul",
+                "Breiding",
+                "number",
+                "roots",
+                "equations",
+                "Funkcional",
+                "Priloˇzen.",
+                "Viktoriia",
+                "Borovik",
+                "Javier"
+            ]
+        }
+    },
+    {
+        "id": "79427994-ec76-48c5-a1b5-3445bf65a17f",
+        "title": "",
+        "chunk_text": "Birkh¨auser/Springer, Cham, 2024. [10] Paul Breiding, Frank Sottile, and James Woodcock. Euclidean dis- tance degree and mixed volume. Foundations of Computational Mathematics. The Journal of the Society for the Foundations of Com- putational Mathematics, 22(6):1743–1765, 2022. [11] Paul Breiding and Sascha Timme. HomotopyContinuation.jl: A Package for Homotopy Continuation in Julia. In James H.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Springer",
+                "Cham",
+                "Birkh",
+                "auser",
+                "Paul",
+                "Mathematics",
+                "Breiding",
+                "Frank",
+                "Sottile",
+                "Woodcock"
+            ]
+        }
+    },
+    {
+        "id": "349d876d-6900-468e-9076-17a527bc34b4",
+        "title": "",
+        "chunk_text": "Dav- enport, Manuel Kauers, George Labahn, and Josef Urban, editors, Mathematical Software – ICMS 2018, pages 458–465, Cham, 2018. Springer International Publishing. [12] Taylor Brysiewicz, Jose Israel Rodriguez, Frank Sottile, and Thomas Yahl. Solving decomposable sparse systems. Numerical Algorithms, 88(1):453–474, 2021. [13] Anita Buckley and Tomaˇz Koˇsir. Determinantal representations of smooth cubic surfaces. Geometriae Dedicata, 125:115–140, 2007.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "ICMS",
+                "Cham",
+                "Manuel",
+                "Kauers",
+                "George",
+                "Labahn",
+                "Urban",
+                "Mathematical",
+                "Software",
+                "Josef"
+            ]
+        }
+    },
+    {
+        "id": "ad70862a-3e96-44fc-b38b-5948351da50e",
+        "title": "",
+        "chunk_text": "[14] Michael Burr, Frank Sottile, and Elise Walker. Numerical homotopies from Khovanskii bases. Mathematics of Computation, 92(343):2333– 2353, 2023. [15] Peter J. Cameron. Permutation groups, volume 45 of London Math- ematical Society Student Texts. Cambridge University Press, Cam- bridge, 1999. [16] Fabrizio Catanese, Serkan Ho¸sten, Amit Khetan, and Bernd Sturm- fels. The maximum likelihood degree. American Journal of Mathe- matics, 128(3):671–697, 2006. 31 [17] Tianran Chen.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Michael",
+                "Burr",
+                "Frank",
+                "Sottile",
+                "Walker",
+                "Elise",
+                "Khovanskii",
+                "Computation",
+                "Cam",
+                "Peter"
+            ]
+        }
+    },
+    {
+        "id": "83fef197-7924-49a4-b82a-85d829552164",
+        "title": "",
+        "chunk_text": "A geometric criterion on the equality between BKK bound and intersection index. arXiv preprint arXiv:1812.05408, 2018. [18] Chiang-Heng Chien, Hongyi Fan, Ahmad Abdelfattah, Elias Tsigari- das, Stanimire Tomov, and Benjamin Kimia. Gpu-based homotopy continuation for minimal problems in computer vision. In Proceed- ings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, pages 15765–15776, 2022. [19] Diego Cifuentes, Kristian Ranestad, Bernd Sturmfels, and Madeleine Weinstein.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "BKK",
+                "index",
+                "geometric",
+                "criterion",
+                "equality",
+                "bound",
+                "intersection",
+                "computer",
+                "vision",
+                "arXiv"
+            ]
+        }
+    },
+    {
+        "id": "05ddae37-5452-4252-bb4c-177df594a8b0",
+        "title": "",
+        "chunk_text": "Voronoi cells of varieties. J. Symbolic Comput., 109:351– 366, 2022. [20] Erin Connelly, Timothy Duff, and Jessie Loucks-Tavitas. Algebra and geometry of camera resectioning. Mathematics of Computation, 2024. [21] Michel Demazure. Sur deux problemes de reconstruction. Technical report, 1988. [22] Yaqing Ding, Jian Yang, Viktor Larsson, Carl Olsson, and Kalle ˚Astr¨om. Revisiting the P3P problem.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Voronoi",
+                "varieties",
+                "cells",
+                "Comput.",
+                "109:351",
+                "Symbolic",
+                "Erin",
+                "Connelly",
+                "Timothy",
+                "Duff"
+            ]
+        }
+    },
+    {
+        "id": "25f4d36e-cd77-48ca-b991-36c67e014d36",
+        "title": "",
+        "chunk_text": "In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recogni- tion, pages 4872–4880, 2023. [23] Igor V. Dolgachev. Classical Algebraic Geometry: A Modern View. Cambridge University Press, Cambridge, 2012. [24] Peter Doyle and Curt McMullen. Solving the quintic by iteration. Acta Mathematica, 163(3-4):151–180, 1989. [25] Jan Draisma, Emil Horobet,, Giorgio Ottaviani, Bernd Sturmfels, and Rekha R. Thomas. The Euclidean distance degree of an algebraic variety. Found. Comput.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "IEEE",
+                "CVF",
+                "Recogni",
+                "Proceedings",
+                "Conference",
+                "Computer",
+                "Vision",
+                "Pattern",
+                "tion",
+                "pages"
+            ]
+        }
+    },
+    {
+        "id": "b6937e05-368a-4e24-af46-b7d5c4958104",
+        "title": "",
+        "chunk_text": "Math., 16(1):99–149, 2016. [26] Jan Draisma and Jose Rodriguez. Maximum likelihood duality for determinantal varieties. International Mathematics Research Notices. IMRN, (20):5648–5666, 2014. [27] Dmitriy Drusvyatskiy, Hon-Leung Lee, Giorgio Ottaviani, and Rekha R. Thomas. The Euclidean distance degree of orthogonally invariant matrix varieties. Israel Journal of Mathematics, 221(1):291– 316, 2017. [28] Dmitriy Drusvyatskiy, Hon-Leung Lee, and Rekha R. Thomas.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Math.",
+                "Dmitriy",
+                "Drusvyatskiy",
+                "Lee",
+                "Thomas",
+                "Rekha",
+                "Jan",
+                "Rodriguez",
+                "Mathematics",
+                "Hon-Leung"
+            ]
+        }
+    },
+    {
+        "id": "ce308090-9084-4b79-ba4c-520787daad7d",
+        "title": "",
+        "chunk_text": "Counting real critical points of the distance to orthogonally invari- ant matrix sets. SIAM Journal on Matrix Analysis and Applications, 36(3):1360–1380, 2015. [29] Timothy Duff, Cvetelina Hill, Anders Jensen, Kisun Lee, Anton Leykin, and Jeff Sommars. Solving polynomial systems via homotopy continuation and monodromy. IMA Journal of Numerical Analysis, 39(3):1421–1446, 2019. [30] Timothy Duff, Kathl´en Kohn, Anton Leykin, and Tomas Pajdla.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Timothy",
+                "Duff",
+                "Anton",
+                "Leykin",
+                "matrix",
+                "Counting",
+                "invari",
+                "ant",
+                "sets",
+                "Journal"
+            ]
+        }
+    },
+    {
+        "id": "c95c85e0-5728-4f10-91ad-729b8259d47d",
+        "title": "",
+        "chunk_text": "PLMP–[oint-Line Minimal Problems in Complete Multi-view Visi- bility. IEEE Transactions on Pattern Analysis and Machine Intelli- gence, 46(1):421–435, 2023. 32 [31] Timothy Duff, Viktor Korotynskiy, Tomas Pajdla, and Margaret Re- gan. Using monodromy to recover symmetries of polynomial systems. In Proceedings of the International Symposium on Symbolic & Alge- braic Computation (ISSAC 2023), pages 251–259. ACM, New York, [2023] ©2023.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "PLMP",
+                "Visi",
+                "Minimal",
+                "Problems",
+                "Complete",
+                "Multi-view",
+                "bility",
+                "oint-Line",
+                "IEEE",
+                "Intelli"
+            ]
+        }
+    },
+    {
+        "id": "5413bc7c-31d0-4194-aa8f-02fdf084fa08",
+        "title": "",
+        "chunk_text": "[32] Timothy Duff, Viktor Korotynskiy, Tomas Pajdla, and Margaret H. Regan. Galois/monodromy groups for decomposing minimal prob- lems in 3D reconstruction. SIAM Journal on Applied Algebra and Geometry, 6(4):740–772, 2022. [33] Timothy Duff and Kisun Lee. Certified homotopy tracking using the Krawczyk method. In ISSAC’24—Proceedings of the 2024 Inter- national Symposium on Symbolic and Algebraic Computation, pages 274–282. ACM, New York, [2024] ©2024.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Viktor",
+                "Korotynskiy",
+                "Tomas",
+                "Pajdla",
+                "Regan",
+                "Margaret",
+                "Timothy",
+                "Duff",
+                "SIAM",
+                "Geometry"
+            ]
+        }
+    },
+    {
+        "id": "730e3a1d-18ca-4861-9689-789d10ed4fd5",
+        "title": "",
+        "chunk_text": "[34] Timothy Duff, Anton Leykin, and Jose Israel Rodriguez. u- generation: solving systems of polynomials equation-by-equation. Numer. Algorithms, 95(2):813–838, 2024. [35] Timothy Duff and Felix Rydell. Metric multiview geometry–a cata- logue in low dimensions. arXiv preprint arXiv:2402.00648, 2024. [36] Alexander Esterov. Galois theory for general systems of polynomial equations. Compositio Mathematica, 155(2):229–245, 2019. [37] Alexander Esterov and Lionel Lang.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Anton",
+                "Leykin",
+                "Rodriguez",
+                "Jose",
+                "Israel",
+                "Timothy",
+                "Duff",
+                "Alexander",
+                "Esterov",
+                "generation"
+            ]
+        }
+    },
+    {
+        "id": "5dc6fcdd-ac75-400d-9081-0e6bb4f5491a",
+        "title": "",
+        "chunk_text": "Sparse polynomial equations and other enumerative problems whose Galois groups are wreath prod- ucts. Selecta Mathematica (New Series), 28(2):Paper No. 22, 35, 2022. [38] Benson Farb and Jesse Wolfson. Resolvent degree, Hilbert’s 13th problem and geometry. L’Enseignement Math´ematique, 65(3-4):303– 376, 2019. [39] Martin A Fischler and Robert C Bolles. Random sample consensus: a paradigm for model fitting with applications to image analysis and automated cartography.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Galois",
+                "ucts",
+                "Sparse",
+                "prod",
+                "polynomial",
+                "equations",
+                "enumerative",
+                "groups",
+                "wreath",
+                "Mathematica"
+            ]
+        }
+    },
+    {
+        "id": "e77c5f02-49a8-47c9-a043-b1e6523cf2b1",
+        "title": "",
+        "chunk_text": "Communications of the ACM, 24(6):381– 395, 1981. [40] Patrizia Gianni and Teo Mora. Algebraic solution of systems of poly- nomial equations using Groebner bases. In Applied algebra, algebraic algorithms and error-correcting codes (Menorca, 1987), volume 356 of Lecture Notes in Comput. Sci., pages 247–257. Springer, Berlin, 1989. [41] Daniel R. Grayson and Michael E. Stillman. Macaulay2, a software system for research in algebraic geometry. Available at http://www2. macaulay2.com.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "ACM",
+                "Communications",
+                "Patrizia",
+                "Mora",
+                "Algebraic",
+                "Gianni",
+                "Teo",
+                "Menorca",
+                "Berlin",
+                "Comput"
+            ]
+        }
+    },
+    {
+        "id": "92fa8d2b-d2a5-41a6-9909-0bf372298594",
+        "title": "",
+        "chunk_text": "[42] Alexandre Guillemot and Pierre Lairez. Validated numerics for al- gebraic path tracking. In ISSAC’24—Proceedings of the 2024 Inter- national Symposium on Symbolic and Algebraic Computation, pages 36–45. ACM, New York, [2024] ©2024. [43] Richard Hartley and Andrew Zisserman. Multiple view geometry in computer vision. Cambridge university press, 2003. 33 [44] Richard I Hartley and Peter Sturm. Triangulation. Computer vision and image understanding, 68(2):146–157, 1997.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Alexandre",
+                "Lairez",
+                "Guillemot",
+                "Pierre",
+                "Richard",
+                "Hartley",
+                "Inter",
+                "ACM",
+                "Proceedings",
+                "Computation"
+            ]
+        }
+    },
+    {
+        "id": "bd2e61a5-5765-4e16-b7a3-fff1f12c841f",
+        "title": "",
+        "chunk_text": "[45] Jonathan Hauenstein, Jose Israel Rodriguez, and Bernd Sturmfels. Maximum likelihood for matrices with rank constraints. J. Algebr. Stat., 5(1):18–38, 2014. [46] Jonathan D. Hauenstein, Jose Israel Rodriguez, and Frank Sottile. Numerical computation of Galois groups. Found. Comput. Math., 18(4):867–890, 2018. [47] Paul Alexander Helminck, Oskar Henriksson, and Yue Ren. A trop- ical method for solving parametrized polynomial systems. arXiv preprint arXiv:2409.13288, 2024.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Sturmfels",
+                "Bernd",
+                "Jose",
+                "Rodriguez",
+                "Jonathan",
+                "Hauenstein",
+                "Israel",
+                "Algebr",
+                "Sottile",
+                "arXiv"
+            ]
+        }
+    },
+    {
+        "id": "f1d148d8-c0d6-450a-b4d2-ea3b0a262c29",
+        "title": "",
+        "chunk_text": "[48] Serkan Ho¸sten, Amit Khetan, and Bernd Sturmfels. Solving the like- lihood equations. Foundations of Computational Mathematics. The Journal of the Society for the Foundations of Computational Mathe- matics, 5(4):389–407, 2005. [49] Petr Hruby, Timothy Duff, and Marc Pollefeys. Efficient solution of point-line absolute pose. In Proceedings of the IEEE/CVF Con- ference on Computer Vision and Pattern Recognition, pages 21316– 21325, 2024.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Serkan",
+                "Amit",
+                "Khetan",
+                "Sturmfels",
+                "Bernd",
+                "sten",
+                "Computational",
+                "Foundations",
+                "Mathematics",
+                "Mathe"
+            ]
+        }
+    },
+    {
+        "id": "c3701a0d-d764-443f-adc4-c0ff96d4eab0",
+        "title": "",
+        "chunk_text": "[50] Petr Hruby, Viktor Korotynskiy, Timothy Duff, Luke Oeding, Marc Pollefeys, Tomas Pajdla, and Viktor Larsson. Four-view geometry with unknown radial distortion. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, pages 8990–9000, 2023. [51] Birkett Huber and Bernd Sturmfels. A polyhedral method for solving sparse polynomial systems. Mathematics of Computation, 64(212):1541–1555, 1995. [52] David L. Johnson.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Viktor",
+                "Petr",
+                "Hruby",
+                "Korotynskiy",
+                "Timothy",
+                "Duff",
+                "Luke",
+                "Oeding",
+                "Marc",
+                "Pollefeys"
+            ]
+        }
+    },
+    {
+        "id": "3c0703fb-6569-42e1-9f22-45b8f8152f6d",
+        "title": "",
+        "chunk_text": "Minimal permutation representations of finite groups. American Journal of Mathematics, 93:857–866, 1971. [53] Kim Kiehn, Albin Ahlb¨ack, and Kathl´en Kohn. PLMP–Point-Line Minimal Problems for Projective SfM. 2025. [54] Joe Kileel and Kathl´en Kohn. Snapshot of algebraic vision. arXiv preprint arXiv:2210.11443, 2022. [55] Anatoliy Kouchnirenko. Poly`edres de Newton et nombres de Milnor. Inventiones Mathematicae, 32(1):1–31, 1976. [56] L. G. Kov´acs and Cheryl E. Praeger.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Kohn",
+                "Kathl´en",
+                "groups",
+                "Minimal",
+                "Mathematics",
+                "permutation",
+                "representations",
+                "finite",
+                "PLMP",
+                "Journal"
+            ]
+        }
+    },
+    {
+        "id": "ccc0844a-bbed-4b7a-a337-7c21fb4c2aec",
+        "title": "",
+        "chunk_text": "On minimal faithful permu- tation representations of finite groups. Bulletin of the Australian Mathematical Society, 62(2):311–317, 2000. [57] Khazhgali Kozhasov, Alan Muniz, Yang Qi, and Luca Sodomaco. On the minimal algebraic complexity of the rank-one approximation problem for general inner products. arXiv preprint arXiv:2309.15105, 2023. [58] Erwin Kruppa. ¨Uber einige orientierungsprobleme der photogram- metrie.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "permu",
+                "tation",
+                "groups",
+                "Society",
+                "faithful",
+                "representations",
+                "finite",
+                "Australian",
+                "Mathematical",
+                "Khazhgali"
+            ]
+        }
+    },
+    {
+        "id": "01590bab-5dd2-4728-946f-6bcefe27de18",
+        "title": "",
+        "chunk_text": "Sitzungsberichte der mathematisch-naturwissenschaftlichen Klasse der kaiserlichen Akademie der Wissenschaften, Abteilung II a, 121(1):3–16, 1912. 34 [59] Kaie Kubjas, Olga Kuznetsova, and Luca Sodomaco. Algebraic de- gree of optimization over a variety with an application to p-norm distance degree. arXiv preprint arXiv:2105.07785, 2021. [60] Zuzana Kukelova, Martin Bujnak, and Tom´as Pajdla. Polyno- mial eigenvalue solutions to minimal problems in computer vision.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Wissenschaften",
+                "Abteilung",
+                "der",
+                "Klasse",
+                "Akademie",
+                "Sitzungsberichte",
+                "Kaie",
+                "Kubjas",
+                "Olga",
+                "Kuznetsova"
+            ]
+        }
+    },
+    {
+        "id": "4c5ac70b-53cf-4c33-8b73-83ad1c175c34",
+        "title": "",
+        "chunk_text": "IEEE Transactions on Pattern Analysis and Machine Intelligence, 34(7):1381–1393, 2012. [61] Viktor Larsson, Kalle ˚Astr¨om, and Magnus Oskarsson. Efficient solvers for minimal problems by syzygy-based reduction. In 2017 IEEE Conference on Computer Vision and Pattern Recognition, CVPR 2017, Honolulu, HI, USA, July 21-26, 2017, pages 2383–2392. IEEE Computer Society, 2017. [62] Viktor Larsson, Nicolas Zobernig, Kasim Taskin, and Marc Pollefeys.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Intelligence",
+                "Transactions",
+                "Analysis",
+                "Machine",
+                "IEEE",
+                "Viktor",
+                "Larsson",
+                "Pattern",
+                "Kalle",
+                "Astr"
+            ]
+        }
+    },
+    {
+        "id": "b4a7279b-7da1-484d-a74b-759e61aca26c",
+        "title": "",
+        "chunk_text": "Calibration-free structure-from-motion with calibrated radial trifocal tensors. In European Conference on Computer Vision, pages 382–399. Springer, 2020. [63] Anton Leykin and Frank Sottile. Galois groups of Schubert prob- lems via homotopy computation. Mathematics of Computation, 78(267):1749–1765, 2009. [64] Anton Leykin and Josephine Yu. Beyond polyhedral homotopies. Journal of Symbolic Computation, 91:173–180, 2019. [65] Shaowei Lin and Bernd Sturmfels.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Calibration-free",
+                "computation",
+                "Anton",
+                "tensors",
+                "Leykin",
+                "Vision",
+                "calibrated",
+                "radial",
+                "trifocal",
+                "European"
+            ]
+        }
+    },
+    {
+        "id": "dee6fdd5-2a9e-4f4f-a27a-061c30accffe",
+        "title": "",
+        "chunk_text": "Polynomial relations among prin- cipal minors of a 4×4-matrix. Journal of Algebra, 322(11):4121–4131, 2009. [66] Julia Lindberg, Carlos Am´endola, and Jose Israel Rodriguez. Esti- mating gaussian mixtures using sparse polynomial moment systems. SIAM Journal on Mathematics of Data Science, 7(1):224–252, 2025. [67] Julia Lindberg, Leonid Monin, and Kemal Rose. The algebraic degree of sparse polynomial optimization. arXiv preprint arXiv:2308.07765, 2023.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Julia",
+                "Lindberg",
+                "prin",
+                "cipal",
+                "Polynomial",
+                "Algebra",
+                "relations",
+                "minors",
+                "Journal",
+                "Carlos"
+            ]
+        }
+    },
+    {
+        "id": "e9dd5043-66b2-4214-a2b5-2e3bb696a256",
+        "title": "",
+        "chunk_text": "[68] Yi Ma, Stefano Soatto, Jana Koˇseck´a, and Shankar Sastry. An Invi- tation to 3-D Vision: from Images to Geometric Models, volume 26. Springer, 2004. [69] Abraham Mart´ın del Campo and Jose Israel Rodriguez. Critical points via monodromy and local methods. Journal of Symbolic Com- putation, 79:559–574, 2017. [70] Laurentiu G. Maxim, Jose I. Rodriguez, and Botong Wang. Euclidean distance degree of the multiview variety. SIAM Journal on Applied Algebra and Geometry, 4(1):28–48, 2020.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Stefano",
+                "Soatto",
+                "Jana",
+                "Koˇseck´a",
+                "Sastry",
+                "Shankar",
+                "Rodriguez",
+                "Vision",
+                "Jose",
+                "Invi"
+            ]
+        }
+    },
+    {
+        "id": "0221cbe9-ba66-40cd-86a4-87a50342a61b",
+        "title": "",
+        "chunk_text": "[71] David Nist´er. An efficient solution to the five-point relative pose problem. IEEE transactions on pattern analysis and machine intel- ligence, 26(6):756–770, 2004. [72] David Nist´er, Richard I. Hartley, and Henrik Stew´enius. Using Galois theory to prove structure from motion algorithms are optimal. In 2007 IEEE Computer Society Conference on Computer Vision and Pattern Recognition (CVPR 2007), 18-23 June 2007, Minneapolis, Minnesota, USA. IEEE Computer Society, 2007.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "David",
+                "Nist´er",
+                "IEEE",
+                "Computer",
+                "Society",
+                "pattern",
+                "CVPR",
+                "Minneapolis",
+                "Minnesota",
+                "USA"
+            ]
+        }
+    },
+    {
+        "id": "fd027837-d810-4f7a-ab33-10641b818a19",
+        "title": "",
+        "chunk_text": "35 [73] Giorgio Ottaviani, Pierre-Jean Spaenlehauer, and Bernd Sturmfels. Exact solutions in structured low-rank approximation. SIAM Journal on Matrix Analysis and Applications, 35(4):1521–1542, 2014. [74] Karl Pearson. Contributions to the mathematical theory of evolution. Philosophical Transactions of the Royal Society of London. A, 185:71– 110, 1894. [75] Felix Rydell, Georg B¨okman, Fredrik Kahl, and Kathl´en Kohn.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Giorgio",
+                "Ottaviani",
+                "Spaenlehauer",
+                "Sturmfels",
+                "Bernd",
+                "Pierre-Jean",
+                "SIAM",
+                "Applications",
+                "Karl",
+                "Pearson"
+            ]
+        }
+    },
+    {
+        "id": "68252aa8-f94d-42e1-84a5-01ae65992477",
+        "title": "",
+        "chunk_text": "A framework for reducing the complexity of geometric vision problems and its application to two-view triangulation with approximation bounds. arXiv preprint arXiv:2503.08142, 2025. [76] Jean-Pierre Serre. Topics in Galois theory, volume 1 of Research Notes in Mathematics. Jones and Bartlett Publishers, Boston, MA, 1992. Lecture notes prepared by Henri Damon [Henri Darmon], With a foreword by Darmon and the author. [77] Andrew J. Sommese and Charles W. Wampler, II.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "bounds",
+                "framework",
+                "reducing",
+                "complexity",
+                "geometric",
+                "vision",
+                "problems",
+                "application",
+                "two-view",
+                "triangulation"
+            ]
+        }
+    },
+    {
+        "id": "6ad39360-2855-4c76-8ab7-a291c9c1456b",
+        "title": "",
+        "chunk_text": "The numerical solution of systems of polynomials. World Scientific Publishing Co. Pte. Ltd., Hackensack, NJ, 2005. Arising in engineering and science. [78] Frank Sottile and Thomas Yahl. Galois groups in enumerative geom- etry and applications. arXiv preprint arXiv:2108.07905, 2021. [79] Richard P. Stauduhar. The determination of Galois groups. Mathe- matics of Computation, 27:981–996, 1973. [80] Henrik Stew´enius, Frederik Schaffalitzky, and David Nist´er.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "polynomials",
+                "numerical",
+                "solution",
+                "systems",
+                "Scientific",
+                "Publishing",
+                "Hackensack",
+                "Galois",
+                "groups",
+                "arXiv"
+            ]
+        }
+    },
+    {
+        "id": "dc5ee70d-5c1e-4e1a-83d2-915b6d95a0df",
+        "title": "",
+        "chunk_text": "How hard is 3-view triangulation really? In Tenth IEEE International Conference on Computer Vision (ICCV’05) Volume 1, volume 1, pages 686–693. IEEE, 2005. [81] Peter Sturm. A historical survey of geometric computer vision. In International Conference on Computer Analysis of Images and Pat- terns, pages 1–8. Springer, 2011. [82] Bernd Sturmfels and Simon Telen. Likelihood equations and scatter- ing amplitudes. Algebraic Statistics, 12(2):167–186, 2021. [83] Seth Sullivant.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Volume",
+                "pages",
+                "Vision",
+                "Computer",
+                "Conference",
+                "IEEE",
+                "International",
+                "triangulation",
+                "hard",
+                "Tenth"
+            ]
+        }
+    },
+    {
+        "id": "18a6018b-fa3e-4117-a58c-9a3232bfad4f",
+        "title": "",
+        "chunk_text": "Algebraic statistics, volume 194 of Graduate Studies in Mathematics. American Mathematical Society, Providence, RI, 2018. [84] SriRam Thirthala and Marc Pollefeys. Radial multi-focal tensors. International Journal of Computer Vision, 96(2):195–211, 2012. [85] Roger Y. Tsai. A versatile camera calibration technique for high- accuracy 3D machine vision metrology using off-the-shelf TV cameras and lenses. IEEE Journal on Robotics and Automation, 3(4):323–344, 1987. [86] Madeleine Aster Weinstein.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Mathematics",
+                "Graduate",
+                "Studies",
+                "volume",
+                "Providence",
+                "Algebraic",
+                "statistics",
+                "Society",
+                "Journal",
+                "Mathematical"
+            ]
+        }
+    },
+    {
+        "id": "32355d5b-96ca-4fda-9515-57b0019cd440",
+        "title": "",
+        "chunk_text": "Metric Algebraic Geometry. PhD thesis, UC Berkeley, 2021. Department of Mathematics, University of Missouri, Columbia MO, 65211 E-mail address: tduff@missouri.edu 36",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Geometry",
+                "Algebraic",
+                "Metric",
+                "Berkeley",
+                "Mathematics",
+                "University",
+                "Missouri",
+                "Columbia",
+                "E-mail",
+                "PhD"
+            ]
+        }
+    }
+]
