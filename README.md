@@ -3,7 +3,6 @@
 
 This guide documents the full pipeline for preparing and fine-tuning a small language model like **Mistral 7B** on custom scientific texts (e.g., research papers from arXiv in the field of computation complexity), using a consumer GPU like RTX 3060.
 
----
 
 ## 🧾 Overview of the Pipeline
 
@@ -14,9 +13,8 @@ This guide documents the full pipeline for preparing and fine-tuning a small lan
 5. **Convert data to a format suitable for fine-tuning**
 6. **Fine-tune a causal LLM using LoRA on a local GPU**
 
----
 
-## 1. 📄 Extract and Chunk Text from PDF
+## 1.  Extract and Chunk Text from PDF
 
 Python script used to:
 - Read scientific PDFs
@@ -27,7 +25,7 @@ Python script used to:
 **Key script:** `pdf_to_json.py`
 
 ```python
-# Highlight: chunking and keyword extraction logic
+# chunking and keyword extraction logic
 chunk_text()
 extract_keywords()
 structure_data()
@@ -38,7 +36,7 @@ Each JSON looks like this:
 ```json
 {
   "id": "uuid",
-  "title": "",
+  "title": "Doc Title",
   "chunk_text": "Scientific content...",
   "metadata": {
     "author": "Author",
@@ -47,29 +45,21 @@ Each JSON looks like this:
 }
 ```
 
----
+## 2. 🧪 Convert Chunks to Fine-tuning Format
 
-## 2. 🧠 Embed Data in ChromaDB (Optional for RAG)
+Since the original data often lacks meaningful titles, we generate **task-specific prompts** based on each chunk’s keywords to make the dataset more specialized.
 
-The following script:
-- Loads the SentenceTransformer model (`all-MiniLM-L6-v2`)
-- Converts each `chunk_text` to an embedding
-- Stores embeddings and metadata in a persistent ChromaDB collection
-
-**Key script:** `json_to_chromadb.py`
-
-⚠️ Note: Keywords must be stored as a comma-separated string, not a list (due to ChromaDB constraints):
+We use a set of **prompt templates** (shown below) and insert the top keywords extracted from every chunk to produce a prompt tailored for that specific paragraph.
 
 ```python
-"keywords": ", ".join(keywords)
+SPECIALIZED_PROMPTS = [
+    "Explain a concept involving {keywords} in computational complexity.",
+    "This is a technical discussion about {keywords} in theoretical computer science.",
+    "Read and understand this section about {keywords} from a research paper.",
+    "Scientific context on {keywords} and their role in graph theory.",
+    "Understanding the computational aspects of {keywords}."
+]
 ```
-
----
-
-## 3. 🧪 Convert Chunks to Fine-tuning Format
-
-Since original data lacks meaningful titles, we generate task-specific prompts based on chunk metadata (keywords).
-
 **Prompt template examples:**
 
 - `Explain a concept involving {keywords} in computational complexity.`
