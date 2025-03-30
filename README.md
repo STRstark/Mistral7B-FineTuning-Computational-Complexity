@@ -166,13 +166,5 @@ print(tokenizer.decode(outputs[0], skip_special_tokens=True))
 - Monitor GPU memory with `nvidia-smi`
 
 
-## ✅ Future Extensions
-
-- Replace prompt generation with actual instructions
-- Add evaluation script for generated outputs
-- Experiment with QLoRA + `trl` for chat-style tuning
-
-
-
 ## **Made with ❤️ and a single RTX 3060 :)**
 
