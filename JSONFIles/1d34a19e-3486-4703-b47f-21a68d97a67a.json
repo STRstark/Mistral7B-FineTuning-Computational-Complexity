@@ -1,0 +1,1958 @@
+[
+    {
+        "id": "f353838e-a7d7-429a-ab21-c46e2ce1e7c3",
+        "title": "",
+        "chunk_text": "Subgradient Method for System Identification with Non-Smooth Objectives Baturalp Yalcin and Javad Lavaei Abstract— This paper investigates a subgradient-based algo- rithm to solve the system identification problem for linear time-invariant systems with non-smooth objectives. This is essential for robust system identification in safety-critical applications.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Objectives",
+                "Abstract",
+                "Non-Smooth",
+                "Identification",
+                "Method",
+                "Baturalp",
+                "Yalcin",
+                "Javad",
+                "Lavaei",
+                "System"
+            ]
+        }
+    },
+    {
+        "id": "4d2b58dd-531b-42e1-92bc-0bc8fc5d66f7",
+        "title": "",
+        "chunk_text": "While existing work provides theoretical exact recovery guarantees using optimization solvers, the design of fast learning algorithms with convergence guarantees for practical use remains unexplored. We analyze the subgradient method in this setting where the optimization problems to be solved change over time as new measurements are taken, and we establish linear convergence results for both the best and Polyak step sizes after a burn-in period.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "guarantees",
+                "solvers",
+                "unexplored",
+                "optimization",
+                "convergence",
+                "existing",
+                "work",
+                "theoretical",
+                "exact",
+                "recovery"
+            ]
+        }
+    },
+    {
+        "id": "c0eaabf3-974f-476b-a5ef-a2bffad6e27a",
+        "title": "",
+        "chunk_text": "Additionally, we characterize the asymptotic convergence of the best average sub-optimality gap under diminishing and constant step sizes. Finally, we compare the time complexity of standard solvers with the subgradient algorithm and support our findings with experimental results. This is the first work to analyze subgradient algorithms for system identification with non-smooth objectives. I.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Additionally",
+                "sizes",
+                "characterize",
+                "asymptotic",
+                "convergence",
+                "average",
+                "sub-optimality",
+                "gap",
+                "diminishing",
+                "constant"
+            ]
+        }
+    },
+    {
+        "id": "ffb6ff47-388d-430e-b9b3-69a8c4f8b318",
+        "title": "",
+        "chunk_text": "INTRODUCTION Dynamical systems form the foundation of modern prob- lems, such as reinforcement learning, auto-regressive models, and control systems. These systems evolve based on their current state, with the system dynamics equations determining the next state. Due to the complexity of real-world systems, these dynamics are often unknown or difficult to model precisely. Learning the unknown dynamics of a dynamical system is known as the system identification problem.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "INTRODUCTION",
+                "systems",
+                "lems",
+                "Dynamical",
+                "system",
+                "dynamics",
+                "prob",
+                "auto-regressive",
+                "state",
+                "form"
+            ]
+        }
+    },
+    {
+        "id": "521cc512-44b4-4040-8ea8-d5ca4aaec998",
+        "title": "",
+        "chunk_text": "The system identification problem has been extensively studied in the literature [1], [2]. The least-squares estimator (LSE) is the most widely studied approach for this problem as it provides a closed-form solution. Early research focused on the asymptotic (infinite-time) convergence properties of LSE [3].",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "LSE",
+                "literature",
+                "problem",
+                "studied",
+                "system",
+                "identification",
+                "extensively",
+                "estimator",
+                "solution",
+                "infinite-time"
+            ]
+        }
+    },
+    {
+        "id": "56dc6fdc-a89f-43b0-93fa-ce7f51bc844e",
+        "title": "",
+        "chunk_text": "Recently, finite-time (non-asymptotic) analyses gained popularity, leveraging high-dimensional statistical techniques for both linear [4], [5], [6], [7] and nonlinear dynamical systems [8], [9], [10]. See [11] for a survey. Traditionally, both asymptotic and non-asymptotic analyses of LSE focused on systems with independent and identically distributed (sub)- Gaussian disturbances.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Recently",
+                "finite-time",
+                "popularity",
+                "leveraging",
+                "linear",
+                "gained",
+                "high-dimensional",
+                "statistical",
+                "techniques",
+                "nonlinear"
+            ]
+        }
+    },
+    {
+        "id": "5eb76e98-124b-47f2-a3e9-1dfe49f464cc",
+        "title": "",
+        "chunk_text": "However, this assumption is often unrealistic for safety-critical systems such as autonomous vehicles, unmanned aerial vehicles, and power grids. In these settings, disturbances may be designed by an adversarial agent, leading to dependencies across time and arbitrary variations. Since LSE is susceptible to outliers and temporal dependen- cies, recent research focused on robust non-smooth estimators This material is based upon work supported in part by the U. S.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "vehicles",
+                "unmanned",
+                "grids",
+                "assumption",
+                "unrealistic",
+                "safety-critical",
+                "systems",
+                "autonomous",
+                "aerial",
+                "power"
+            ]
+        }
+    },
+    {
+        "id": "2eb44732-3fcb-4fd3-866b-97e5d9650c11",
+        "title": "",
+        "chunk_text": "Army Research Laboratory and the U. S. Army Research Office under grant number W911NF2010219. It was also supported by the Office of Naval Research under grant number N000142412673, as well as AFOSR, NSF, and the UC Noyce Initiative. The authors are with the University of California, Berkeley. E-mail: {byalcin, lavaei}@berkeley.edu for safety-critical systems, particularly lasso-type estimators.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Research",
+                "Laboratory",
+                "Army",
+                "Office",
+                "number",
+                "grant",
+                "NSF",
+                "Berkeley",
+                "AFOSR",
+                "Initiative"
+            ]
+        }
+    },
+    {
+        "id": "fb14ac80-9730-4aad-ade3-28934bdbca9c",
+        "title": "",
+        "chunk_text": "[12] and [13] analyzed the properties of these estimators through the lens of the Null Space Property, a key concept in lasso analysis. Later works introduced a disturbance structure where disturbance vectors are zero with probability 1 −p and nonzero with probability p.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Property",
+                "Null",
+                "Space",
+                "analyzed",
+                "analysis",
+                "properties",
+                "estimators",
+                "lens",
+                "key",
+                "concept"
+            ]
+        }
+    },
+    {
+        "id": "e9b6e874-56d5-4a5f-94a4-4c348f3c9d8f",
+        "title": "",
+        "chunk_text": "For any p between 0 and 1, [14] and [15] proved that lasso-type estimators with non- smooth objectives can exactly recover system dynamics for linear and parameterized nonlinear systems, respectively, with probability approaching one. Additionally, [16] showed that asymmetric disturbances with nonzero probability p could be transformed into zero-mean disturbances with probability 2p, enabling exact recovery for any disturbance structure where p < 1/2.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "probability",
+                "proved",
+                "smooth",
+                "lasso-type",
+                "estimators",
+                "objectives",
+                "recover",
+                "dynamics",
+                "linear",
+                "parameterized"
+            ]
+        }
+    },
+    {
+        "id": "b20bda17-466d-4653-984a-5ef1c9075c0f",
+        "title": "",
+        "chunk_text": "These non-asymptotic analyses leverage techniques from modern high-dimensional probability and statistics [17], [18]. Despite their strong learning properties, these approaches rely on convex optimization solvers, which become computationally prohibitive as the system state dimension and time horizon grow. Safety-critical systems require rapid estimation to ensure real-time control without delays.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "statistics",
+                "non-asymptotic",
+                "analyses",
+                "leverage",
+                "techniques",
+                "modern",
+                "high-dimensional",
+                "probability",
+                "properties",
+                "solvers"
+            ]
+        }
+    },
+    {
+        "id": "cf9723e3-472d-44b4-8562-dc7c94d51244",
+        "title": "",
+        "chunk_text": "Thus, it is imperative to design fast algorithms that efficiently solve lasso-type non-smooth estimators within a reasonable time frame. Due to the non-smoothness of the objective, gradient- and Hessian-based first-order and second-order algorithms are not viable options in this context. Instead, we employ the subgradient method, a well-established technique in the literature, as the lasso-type estimator is a convex optimization problem.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "frame",
+                "algorithms",
+                "imperative",
+                "design",
+                "fast",
+                "efficiently",
+                "solve",
+                "non-smooth",
+                "reasonable",
+                "time"
+            ]
+        }
+    },
+    {
+        "id": "997ef7ac-7c35-4a15-80d7-f157f0efe7d9",
+        "title": "",
+        "chunk_text": "Unlike gradient-based methods, subgradient methods do not guarantee descent at each iteration. However, existing results show that the best sub-optimality gap asymptotically converges to zero over time with both constant and diminish- ing step sizes. For a comprehensive overview of subgradient methods for non-smooth objectives, see [19], [20], [21], [22], [23].",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Unlike",
+                "iteration",
+                "methods",
+                "subgradient",
+                "gradient-based",
+                "guarantee",
+                "descent",
+                "existing",
+                "diminish",
+                "ing"
+            ]
+        }
+    },
+    {
+        "id": "34a41042-92fa-4e5b-9759-99a57991d26a",
+        "title": "",
+        "chunk_text": "Closed-form solutions and gradient-based methods are widely used in system identification problems, as the literature has primarily focused on LSE or other smooth estimators for linear systems [24]. Nonlinear system identification is inherently more complex than its linear counterpart [25], yet existing estimation techniques still rely on smooth penalty functions. In contrast, subgradient methods have not been explored in the system identification context.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "LSE",
+                "identification",
+                "system",
+                "Closed-form",
+                "problems",
+                "smooth",
+                "linear",
+                "solutions",
+                "gradient-based",
+                "widely"
+            ]
+        }
+    },
+    {
+        "id": "46a31f12-dd1b-4e53-8c3a-95abb47f484a",
+        "title": "",
+        "chunk_text": "Thus, this paper is the first to analyze the subgradient algorithm for the system identification problem. It is important to note that we do not apply the subgradient method to a single optimization problem and instead apply it to a sequence of time-varying problems due to the fact that as new measurements are taken, the optimization problem to be solved changes as well. arXiv:2503.16673v1 [math.OC] 20 Mar 2025 Notations: For a matrix Z, ∥Z∥F denotes its Frobenius norm.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "problem",
+                "subgradient",
+                "paper",
+                "analyze",
+                "algorithm",
+                "system",
+                "identification",
+                "optimization",
+                "apply",
+                "Mar"
+            ]
+        }
+    },
+    {
+        "id": "e38bd6c4-1e28-409d-971c-53bd9029d451",
+        "title": "",
+        "chunk_text": "For two matrices Z1 and Z2, we use ⟨Z1,Z2⟩and Z1 ⊗Z2 to denote the inner product and Kronecker product, respectively. For a matrix Z, vec(Z) is the usual vectorization operation by stacking the columns of the matrix Z into a vector. For a vector z, ∥z∥2 denotes its ℓ2-norm. ∠z1z2 denotes the angle between two vectors and ∠vec(Z1)vec(Z2) is the angle between two matrices Z1 and Z2.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "vec",
+                "Kronecker",
+                "product",
+                "matrices",
+                "matrix",
+                "vector",
+                "denotes",
+                "angle",
+                "denote",
+                "vectors"
+            ]
+        }
+    },
+    {
+        "id": "e57af412-7b53-4c7d-a241-a3b4653ce659",
+        "title": "",
+        "chunk_text": "Given two functions f and g, the notation f(x) = Θ(g(x)) means that there exist universal positive constants c1 and c2 such that c1g(x) ≤ f(x) ≤c2g(x). Similarly, f(x) ≤O(g(x)) implies that there exists a universal positive constant c3 such that f(x) ≤c3g(x). In stands for the n×n identity matrix and 0n is the vector of zeros with dimension n. II.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "positive",
+                "universal",
+                "constants",
+                "constant",
+                "functions",
+                "notation",
+                "exist",
+                "exists",
+                "Similarly",
+                "implies"
+            ]
+        }
+    },
+    {
+        "id": "1c37e6c1-c262-4d73-8337-e8921a773acb",
+        "title": "",
+        "chunk_text": "NON-SMOOTH ESTIMATOR AND DISTURBANCE MODEL We consider a linear time-invariant dynamical system of order n with the system update equation xt+1 = ¯Axt + ¯dt, t = 0,1,...,T −1, where ¯A ∈Rn×n is the unknown system matrix and ¯dt ∈Rn are unknown system disturbances. Our goal is to estimate ¯A using the state samples {xt}T t=0 obtained from a single system initialization.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Axt",
+                "system",
+                "unknown",
+                "ESTIMATOR",
+                "MODEL",
+                "DISTURBANCE",
+                "NON-SMOOTH",
+                "linear",
+                "time-invariant",
+                "dynamical"
+            ]
+        }
+    },
+    {
+        "id": "2cbdf412-dbd5-4d7e-bf62-bf9b822d3364",
+        "title": "",
+        "chunk_text": "Note we only study the autonomous case due to space restrictions and the generalization to the case with inputs is straightforward. Traditionally, the following LSE has been widely studied in the literature: min A∈Rn×n T−1 ∑ i=0 ∥xt+1 −Axt∥2 2. (LSE) However, the LSE is vulnerable to outliers and adversarial disturbances. In safety-critical system identification, a new popular alternative is the following non-smooth estimator: min A∈Rn×n T−1 ∑ i=0 ∥xt+1 −Axt∥2.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "case",
+                "Axt",
+                "LSE",
+                "Note",
+                "straightforward",
+                "min",
+                "study",
+                "autonomous",
+                "due",
+                "space"
+            ]
+        }
+    },
+    {
+        "id": "9b8b8175-96d8-42fb-9ea0-fe986237d9de",
+        "title": "",
+        "chunk_text": "(NSE) The primary objective of this non-smooth estimator is to achieve exact recovery in finite time, which is an essential feature for safety-critical applications such as power-grid mon- itoring, unmanned aerial vehicles, and autonomous vehicles. In these scenarios, the system should be learned from a single trajectory (since multiple initialization is often infeasible) and, moreover, it can be exposed to adversarial agents. Even under i.i.d.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "NSE",
+                "vehicles",
+                "itoring",
+                "time",
+                "mon",
+                "unmanned",
+                "primary",
+                "objective",
+                "non-smooth",
+                "estimator"
+            ]
+        }
+    },
+    {
+        "id": "726b0f95-3736-4cb0-91f6-a2b84369ac60",
+        "title": "",
+        "chunk_text": "disturbance vectors, if ¯dt is non-zero at every time step t, the exact recovery of the ¯A is not attainable in finite time. Motivated by [15], we, therefore, introduce a disturbance model in which the disturbance vector ¯dt is zero at certain time instances. Definition 1 (Probabilistic sparsity model [15]). For each time instance t, the disturbance vector ¯dt is zero with probability 1 −p, where p ∈(0,1).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "disturbance",
+                "vector",
+                "time",
+                "vectors",
+                "non-zero",
+                "step",
+                "exact",
+                "recovery",
+                "attainable",
+                "finite"
+            ]
+        }
+    },
+    {
+        "id": "46dfb0e9-49b6-42d4-8ebd-8ba5e18f2848",
+        "title": "",
+        "chunk_text": "Furthermore, the time instances at which the disturbances are nonzero are independent of each other (while the nonzero disturbance values could be correlated). [15] showed that the estimator (LSE) fails to achieve exact recovery in finite time even when p < 1 and in the simplest case when the disturbance vectors are i.i.d. Gaussian. Consequently, it becomes essential to employ non-smooth estimators to enable exact recovery within a finite time horizon.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "nonzero",
+                "time",
+                "disturbance",
+                "correlated",
+                "LSE",
+                "instances",
+                "independent",
+                "exact",
+                "recovery",
+                "finite"
+            ]
+        }
+    },
+    {
+        "id": "99f911ec-e6d0-4980-ace2-690c6e168f04",
+        "title": "",
+        "chunk_text": "Furthermore, without specific assumptions on the system dynamics and disturbance vectors, exact recovery is unattainable in finite time. See Theorem 3 in [15]. First, we impose a sufficient condition for the system stability of the LTI system in Assumption 1 to guarantee learning under possibly large correlated disturbances. Assumption 1. The ground-truth ¯A satisfies ρ := ¯A 2 < 1.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "system",
+                "vectors",
+                "exact",
+                "time",
+                "Theorem",
+                "specific",
+                "dynamics",
+                "recovery",
+                "unattainable",
+                "finite"
+            ]
+        }
+    },
+    {
+        "id": "9b5baaac-6e3b-4d1f-af7d-122616906377",
+        "title": "",
+        "chunk_text": "If the disturbance vectors take arbitrary values and are chosen from a low-dimensional subspace, it is shown in [15] that learning the full system dynamics becomes infeasible. To address this, we define the filtration Ft := σ{x0,x1,...,xt}, and we add the semi-oblivious and sub-Gaussian disturbances assumption below based on [15]. Assumption 2 (Semi-Oblivious and sub-Gaussian distur- bances).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "subspace",
+                "infeasible",
+                "vectors",
+                "arbitrary",
+                "chosen",
+                "low-dimensional",
+                "shown",
+                "learning",
+                "full",
+                "system"
+            ]
+        }
+    },
+    {
+        "id": "4deb2c40-7cee-45dc-984d-ab34724d9af9",
+        "title": "",
+        "chunk_text": "Conditional on the filtration Ft and the event that ¯dt ̸= 0n, the attack vector ¯dt is defined by the product ℓt ˆdt, where 1) ˆdt ∈Rn and ℓt ∈R are independent conditional on Ft and ¯dt ̸= 0n; 2) ˆdt obeys the uniform distribution on the unit sphere whenever ¯dt ̸= 0n; 3) ℓt is zero-mean and sub-Gaussian with parameter σ. Assumption 2 implies that the disturbance vectors ¯dt are sub-Gaussian and temporally correlated (since ℓt may depend on previous disturbances).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "ˆdt",
+                "Conditional",
+                "sub-Gaussian",
+                "filtration",
+                "event",
+                "attack",
+                "defined",
+                "product",
+                "independent",
+                "obeys"
+            ]
+        }
+    },
+    {
+        "id": "23340965-fbd7-4a42-8f5a-8197c2832807",
+        "title": "",
+        "chunk_text": "This correlation better reflects real- world semi-oblivious attacks, where an adversarial agent can inject disturbances that depend on prior injections. Moreover, Assumption 2 ensures exploration of the entire state space, as the direction vector ˆdt is uniformly distributed on the unit sphere. In recent years, non-smooth estimators for system iden- tification gained traction [26], [27], [14], [15], [16].",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "real",
+                "world",
+                "attacks",
+                "injections",
+                "Assumption",
+                "correlation",
+                "reflects",
+                "semi-oblivious",
+                "adversarial",
+                "agent"
+            ]
+        }
+    },
+    {
+        "id": "ebdca724-2f54-4fd6-b267-f92e98df4d95",
+        "title": "",
+        "chunk_text": "These studies analyzed non-smooth estimators in a non-asymptotic framework under various disturbance models. Specifically, under Assumptions 1 and 2, [14] and [15] derived sample complexity bounds for exact recovery in finite time with high probability. However, they do not propose numerical algorithms and rely on existing convex optimization solvers, which suffer from two drawbacks. The first issue is that in practice (NSE) should be repeatedly solved for T = 1,2,...",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "models",
+                "studies",
+                "analyzed",
+                "non-smooth",
+                "estimators",
+                "non-asymptotic",
+                "framework",
+                "disturbance",
+                "Assumptions",
+                "NSE"
+            ]
+        }
+    },
+    {
+        "id": "b6c08090-5536-4815-b0df-4713f7d40105",
+        "title": "",
+        "chunk_text": "as new measurements are taken until a satisfactory model is obtained. This means that the methods in [15] and [16] require solving a convex optimization problem at each time step. In addition, the problem (NSE) at time T is translated into a second-order conic program with T + n2 scalar variables and T conic inequalities. Hence, the solver performance degrades significantly as the order of the system and the time horizon grow.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "obtained",
+                "time",
+                "measurements",
+                "satisfactory",
+                "model",
+                "problem",
+                "NSE",
+                "conic",
+                "require",
+                "step"
+            ]
+        }
+    },
+    {
+        "id": "763dd0f3-c8db-4f26-aee4-b74453911153",
+        "title": "",
+        "chunk_text": "Since safety-critical applications demand fast and efficient identification, convex optimization solvers are inefficient for real-time computation. To address these limitations, we investigate the subgradient method for learning system parameters. III. SUBGRADIENT METHOD Let fT(A) denote the objective function of (NSE) and ∂fT(A) denote its subdifferential at a point A and time period T. We denote a subgradient in the subdifferential as GA,T ∈ ∂fT(A).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "subgradient",
+                "identification",
+                "convex",
+                "computation",
+                "method",
+                "safety-critical",
+                "applications",
+                "demand",
+                "fast",
+                "efficient"
+            ]
+        }
+    },
+    {
+        "id": "6dcaf4ba-9dd5-4ded-a144-725785721931",
+        "title": "",
+        "chunk_text": "We first define the subdifferential of the ℓ2 norm. Definition 2 (Subdifferential of ℓ2 Norm). Let ∂∥x∥2 denote the subdifferential of the ℓ2 norm, i.e., ∂∥x∥2 = ( x ∥x∥2 , if x ̸= 0, {e : ∥e∥2 ≤1}, otherwise . The subdifferential is a unique point when x is nonzero, but it consists of all points within the unit ball when x = 0. Using the previous definition, we obtain the subdifferential of the objective function, ∂fT(A). Lemma 1.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "subdifferential",
+                "norm",
+                "Definition",
+                "define",
+                "denote",
+                "nonzero",
+                "point",
+                "points",
+                "Lemma",
+                "unique"
+            ]
+        }
+    },
+    {
+        "id": "6a3d600c-192f-4be3-9ecb-6af5e5d5b371",
+        "title": "",
+        "chunk_text": "The subdifferential of fT(·) at a point A is ∂fT(A) = ( − T−1 ∑ t=0 ∂∥xt+1 −Axt∥2 ⊗xt ) , and the subdifferential of the fT(·) at the point ¯A is ∂fT( ¯A) = ( −∑ t∈K ˆdt ⊗xt −∑ t̸∈K et ⊗xt : ∥et∥2 ≤1,∀t ̸∈K ) , where K := {t | ¯dt ̸= 0} is the set of time indices of nonzero disturbances and ˆdt := ¯dt/∥¯dt∥2,∀t ∈K , are the normalized disturbance directions. The proof of Lemma 1 is straightforward and follows from a property of the Minkowski sum over convex sets.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "subdifferential",
+                "ˆdt",
+                "Axt",
+                "point",
+                "directions",
+                "disturbances",
+                "time",
+                "indices",
+                "nonzero",
+                "normalized"
+            ]
+        }
+    },
+    {
+        "id": "e1ab2a80-f30e-4e5b-bd64-5ca981f111a8",
+        "title": "",
+        "chunk_text": "Furthermore, due to the convexity of fT(A), the next lemma provides a useful bound on the difference between the objective function values at two distinct points. Lemma 2 ([28]). Given two arbitrary points A,B ∈Rn×n and any subgradient GA,T ∈∂fT(A), it holds that fT(B) ≥fT(A)+⟨GA,T,B−A⟩. To find the matrix ¯A, we propose Algorithm 1 that relies on the subgradient method. In Step (i), the subdifferential of the objective function at the current estimate is calculated.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "lemma",
+                "due",
+                "convexity",
+                "bound",
+                "difference",
+                "distinct",
+                "points",
+                "objective",
+                "function",
+                "subgradient"
+            ]
+        }
+    },
+    {
+        "id": "56af2bd6-03d5-4b6b-ab59-3a2986a0711b",
+        "title": "",
+        "chunk_text": "Since this subdifferential possibly contains multiple values, we choose a subgradient from the subdifferential in Step (ii). After that, a step size is selected in Step (iii). In Step (iv), a subgradient update is performed. Lastly, we update the objective function with the new data point in Step (v).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Step",
+                "subdifferential",
+                "subgradient",
+                "possibly",
+                "multiple",
+                "choose",
+                "update",
+                "iii",
+                "Lastly",
+                "size"
+            ]
+        }
+    },
+    {
+        "id": "a52a76fc-44ac-49a8-8f6d-d0768cd138af",
+        "title": "",
+        "chunk_text": "The main feature of this algorithm is that we do not apply the subgradient algorithm to solve the current optimization problem (NSE) and instead we take one iteration to update our estimate of the matrix value at time t. Then, after a new measurement is taken, the optimization problem at time t +1 changes since an additional term is added to its objective function. Thus, as we update our estimates, the optimization problems also change over time.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "NSE",
+                "optimization",
+                "time",
+                "algorithm",
+                "problem",
+                "update",
+                "main",
+                "feature",
+                "apply",
+                "subgradient"
+            ]
+        }
+    },
+    {
+        "id": "c56c1271-a86e-4b2a-ab0c-6bbfc720beba",
+        "title": "",
+        "chunk_text": "We analyze the convergence of Algorithm 1 under different step size selection rules and show that although the objective function changes at each iteration, our algorithm convergences to the ¯A.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Algorithm",
+                "iteration",
+                "analyze",
+                "step",
+                "size",
+                "selection",
+                "rules",
+                "show",
+                "objective",
+                "function"
+            ]
+        }
+    },
+    {
+        "id": "1f1f97b1-06e2-4608-80a9-68cbceab80cf",
+        "title": "",
+        "chunk_text": "Algorithm 1 Subgradient Method for (NSE) Initialize ˆA(0) randomly for t = 0,...,T −1 do (i) Find ∂ft( ˆA(t)) = −∑t ℓ=0 ∂∥( ¯A−ˆA(t))xℓ+ ¯dℓ∥2 ⊗xℓ (ii) Choose G ˆA(t),t from ∂ft( ˆA(t)) (iii) Choose β (t) using an appropriate step size rule (iv) Update ˆA(t+1) = ˆA(t) −β (t)G ˆA(t),t (v) Update ft+1(A) = ft(A)+∥xt+1 −Axt∥2 end for Return ˆA(T) A.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Choose",
+                "Update",
+                "NSE",
+                "Find",
+                "Axt",
+                "Subgradient",
+                "Initialize",
+                "Method",
+                "Return",
+                "Algorithm"
+            ]
+        }
+    },
+    {
+        "id": "1b46b21f-231e-4f49-aad6-518f87f02928",
+        "title": "",
+        "chunk_text": "Subgradient Method with Best Step Size We analyze the subgradient method using the best step size, which is defined as the step size that maximizes improvement at each iteration. However, computing this step size requires knowledge of the ground-truth matrix ¯A, making it impractical in real-world applications. Nonetheless, studying this case offers valuable insights into the behavior of subgradient updates.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Step",
+                "Method",
+                "Size",
+                "Subgradient",
+                "iteration",
+                "analyze",
+                "defined",
+                "maximizes",
+                "improvement",
+                "computing"
+            ]
+        }
+    },
+    {
+        "id": "015b1230-3377-4b9c-8fa8-6d3583ea6414",
+        "title": "",
+        "chunk_text": "Let the step size in Algorithm 1 be chosen as β (t) = ⟨G ˆA(t),t, ˆA(t) −¯A⟩ ∥G ˆA(t),t∥2 F , It is shown in Appendix VII-A that this is the best step size possible. According to Theorem 1, the distance to the ground-truth matrix decreases by a factor of q 1−cos2( ˆθt) at each update with best step size. As long as this angle is not ±90◦or ±270◦, Algorithm 1 makes progress toward ¯A. Theorem 1.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "step",
+                "Appendix",
+                "size",
+                "Algorithm",
+                "Theorem",
+                "chosen",
+                "shown",
+                "VII-A",
+                "ˆθt",
+                "distance"
+            ]
+        }
+    },
+    {
+        "id": "76789dac-16ce-466d-91e4-3f6c4348e317",
+        "title": "",
+        "chunk_text": "Under the best step size for Algorithm 1, it holds that ∥ˆA(t+1) −¯A∥F ≤ q 1−cos2( ˆθt)∥ˆA(t) −¯A∥F, where ˆθT denotes the angle between ˆA(t) −¯A and G ˆA(t),t. If ˆθt is obtuse, the step size will be negative, which must be avoided. To this end, we establish a positive lower bound on cos( ˆθt) in Theorem 2 and show that this angle remains acute. To guarantee that, we define the burn-in period as the number of samples required for a theoretical exact recovery.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Algorithm",
+                "ˆθt",
+                "step",
+                "size",
+                "holds",
+                "denotes",
+                "angle",
+                "Theorem",
+                "obtuse",
+                "negative"
+            ]
+        }
+    },
+    {
+        "id": "70f52057-7cd2-4d0d-916d-edf873a39e42",
+        "title": "",
+        "chunk_text": "After the burn-in period, ¯A is the unique optimal solution of min fT(A) with high probability. Definition 3. Consider an arbitrary δ ∈(0,1). Let T (burn)(n, p,ρ,σ,δ) be defined as T (burn) := Θ max \u001a σ10 (1−ρ)3(1−p)2 , σ4 p(1−p) \u001b × \u0014 n2 log \u0012 1 (1−ρ)σ p(1−p) \u0013 +log \u0012 1 δ \u0013\u0015! . For every t ≥T (burn)(n, p,ρ,σ,δ), ¯A is the unique optimal solution to (NSE) with probability at least 1−δ. For convenience, we omit the argument (n, p,ρ,σ,δ) and denote the burn-in period as T (burn).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "burn",
+                "log",
+                "min",
+                "high",
+                "unique",
+                "optimal",
+                "burn-in",
+                "solution",
+                "period",
+                "probability"
+            ]
+        }
+    },
+    {
+        "id": "7802c967-6416-494c-a573-6eebf2bce092",
+        "title": "",
+        "chunk_text": "We analyze the algorithm’s behavior after the burn-in period because it happens that the iterates of Algorithm 1 are chaotic when t is not large enough or equivalently when ¯A is not the unique solution of (NSE). The following theorem establishes that if the number of samples exceeds T (burn), the cosine of the angle can be lower-bounded by a positive term. Theorem 2.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "algorithm",
+                "NSE",
+                "analyze",
+                "behavior",
+                "burn-in",
+                "period",
+                "iterates",
+                "chaotic",
+                "large",
+                "equivalently"
+            ]
+        }
+    },
+    {
+        "id": "fe4bf7a0-98db-4314-a229-dee97b665e0d",
+        "title": "",
+        "chunk_text": "Define ˆθT to be the angle between ˆA(T) −¯A and G ˆA(T),T, and let ^ ∥xT∥2 = ∑T−1 i=0 ∥xt∥2/T be the average norm of the states until time T. Suppose that Assumptions 1 and 2 hold. Then, as long as the sample complexity T ≥ T (burn)(n, p,ρ,σ,δ) and ˆA(T) ̸= ¯A, with probability at least 1−δ, the term cos( ˆθT) can be lower-bounded as cos( ˆθT) ≥Θ min ( 1, p(1−p) σ4^ ∥xT∥2 )! > 0.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "ˆθT",
+                "Define",
+                "angle",
+                "average",
+                "norm",
+                "states",
+                "time",
+                "cos",
+                "Assumptions",
+                "hold"
+            ]
+        }
+    },
+    {
+        "id": "3ca59b63-2a05-4336-ba36-344005e7f364",
+        "title": "",
+        "chunk_text": "Theorem 2 provides a probabilistic lower bound on the cosine of the angle of interest when the sample complexity T is sufficiently large. The algorithm iterates move toward the ground truth ¯A when the ¯A is the global solution of (NSE). In this lower bound, the average norm of the system states over time, ^ ∥xT∥2, appears as a random variable. This term is known to have an upper bound on the order of p1/2/σ9(1−ρ) with high probability. Lemma 3 (Equation (63) in [15]).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "bound",
+                "Theorem",
+                "large",
+                "lower",
+                "probabilistic",
+                "cosine",
+                "angle",
+                "interest",
+                "sample",
+                "complexity"
+            ]
+        }
+    },
+    {
+        "id": "5839822c-27a8-4310-a0a6-f13d592827e7",
+        "title": "",
+        "chunk_text": "Under the assumptions of Theorem 2, when T ≥T (burn)(n, p,ρ,σ,δ), the inequality ^ ∥xT∥2 ≤Θ p1/2 σ9(1−ρ) ! holds with probability at least 1−δ In order to establish the result in Lemma 3, we select θ := Θ(p(1−p)T/σ4) and ε := Θ( p p(1−p)2(1−ρ)2σ10) in Equation (63) of [15]. Combining this result with Theorem 2 leads to the main result of this subsection. Corollary 1.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Theorem",
+                "Lemma",
+                "Equation",
+                "result",
+                "burn",
+                "inequality",
+                "holds",
+                "assumptions",
+                "probability",
+                "order"
+            ]
+        }
+    },
+    {
+        "id": "f41b5d32-b8e2-4179-9ee8-f3312f98f222",
+        "title": "",
+        "chunk_text": "Let D = ∥ˆA(T (burn)(n,p,ρ,σ,δ/2)) −¯A∥F denote the distance of the solution of the last iterate to the ground-truth ¯A at the end of the burn-in time. Define γ(p,ρ,σ) to be γ(p,ρ,σ) := q 1−min{1,Θ(p(1−p)2σ10(1−ρ)2)}.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "burn",
+                "ground-truth",
+                "time",
+                "denote",
+                "distance",
+                "solution",
+                "iterate",
+                "end",
+                "burn-in",
+                "min"
+            ]
+        }
+    },
+    {
+        "id": "35b5ff07-e624-48dd-865d-e0d35490c8c4",
+        "title": "",
+        "chunk_text": "Then, given an arbitrary ε > 0, Algorithm 1 under the best step size achieves ∥ˆA(T) −¯A∥F ≤ε with probability 1 −δ, when the number of iterations T is sufficiently large such that T > T (ε) := T (burn)(n, p,ρ,σ,δ/2) + T (conv)(p,ρ,σ,D,ε), where T (conv)(p,ρ,σ,D,ε) := log \u0012D ε \u0013 log \u0012 1 γ(p,ρ,σ) \u0013 . Algorithm 1 achieves linear convergence with high prob- ability after the burn-in period due to the log(D/ε) term.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Algorithm",
+                "conv",
+                "log",
+                "achieves",
+                "burn",
+                "term",
+                "probability",
+                "prob",
+                "ability",
+                "arbitrary"
+            ]
+        }
+    },
+    {
+        "id": "89170478-8717-4255-b152-8e0f5d05020d",
+        "title": "",
+        "chunk_text": "Corollary 1 implies that to achieve an ε-level estimation error, the total number of required samples should be the sum of those needed for the burn-in phase and the linear convergence phase. With high probability, the burn-in period scales as max{(1−p)−2, p−1(1−p)−1} with respect to p and as n2 with respect to the system dimension.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "phase",
+                "Corollary",
+                "burn-in",
+                "implies",
+                "error",
+                "respect",
+                "achieve",
+                "ε-level",
+                "estimation",
+                "total"
+            ]
+        }
+    },
+    {
+        "id": "dd68901c-56a0-4efa-98d6-dda8ac6310f6",
+        "title": "",
+        "chunk_text": "After the burn-in phase, the algorithm converges to the ground truth at a linear rate because cos( ˆθT) is lower-bounded by a positive factor given by min{1, p1/2(1 −p)σ5(1 −ρ)}. Consequently, the linear convergence is upper-bounded by γ(p,ρ,σ), and the sample complexity scales logarithmically with the problem parameters. Therefore, the sample complexity of the burn- in period dominates the sample complexity of the linear convergence phase.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "linear",
+                "sample",
+                "complexity",
+                "ˆθT",
+                "phase",
+                "cos",
+                "min",
+                "burn-in",
+                "algorithm",
+                "converges"
+            ]
+        }
+    },
+    {
+        "id": "0cb157de-900e-4b55-a47f-377fb31dd0da",
+        "title": "",
+        "chunk_text": "Next, we now generalize the results to more practical step size rules. B. Subgradient Method with Polyak Step Size We analyze the Polyak step size. Unlike the best step size selection, the Polyak step size does not require knowledge of ¯A. However, it requires information about the optimal objective value at ¯A at time T, that is fT( ¯A). Under this step size rule, we can establish a result similar to Corollary 1. Theorem 3.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "step",
+                "size",
+                "Polyak",
+                "Subgradient",
+                "Method",
+                "generalize",
+                "practical",
+                "Corollary",
+                "rules",
+                "rule"
+            ]
+        }
+    },
+    {
+        "id": "186310a2-bc62-4fd8-949a-e8b920f397d6",
+        "title": "",
+        "chunk_text": "Consider Algorithm 1 under the Polyak step size defined as β (T) = (fT( ˆA(T))−fT( ¯A)) ∥G ˆA(T),T∥2 F . Suppose that Assumptions 1 and 2 hold. When the number of samples T is greater than T (ε), Algorithm 1 achieves ∥ˆA(T) −¯A∥F ≤ε, where T (ε) defined in Corollary 1.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Algorithm",
+                "Suppose",
+                "Assumptions",
+                "Polyak",
+                "hold",
+                "defined",
+                "step",
+                "size",
+                "Corollary",
+                "achieves"
+            ]
+        }
+    },
+    {
+        "id": "d756b557-16f4-4921-bc54-824120d1b329",
+        "title": "",
+        "chunk_text": "Although the Polyak step size relies on less information about the ground-truth system dynamics than the best step size (i.e., it needs to know an optimal scalar rather than an optimal matrix), it requires the same number of iterations as the best step size selection. These step sizes are implementable in practice (subject to some approximations) if some prior knowledge about the system dynamics is available. C.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "step",
+                "Polyak",
+                "optimal",
+                "size",
+                "system",
+                "dynamics",
+                "matrix",
+                "selection",
+                "relies",
+                "information"
+            ]
+        }
+    },
+    {
+        "id": "23de9d23-c7f8-48b9-9387-cb14b9a39d4c",
+        "title": "",
+        "chunk_text": "Subgradient Method with Constant and Diminishing Step Sizes The step sizes discussed in previous sections require information about the ground-truth matrix ¯A and the optimal objective value fT( ¯A). While theoretically useful, these step sizes are impractical in real-world applications. Therefore, we explore the subgradient method with constant and diminishing step sizes. Unlike the best and Polyak step sizes, constant and diminishing step sizes do not guarantee descent at every iteration.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Step",
+                "Sizes",
+                "Diminishing",
+                "Constant",
+                "Method",
+                "matrix",
+                "Subgradient",
+                "discussed",
+                "previous",
+                "sections"
+            ]
+        }
+    },
+    {
+        "id": "fe9562b5-0557-4088-837b-f44321fc41d4",
+        "title": "",
+        "chunk_text": "Instead, they lead to convergence within a neighborhood of the true solution rather than exact recovery. Consequently, results concerning the solution gap, ˆA(T) −¯A, are less relevant in this setting. Nevertheless, we establish the asymptotic convergence of the best average sub-optimality gap over time, defined as: min t∈[T (burn)(n,p,ρ,σ,δ),T] \u001a1 t (ft( ˆA(t))−ft( ¯A)) \u001b .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "recovery",
+                "solution",
+                "lead",
+                "neighborhood",
+                "true",
+                "exact",
+                "convergence",
+                "gap",
+                "results",
+                "setting"
+            ]
+        }
+    },
+    {
+        "id": "5dab568e-7114-4dba-93db-074c8ea1067f",
+        "title": "",
+        "chunk_text": "The best average sub-optimality gap represents the algorithm’s performance over its entire horizon, from the burn-in period to the final iteration. We scale the sub-optimality gap by 1/t to ensure comparability across time steps, as the objective function ft(A) in (NSE) evolves with t and consists of a sum of t terms. An ε-level estimation error at time t , i.e. ∥ˆA(t) −¯A∥F ≤ε, corresponds to a sub-optimality gap of tε.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "sub-optimality",
+                "gap",
+                "horizon",
+                "iteration",
+                "NSE",
+                "average",
+                "represents",
+                "algorithm",
+                "performance",
+                "entire"
+            ]
+        }
+    },
+    {
+        "id": "ef91a079-8a05-4aa0-809d-8550a848e36d",
+        "title": "",
+        "chunk_text": "Furthermore, we focus on the best average sub-optimality gap rather than the gap at the final iteration, as iterates fluctuate around the neighborhood of ¯A due to the nature of these step sizes. These step sizes may potentially remain large, preventing exact convergence, or diminish too quickly or too slowly to achieve a precise limit.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "gap",
+                "step",
+                "sizes",
+                "iteration",
+                "focus",
+                "average",
+                "sub-optimality",
+                "final",
+                "iterates",
+                "fluctuate"
+            ]
+        }
+    },
+    {
+        "id": "aa2911f7-d92e-4542-bd30-88bfeef0bd0d",
+        "title": "",
+        "chunk_text": "Additionally, we analyze the best average sub-optimality gap only after the burn-in period since ¯A may not be the global minimizer during this phase, leading to potential negative sub-optimality terms. Next, we demonstrate that under a constant step size, the best average sub-optimality gap of the subgradient algorithm asymptotically converges at a rate of T −1/2.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "sub-optimality",
+                "Additionally",
+                "average",
+                "gap",
+                "phase",
+                "leading",
+                "terms",
+                "analyze",
+                "burn-in",
+                "period"
+            ]
+        }
+    },
+    {
+        "id": "ba82f5b3-4be2-4d6e-8dbb-35bb12e19f11",
+        "title": "",
+        "chunk_text": "When T is significantly larger than T (burn), the upper bound for the best average sub-optimality gap can be simplified as Θ(Dp1/2/σ9(1−ρ)T 1/2). Hence, it asymptotically converges to zero with the rate T −1/2. Theorem 4. When the step size β (t) is set to the constant, β (t) = β = Θ Dσ9(1−ρ) p1/2(∑T t=T (burn) t2)1/2 !",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "burn",
+                "significantly",
+                "larger",
+                "upper",
+                "bound",
+                "average",
+                "sub-optimality",
+                "gap",
+                "simplified",
+                "Theorem"
+            ]
+        }
+    },
+    {
+        "id": "74391022-725a-4859-acca-b4b3d7274447",
+        "title": "",
+        "chunk_text": ", the best average sub-optimality gap for Algorithm 1 iterates can be bounded with probability at least 1−δ as min t∈[T (burn),T] \u001a1 t (ft( ˆA(t))−ft( ¯A)) \u001b ≤Θ Dp1/2 σ9(1−ρ) × (∑T t=T (burn) t2)1/2 ∑T t=T (burn) t ! . We establish a similar result for the diminishing step size. Theorem 5. Suppose that the step size β (t) takes the diminishing form β (t) = β/t, where β is defined as β := Θ \u0012 Dσ9(1−ρ) p1/2(T −T (burn))1/2 \u0013 .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "burn",
+                "Algorithm",
+                "iterates",
+                "average",
+                "sub-optimality",
+                "gap",
+                "bounded",
+                "probability",
+                "min",
+                "diminishing"
+            ]
+        }
+    },
+    {
+        "id": "7735255a-59b3-4d25-9ab4-eea85d7a2492",
+        "title": "",
+        "chunk_text": "Then, with probability at least 1−δ, the best average sub- optimality gap for Algorithm 1 iterates can be bounded as min t∈[T (burn),T] \u001a1 t (ft( ˆA(t))−ft( ¯A)) \u001b ≤Θ Dp1/2 σ9(1−ρ) × 1 (T −T (burn))1/2 ! . The proof of Theorem 5 is omitted as it follows the same reasoning as Theorem 4. The diminishing step size is chosen to satisfy ∑β (t) −→∞and ∑(β (t))2 < ∞, ensuring sufficient exploration and stable convergence without excessive os- cillations.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "burn",
+                "Algorithm",
+                "Theorem",
+                "optimality",
+                "iterates",
+                "probability",
+                "average",
+                "gap",
+                "bounded",
+                "min"
+            ]
+        }
+    },
+    {
+        "id": "ef0a345a-48b8-4700-b5f0-9a6f367d67e3",
+        "title": "",
+        "chunk_text": "Theorem 5 establishes that, under a diminishing step size, the best average sub-optimality gap asymptotically converges at a rate of T −1/2. IV. TIME COMPLEXITY ANALYSIS We compare the time complexities of the subgradient method and the exact solution of (NSE) using CVX. For the subgradient algorithm, each time period involves computing the subgradient, which has a per-iteration cost of O(Tn2). Running the algorithm for T iterations results in an overall complexity of O(T 2n2).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Theorem",
+                "TIME",
+                "subgradient",
+                "establishes",
+                "size",
+                "diminishing",
+                "step",
+                "average",
+                "sub-optimality",
+                "gap"
+            ]
+        }
+    },
+    {
+        "id": "111549b6-1fdd-4360-a015-aec948fca6ee",
+        "title": "",
+        "chunk_text": "On the other hand, solving (NSE) using CVX reduces the problem to a second-order conic program (SOCP) with T +n2 variables with T second-order cone constraints (minimization of the sum of norms can be written as a SOCP [29]). Defining [T] = {0,1,...,T −1}, this problem is formulated as min vec(A)∈Rn2 ft∈R, t∈[T] T ∑ t=0 ft (SOCP) s.t. ft ≥∥xt+1 −(xt ⊗In)vec(A)∥2, t ∈[T]. The CVX solver employs primal-dual interior point methods to solve (SOCP).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "SOCP",
+                "NSE",
+                "second-order",
+                "CVX",
+                "solving",
+                "problem",
+                "hand",
+                "program",
+                "variables",
+                "constraints"
+            ]
+        }
+    },
+    {
+        "id": "56b1ad88-eb83-469d-81ce-e99f328c2866",
+        "title": "",
+        "chunk_text": "The number of iterations required to reach an ε-accurate solution is O(T 1/2 log(1/ε)) [30]. Since solving conic constraints has a worst-case complexity of O(n6), the per time period complexity is O(T 1/2n6), leading to an overall complexity of O(T 3/2n6). We know that T and T (burn) scale as Θ(n2). Consequently, the per-time period complexity of the subgradient method and the exact SOCP solution are O(n4) and O(n7), respectively.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "complexity",
+                "log",
+                "number",
+                "iterations",
+                "required",
+                "reach",
+                "ε-accurate",
+                "period",
+                "solution",
+                "SOCP"
+            ]
+        }
+    },
+    {
+        "id": "25e5433e-0314-4b7b-af73-9ecc61c96dec",
+        "title": "",
+        "chunk_text": "This highlights that solving (SOCP) exactly requires significantly more computational power than the subgradient approach. Next, we present numerical experiments to validate the convergence results. V. NUMERICAL EXPERIMENTS We generate a system with ground-truth matrix ¯A whose singular values are uniform in (0,1). Given the probability p, disturbance vectors are set to zero with probability 1−p. With probability p, the disturbance ¯dt is defined as ¯dt := ℓt ˆdt.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "SOCP",
+                "solving",
+                "approach",
+                "numerical",
+                "experiments",
+                "probability",
+                "highlights",
+                "requires",
+                "significantly",
+                "computational"
+            ]
+        }
+    },
+    {
+        "id": "402190ea-07b5-4322-bfa7-f8f7e3d9b213",
+        "title": "",
+        "chunk_text": "Then, we sample ℓt ∼N (0,σ2 t ), where σ2 t := min{∥xt∥2 2,1/n}, and we sample ˆdt ∼uniform(Sn−1). This disturbance vector conforms to Assumption 2, and the values of the disturbance vectors are correlated over time. We generate 10 independent trajectories of the subgradient algorithm using 10 different systems. Then, we report the average solution gap and the average loss gap of Algorithm 1 at each period.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "sample",
+                "min",
+                "uniform",
+                "ˆdt",
+                "disturbance",
+                "Assumption",
+                "algorithm",
+                "average",
+                "gap",
+                "time"
+            ]
+        }
+    },
+    {
+        "id": "9df2b833-b642-4a4f-a75c-a09d26a4ef06",
+        "title": "",
+        "chunk_text": "The solution gap and the loss gap for Algorithm 1 at time T are ∥ˆA(T) −¯A∥F and fT( ˆA(T))−fT( ¯A), respectively. Algorithm 1 is experimented with different step size rules. The system has order n = 5, and p = 0.7. In addition to the best, Polyak, diminishing, and constant step sizes, we also introduce the backtracking step size. We initialize the step size at a constant value, and it is shrunk by constant factor γ ∈(0,1) until we achieve a sufficiently large descent.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Algorithm",
+                "gap",
+                "step",
+                "size",
+                "constant",
+                "solution",
+                "loss",
+                "time",
+                "Polyak",
+                "rules"
+            ]
+        }
+    },
+    {
+        "id": "1297ebcd-5bb1-48fb-8af8-3e3bfc5f31a9",
+        "title": "",
+        "chunk_text": "See Armijo step size in [31]. Figure 1 depicts the performance of Algorithm 1 under these different step sizes. Best and Polyak step sizes achieve fast and linear convergence as proven theoretically. Moreover, the backtracking step size performs similarly to the best and Polyak step sizes without using the knowledge of the ground truth ¯A or the optimal objective value fT( ¯A). Thus, the theoretical analysis of the backtracking step size is an interesting future direction.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "step",
+                "Armijo",
+                "size",
+                "sizes",
+                "Polyak",
+                "Algorithm",
+                "backtracking",
+                "Figure",
+                "depicts",
+                "performance"
+            ]
+        }
+    },
+    {
+        "id": "4d0e582b-6f3a-4c82-96f4-c455f0394022",
+        "title": "",
+        "chunk_text": "Furthermore, despite the slower rates, the diminishing and constant step sizes converged to the neighborhood of the solution. We test the performance of Algorithm 1 with different system dimensions n and different probabilistic sparsity model parameters p. We choose backtracking and best step sizes to Fig. 1: Solution Gap and Loss Gap of Algorithm 1 with Different Step Sizes for n = 5, and p = 0.7 Fig.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Algorithm",
+                "step",
+                "sizes",
+                "rates",
+                "solution",
+                "Gap",
+                "slower",
+                "diminishing",
+                "constant",
+                "converged"
+            ]
+        }
+    },
+    {
+        "id": "ce3a59c5-9c97-4138-9204-38304b569ecd",
+        "title": "",
+        "chunk_text": "2: Solution Gap and Loss Gap of Algorithm 1 with p = 0.7, Best and Backtracking Step Sizes, and n ∈{5,10,15} test the impact of different dimensions of the system states, n ∈{5,10,15} on the solution gap and loss gap when p is set to 0.7. Figure 2 shows that as n grows, the number of samples needed for convergence grows as n2. This aligns with the theoretical results from earlier sections. Moreover, the backtracking step size performs similarly to the best step size.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Gap",
+                "Loss",
+                "Solution",
+                "Algorithm",
+                "Step",
+                "Backtracking",
+                "size",
+                "test",
+                "states",
+                "impact"
+            ]
+        }
+    },
+    {
+        "id": "d0812667-6b9c-4be7-84bf-592c95ef0480",
+        "title": "",
+        "chunk_text": "Likewise, Figure 3 depicts the performance of the subgradient algorithm for the different probabilities of nonzero disturbance p ∈{0.5,0.7,0.8} with n = 5 using best and backtracking step sizes. As p increases, the convergence for the estimator needs more samples, as supported by the theoretical results. We perform experimentation on the subgradient selection in Step (ii) of Algorithm 1. Whenever the ℓ2 norm is less than 10−5, we consider its subdifferential as the unit ball.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Figure",
+                "Likewise",
+                "algorithm",
+                "step",
+                "depicts",
+                "sizes",
+                "subgradient",
+                "performance",
+                "probabilities",
+                "nonzero"
+            ]
+        }
+    },
+    {
+        "id": "2dba1447-82ff-4fdc-8537-03bd56f4d2f0",
+        "title": "",
+        "chunk_text": "For random subgradient selection, we select the subgradient randomly on the unit sphere. For the zero subgradients, we set the subgradient to zero. Lastly, we chose the minimum norm subgradient among all the available ones in the subdifferential. We test these selection criteria for a system with order n = 10 and p = 0.7 using the best step size. Figure 4 demonstrates that there is not a significant difference in terms of solution gap.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "subgradient",
+                "sphere",
+                "random",
+                "select",
+                "randomly",
+                "unit",
+                "selection",
+                "Lastly",
+                "set",
+                "subdifferential"
+            ]
+        }
+    },
+    {
+        "id": "e0fd9840-9610-42dd-ac91-278309131d02",
+        "title": "",
+        "chunk_text": "Last but not least, we provide simulation results using the best step size for large systems of order n ∈{25,50,75}. We run these experiments for T = 10000. This is not possible with the CVX solver due to the high computational complexity of (SOCP). Nevertheless, the subgradient algorithm provides an accurate estimation for large systems within a reasonable time frame, as seen in Figure 5. VI.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "large",
+                "simulation",
+                "results",
+                "step",
+                "size",
+                "order",
+                "SOCP",
+                "systems",
+                "Figure",
+                "CVX"
+            ]
+        }
+    },
+    {
+        "id": "de132fc6-35cb-4d0f-84b5-6299054666dd",
+        "title": "",
+        "chunk_text": "CONCLUSION We proposed and analyzed a subgradient algorithm for non-smooth system identification of linear-time invariant systems with disturbances following a probabilistic sparsity model. While the non-asymptotic theory for this setting is well-established in the literature, existing methods rely on solvers that use primal-dual interior-point methods for Fig. 3: Solution Gap and Loss Gap of Algorithm 1 with n = 5, Best and Backtracking Step Sizes, and p ∈{0.5,0.7,0.8} Fig.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "CONCLUSION",
+                "algorithm",
+                "model",
+                "Gap",
+                "Fig",
+                "proposed",
+                "analyzed",
+                "subgradient",
+                "non-smooth",
+                "identification"
+            ]
+        }
+    },
+    {
+        "id": "702c6650-fb04-40b3-acd1-d20b1ff165ab",
+        "title": "",
+        "chunk_text": "4: Solution Gap and Loss Gap of Algorithm 1 with Different Subgradient Selection Methods for n = 10 and p = 0.7 second-order conic programs, leading to high computational costs. To address this, we proposed a subgradient method that enables fast exact recovery. We demonstrated that the subgradient method with the best and Polyak step sizes converges linearly to the ground-truth system dynamics after a burn-in period.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Gap",
+                "Solution",
+                "Algorithm",
+                "Loss",
+                "Selection",
+                "Subgradient",
+                "second-order",
+                "programs",
+                "leading",
+                "costs"
+            ]
+        }
+    },
+    {
+        "id": "7214519d-e282-4c16-a0cf-e2100a86a250",
+        "title": "",
+        "chunk_text": "Additionally, we showed that constant and diminishing step sizes lead to convergence within a neighborhood of the true solution, with the best average sub-optimality gap asymptotically approaching zero. These theoretical results are supported by numerical simulations. Our experiments also highlight the practical effectiveness of the backtracking step size, suggesting it as a promising alternative. However, its theoretical properties remain an open question.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Additionally",
+                "solution",
+                "step",
+                "showed",
+                "constant",
+                "diminishing",
+                "lead",
+                "convergence",
+                "neighborhood",
+                "true"
+            ]
+        }
+    },
+    {
+        "id": "5473c08d-b6c9-415d-93d0-f451c918cd00",
+        "title": "",
+        "chunk_text": "Furthermore, our current implementation computes the full subgradient at each iteration. To improve time complexity, a partial subgradient approach, similar to stochastic gradient descent, could be explored. VII. APPENDIX A. Proof of Theorem 1 Proof. Using the subgradient update iteration at time T, ˆA(T+1) = ˆA(T) −β (T)G ˆA(T),T, we have ∥ˆA(T+1) −¯A∥2 F = ∥( ˆA(T) −¯A)−β (T)G ˆA(T),T∥2 F = ∥ˆA(T) −¯A∥2 F +(β (T))2∥G ˆA(T),T∥2 F −2β (T)⟨G ˆA(T),T, ˆA(T) −¯A⟩.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "subgradient",
+                "current",
+                "implementation",
+                "computes",
+                "full",
+                "Proof",
+                "iteration",
+                "time",
+                "VII",
+                "APPENDIX"
+            ]
+        }
+    },
+    {
+        "id": "971f4f28-32ae-4e0b-a7ac-938e2ac53f51",
+        "title": "",
+        "chunk_text": "(1) Substituting the step size stated in the theorem yields ∥ˆA(T+1) −¯A∥2 F = ∥ˆA(T) −¯A∥2 F − (⟨G ˆA(T),T, ˆA(T) −¯A⟩)2 ∥G ˆA(T),T∥2 F ≤ q 1−cos2( ˆθT)∥ˆA(T) −¯A∥F. The last inequality uses the fact that ⟨G ˆA(T),T, ˆA(T) −¯A⟩= ∥G ˆA(T),T∥F∥ˆA(T) −¯A∥F cos( ˆθT). Fig. 5: Solution Gap and Loss Gap of Algorithm 1 with p = 0.7, Best Step Size, and n ∈{50,75,100} B. Proof of Theorem 2 Proof.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Substituting",
+                "ˆθT",
+                "step",
+                "size",
+                "Gap",
+                "theorem",
+                "yields",
+                "stated",
+                "Proof",
+                "Solution"
+            ]
+        }
+    },
+    {
+        "id": "46a4c5f1-242d-44b1-b9f1-741238a382da",
+        "title": "",
+        "chunk_text": "Using Lemma 2, we can show that cos( ˆθT) = ⟨ˆA(T) −¯A,G ˆA(T),T⟩ ∥ˆA(T) −¯A∥F∥G ˆA(T),T∥F ≥ fT( ˆA(T))−fT( ¯A) ∥¯A−ˆA(T)∥F∥G ˆA(T),T∥F . We lower bound the difference between the objectives as fT( ˆA(T))−fT( ¯A) ≥ sup G ¯A,T ∈∂fT ( ¯A) n ⟨ˆA(T) −¯A,G ¯A,T⟩ o = sup ∥et∥≤1,t̸∈K (* ˆA(T) −¯A,−∑ t∈K ˆdt ⊗xt −∑ t̸∈K et ⊗xt +) = ∑ t∈K ( ¯A−ˆA(T))xt, ¯dt ∥¯dt∥2 + ∑ t̸∈K ∥( ¯A−ˆA(T))xt∥2.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Lemma",
+                "ˆθT",
+                "cos",
+                "ˆdt",
+                "show",
+                "lower",
+                "bound",
+                "difference",
+                "objectives"
+            ]
+        }
+    },
+    {
+        "id": "3194fcd5-9620-49ff-858a-a4bf4774d46d",
+        "title": "",
+        "chunk_text": "The term on the right-hand side is equivalent to the condition in Corollary 3 in [15] with f(xt) = xt and Z = ¯A−ˆA(T). Lemma 4 (Theorem 6 in [15]). Suppose that the Assumptions 1 and 2 are satisfied. Then, for any given B ∈Rn×n , the following holds with probability at least 1−δ: ∑ t∈K B−¯A, ¯dt ∥¯dt∥2 + ∑ t̸∈K ∥(B−¯A)xt∥2 ≥Θ \u0014cp(1−p)∥B−¯A∥FT σ4 \u0015 when the number of samples T ≥T (burn)(n, p,ρ,σ,δ).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Corollary",
+                "term",
+                "right-hand",
+                "side",
+                "equivalent",
+                "condition",
+                "Theorem",
+                "Lemma",
+                "Assumptions",
+                "burn"
+            ]
+        }
+    },
+    {
+        "id": "26e15ab1-8fa8-4b24-91cf-d5debe24811a",
+        "title": "",
+        "chunk_text": "Using Lemma 4 and B = ˆA(T), if T ≥T (1)(δ), we have fT( ˆA(T))−fT( ¯A) ≥cp(1−p)∥ˆA(T) −¯A∥FT σ4 (2) with probability at least 1 −δ. Next, we upper-bound the norm of the subgradient as below: ∥G ˆA(T),T∥2 F = D − T ∑ t=0 ∂∥( ¯A−ˆA(T))xt + ¯dt∥2 ⊗xt, − T ∑ t=0 ∂∥( ¯A−ˆA(T))xt + ¯dt∥2 ⊗xt E ≤ T ∑ t=0 T ∑ m=0 ∥xt∥2∥xm∥2 = T−1 ∑ t=0 ∥xt∥2 !2 . (3) The second-to-last inequality holds due to the norm of subgra- dients being at most one and the Cauchy-Schwarz inequality.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Lemma",
+                "norm",
+                "probability",
+                "inequality",
+                "subgra",
+                "dients",
+                "upper-bound",
+                "subgradient",
+                "holds",
+                "due"
+            ]
+        }
+    },
+    {
+        "id": "3f22fe75-4c60-4db7-8a03-6b1fcb955cae",
+        "title": "",
+        "chunk_text": "We simplify the expression as ∥G ˆA(T),T∥F ≤T ^ ∥xT∥2, where ^ ∥xT∥2 is defined in the theorem statement. We combine (2) and (3) with the lower bound on cos( ˆθT). With probability at least 1−δ, when the number of samples is greater than T ≥T (burn)(n, p,ρ,σ,δ), we have cos( ˆθT) ≥Θ min ( 1, p(1−p) σ4^ ∥xT∥2 )! > 0. C. Proof of Theorem 3 Proof.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "ˆθT",
+                "statement",
+                "cos",
+                "theorem",
+                "simplify",
+                "expression",
+                "defined",
+                "Proof",
+                "combine",
+                "burn"
+            ]
+        }
+    },
+    {
+        "id": "3deebae6-6816-4955-a3b5-476cfa45c3d0",
+        "title": "",
+        "chunk_text": "Using the subgradient update iteration at time T, ˆA(T+1) = ˆA(T) −β (T)G ˆA(T),T, we have ∥ˆA(T+1) −¯A∥2 F = ∥( ˆA(T) −¯A)−β (T)G ˆA(T),T∥2 F = ∥( ˆA(T) −¯A)∥2 F +(β (T))2∥G ˆA(T),T∥2 F −2β (T)⟨G ˆA(T),T, ˆA(T) −¯A⟩ ≤∥( ˆA(T) −¯A)∥2 F +(β (T))2∥G ˆA(T),T∥2 F −2β (T)(fT( ˆA(T))−fT( ¯A)). (4) The last inequality uses the fact that (fT( ˆA(T))−fT( ¯A)) ≥ ⟨G ˆA(T),T, ˆA(T) −¯A⟩due to the properties of subgradient.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "subgradient",
+                "update",
+                "iteration",
+                "time",
+                "due",
+                "inequality",
+                "fact",
+                "properties"
+            ]
+        }
+    },
+    {
+        "id": "ec037747-efa0-4942-9d6e-58a04e92766b",
+        "title": "",
+        "chunk_text": "Substituting the step size stated in the theorem yields ∥ˆA(T+1) −¯A∥2 F ≤∥( ˆA(T) −¯A)∥2 F −(fT( ˆA(T))−fT( ¯A))2 ∥G ˆA(T),T∥2 F . In Theorem 2 and Corollary 1, it is proved that whenever the number of samples is greater than T (burn)(n, p,ρ,σ,δ), we have (fT( ˆA(T))−fT( ¯A))2 ∥G ˆA(T),T∥2 F ≤(1−γ2)∥( ˆA(T) −¯A)∥2 F with probability at least 1−δ where γ is a positive constant that is less than 1.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "theorem",
+                "Corollary",
+                "burn",
+                "Substituting",
+                "yields",
+                "step",
+                "size",
+                "stated",
+                "proved",
+                "number"
+            ]
+        }
+    },
+    {
+        "id": "2a83bc49-c5e0-4109-aa8d-1131d3048c45",
+        "title": "",
+        "chunk_text": "Thus, we have convergence to the ground truth with the linear rate γ because ∥ˆA(T+1) −¯A∥F ≤γ∥( ˆA(T) −¯A)∥F. The rest of the arguments are similar to those in Corollary 1. D. Proof of Theorem 4 Proof. We first define the following Lemma. Lemma 5. Let D = ∥ˆA(T (burn)) −¯A∥F be the distance of the iterate to the ground-truth ¯A at the end of the burn-in time. Then, the following holds: T ∑ t=T (burn) β (t)(ft( ˆA(t))−ft( ¯A)) ≤D2 + T ∑ t=T (burn) (β (t))2 t ∑ ℓ=0 ∥xℓ∥2 !2 .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "burn",
+                "Proof",
+                "Lemma",
+                "convergence",
+                "ground",
+                "truth",
+                "linear",
+                "rate",
+                "Corollary",
+                "Theorem"
+            ]
+        }
+    },
+    {
+        "id": "a62e3ef6-611d-4152-8a57-e7a32b99052f",
+        "title": "",
+        "chunk_text": "Using Lemma 5 and taking the minimum of the left-hand side over periods between [T (burn),T] yields min t∈[T (burn),T] \u001a1 t (ft( ˆA(t))−ft( ¯A)) \u001b ≤ D2 +∑T t=T (burn)(β (t))2 (∑t ℓ=0 ∥xℓ∥2)2 2∑T t=T (burn)(β (t)t) . Using Lemma 3, we know that (∑t ℓ=0 ∥xℓ∥2) can be upper- bounded by Θ(tp1/2/σ9(1 −ρ)) with probability at least 1−δ whenever t is larger than the burn-in time. We have min t∈[T (burn),T] \u001a1 t (ft( ˆA(t))−ft( ¯A)) \u001b ≤Θ D2 +∑T t=T (burn)(β (t))2t2p/σ18(1−ρ)2 ∑T t=T (burn)(β (t)t) !",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "burn",
+                "Lemma",
+                "min",
+                "yields",
+                "upper",
+                "bounded",
+                "time",
+                "taking",
+                "minimum",
+                "left-hand"
+            ]
+        }
+    },
+    {
+        "id": "5e63f375-fdca-49d3-8601-da49bf1d8773",
+        "title": "",
+        "chunk_text": "with probability 1−δ. Setting the step size to be β (t) = β implies the term on the right-hand side to be Θ  D2 + β 2p σ18(1−ρ)2 ∑T t=T (burn) t2 β ∑T t=T (burn) t  . Minimizing the right-hand side with respect to β results in the following constant step size: β (t) = β = Θ Dσ9(1−ρ) p1/2(∑T t=T (burn) t2)1/2 ! .",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "burn",
+                "probability",
+                "right-hand",
+                "step",
+                "size",
+                "side",
+                "Setting",
+                "implies",
+                "term",
+                "Minimizing"
+            ]
+        }
+    },
+    {
+        "id": "c63f1ee9-e6b3-45e7-877c-3069f63b994a",
+        "title": "",
+        "chunk_text": "Substituting this constant step size to the expression on the sub-optimality gap inequality provides the simplified upper bound that holds with probability at least 1−δ: min t∈[T (burn),T] \u001a1 t (ft( ˆA(t))−ft( ¯A)) \u001b ≤Θ Dp1/2 σ9(1−ρ) × (∑T t=T (burn) t2)1/2 ∑T t=T (burn) t ! . E. Proof of Lemma 5 Proof.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "burn",
+                "Proof",
+                "Substituting",
+                "min",
+                "constant",
+                "step",
+                "size",
+                "expression",
+                "sub-optimality",
+                "gap"
+            ]
+        }
+    },
+    {
+        "id": "b355e843-f35a-487e-93e5-0a8d9001f8d1",
+        "title": "",
+        "chunk_text": "Using (4) and the iterative substitution between the time periods from T (burn)(n, p,ρ,σ,δ) to T, we obtain ∥ˆA(T+1) −¯A∥2 F ≤∥( ˆA(T (burn)) −¯A)∥2 F + T ∑ t=T (burn) (β (t))2∥G ˆA(t),t∥2 F −2 T ∑ t=T (burn) β (t)(ft( ˆA(t))−ft( ¯A)) ≤D2 + T ∑ t=T (burn) (β (t))2 t ∑ ℓ=0 ∥xℓ∥2 !2 −2 T ∑ t=T (burn) β (t)(ft( ˆA(t))−ft( ¯A)). The last inequality follows from the fact that D = ∥ˆA(T (burn)) − ¯A∥F and ∥G ˆA(t),t∥F can be upper-bounded by (∑t ℓ=0 ∥xℓ∥2).",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "burn",
+                "obtain",
+                "iterative",
+                "substitution",
+                "time",
+                "periods",
+                "inequality",
+                "fact",
+                "upper-bounded"
+            ]
+        }
+    },
+    {
+        "id": "9f1ac5e2-2616-4e9f-bd18-572822e7e771",
+        "title": "",
+        "chunk_text": "Since ∥ˆA(T+1) −¯A∥2 F is nonnegative, the last term on the right-hand side can be lower-bounded by 0. Switching the term with the negative coefficient from the right-hand side to the left-hand side completes the proof. REFERENCES [1] H.-F. Chen and L. Guo, Identification and stochastic adaptive control. Springer Science & Business Media, 2012. [2] L. Lennart, “System identification: theory for the user,” PTR Prentice Hall, Upper Saddle River, NJ, vol. 28, p. 540, 1999. [3] L.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "side",
+                "right-hand",
+                "term",
+                "nonnegative",
+                "lower-bounded",
+                "Identification",
+                "REFERENCES",
+                "Guo",
+                "Science",
+                "Business"
+            ]
+        }
+    },
+    {
+        "id": "32b52f97-07a6-4137-a3ea-a8af20d2ff0c",
+        "title": "",
+        "chunk_text": "Ljung, “Convergence analysis of parametric identification methods,” IEEE transactions on automatic control, vol. 23, no. 5, pp. 770–783, 1978. [4] M. Simchowitz, H. Mania, S. Tu, M. I. Jordan, and B. Recht, “Learning without mixing: Towards a sharp analysis of linear system identification,” in Conference On Learning Theory. PMLR, 2018, pp. 439–473. [5] S. Dean, H. Mania, N. Matni, B. Recht, and S.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Convergence",
+                "IEEE",
+                "Ljung",
+                "vol.",
+                "Mania",
+                "Recht",
+                "methods",
+                "control",
+                "Learning",
+                "PMLR"
+            ]
+        }
+    },
+    {
+        "id": "38498eab-af6c-4cc2-9f4b-f927fdb7b710",
+        "title": "",
+        "chunk_text": "Tu, “On the sample complexity of the linear quadratic regulator,” Foundations of Computational Mathematics, vol. 20, no. 4, pp. 633–679, 2020. [6] A. Tsiamis and G. J. Pappas, “Finite sample analysis of stochastic system identification,” in 2019 IEEE 58th Conference on Decision and Control (CDC). IEEE, 2019, pp. 3648–3654. [7] M. K. S. Faradonbeh, A. Tewari, and G. Michailidis, “Finite time identification in unstable linear systems,” Automatica, vol. 96, pp. 342–353, 2018. [8] D. Foster, T.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Foundations",
+                "Mathematics",
+                "Computational",
+                "IEEE",
+                "vol.",
+                "regulator",
+                "Finite",
+                "complexity",
+                "quadratic",
+                "CDC"
+            ]
+        }
+    },
+    {
+        "id": "22b4c05b-fd44-4cd3-bffc-d15ea487f2c1",
+        "title": "",
+        "chunk_text": "Sarkar, and A. Rakhlin, “Learning nonlinear dynamical systems from a single trajectory,” in Learning for Dynamics and Control. PMLR, 2020, pp. 851–861. [9] Y. Sattar and S. Oymak, “Non-asymptotic and accurate learning of nonlinear dynamical systems,” Journal of Machine Learning Research, vol. 23, no. 140, pp. 1–49, 2022. [10] I. M. Ziemann, H. Sandberg, and N. Matni, “Single trajectory nonparametric learning of nonlinear dynamics,” in conference on Learning Theory. PMLR, 2022, pp. 3333–3364.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Rakhlin",
+                "Control",
+                "Learning",
+                "PMLR",
+                "Sarkar",
+                "nonlinear",
+                "single",
+                "dynamical",
+                "Dynamics",
+                "systems"
+            ]
+        }
+    },
+    {
+        "id": "16e25a7a-d0e9-40cc-9a6f-9b4c5cbd821a",
+        "title": "",
+        "chunk_text": "[11] A. Tsiamis, I. Ziemann, N. Matni, and G. J. Pappas, “Statistical learning theory for control: A finite-sample perspective,” IEEE Control Systems Magazine, vol. 43, no. 6, pp. 67–97, 2023. [12] H. Feng and J. Lavaei, “Learning of dynamical systems under adversarial attacks,” in 2021 60th IEEE Conference on Decision and Control (CDC), 2021, pp. 3010–3017. [13] H. Feng, B. Yalcin, and J.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "IEEE",
+                "control",
+                "Ziemann",
+                "Matni",
+                "Pappas",
+                "Statistical",
+                "Magazine",
+                "learning",
+                "Systems",
+                "Feng"
+            ]
+        }
+    },
+    {
+        "id": "2d7789e5-a009-4ad0-9a6e-8631f2606723",
+        "title": "",
+        "chunk_text": "Lavaei, “Learning of dynamical systems under adversarial attacks - null space property perspective,” in 2023 American Control Conference (ACC), 2023, pp. 4179–4184. [14] B. Yalcin, H. Zhang, J. Lavaei, and M. Arcak, “Exact recovery for system identification with more corrupt data than clean data,” IEEE Open Journal of Control Systems, 2024. [15] H. Zhang, B. Yalcin, J. Lavaei, and E. D.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "ACC",
+                "Learning",
+                "American",
+                "Conference",
+                "Lavaei",
+                "Control",
+                "attacks",
+                "null",
+                "perspective",
+                "Yalcin"
+            ]
+        }
+    },
+    {
+        "id": "864d5fdc-d8dd-4b1f-9d72-1749516a397e",
+        "title": "",
+        "chunk_text": "Sontag, “Exact recovery guarantees for parameterized non-linear system identification problem under adversarial attacks,” 2024. [Online]. Available: https://arxiv.org/abs/2409.00276 [16] J. Kim and J. Lavaei, “Prevailing against adversarial noncentral disturbances: Exact recovery of linear systems with the l_1-norm estimator,” arXiv preprint arXiv:2410.03218, 2024. [17] M. J. Wainwright, High-Dimensional Statistics: A Non-Asymptotic Viewpoint, ser.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Sontag",
+                "Exact",
+                "Online",
+                "attacks",
+                "recovery",
+                "guarantees",
+                "parameterized",
+                "non-linear",
+                "identification",
+                "problem"
+            ]
+        }
+    },
+    {
+        "id": "818259e5-d4a3-47a4-948a-f89d79ba71eb",
+        "title": "",
+        "chunk_text": "Cambridge Series in Statistical and Probabilistic Mathematics. Cambridge University Press, 2019. [18] R. Vershynin, High-Dimensional Probability: An Introduction with Applications in Data Science, ser. Cambridge Series in Statistical and Probabilistic Mathematics. Cambridge University Press, 2018. [19] N. Z. Shor, Minimization methods for non-differentiable functions. Springer Science & Business Media, 2012, vol. 3. [20] B. T. Polyak, “Introduction to optimization,” 1987. [21] D. P.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Cambridge",
+                "Mathematics",
+                "Press",
+                "Series",
+                "Statistical",
+                "Probabilistic",
+                "University",
+                "Science",
+                "Introduction",
+                "Probability"
+            ]
+        }
+    },
+    {
+        "id": "30682684-3878-436d-8966-3ee1ff0fa723",
+        "title": "",
+        "chunk_text": "Bertsekas, “Nonlinear programming,” Journal of the Operational Research Society, vol. 48, no. 3, pp. 334–334, 1997. [22] Y. Nesterov, “Primal-dual subgradient methods for convex problems,” Mathematical programming, vol. 120, no. 1, pp. 221–259, 2009. [23] ——, Introductory lectures on convex optimization: A basic course. Springer Science & Business Media, 2013, vol. 87. [24] K. J. Keesman, System identification: an introduction. Springer Science & Business Media, 2011. [25] J. Schoukens and L.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Nonlinear",
+                "Journal",
+                "Society",
+                "vol.",
+                "Operational",
+                "Research",
+                "Bertsekas",
+                "Science",
+                "Business",
+                "Media"
+            ]
+        }
+    },
+    {
+        "id": "652da51e-e527-4f73-a2d3-8e12b707ef44",
+        "title": "",
+        "chunk_text": "Ljung, “Nonlinear system identification: A user- oriented road map,” IEEE Control Systems Magazine, vol. 39, no. 6, pp. 28–99, 2019. [26] H. Feng and J. Lavaei, “Learning of dynamical systems under adversarial attacks,” in 2021 60th IEEE Conference on Decision and Control (CDC). IEEE, 2021, pp. 3010–3017. [27] H. Feng, B. Yalcin, and J. Lavaei, “Learning of dynamical systems under adversarial attacks-null space property perspective,” in 2023 American Control Conference (ACC). IEEE, 2023, pp.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "Nonlinear",
+                "Magazine",
+                "IEEE",
+                "Control",
+                "Ljung",
+                "vol.",
+                "Lavaei",
+                "Learning",
+                "Systems",
+                "identification"
+            ]
+        }
+    },
+    {
+        "id": "f361b838-9083-4599-bf37-6bf50971ccd7",
+        "title": "",
+        "chunk_text": "4179–4184. [28] S. P. Boyd and L. Vandenberghe, Convex optimization. Cambridge university press, 2004. [29] F. Alizadeh and D. Goldfarb, “Second-order cone programming,” Mathematical programming, vol. 95, no. 1, pp. 3–51, 2003. [30] S. J. Wright, Primal-dual interior-point methods. SIAM, 1997. [31] L. Armijo, “Minimization of functions having lipschitz continuous first partial derivatives,” Pacific Journal of mathematics, vol. 16, no. 1, pp. 1–3, 1966.",
+        "metadata": {
+            "author": "",
+            "keywords": [
+                "vol.",
+                "programming",
+                "Vandenberghe",
+                "Convex",
+                "SIAM",
+                "Boyd",
+                "Goldfarb",
+                "Second-order",
+                "Mathematical",
+                "Wright"
+            ]
+        }
+    }
+]

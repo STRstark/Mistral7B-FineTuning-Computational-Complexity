@@ -73,7 +73,7 @@ def PdfToJSON(pdf_fiels ,json_path ):
     for pdf in pdfs :
         StoreDataFromPdfToJSON(pdf_fiels+f"/{pdf}" , json_path)
 
-
+PdfToJSON("pdfFiles" , "JSONFIles")
 # pdf_fiels = "pdfFiles"
 # json_path = "JSONFIles"
 
